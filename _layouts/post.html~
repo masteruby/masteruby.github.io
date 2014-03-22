@@ -8,7 +8,7 @@ layout: default
 {{ content }}
 </div>
 
-{% if page.comments %}
+{% if page.allow_comments != false %}
         
         <div id="disqus_thread" name="disqus_thread"></div>
     <script type="text/javascript">
