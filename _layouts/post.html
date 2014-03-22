@@ -8,9 +8,9 @@ layout: default
 {{ content }}
 </div>
 
-{% if page.comments %}
+{% if page.allow.comments != false %}
         
-        <div id="disqus_thread"></div>
+        <div id="disqus_thread" name="disqus_thread"></div>
     <script type="text/javascript">
         /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
         var disqus_shortname = 'mdolobac'; // required: replace example with your forum shortname
