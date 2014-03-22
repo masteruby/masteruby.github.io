@@ -31,6 +31,8 @@ layout: default
   {% for post in site.related_posts %}
 
   <li><span>{{ post.date | date_to_string  }}</span> &raquo; <a href="{{ post.url }}#disqus_thread">{{ post.title }}</a></li>
+  
+  
   {% endfor %} 
   
 
