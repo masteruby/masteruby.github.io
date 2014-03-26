@@ -36,6 +36,9 @@ a:hover   { color: rgb(197, 47, 36) }
 a:visited { color: #a0a; }
 
 img.contact { height: 32px; width: 32px;}
+
+img.share { height: 40px; width: 40px;}
+
 img { width: 100%;}
 
 .navbar { 
@@ -224,12 +227,12 @@ section#posts {
 
 .post h2 {
   font-size: 1.8em;
-  line-height: 1.2em;
+  margin: 3.9em 0 0.6em 0;
 }
 
 .post h3 {
-  padding: 0.9em 0 0.6em 0;
-  font-size: 1.4em;
+  margin: 2.9em 0 0.6em 0;
+  font-size: 1.2em;
 }
 
 .post h4 {
