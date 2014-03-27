@@ -37,27 +37,41 @@ You can go back to previous directory with **cd ..**
 $ cd ..
 {% endhighlight %}
 
-## 2.ls(list directory)
+## 2.ls or dir(list directory)
 
 **ls** command shows list of all files and directories in current working 
 directory. For example to see list of files of your home directory type this
-into command line:
+into command line in Linux and Mac.
 
 {% highlight sh %}
 $ ls
 {% endhighlight %}
 
+Type this in **Windows**
+
+{% highlight sh %}
+$ dir
+{% endhighlight %}
+
+
 You should see something like this:
 
 ![list-of-directories](/images/list-of-directories.png)
 
-## 3. touch
+## 3. touch or copy con
 Touch command creates empty file. For example try to create empty file in home
 folder:
 
 {% highlight sh %}
 $ touch empty.txt
 {% endhighlight %}
+
+**Copy con** command serves for creating empty file in **Windows**
+
+{% highlight sh %}
+$ copy con empty.txt
+{% endhighlight %}
+
 
 You should see your file in home directory.
 
@@ -70,7 +84,7 @@ folder of your choice:
 mkdir my_folder
 {% endhighlight %}
 
-Check it out if folder has been created.
+Check it out if folder has been created with **ls** or **dir**.
 
 ![create-folder](/images/create-folder.png)
 
@@ -93,6 +107,7 @@ You type rm with -r and add name of the directory you want to remove:
 $ rm -r my_folder
 {% endhighlight %}
 
+
 You should see that our folder has been removed. Option -r means recursive, it
 removes directory with all of his content. Let's try something:
 
@@ -101,10 +116,14 @@ removes directory with all of his content. Let's try something:
 ### Removing files
 
 You can use rm for removing files too. For example create file with touch
-command.
+command or copy con in Windows.
 
 {% highlight sh %}
 $ touch abc.txt
+{% endhighlight %}
+
+{% highlight sh %}
+$ copy con abc.txt
 {% endhighlight %}
 
 Remove it with **rm**
@@ -112,6 +131,13 @@ Remove it with **rm**
 {% highlight sh %}
 $ rm abc.txt
 {% endhighlight %}
+
+On windows you remove files with **del** command following name of the file you want to remove.
+
+{% highlight sh %}
+$ del abc.txt
+{% endhighlight %}
+
 
 ## 6. mv(move file or directory) 
 Move command serves for renaming or moving directories.
@@ -125,7 +151,10 @@ you want to change it.
 $ mv abc.txt empty.txt
 {% endhighlight %}
 
-Check it out with ls. You should see that file abc.txt is now renamed to
+In Windows this won't work. You have to use **ren** command to rename your
+file.
+
+Check it out with ls or dir. You should see that file abc.txt is now renamed to
 empty.txt. 
 
 ![rename-file](/images/rename-file.png)
@@ -136,6 +165,11 @@ We can use mv for renaming directories too. Try something like this: Create dire
 {% highlight sh %}
 $ mkdir new_folder
 $ mv new_folder dir 
+{% endhighlight %}
+
+{% highlight sh %}
+$ mkdir new_folder
+$ ren new_folder dir
 {% endhighlight %}
 
 ### Moving files or directory with mv
@@ -153,16 +187,34 @@ You can move any number of files as you want. For example create some files.
 $ touch test1.txt test2.txt test3.txt
 {% endhighlight %}
 
+{% highlight sh %}
+$ copy con test1.txt test2.txt test3.txt
+{% endhighlight %}
+
+
 Now move them to your folder.
 {% highlight sh %}
 $ mv test1.txt test2.txt test3.txt ~/dir
 {% endhighlight %}
 
+
+
+In Windows you will use **move** command instead of mv.
+
+{% highlight sh %}
+$ move test1.txt test2.txt test3.txt c:\dir
+{% endhighlight %}
+
+
 You don't have to type name of files to terminal, you can use regular
 expressions. Try something like that:
 
 {% highlight sh %}
-$ mv *.txt ~/folder
+$ mv *.txt ~/dir
+{% endhighlight %}
+
+{% highlight sh %}
+$ move *.txt c:\dir
 {% endhighlight %}
 
 If you type **\*.txt** it means move all files to folder.
@@ -175,16 +227,27 @@ Copy command takes file or group or files and copy it to specific directory. For
 $ cp *.txt ~
 {% endhighlight %}
 
+On Windows instead of cp you will use **copy**
+
+{% highlight sh %}
+$ copy *.txt c:\
+{% endhighlight %}
+
 Go back to your home directory. You should see our files.
 
-## 8. sudo(switch user do)
+## 8. sudo or runas(switch user do)
 
-If you want to install some programs on your Linux or Mac operating system you
+If you want to install some programs  on your Linux or Mac operating system you
 will have to use sudo. Let's try to install **Openbox**, tool for creating and
 editing videos in terminal.
 
 {% highlight sh %}
 $ sudo apt-get install openbox
+{% endhighlight %}
+
+Or you can use runas in Windows. Type this:
+{% highlight sh %}
+$ runas /user:<localmachine>\adminstrator.cmd
 {% endhighlight %}
 
 You will be prompted for your user password.
@@ -193,7 +256,7 @@ You will be prompted for your user password.
 
 Type this in and type letter Y for installation.
 
-## 9. cat(concatenate)
+## 9. cat or type(concatenate)
 
 Cat command serves for viewing of contents and concatenation of multiple files.
 
@@ -205,6 +268,13 @@ content with cat.
 {% highlight sh %}
 $ cat test1.txt
 {% endhighlight %}
+
+On windows instead of cat you will use **type** command.
+
+{% highlight sh %}
+$ Type test1.txt
+{% endhighlight %}
+
 
 You should see content of your file like this.
 
@@ -226,5 +296,13 @@ Clear command  remove all previous commands from screen
 $ clear
 {% endhighlight %}
 
+On windows you will use **cls** command.
+
+{% highlight sh %}
+$ cls
+{% endhighlight %}
+
 That's all for now.
 
+**27-03-2014 - I've updated my post after critical responses on Reddit. Now it 
+contains Windows equivalent of Linux/Mac/Unix commands.**
