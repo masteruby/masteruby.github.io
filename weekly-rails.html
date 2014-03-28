@@ -7,7 +7,7 @@ title: Masteruby
   <p>In these series of tutorials i'm gonna to learn you how to create rails apps.</p>
 <ul class="posts">
   {% for post in site.categories.weekly-rails %}
-  <li><span>{{ post.date | date_to_string  }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+  <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
   {% endfor %}
 
   

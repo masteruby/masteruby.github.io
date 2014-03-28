@@ -19,74 +19,13 @@ tutorial you will learn:
 
 * You need to have some basic knowledge of HTML, CSS. If you haven't learn them  yet go to [web tutorial on codecademy](http://www.codecademy.com/tracks/web)
 
-* You need to have basics in Ruby. If you haven't go to [ruby tutorial on codecademy](http://www.codecademy.com/tracks/ruby)
+* You need to have basics in Ruby. If you haven't I wrote post about [learning resources](http://masteruby/github.io/learning-resources/2014/03/28/learn-ruby-with-these-resources.html) for ruby
 
 * You need to have ruby and ruby on rails installed. I will explain this in next section
 
 ## 2 How to install Ruby
-
-### 2.1 Windows
-
- Get installer on [rails installer site](http://www.railsinstaller.org/en).
- Go to the Start Menu, select Accessories and choose Command prompt.
-
- You should see window with your Windows Version and actual directory path. Let's check it out if Ruby is properly installed. Type this into command prompt:
-
- {% highlight sh %}
- ruby -v
- {% endhighlight %}
-
-### 2.2 Mac OS X
- Start on [rails installer  site](http://www.railsinstaller.org). Now open the Terminal and check if ruby is installed with following command.
-
-{% highlight sh %}
- $ ruby -v
- {% endhighlight %}
-
- 
- You should see the following result:
-
- {% highlight sh %}
- $ ruby 2.0.0p247
- {% endhighlight %}
-### 2.3 Linux
-
-  Start with your package management system. You need to install all dependencies like this:
- 
-{% highlight sh %}
-$ sudo apt-get install apache2 curl git libmysql-client-dev mysql-server nodejs
-{% endhighlight %}
-
-
-
-  Then you have to install ruby. I recommend you to install it using RVM
-{% highlight sh %}
-  $ curl -L https://get.rvm.io | bash -s stable
-{% endhighlight %}
-
-  Execute following command, which install all requirements for your operating system
-{% highlight sh %}
-  $ rvm requirements --autolibs=enable
-{% endhighlight %}
-
-  Then you can install Ruby.
-
-{% highlight sh %}
-  $ rvm install ruby 2.0.0
-{% endhighlight %}
-
-After this you can use ruby and install rails
-
-{% highlight sh %}
-  $ rvm use 2.0.0
-
-  $ gem install rails 
-{% endhighlight %}
-
-  You can check succesfull installation with following command:
-{% highlight sh %}
-  $ rails -v
-{% endhighlight %}
+In [this post](http://www.masteruby.github.io/learning-resources/2014/03/28/how-to-install-ruby.html)
+I've included installation instructions for Ruby and Rails
 
 ## 3 Choosing your text editor
 

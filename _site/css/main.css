@@ -39,7 +39,8 @@ img.contact { height: 32px; width: 32px;}
 
 img.share { height: 40px; width: 40px;}
 
-img { width: 100%;}
+
+img.book { width: 200px; height: 250px }
 
 .navbar { 
   background-color: rgb(197, 47, 36);
@@ -57,9 +58,6 @@ img { width: 100%;}
 .navbar a:hover {
   color: black;
 }
-
-
-
 
 #sidebar {
   float: left;
