@@ -85,14 +85,16 @@ img.book { width: 200px; height: 250px }
 
 .posts {
   list-style-type: none;
-  margin-bottom: 1em;
   float: left;
+  margin: 0 1.2em 2em 0;
+  padding: 0 0 0 0; 
   
   
 }
 
 .posts li {
-  line-height: 1.75em;
+  line-height: 1.65em;
+  margin-bottom: 1em;
 }
 
 .posts span {

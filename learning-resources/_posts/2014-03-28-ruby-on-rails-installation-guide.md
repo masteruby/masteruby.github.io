@@ -1,8 +1,7 @@
 ---
 layout: post
 ---
-
-In this post I want to show you how to install for your operating system.
+In this post I want to show you how to install Rails for your operating system.
 
 ##  How to install Ruby and Rails
 
