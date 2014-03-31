@@ -1,0 +1,980 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+	<channel>
+		<title>Masteruby</title>
+		<description>Masteruby is ruby tutorials website</description>		
+		<link>http://masteruby.github.io</link>
+		<atom:link href="http://masteruby.github.io/feed.xml" rel="self" type="application/rss+xml" />
+		
+			<item>
+				<title>Add_tasks</title>
+				<description>&lt;p&gt;In previous part of this tutorial we&amp;#39;ve created &lt;a href=&quot;http://masteruby.github.io/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.md&quot;&gt;static pages&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Now we move on adding,removing,editing tasks on our todo rails app.&lt;/p&gt;
+
+&lt;h2&gt;Adding tasks&lt;/h2&gt;
+
+&lt;p&gt;If you want to build some tasks we need to generate another controller. Open
+up terminal and type this:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rails generate controller Tasks
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;First we&amp;#39;ll write some tests. Add file &lt;strong&gt;tasks.feature&lt;/strong&gt; to your features
+directory.&lt;/p&gt;
+
+&lt;h4&gt;tasks.feature&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;Feature: Task Manipulation
+
+Scenario: Adding Tasks
+  When I add new task
+  Then I should see task added message
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now write out step_definitions.&lt;/p&gt;
+
+&lt;h4&gt;tasks_steps.rb&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;When&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^I add new task$/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;fill_in&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;task_name&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Pay a bill&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;click_button&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Add tasks&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Try to run your test with guard. You should see falling test:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/task_falling.png&quot; alt=&quot;task added test&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;Of course our test is falling. We don&amp;#39;t have records in our database and we
+don&amp;#39;t have task form.&lt;/p&gt;
+
+&lt;p&gt;We need to create models to record our tasks to database.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;#39;s generate Task model in terminal&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;rails generate model Task
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now you can play with your tasks in your in rails console.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;rails console 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+				<pubDate>Mon, 31 Mar 2014 16:09:57 +0200</pubDate>
+				<link>http://masteruby.github.io/2014/03/31/add_tasks.html</link>
+				<guid isPermaLink="true">http://masteruby.github.io/2014/03/31/add_tasks.html</guid>
+			</item>
+		
+			<item>
+				<title>Ruby On Rails Installation Guide</title>
+				<description>&lt;p&gt;In this post I want to show you how to install Rails for your operating system.&lt;/p&gt;
+
+&lt;h2&gt;How to install Ruby and Rails&lt;/h2&gt;
+
+&lt;h3&gt;Windows&lt;/h3&gt;
+
+&lt;p&gt;Get installer on &lt;a href=&quot;http://www.railsinstaller.org/en&quot;&gt;rails installer site&lt;/a&gt;.
+ It will install Ruby with Rails and all dependencies you will use in
+ developing Rails application&lt;/p&gt;
+
+&lt;p&gt;Try checking succesfull installation.  Go to the Start Menu, select Accessories and choose Command prompt.&lt;/p&gt;
+
+&lt;p&gt;You should see window with your Windows Version and actual directory path. Let&amp;#39;s check it out if Ruby is properly installed. Type this into command prompt:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ruby -v
+ &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rails -v
+ 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You should see something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/rails_installation.png&quot; alt=&quot;ruby-on-rails-installation&quot;&gt;&lt;/p&gt;
+
+&lt;h3&gt;Mac OS X&lt;/h3&gt;
+
+&lt;p&gt;Start on &lt;a href=&quot;http://www.railsinstaller.org&quot;&gt;rails installer  site&lt;/a&gt;. Now open the Terminal and check if ruby is installed with following command.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ruby -v
+ 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You should see the following result:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ruby 2.0.0p247
+ 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If you want to install Rails by command line try this guide:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://railsapps.github.io/installrubyonrails-mac.html&quot;&gt;how to install rails on  mac&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3&gt;Linux&lt;/h3&gt;
+
+&lt;p&gt;Start with your package management system. You need to install all dependencies like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sudo apt-get install apache2 curl git libmysql-client-dev mysql-server nodejs
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Then you have to install ruby. I recommend you to install it using RVM&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl -L https://get.rvm.io | bash -s stable
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Execute following command, which install all requirements for your operating system&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rvm requirements --autolibs&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;enable&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Then you can install Ruby.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rvm install ruby 2.0.0
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;After this you can use ruby and install rails&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rvm use 2.0.0
+
+  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gem install rails 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You can check succesfull installation with following command:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rails -v
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;What&amp;#39;s next&lt;/h2&gt;
+
+&lt;p&gt;That&amp;#39;s all for now. If you want to know more about developing Rails
+applications I recommend you &lt;a href=&quot;http://guides.rubyonrails.org/getting_started.html&quot;&gt;ruby on rails
+guide&lt;/a&gt;. I wrote post about
+&lt;a href=&quot;http://masteruby.github.io/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.html&quot;&gt;how to create todo list app in
+rails&lt;/a&gt;,
+so if you want you can check it out.&lt;/p&gt;
+</description>
+				<pubDate>Fri, 28 Mar 2014 00:00:00 +0100</pubDate>
+				<link>http://masteruby.github.io/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html</link>
+				<guid isPermaLink="true">http://masteruby.github.io/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html</guid>
+			</item>
+		
+			<item>
+				<title>Learn Ruby With These Resources</title>
+				<description>&lt;p&gt;In this tutorial i&amp;#39;m gonna to show you some resources to learn ruby. Some are
+paid, some are free, it depends on you what you choose.&lt;/p&gt;
+
+&lt;p&gt;So where to start? It depends on who you are.&lt;/p&gt;
+
+&lt;h2&gt;You have no programming background and you like reading books&lt;/h2&gt;
+
+&lt;h3&gt;Learn to Program by Chris Pine&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.amazon.com/Learn-Program-Second-Facets-Ruby/dp/1934356360/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1396001035&amp;sr=1-1&amp;keywords=learn+to+program&quot;&gt;&lt;img class=&quot;book&quot; src=&quot;/images/learn-to-program.jpg&quot;&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;This book assumes you have no programming background. You will walk
+through practical examples about how to write code in Ruby. You will start
+with basic data types like variables, numbers, strings. Then you will move on
+classes, reading, writting to the file, lambdas, procs. What I like about
+this book is it&amp;#39;s readability and interesting exercises.&lt;/p&gt;
+
+&lt;h3&gt;Begining Ruby from Novice To Professional&lt;/h3&gt;
+
+&lt;p&gt;&lt;a
+href=&quot;http://www.amazon.com/Beginning-Ruby-Novice-Professional-Experts/dp/1430223634/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1396001263&amp;sr=1-1&amp;keywords=beginning+ruby+from+novice+to+professional&quot;&gt;&lt;img
+class=&quot;book&quot; src=&quot;/images/beginning-ruby.jpg&quot;&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;It&amp;#39;s a standard book about how to learn ruby. It begins with baby steps in ruby
+language, then you broad to advanced topics like how to distribute ruby gems,
+how to use threads and sockets, how to use ruby in web development with Rails,
+Sinatra, Ramaze and how to use ruby in &lt;strong&gt;gui&lt;/strong&gt; apps. Only disadvantage of this
+book is that it&amp;#39;s really old. It was published in 2009, so it&amp;#39;s very long time.&lt;/p&gt;
+
+&lt;h2&gt;You like challenges&lt;/h2&gt;
+
+&lt;p&gt;So you want to know ruby language and don&amp;#39;t have time to read book. Try this
+online guide:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://ruby.learncodethehardway.org/book/&quot;&gt;Learn Ruby Hardway&lt;/a&gt; online book by Zed Shaw.&lt;/p&gt;
+
+&lt;p&gt;What I like about this book is that it moves you straight to action. You walk up through series of exercises. Every exercise contains &lt;strong&gt;what you should see&lt;/strong&gt;
+section. If your screen doesn&amp;#39;t matches with book you should find error in your
+code and try again.&lt;/p&gt;
+
+&lt;h2&gt;You want some online interactive tutorials&lt;/h2&gt;
+
+&lt;p&gt;Try these tutorials:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://tryruby.org/levels/1/challenges/0&quot;&gt;Try Ruby&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;https://rubymonk.com/&quot;&gt;Ruby Monk&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.codecademy.com/tracks/ruby&quot;&gt;Codecademy&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://hackety.com/&quot;&gt;Hackety Hack&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;You have some programming background from other language&lt;/h2&gt;
+
+&lt;p&gt;If you came from object oriented language like Java, Programming Ruby by
+Pragmatic Bookshelf is definitely good place to start and you can use it for
+reference along with ruby docs.&lt;/p&gt;
+
+&lt;h3&gt;Programming Ruby&lt;/h3&gt;
+
+&lt;p&gt;&lt;a
+href=&quot;http://www.amazon.com/Programming-Ruby-1-9-2-0-Programmers/dp/1937785491/ref=pd_sim_b_1/192-2394227-8927164?ie=UTF8&amp;refRID=0YE5JVBZCNGW64CSXBVX&quot;&gt;&lt;img
+class=&quot;book&quot; src=&quot;/images/programming-ruby.jpeg&quot;&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;What&amp;#39;s next&lt;/h2&gt;
+
+&lt;p&gt;You definitely use Ruby in your apps. If you are into gui development you can
+start with &lt;a href=&quot;http://shoesrb.com/&quot;&gt;Shoes&lt;/a&gt;, or you can try web development with
+&lt;strong&gt;Rails&lt;/strong&gt; or Sinatra**&lt;/p&gt;
+</description>
+				<pubDate>Fri, 28 Mar 2014 00:00:00 +0100</pubDate>
+				<link>http://masteruby.github.io/learning-resources/2014/03/28/learn-ruby-with-these-resources.html</link>
+				<guid isPermaLink="true">http://masteruby.github.io/learning-resources/2014/03/28/learn-ruby-with-these-resources.html</guid>
+			</item>
+		
+			<item>
+				<title>Top Ten Commands In Terminal You Will Use Everyday</title>
+				<description>&lt;p&gt;In previous tutorial about &lt;a href=&quot;http://masteruby.github.io/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.html&quot;&gt;how to create todo list app in rails&lt;/a&gt;
+you saw that we will use terminal with Rails most of the time.&lt;/p&gt;
+
+&lt;p&gt;In this tutorial you will learn top ten commands you will use everyday in
+terminal.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;#39;s get started. First go to menu and open up: &lt;strong&gt;Command Prompt&lt;/strong&gt; or
+&lt;strong&gt;PowerShell&lt;/strong&gt; in Windows and &lt;strong&gt;Terminal&lt;/strong&gt; in Linux and Mac. You should see something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/terminal-screen.png&quot; alt=&quot;terminal-screen&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;Ok so everything works let&amp;#39;s begin.&lt;/p&gt;
+
+&lt;h2&gt;1. cd(change directory)&lt;/h2&gt;
+
+&lt;p&gt;To change actual working directory you use &lt;strong&gt;cd&lt;/strong&gt; command. Type cd and
+directory into you want to move.&lt;/p&gt;
+
+&lt;h3&gt;Move to another directory&lt;/h3&gt;
+
+&lt;p&gt;To move into Desktop directory you will use this command:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;Desktop
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;Go back to previous directory&lt;/h3&gt;
+
+&lt;p&gt;You can go back to previous directory with &lt;strong&gt;cd ..&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ..
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;2.ls or dir(list directory)&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;ls&lt;/strong&gt; command shows list of all files and directories in current working 
+directory. For example to see list of files of your home directory type this
+into command line in Linux and Mac.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ls
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Type this in &lt;strong&gt;Windows&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;dir
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You should see something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/list-of-directories.png&quot; alt=&quot;list-of-directories&quot;&gt;&lt;/p&gt;
+
+&lt;h2&gt;3. touch or copy con&lt;/h2&gt;
+
+&lt;p&gt;Touch command creates empty file. For example try to create empty file in home
+folder:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;touch empty.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Copy con&lt;/strong&gt; command serves for creating empty file in &lt;strong&gt;Windows&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;copy con empty.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You should see your file in home directory.&lt;/p&gt;
+
+&lt;h2&gt;4. mkdir(make directory)&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;mkdir&lt;/strong&gt; command creates empty folder. Navigate to home folder and create
+folder of your choice:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;mkdir my_folder
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Check it out if folder has been created with &lt;strong&gt;ls&lt;/strong&gt; or &lt;strong&gt;dir&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/create-folder.png&quot; alt=&quot;create-folder&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;You should see your folder in list. You can create any number of directories what you like. For example try create three directories:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;mkdir folder1 folder2 folder3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You should see three new folders in current working directory. Let&amp;#39;s move on.&lt;/p&gt;
+
+&lt;h2&gt;5. rm(remove)&lt;/h2&gt;
+
+&lt;p&gt;Remove command deletes folder or file.&lt;/p&gt;
+
+&lt;h3&gt;Remove folder&lt;/h3&gt;
+
+&lt;p&gt;You type rm with -r and add name of the directory you want to remove:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rm -r my_folder
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You should see that our folder has been removed. Option -r means recursive, it
+removes directory with all of his content. Let&amp;#39;s try something:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/remove-directory.png&quot; alt=&quot;remove-directory&quot;&gt; &lt;/p&gt;
+
+&lt;h3&gt;Removing files&lt;/h3&gt;
+
+&lt;p&gt;You can use rm for removing files too. For example create file with touch
+command or copy con in Windows.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;touch abc.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;copy con abc.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Remove it with &lt;strong&gt;rm&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rm abc.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;On windows you remove files with &lt;strong&gt;del&lt;/strong&gt; command following name of the file you want to remove.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;del abc.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;6. mv(move file or directory)&lt;/h2&gt;
+
+&lt;p&gt;Move command serves for renaming or moving directories.&lt;/p&gt;
+
+&lt;h3&gt;Rename directory or file with move&lt;/h3&gt;
+
+&lt;p&gt;To rename your file type filename of file you want change and name of the file
+you want to change it.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mv abc.txt empty.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;In Windows this won&amp;#39;t work. You have to use &lt;strong&gt;ren&lt;/strong&gt; command to rename your
+file.&lt;/p&gt;
+
+&lt;p&gt;Check it out with ls or dir. You should see that file abc.txt is now renamed to
+empty.txt. &lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/rename-file.png&quot; alt=&quot;rename-file&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;We can use mv for renaming directories too. Try something like this: Create directory &lt;strong&gt;new_folder&lt;/strong&gt; in your home directory. Now rename it to
+&lt;strong&gt;dir&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mkdir new_folder
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mv new_folder dir 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mkdir new_folder
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ren new_folder dir
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;Moving files or directory with mv&lt;/h3&gt;
+
+&lt;p&gt;You can use mv command to move files to specific directory. Move your
+&lt;strong&gt;empty.txt&lt;/strong&gt; file to &lt;strong&gt;dir&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mv empty.txt ~/dir
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ls
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You can move any number of files as you want. For example create some files.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;touch test1.txt test2.txt test3.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;copy con test1.txt test2.txt test3.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now move them to your folder.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mv test1.txt test2.txt test3.txt ~/dir
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;In Windows you will use &lt;strong&gt;move&lt;/strong&gt; command instead of mv.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;move test1.txt test2.txt test3.txt c:&lt;span class=&quot;se&quot;&gt;\d&lt;/span&gt;ir
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You don&amp;#39;t have to type name of files to terminal, you can use regular
+expressions. Try something like that:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mv *.txt ~/dir
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;move *.txt c:&lt;span class=&quot;se&quot;&gt;\d&lt;/span&gt;ir
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If you type &lt;strong&gt;*.txt&lt;/strong&gt; it means move all files to folder.&lt;/p&gt;
+
+&lt;h2&gt;7. cp(copy)&lt;/h2&gt;
+
+&lt;p&gt;Copy command takes file or group or files and copy it to specific directory. For example try copy our text files back to home directory.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;cp *.txt ~
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;On Windows instead of cp you will use &lt;strong&gt;copy&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;copy *.txt c:&lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Go back to your home directory. You should see our files.&lt;/p&gt;
+
+&lt;h2&gt;8. sudo or runas(switch user do)&lt;/h2&gt;
+
+&lt;p&gt;If you want to install some programs  on your Linux or Mac operating system you
+will have to use sudo. Let&amp;#39;s try to install &lt;strong&gt;Openbox&lt;/strong&gt;, tool for creating and
+editing videos in terminal.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sudo apt-get install openbox
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Or you can use runas in Windows. Type this:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;runas /user:&amp;lt;localmachine&amp;gt;&lt;span class=&quot;se&quot;&gt;\a&lt;/span&gt;dminstrator.cmd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You will be prompted for your user password.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/sudo.png&quot; alt=&quot;sudo&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;Type this in and type letter Y for installation.&lt;/p&gt;
+
+&lt;h2&gt;9. cat or type(concatenate)&lt;/h2&gt;
+
+&lt;p&gt;Cat command serves for viewing of contents and concatenation of multiple files.&lt;/p&gt;
+
+&lt;h3&gt;Viewing content of the file with cat&lt;/h3&gt;
+
+&lt;p&gt;Create some file and type something in it with your text editor. Then view its
+content with cat.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;cat test1.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;On windows instead of cat you will use &lt;strong&gt;type&lt;/strong&gt; command.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;Type test1.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You should see content of your file like this.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/cat-command.png&quot; alt=&quot;cat-command&quot;&gt;&lt;/p&gt;
+
+&lt;h3&gt;Joining multiple files to one file with cat&lt;/h3&gt;
+
+&lt;p&gt;Let&amp;#39;s try to join our test files to one file with cat.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;cat test1.txt test2.txt test3.txt &amp;gt; test.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;10. clear&lt;/h2&gt;
+
+&lt;p&gt;Clear command  remove all previous commands from screen&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;clear
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;On windows you will use &lt;strong&gt;cls&lt;/strong&gt; command.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;cls
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;That&amp;#39;s all for now.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;27-03-2014 - I&amp;#39;ve updated my post after critical responses on Reddit. Now it 
+contains Windows equivalent of Linux/Mac/Unix commands.&lt;/strong&gt;&lt;/p&gt;
+</description>
+				<pubDate>Wed, 26 Mar 2014 00:00:00 +0100</pubDate>
+				<link>http://masteruby.github.io/productivity-booster/2014/03/26/top-ten-commands-in-terminal-you-will-use-everyday.html</link>
+				<guid isPermaLink="true">http://masteruby.github.io/productivity-booster/2014/03/26/top-ten-commands-in-terminal-you-will-use-everyday.html</guid>
+			</item>
+		
+			<item>
+				<title>How To Create Todo List App Static Pages</title>
+				<description>&lt;p&gt;In the following series of posts we gonna create todo list app in rails.
+In this tutorial we&amp;#39;ll create basic structure of our app. In first part of
+tutorial you will learn:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;How to install &lt;strong&gt;Rails&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;How to choose text editor for your operating system&lt;/li&gt;
+&lt;li&gt;How to use &lt;strong&gt;Rails&lt;/strong&gt; in command line &lt;/li&gt;
+&lt;li&gt;How to use &lt;strong&gt;Bundler&lt;/strong&gt; to install gems&lt;/li&gt;
+&lt;li&gt;How to use &lt;strong&gt;Cucumber&lt;/strong&gt; with &lt;strong&gt;Capybara&lt;/strong&gt; to test our pages&lt;/li&gt;
+&lt;li&gt;How to create our static_pages(home,about,contact)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;1 What do you need&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;You need to have some basic knowledge of HTML, CSS. If you haven&amp;#39;t learn them  yet go to &lt;a href=&quot;http://www.codecademy.com/tracks/web&quot;&gt;web tutorial on codecademy&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;You need to have basics in Ruby. If you haven&amp;#39;t I wrote post about &lt;a href=&quot;http://masteruby/github.io/learning-resources/2014/03/28/learn-ruby-with-these-resources.html&quot;&gt;learning resources&lt;/a&gt; for ruby&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;You need to have ruby and ruby on rails installed. I will explain this in next section&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;2 How to install Ruby&lt;/h2&gt;
+
+&lt;p&gt;In &lt;a href=&quot;http://www.masteruby.github.io/learning-resources/2014/03/28/how-to-install-ruby.html&quot;&gt;this post&lt;/a&gt;
+I&amp;#39;ve included installation instructions for Ruby and Rails&lt;/p&gt;
+
+&lt;h2&gt;3 Choosing your text editor&lt;/h2&gt;
+
+&lt;p&gt;You write all your ruby programs using text editor.&lt;/p&gt;
+
+&lt;h3&gt;3.1 &lt;a href=&quot;http://notepad-plus-plus.org/download/v6.5.3.html&quot;&gt;Notepad++&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;For Windows  I recommend you this editor. It&amp;#39;s free and it includes syntax highlighting and auto completion for ruby. &lt;/p&gt;
+
+&lt;h3&gt;3.2 &lt;a href=&quot;http://macromates.com&quot;&gt;TextMate&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;On Mac you can use TextMate. You can download it and install for free.&lt;/p&gt;
+
+&lt;h3&gt;3.3 Gedit&lt;/h3&gt;
+
+&lt;p&gt;On Linux you can use gedit.&lt;/p&gt;
+
+&lt;h2&gt;4 Creating basic structure of the app&lt;/h2&gt;
+
+&lt;p&gt;Ok so you&amp;#39;ve got your tools in order, so we can start to  create application. Open up terminal window or command prompt if you&amp;#39;re on Windows and enter following code:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rails new todo --skip-test-unit
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This will create rails application named todo. It takes a while. Ok let&amp;#39;s check out some folders that we&amp;#39;re created.&lt;/p&gt;
+
+&lt;h4&gt;Gemfile&lt;/h4&gt;
+
+&lt;p&gt;That&amp;#39;s the file that you will use to install all dependencies what you need
+ for your applications. They&amp;#39;re called gems. Just add name of gem to your
+ Gemfile and let Bundler to take care of installation.&lt;/p&gt;
+
+&lt;h4&gt;app/views&lt;/h4&gt;
+
+&lt;p&gt;In this folder you place your html templates.&lt;/p&gt;
+
+&lt;h4&gt;app/assets&lt;/h4&gt;
+
+&lt;p&gt;Images, Javascript and CSS files belongs here.&lt;/p&gt;
+
+&lt;h3&gt;4.1 How to use Bundler&lt;/h3&gt;
+
+&lt;p&gt;After creating rails application you should use Bundler to use all dependencies
+what you need. First add name of the gem to your Gemfile, then open up terminal
+and add following command:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle install
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Let&amp;#39;s add some gems to your Gemfile. Open up your Gemfile and add following
+gems:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;slim-rails&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;capybara&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;cucumber-rails&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:require&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;database_cleaner&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;rspec-expectations&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;selenium-webdriver&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Install it with Bundler:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle install
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;4.2 Starting our application&lt;/h3&gt;
+
+&lt;p&gt;To run your application, type this into command line:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rails server
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Go to web browser and type localhost:3000. Your output screen should look like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/rails-opening-screen.png&quot; alt=&quot;rails-opening-screen&quot;&gt;&lt;/p&gt;
+
+&lt;h2&gt;5 Creating Static Pages&lt;/h2&gt;
+
+&lt;p&gt;We have our web server running let&amp;#39;s build some pages.&lt;/p&gt;
+
+&lt;h3&gt;5.1 Creating controllers&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rails generate controller StaticPages home &lt;span class=&quot;nb&quot;&gt;help &lt;/span&gt;about --no-test-framework
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If you open your views folder, you should see that you have new folder named
+&lt;strong&gt;static_pages&lt;/strong&gt; with some files in it. Go to the &lt;strong&gt;config/routes.rb&lt;/strong&gt;, you should see path of our pages that we&amp;#39;re created. Type for example, localhost:3000/static_pages into your web browser.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/home.png&quot; alt=&quot;home&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;We created StaticPages controller and we can populate our files. Testing every
+change in a browser would be tedious. So we gonna need Cucumber and Capybara to
+do it for us.&lt;/p&gt;
+
+&lt;h3&gt;5.2 Cucumber&lt;/h3&gt;
+
+&lt;p&gt;Cucumber lets software developers and shareholders to use simple plain language
+to describe features. If you want to know more about Cucumber, try
+&lt;a href=&quot;http://www.amazon.com/The-Cucumber-Book-Behaviour-Driven-Development/dp/1934356808&quot;&gt;CucumberBook&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4&gt;How Cucumber works&lt;/h4&gt;
+
+&lt;p&gt;Cucumber works in features which are written in plain text and step definitions which are written in regular ruby code. If you go to your app folder, you should see that folder named features  was created.  &lt;/p&gt;
+
+&lt;p&gt;First we need to setup folder structure of Cucumber. Run following command:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rails generate cucumber:install
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We need to test all our static pages. Open up folder features in your main
+ directory and add file &lt;strong&gt;static_pages.feature&lt;/strong&gt; into your features directory.&lt;/p&gt;
+
+&lt;h4&gt;static_pages.feature&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;gherkin&quot;&gt;&lt;span class=&quot;k&quot;&gt;Feature:&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt; Static Pages content&lt;/span&gt;
+
+&lt;span class=&quot;nf&quot;&gt; User should see static pages content&lt;/span&gt;
+
+&lt;span class=&quot;nf&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;Scenario Outline:&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt; Path testing&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;    When &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;I visit &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;&amp;lt;Path&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt; path &lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;Then &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;I should see following content: &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;&amp;lt;Content&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;    &lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;Examples:&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;      |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; Path&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;     |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; Content&lt;/span&gt;&lt;span class=&quot;k&quot;&gt; | &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;      |&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; Home&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;     |&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; Todo&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;    |&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;      |&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; About&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;    |&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; About&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;   |&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;      |&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; Help&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;     |&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; Help&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;    |&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;   &lt;/span&gt;
+
+
+&lt;span class=&quot;k&quot;&gt; &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This is how it works. At first line you define your feature, in our example
+ StaticPages content. Then you define your steps. Steps always begin with
+ keywords: Given,When,Then,And and continue with regular expression. It can be
+ any text. Don&amp;#39;t forget to surround your text in regular expression like this: &lt;strong&gt;/^some text$/&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;We have our feature defined, let&amp;#39;s test it with Cucumber&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;cucumber
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You should see something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/static-pages-failing-steps.png&quot; alt=&quot;failing steps&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;Ok we&amp;#39;ve saw undefined scenarios and steps let&amp;#39;s actually implement it. Open
+ up folder step-definitions and create file &lt;strong&gt;static&lt;em&gt;pages&lt;/em&gt;steps.rb&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h4&gt;static&lt;em&gt;pages&lt;/em&gt;steps.rb&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;When&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^I visit Home path$/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; 
+  &lt;span class=&quot;n&quot;&gt;visit&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;static_pages/home&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;In first line we match name of our step with name in the feature file.
+Then we use capybara to visit home path in the browser. Run your test with cucumber. You should see one passing test.&lt;/p&gt;
+
+&lt;p&gt;Now we need to test content of our home page. Add this into features/step&lt;em&gt;definitions/static&lt;/em&gt;pages_steps.rb:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;Then&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^I should see following content: Todo$/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;expect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;have_content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;Todo&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;In first line we match second step with feature file.
+On the second line we use &lt;strong&gt;Rspec Expectations&lt;/strong&gt; to test content of our home page.&lt;/p&gt;
+
+&lt;p&gt;Run cucumber again. You should see failing tests. Of course that test is falling, we don&amp;#39;t have content Todo in our templates.&lt;/p&gt;
+
+&lt;p&gt;Open up folder app/views/static_pages and edit file named &lt;strong&gt;home.html.slim&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h3&gt;5.3 Why to use Slim&lt;/h3&gt;
+
+&lt;p&gt;Maybe you wonder why we&amp;#39;re using files with slim ending. Slim is a template
+language that strips all unnecessary elements as opening and closing tags. For example this is a code in html: &lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;My WebPage&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;My heading&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;My paragraph&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+
+  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And this is code in Slim:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;  html
+    head
+     title My WebPage
+    body
+      h1 My heading
+      p My paragraph
+   
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You see that Slim code is shorter and easier to read as Html code. 
+  Let&amp;#39;s return to our file. Replace content of &lt;strong&gt;home.html.slim&lt;/strong&gt; with following
+  content:&lt;/p&gt;
+
+&lt;h4&gt;home.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;h1 Todo 
+ 
+ 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You should see that our test is now passing. Implement this to remaining steps
+in our feature file.&lt;/p&gt;
+
+&lt;h4&gt;static&lt;em&gt;pages&lt;/em&gt;steps.rb(excerpt)&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;When&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^I visit About path$/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;visit&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;static_pages/about&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;no&quot;&gt;Then&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^I should see following content: About$/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;expect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;have_content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;About&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt; 
+
+&lt;span class=&quot;no&quot;&gt;When&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^I visit Help path$/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;visit&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;static_pages/help&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;no&quot;&gt;Then&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^I should see following content: Help$/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;expect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;have_content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;Help&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4&gt;about.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt; h1 About
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4&gt;help.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt; 
+ h1 Help
+ 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;All our tests are now passing, next step will be implement title tests. Open up
+ your &lt;strong&gt;static_pages.feature&lt;/strong&gt; file and append following line:&lt;/p&gt;
+
+&lt;h4&gt;static_pages.feature&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;gherkin&quot;&gt;&lt;span class=&quot;nf&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;And &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;I should see following title: &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;&amp;lt;Title&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;&lt;/span&gt;
+
+&lt;span class=&quot;nf&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;Examples:&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;   |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; Path&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;     |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; Content&lt;/span&gt;&lt;span class=&quot;k&quot;&gt; |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; **Title&lt;/span&gt;&lt;span class=&quot;k&quot;&gt; |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;   |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; Home&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;     |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; Todo&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;    |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; **Todo&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;  |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;   |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; About&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;    |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; About&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;   |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; **About&lt;/span&gt;&lt;span class=&quot;k&quot;&gt; |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;   |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; Help&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;     |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; Help&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;    |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; **Help&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;  |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;**&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Let&amp;#39;s implement our test. Add these lines to our steps file.&lt;/p&gt;
+
+&lt;h4&gt;static&lt;em&gt;pages&lt;/em&gt;steps.rb&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;And&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^I should see following title: Todo$/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;expect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;have_title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;Todo&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;no&quot;&gt;And&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^I should see following title: About$/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;expect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;have_title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;About&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+ &lt;span class=&quot;no&quot;&gt;And&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^I should see following title: Help$/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;expect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;have_title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;Help&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Let&amp;#39;s fix failing tests. We need to change our title in our templates.&lt;/p&gt;
+
+&lt;h4&gt;home.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;html
+  head
+    title Todo
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4&gt;about.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;html
+  head
+    title About
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4&gt;help.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;html
+  head
+    title Help
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Let&amp;#39;s run cucumber again. You should see that&amp;#39;s all our steps are now passing. We are done.&lt;/p&gt;
+
+&lt;h2&gt;6 What to improve&lt;/h2&gt;
+
+&lt;h3&gt;6.1 Watching step changes with Guard&lt;/h3&gt;
+
+&lt;p&gt;There&amp;#39;s lot a place to improve. For example running cucumber every time for
+every change in terminal it&amp;#39;s disgusting. Let&amp;#39;s change it. We can use &lt;strong&gt;Guard&lt;/strong&gt;
+to watch every change in our features folder. Add Guard to your Gemfile.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;guard-cucumber&amp;#39;&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And install it:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle install
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Let&amp;#39;s add Guard to Cucumber.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;guard init cucumber
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If you open your app&amp;#39;s folder you should see that file named &lt;strong&gt;Guardfile&lt;/strong&gt; was
+created.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;#39;s run Guard to run our features automatically.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;guard
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;All features are running automatically by now.&lt;/p&gt;
+
+&lt;h3&gt;6.2 Eliminate duplication in title&lt;/h3&gt;
+
+&lt;p&gt;Take a look at files in views folder.
+You saw that we&amp;#39;ve writed title tag three times. That&amp;#39;s terrible, let&amp;#39;s do
+something about that. First rename file in &lt;strong&gt;app/views/layouts&lt;/strong&gt; directory.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;mv application.html.erb application.html.slim
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Delete all content and replace it with following:&lt;/p&gt;
+
+&lt;h4&gt;app/views/layouts/application.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;doctype html
+html
+  head
+    title Todo
+    = stylesheet_link_tag    &amp;quot;application&amp;quot;, media: &amp;quot;all&amp;quot;, &amp;quot;data-turbolinks-track&amp;quot; =&amp;gt; true
+    = javascript_include_tag &amp;quot;application&amp;quot;, &amp;quot;data-turbolinks-track&amp;quot; =&amp;gt; true
+    = csrf_meta_tags
+  body
+    = yield
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4&gt;app/views/static_pages/about.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;- provide(:title, &amp;#39;About&amp;#39;)
+h1 About
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4&gt;app/views/static_pages/help.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt; - provide(:title, &amp;#39;Help&amp;#39;)
+h1 Help
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;6.3 Linking our pages and updating routes&lt;/h3&gt;
+
+&lt;p&gt;Typing long adresses like &lt;strong&gt;static_pages/home&lt;/strong&gt; is very disgusting, if we
+instead use shorter address, it wouldbe much better.&lt;/p&gt;
+
+&lt;p&gt;Open up &lt;strong&gt;config/routes.rb&lt;/strong&gt; and replace it content with following:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;cucumber&quot;&gt;&lt;span class=&quot;nf&quot;&gt;root &amp;quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;static_pages#home&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;match &amp;quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;/help&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;&amp;quot;, to: &amp;quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;static_pages#help&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;&amp;quot;, via: &amp;#39;get&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;match &amp;quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;/about&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;&amp;quot;, to: &amp;quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;static_pages#about&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;&amp;quot;, via: &amp;#39;get&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And change tests in &lt;strong&gt;features/step&lt;em&gt;definitions/static&lt;/em&gt;pages_steps.rb&lt;/strong&gt; like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;features/step&lt;em&gt;definitions/static&lt;/em&gt;pages_steps.rb&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;When&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^I visit Home path$/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;visit&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;  
+
+&lt;span class=&quot;no&quot;&gt;When&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^I visit About path$/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;visit&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;/about&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;no&quot;&gt;When&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^I visit Help path$/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;visit&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;/help&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Let&amp;#39;s take a look at code we&amp;#39;ve just wrote.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;root &lt;span class=&quot;s2&quot;&gt;&amp;quot;static_pages#home&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This code creates root path for our pages. In this time it&amp;#39;s
+&lt;strong&gt;static_pages#home&lt;/strong&gt;. So you don&amp;#39;t have to write your path to web browser.
+Start rails server. You should something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/root_path.png&quot; alt=&quot;how-to-create-root-path-in-rails&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;That&amp;#39;s good but your visitors don&amp;#39;t have time to write short path like
+&lt;strong&gt;/help&lt;/strong&gt; to your webrowser. You haveto include links on your root page.&lt;/p&gt;
+
+&lt;p&gt;Add this code for adding links to your
+&lt;strong&gt;app/views/static_pages/layouts/application.html&lt;/strong&gt; file after the body tag.&lt;/p&gt;
+
+&lt;h4&gt;application.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;nav
+  ul
+    &lt;span class=&quot;nv&quot;&gt;li&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; link_to &lt;span class=&quot;s2&quot;&gt;&amp;quot;Home&amp;quot;&lt;/span&gt;, root_path
+    &lt;span class=&quot;nv&quot;&gt;li&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; link_to &lt;span class=&quot;s2&quot;&gt;&amp;quot;Help&amp;quot;&lt;/span&gt;, help_path
+    &lt;span class=&quot;nv&quot;&gt;li&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; link_to &lt;span class=&quot;s2&quot;&gt;&amp;quot;About&amp;quot;&lt;/span&gt;, about_path
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You should see links on your home page.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/linked-pages.png&quot; alt=&quot;linked pages&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;We&amp;#39;re done here. In next tutorial we&amp;#39;ll do some styling to our app&lt;/p&gt;
+</description>
+				<pubDate>Sat, 22 Mar 2014 00:00:00 +0100</pubDate>
+				<link>http://masteruby.github.io/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.html</link>
+				<guid isPermaLink="true">http://masteruby.github.io/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.html</guid>
+			</item>
+		
+	</channel>
+</rss>

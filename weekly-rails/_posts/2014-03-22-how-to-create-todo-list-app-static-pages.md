@@ -370,7 +370,7 @@ And install it:
 $ bundle install
 {% endhighlight %}
 
-Let's run Guard with Cucumber.
+Let's add Guard to Cucumber.
 
 {% highlight sh %}
 $ guard init cucumber
@@ -431,6 +431,72 @@ h1 About
  - provide(:title, 'Help')
 h1 Help
 {% endhighlight %}
+
+### 6.3 Linking our pages and updating routes
+
+Typing long adresses like **static_pages/home** is very disgusting, if we
+instead use shorter address, it wouldbe much better.
+
+Open up **config/routes.rb** and replace it content with following:
+
+{% highlight cucumber %}
+root "static_pages#home"
+match "/help", to: "static_pages#help", via: 'get'
+match "/about", to: "static_pages#about", via: 'get'
+{% endhighlight %}
+
+And change tests in **features/step_definitions/static_pages_steps.rb** like this:
+
+**features/step_definitions/static_pages_steps.rb**
+
+{% highlight ruby %}
+When /^I visit Home path$/ do
+  visit '/'
+end  
+
+When /^I visit About path$/ do
+  visit '/about'
+end
+
+When /^I visit Help path$/ do
+  visit '/help'
+end
+
+{% endhighlight %}
+Let's take a look at code we've just wrote.
+
+{% highlight sh %}
+root "static_pages#home"
+{% endhighlight %}
+
+This code creates root path for our pages. In this time it's
+**static_pages#home**. So you don't have to write your path to web browser.
+Start rails server. You should something like this:
+
+![how-to-create-root-path-in-rails](/images/root_path.png)
+
+That's good but your visitors don't have time to write short path like
+**/help** to your webrowser. You haveto include links on your root page.
+
+Add this code for adding links to your
+**app/views/static_pages/layouts/application.html** file after the body tag.
+
+
+#### application.html.slim
+
+{% highlight sh %}
+nav
+  ul
+    li = link_to "Home", root_path
+    li = link_to "Help", help_path
+    li = link_to "About", about_path
+{% endhighlight %}
+
+You should see links on your home page.
+
+![linked pages](/images/linked-pages.png)
+
+
 
 We're done here. In next tutorial we'll do some styling to our app
 

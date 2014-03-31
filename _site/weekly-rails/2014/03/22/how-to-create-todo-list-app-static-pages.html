@@ -18,7 +18,7 @@
           
         <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/main.css">
-         
+    <link rel="alternate" type="application/rss+xml" title="Masteruby" href="http://masteruby.github.io/feed.xml">     
 	<!-- Bootstrap CSS -->
   <meta name="google-site-verification" content="UFFQXW8FdLgKuB_vYYy8LTw5aonnBmAHdUhUopMxero" />
   </head>
@@ -46,6 +46,13 @@
 
 <ul class="posts">
   <h1>Recent posts</h1>
+
+<li>
+  <span>31 Mar 2014</span> &raquo;
+
+  <a href="/2014/03/31/add_tasks.html">
+    Add_tasks</a>
+</li>
 
 <li>
   <span>28 Mar 2014</span> &raquo;
@@ -455,7 +462,7 @@ to watch every change in our features folder. Add Guard to your Gemfile.</p>
 <div class="highlight"><pre><code class="sh"><span class="nv">$ </span>bundle install
 </code></pre></div>
 
-<p>Let&#39;s run Guard with Cucumber.</p>
+<p>Let&#39;s add Guard to Cucumber.</p>
 
 <div class="highlight"><pre><code class="sh"><span class="nv">$ </span>guard init cucumber
 </code></pre></div>
@@ -506,6 +513,65 @@ h1 About
 h1 Help
 </code></pre></div>
 
+<h3>6.3 Linking our pages and updating routes</h3>
+
+<p>Typing long adresses like <strong>static_pages/home</strong> is very disgusting, if we
+instead use shorter address, it wouldbe much better.</p>
+
+<p>Open up <strong>config/routes.rb</strong> and replace it content with following:</p>
+
+<div class="highlight"><pre><code class="cucumber"><span class="nf">root &quot;</span><span class="s">static_pages#home</span><span class="nf">&quot;</span>
+<span class="nf">match &quot;</span><span class="s">/help</span><span class="nf">&quot;, to: &quot;</span><span class="s">static_pages#help</span><span class="nf">&quot;, via: &#39;get&#39;</span>
+<span class="nf">match &quot;</span><span class="s">/about</span><span class="nf">&quot;, to: &quot;</span><span class="s">static_pages#about</span><span class="nf">&quot;, via: &#39;get&#39;</span>
+</code></pre></div>
+
+<p>And change tests in <strong>features/step<em>definitions/static</em>pages_steps.rb</strong> like this:</p>
+
+<p><strong>features/step<em>definitions/static</em>pages_steps.rb</strong></p>
+
+<div class="highlight"><pre><code class="ruby"><span class="no">When</span> <span class="sr">/^I visit Home path$/</span> <span class="k">do</span>
+  <span class="n">visit</span> <span class="s1">&#39;/&#39;</span>
+<span class="k">end</span>  
+
+<span class="no">When</span> <span class="sr">/^I visit About path$/</span> <span class="k">do</span>
+  <span class="n">visit</span> <span class="s1">&#39;/about&#39;</span>
+<span class="k">end</span>
+
+<span class="no">When</span> <span class="sr">/^I visit Help path$/</span> <span class="k">do</span>
+  <span class="n">visit</span> <span class="s1">&#39;/help&#39;</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<p>Let&#39;s take a look at code we&#39;ve just wrote.</p>
+
+<div class="highlight"><pre><code class="sh">root <span class="s2">&quot;static_pages#home&quot;</span>
+</code></pre></div>
+
+<p>This code creates root path for our pages. In this time it&#39;s
+<strong>static_pages#home</strong>. So you don&#39;t have to write your path to web browser.
+Start rails server. You should something like this:</p>
+
+<p><img src="/images/root_path.png" alt="how-to-create-root-path-in-rails"></p>
+
+<p>That&#39;s good but your visitors don&#39;t have time to write short path like
+<strong>/help</strong> to your webrowser. You haveto include links on your root page.</p>
+
+<p>Add this code for adding links to your
+<strong>app/views/static_pages/layouts/application.html</strong> file after the body tag.</p>
+
+<h4>application.html.slim</h4>
+
+<div class="highlight"><pre><code class="sh">nav
+  ul
+    <span class="nv">li</span> <span class="o">=</span> link_to <span class="s2">&quot;Home&quot;</span>, root_path
+    <span class="nv">li</span> <span class="o">=</span> link_to <span class="s2">&quot;Help&quot;</span>, help_path
+    <span class="nv">li</span> <span class="o">=</span> link_to <span class="s2">&quot;About&quot;</span>, about_path
+</code></pre></div>
+
+<p>You should see links on your home page.</p>
+
+<p><img src="/images/linked-pages.png" alt="linked pages"></p>
+
 <p>We&#39;re done here. In next tutorial we&#39;ll do some styling to our app</p>
 
 
@@ -533,6 +599,11 @@ h1 Help
 
 
 <ul class="posts">
+  
+
+  <li><span>31 Mar 2014</span> &raquo; <a href="/2014/03/31/add_tasks.html#disqus_thread">Add_tasks</a></li>
+  
+  
   
 
   <li><span>28 Mar 2014</span> &raquo; <a href="/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html#disqus_thread">Ruby On Rails Installation Guide</a></li>
