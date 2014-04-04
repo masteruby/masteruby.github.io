@@ -3,67 +3,389 @@
 	<channel>
 		<title>Masteruby</title>
 		<description>Masteruby is ruby tutorials website</description>		
-		<link>http://masteruby.github.io</link>
-		<atom:link href="http://masteruby.github.io/feed.xml" rel="self" type="application/rss+xml" />
+		<link>http://www.masteruby.github.io</link>
+		<atom:link href="http://www.masteruby.github.io/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
-				<title>Add_tasks</title>
+				<title>How To Create Todo List App Adding Removing Completing Tasks</title>
 				<description>&lt;p&gt;In previous part of this tutorial we&amp;#39;ve created &lt;a href=&quot;http://masteruby.github.io/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.md&quot;&gt;static pages&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;Now we move on adding,removing,editing tasks on our todo rails app.&lt;/p&gt;
+&lt;p&gt;In this post we&amp;#39;ll learn:&lt;/p&gt;
 
-&lt;h2&gt;Adding tasks&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;How to style our app with Bootstrap&lt;/li&gt;
+&lt;li&gt;Showing list of all tasks&lt;/li&gt;
+&lt;li&gt;Adding tasks&lt;/li&gt;
+&lt;li&gt;Deleting Tasks&lt;/li&gt;
+&lt;li&gt;Completing Tasks&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;If you want to build some tasks we need to generate another controller. Open
-up terminal and type this:&lt;/p&gt;
+&lt;h2&gt;Styling our app with Bootstrap&lt;/h2&gt;
+
+&lt;p&gt;Our app is little bit boring, just html, no css. Let&amp;#39;s do something about that we will use Bootstrap to take care of basic design&lt;/p&gt;
+
+&lt;h3&gt;Get started with Bootstrap&lt;/h3&gt;
+
+&lt;p&gt;Bootstrap is a framework for easier developing websites. To use it we have to install &lt;strong&gt;bootstrap-sass&lt;/strong&gt; gem&lt;/p&gt;
+
+&lt;h4&gt;Gemfile&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gem &lt;span class=&quot;s1&quot;&gt;&amp;#39;bootstrap-sass&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle install
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;Styling Navigation with Boostrap&lt;/h3&gt;
+
+&lt;p&gt;Let&amp;#39;s make our navigation prettier. Go to the app/views/layouts and add this code right after body.&lt;/p&gt;
+
+&lt;h4&gt;app/views/layouts/application.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;header.navbar
+  .navbar-inner
+    .container
+      nav
+        ul.nav.navbar-nav
+          li = link_to &amp;quot;Home&amp;quot;, root_path
+          li = link_to &amp;quot;Help&amp;quot;, help_path
+          li = link_to &amp;quot;About&amp;quot;, about_path
+          
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;To work we need to import bootstrap from our extended css file. Create file &lt;strong&gt;main.css.scss&lt;/strong&gt; in &lt;strong&gt;app/assets/stylesheets&lt;/strong&gt; directory.&lt;/p&gt;
+
+&lt;h3&gt;What is scss&lt;/h3&gt;
+
+&lt;p&gt;Scss is improved CSS, it allow us to use variables, and removes some repetitions in our commands. If you want to know more about Sass I recommend you
+&lt;a href=&quot;http://www.amazon.com/Pragmatic-Guide-Sass-Hampton-Catlin/dp/1934356840&quot;&gt;pragmatic guide to sass&lt;/a&gt; book&lt;/p&gt;
+
+&lt;p&gt;Add this code to &lt;strong&gt;main.css.scss&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h4&gt;app/assets/stylesheets/main.css.scss&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;css&quot;&gt;&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;bootstrap&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;So we have bootstrap imported,let&amp;#39;s look at the home page:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/navigation.png&quot; alt=&quot;bootstrap navigation&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;So we&amp;#39;ve applied some styling let&amp;#39;s move on showing list of tasks&lt;/p&gt;
+
+&lt;h2&gt;Showing list of all tasks&lt;/h2&gt;
+
+&lt;p&gt;To manipulate tasks we need to create a new controller:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rails generate controller Tasks
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;First we&amp;#39;ll write some tests. Add file &lt;strong&gt;tasks.feature&lt;/strong&gt; to your features
-directory.&lt;/p&gt;
+&lt;p&gt;That&amp;#39;s fine, but we need to record tasks do database. Writing all sql code would be tedious, fortunately there is &lt;strong&gt;Active Record&lt;/strong&gt; to help.&lt;/p&gt;
 
-&lt;h4&gt;tasks.feature&lt;/h4&gt;
+&lt;h3&gt;What is Active Record&lt;/h3&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;Feature: Task Manipulation
+&lt;p&gt;Active Record is Object-Relation-Mapping Software, that means that maps row in database to Ruby object. You don&amp;#39;t have to write sql, you can use Ruby. If you
+want to know more about Active Record you can try &lt;a href=&quot;http://guides.rubyonrails.org/active_record_basics.html&quot;&gt;this site&lt;/a&gt;&lt;/p&gt;
 
-Scenario: Adding Tasks
-  When I add new task
-  Then I should see task added message
+&lt;h3&gt;Creating Models&lt;/h3&gt;
+
+&lt;p&gt;We need to create models to add records to database.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rails generate model Task name:string
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Now write out step_definitions.&lt;/p&gt;
+&lt;p&gt;Our model isn&amp;#39;t already in database, we need to move our migration. Go to db/migrate folder. You should see migration &lt;strong&gt;create_tasks.rb&lt;/strong&gt;&lt;/p&gt;
 
-&lt;h4&gt;tasks_steps.rb&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&quot;/images/migration_file.png&quot; alt=&quot;rails migration&quot;&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;When&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^I add new task$/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;fill_in&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;task_name&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;with&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Pay a bill&amp;quot;&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;click_button&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Add tasks&amp;quot;&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;  
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rake db:migrate
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Try to run your test with guard. You should see falling test:&lt;/p&gt;
+&lt;p&gt;And move it for test purposes.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/task_falling.png&quot; alt=&quot;task added test&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;Of course our test is falling. We don&amp;#39;t have records in our database and we
-don&amp;#39;t have task form.&lt;/p&gt;
-
-&lt;p&gt;We need to create models to record our tasks to database.&lt;/p&gt;
-
-&lt;p&gt;Let&amp;#39;s generate Task model in terminal&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;rails generate model Task
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rake db:test:prepare
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Now you can play with your tasks in your in rails console.&lt;/p&gt;
+&lt;p&gt;Let&amp;#39;s go to rails console and create some tasks. &lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;rails console 
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rails console
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/creating_task.png&quot; alt=&quot;creating task in console&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;You saw that we&amp;#39;ve created task with name &lt;strong&gt;Pay a bill&lt;/strong&gt;. That&amp;#39;s fine it works in console, but to view it in browser we need to add some code to our controllers and views.&lt;/p&gt;
+
+&lt;p&gt;First we&amp;#39;ll generate list of all tasks. We want to generate lists of tasks on
+home page, so we&amp;#39;ll use static&lt;em&gt;pages&lt;/em&gt;controller, otherwise we would use tasks
+route with tasks controller. Go to &lt;strong&gt;app/controllers/static&lt;em&gt;pages&lt;/em&gt;controller.rb&lt;/strong&gt; and add this code.&lt;/p&gt;
+
+&lt;h4&gt;app/controllers/static&lt;em&gt;pages&lt;/em&gt;controller.rb&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;home&lt;/span&gt;
+  &lt;span class=&quot;vi&quot;&gt;@tasks&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Task&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;all&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This code will check all instances of object Task and save it into variable &lt;strong&gt;@tasks&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;We want to show all tasks on home page, open up
+&lt;strong&gt;app/views/static_pages/home.html.slim&lt;/strong&gt; and add following code:&lt;/p&gt;
+
+&lt;h4&gt;app/views/static_pages/home.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;ul#tasks
+  - @tasks.each do |task|
+    li = task.name
+ 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+ 
+
+&lt;p&gt;In this code we connect view with static_pages controller and with each method
+we loop through all the tasks and add their names to unordered list.&lt;/p&gt;
+
+&lt;p&gt;Go to checkout change in browser. You should see list with our recently created tasks.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/tasks_list.png&quot; alt=&quot;task-list&quot;&gt;&lt;/p&gt;
+
+&lt;h2&gt;Adding Tasks&lt;/h2&gt;
+
+&lt;p&gt;It works, with some problems. Creating task from rails console would be really boring. We need to create task form to do it for us.&lt;/p&gt;
+
+&lt;p&gt;First we write up some tests. Create new file &lt;strong&gt;tasks.feature&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h4&gt;features/tasks.feature&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;gherkin&quot;&gt;&lt;span class=&quot;k&quot;&gt;Feature:&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt; Task Manipulation&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;  In order to use my todo list app I want to add, remove and complete my tasks.&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;Scenario:&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt; Adding task&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;    When &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;I add a new task&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;Then &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;I should see task added message&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now write some step definitions.&lt;/p&gt;
+
+&lt;h4&gt;features/step&lt;em&gt;definitions/tasks&lt;/em&gt;steps.rb&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;When&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^I add a new task$/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;visit&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;root_path&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;fill_in&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;task_name&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:with&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Pay a bill&amp;#39;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;expect&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;click_button&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Add task&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;change&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Task&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;by&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We used capybara methods to fill in form for task. fill&lt;em&gt;in method fills text field **task&lt;/em&gt;name** and click button with value &lt;strong&gt;Add task&lt;/strong&gt;, then it count
+number of tasks and if one more tasks has been it will pass.&lt;/p&gt;
+
+&lt;p&gt;Try it now. Our tests should fail.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/failing_form.png&quot; alt=&quot;failing form&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;We need to add routes for tasks. To save the time we use resources to generate
+all the routes for tasks.&lt;/p&gt;
+
+&lt;h4&gt;config/routes.rb&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;resources&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:tasks&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Let&amp;#39;s try to create our form.&lt;/p&gt;
+
+&lt;h4&gt;app/views/static_pages/home.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;= form_for :task, url: tasks_path do |f|
+  = f.label :name
+  = f.text_field :name
+  = f.submit &amp;quot;Add task&amp;quot;, class: &amp;quot;btn btn-large btn-primary&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Maybe you wonder what &lt;strong&gt;form_for&lt;/strong&gt; method does. Take look at this at the browser.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/tasks_form.png&quot; alt=&quot;tasks form&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;If you look at it with Firebug, Chrome Developer Tools or something like that,
+you should see that &lt;strong&gt;form_for&lt;/strong&gt; method will create html code as you see in the
+picture.&lt;/p&gt;
+
+&lt;p&gt;Form is created but it doesn&amp;#39;t work because we didn&amp;#39;t add controller.&lt;/p&gt;
+
+&lt;h4&gt;app/controllers/tasks_controller.rb&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;create&lt;/span&gt;
+ &lt;span class=&quot;vi&quot;&gt;@task&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Task&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;task_params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ &lt;span class=&quot;vi&quot;&gt;@task&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;save&lt;/span&gt;
+ &lt;span class=&quot;n&quot;&gt;redirect_to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;root_path&lt;/span&gt;
+ 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Maybe you wonder what means &lt;strong&gt;task_params&lt;/strong&gt;. Due to security issues Rails
+ developers add some safer code to create new objects.&lt;/p&gt;
+
+&lt;p&gt;Add this code to bottom of the &lt;strong&gt;tasks_controller&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h4&gt;app/controllers/tasks_controller.rb&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt; &lt;span class=&quot;kp&quot;&gt;private&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;task_params&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:task&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;permit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+    
+
+&lt;p&gt;We&amp;#39;ve completed our test let&amp;#39;s move on second. We need to add Task added
+Message. To display success or error messages with controller we will use flash
+hash.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;#39;s write test first.&lt;/p&gt;
+
+&lt;h4&gt;features/step&lt;em&gt;definitions/tasks&lt;/em&gt;steps.rb&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;gherkin&quot;&gt;&lt;span class=&quot;k&quot;&gt;Then &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;/^I should see task added message$/ do&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;  expect(page).to have_content &amp;quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Task added&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Our test should fail. To work we need to add flash notice to our controller and add it to layout.&lt;/p&gt;
+
+&lt;h4&gt;app/controllers/tasks_controller.rb&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;flash&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:notice&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Task added&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4&gt;application.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;- if notice
+  = notice
+- if alert
+  = alert
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+  
+
+&lt;p&gt;Try to run test now you should see passing tests. If you go to web browser you should see task added message at the top of the page&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/task_added.png&quot; alt=&quot;task added&quot;&gt;&lt;/p&gt;
+
+&lt;h2&gt;Removing Tasks&lt;/h2&gt;
+
+&lt;p&gt;If we&amp;#39;ll complete our tasks we should remove them from tasks list. First we&amp;#39;ll write some tests&lt;/p&gt;
+
+&lt;h4&gt;features/tasks.feature&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;gherkin&quot;&gt;&lt;span class=&quot;k&quot;&gt;When &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;I delete task&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;Then &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;I should see task deleted message&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4&gt;features/step&lt;em&gt;definitions/tasks&lt;/em&gt;steps.rb&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;When&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^I delete task$/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;visit&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;root_path&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;expect&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;click_button&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Delete task&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;change&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Task&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;by&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;no&quot;&gt;Then&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^I should see task deleted message$/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;expect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;have_content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;Task deleted&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Our tests should fail. We need to add some code to our views and controllers.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;destroy&lt;/span&gt;
+  &lt;span class=&quot;vi&quot;&gt;@task&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Task&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;vi&quot;&gt;@task&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;destroy&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;redirect_to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;root_path&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;flash&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:alert&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Task deleted&amp;quot;&lt;/span&gt;
+ 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+ 
+
+&lt;p&gt;This code will find Task by id and saves it to variable and then it will use
+Active Record destroy method to remove it.&lt;/p&gt;
+
+&lt;p&gt;Add this code to &lt;strong&gt;home.html.slim&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h4&gt;app/views/static_pages/home.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;= link_to &amp;#39;Delete task&amp;#39;, task, method: :delete
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If you test it right now. You should see passing tests.&lt;/p&gt;
+
+&lt;h2&gt;Completing Tasks&lt;/h2&gt;
+
+&lt;p&gt;We want to complete tasks and display it as completed. To do it 
+we need to add boolean completed to our tasks table.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;rails generate migration AddCompletedToTask
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We need to edit our migration manually. Open up
+&lt;strong&gt;db/migrate/add&lt;em&gt;completed&lt;/em&gt;to_task.rb&lt;/strong&gt; and add some content:&lt;/p&gt;
+
+&lt;h4&gt;db/migrate/add&lt;em&gt;completed&lt;/em&gt;to_task.rb&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;change&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;add_column&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:tasks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:completed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:boolean&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We need to add new route.&lt;/p&gt;
+
+&lt;h4&gt;config/routes.rb&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt; &lt;span class=&quot;n&quot;&gt;match&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;tasks/complete&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;tasks#complete&amp;#39;&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:via&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;post&lt;/span&gt;
+ 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And view and controller&lt;/p&gt;
+
+&lt;h4&gt;app/views/static_pages/home.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt; = form_tag(&amp;quot;/tasks/complete&amp;quot;, :method =&amp;gt; &amp;quot;post&amp;quot;) do
+  ul#tasks
+    - @tasks.each do |task|
+      - if task.completed == true
+        li[style=&amp;quot;color:grey;&amp;quot;]
+          = check_box_tag &amp;quot;tasks_checkbox[]&amp;quot;,task.id 
+          strike
+            = task.name
+          = link_to &amp;#39;Delete task&amp;#39;, task, method: :delete
+          
+      - else
+        li
+          = check_box_tag &amp;quot;tasks_checkbox[]&amp;quot;,task.id
+          = task.name
+          = link_to &amp;#39;Delete task&amp;#39;, task, method: :delete  
+
+  = submit_tag(&amp;quot;Complete Task&amp;quot;, class: &amp;quot;btn btn-large btn-primary&amp;quot;)    
+= form_for :task, url: tasks_path do |f|
+  = f.label :name
+  = f.text_field :name
+  = f.submit &amp;quot;Add task&amp;quot;, class: &amp;quot;btn btn-large btn-primary&amp;quot;
+  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We checkout if task has attribute &lt;strong&gt;completed&lt;/strong&gt; set to true and if it does we use strike and little css styling.&lt;/p&gt;
+
+&lt;h4&gt;app/controllers/tasks_controller.rb&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;complete&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:tasks_checkbox&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;check&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;task_id&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;check&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Task&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;find_by_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;task_id&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;update_attribute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:completed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;flash&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:notice&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Task completed&amp;quot;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;redirect_to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;root_path&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+ 
+
+&lt;h2&gt;What&amp;#39;s next&lt;/h2&gt;
+
+&lt;p&gt;In next tutorial we&amp;#39;ll look at user authentication.&lt;/p&gt;
 </description>
-				<pubDate>Mon, 31 Mar 2014 16:09:57 +0200</pubDate>
-				<link>http://masteruby.github.io/2014/03/31/add_tasks.html</link>
-				<guid isPermaLink="true">http://masteruby.github.io/2014/03/31/add_tasks.html</guid>
+				<pubDate>Fri, 04 Apr 2014 00:00:00 +0200</pubDate>
+				<link>http://www.masteruby.github.io/weekly-rails/2014/04/04/how-to-create-todo-list-app-adding-removing-completing-tasks.html</link>
+				<guid isPermaLink="true">http://www.masteruby.github.io/weekly-rails/2014/04/04/how-to-create-todo-list-app-adding-removing-completing-tasks.html</guid>
 			</item>
 		
 			<item>
@@ -153,8 +475,8 @@ rails&lt;/a&gt;,
 so if you want you can check it out.&lt;/p&gt;
 </description>
 				<pubDate>Fri, 28 Mar 2014 00:00:00 +0100</pubDate>
-				<link>http://masteruby.github.io/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html</link>
-				<guid isPermaLink="true">http://masteruby.github.io/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html</guid>
+				<link>http://www.masteruby.github.io/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html</link>
+				<guid isPermaLink="true">http://www.masteruby.github.io/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html</guid>
 			</item>
 		
 			<item>
@@ -229,8 +551,8 @@ start with &lt;a href=&quot;http://shoesrb.com/&quot;&gt;Shoes&lt;/a&gt;, or you
 &lt;strong&gt;Rails&lt;/strong&gt; or Sinatra**&lt;/p&gt;
 </description>
 				<pubDate>Fri, 28 Mar 2014 00:00:00 +0100</pubDate>
-				<link>http://masteruby.github.io/learning-resources/2014/03/28/learn-ruby-with-these-resources.html</link>
-				<guid isPermaLink="true">http://masteruby.github.io/learning-resources/2014/03/28/learn-ruby-with-these-resources.html</guid>
+				<link>http://www.masteruby.github.io/learning-resources/2014/03/28/learn-ruby-with-these-resources.html</link>
+				<guid isPermaLink="true">http://www.masteruby.github.io/learning-resources/2014/03/28/learn-ruby-with-these-resources.html</guid>
 			</item>
 		
 			<item>
@@ -505,8 +827,8 @@ content with cat.&lt;/p&gt;
 contains Windows equivalent of Linux/Mac/Unix commands.&lt;/strong&gt;&lt;/p&gt;
 </description>
 				<pubDate>Wed, 26 Mar 2014 00:00:00 +0100</pubDate>
-				<link>http://masteruby.github.io/productivity-booster/2014/03/26/top-ten-commands-in-terminal-you-will-use-everyday.html</link>
-				<guid isPermaLink="true">http://masteruby.github.io/productivity-booster/2014/03/26/top-ten-commands-in-terminal-you-will-use-everyday.html</guid>
+				<link>http://www.masteruby.github.io/productivity-booster/2014/03/26/top-ten-commands-in-terminal-you-will-use-everyday.html</link>
+				<guid isPermaLink="true">http://www.masteruby.github.io/productivity-booster/2014/03/26/top-ten-commands-in-terminal-you-will-use-everyday.html</guid>
 			</item>
 		
 			<item>
@@ -972,8 +1294,8 @@ Start rails server. You should something like this:&lt;/p&gt;
 &lt;p&gt;We&amp;#39;re done here. In next tutorial we&amp;#39;ll do some styling to our app&lt;/p&gt;
 </description>
 				<pubDate>Sat, 22 Mar 2014 00:00:00 +0100</pubDate>
-				<link>http://masteruby.github.io/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.html</link>
-				<guid isPermaLink="true">http://masteruby.github.io/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.html</guid>
+				<link>http://www.masteruby.github.io/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.html</link>
+				<guid isPermaLink="true">http://www.masteruby.github.io/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.html</guid>
 			</item>
 		
 	</channel>

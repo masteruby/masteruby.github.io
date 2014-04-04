@@ -50,7 +50,7 @@ header.navbar
 To work we need to import bootstrap from our extended css file. Create file **main.css.scss** in **app/assets/stylesheets** directory.
 
 ### What is scss
-Scss is improved CSS, it allow us to use variables, and removes some repetitions in our commands. If you want to know more about Sass I recommend you
+Scss is improved CSS, it allow us to use variables, and removes some repetitions in our commands. If you want to know more about Sass I recommend
 [pragmatic guide to sass](http://www.amazon.com/Pragmatic-Guide-Sass-Hampton-Catlin/dp/1934356840) book
 
 Add this code to **main.css.scss**
