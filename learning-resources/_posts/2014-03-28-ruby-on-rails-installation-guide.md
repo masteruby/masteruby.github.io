@@ -1,5 +1,6 @@
 ---
 layout: post
+title: Ruby on Rails Installation Guide
 ---
 In this post I want to show you how to install Rails for your operating system.
 

@@ -1,5 +1,6 @@
 ---
 layout: post
+title: How to create todo list app adding removing and deleting tasks
 ---
 
 In previous part of this tutorial we've created [static pages](http://masteruby.github.io/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.md)

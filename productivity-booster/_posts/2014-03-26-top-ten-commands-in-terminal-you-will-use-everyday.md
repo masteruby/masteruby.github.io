@@ -1,5 +1,6 @@
 ---
 layout: post
+title: Top 10 commands in terminal you will use everyday
 ---
 
 In previous tutorial about [how to create todo list app in rails](http://masteruby.github.io/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.html)

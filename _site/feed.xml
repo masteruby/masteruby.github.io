@@ -7,7 +7,7 @@
 		<atom:link href="http://www.masteruby.github.io/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
-				<title>How To Create Todo List App Adding Removing Completing Tasks</title>
+				<title>How to create todo list app adding removing and deleting tasks</title>
 				<description>&lt;p&gt;In previous part of this tutorial we&amp;#39;ve created &lt;a href=&quot;http://masteruby.github.io/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.md&quot;&gt;static pages&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;In this post we&amp;#39;ll learn:&lt;/p&gt;
@@ -389,7 +389,7 @@ we need to add boolean completed to our tasks table.&lt;/p&gt;
 			</item>
 		
 			<item>
-				<title>Ruby On Rails Installation Guide</title>
+				<title>Ruby on Rails Installation Guide</title>
 				<description>&lt;p&gt;In this post I want to show you how to install Rails for your operating system.&lt;/p&gt;
 
 &lt;h2&gt;How to install Ruby and Rails&lt;/h2&gt;
@@ -480,7 +480,7 @@ so if you want you can check it out.&lt;/p&gt;
 			</item>
 		
 			<item>
-				<title>Learn Ruby With These Resources</title>
+				<title>Learning resources for ruby</title>
 				<description>&lt;p&gt;In this tutorial i&amp;#39;m gonna to show you some resources to learn ruby. Some are
 paid, some are free, it depends on you what you choose.&lt;/p&gt;
 
@@ -556,7 +556,7 @@ start with &lt;a href=&quot;http://shoesrb.com/&quot;&gt;Shoes&lt;/a&gt;, or you
 			</item>
 		
 			<item>
-				<title>Top Ten Commands In Terminal You Will Use Everyday</title>
+				<title>Top 10 commands in terminal you will use everyday</title>
 				<description>&lt;p&gt;In previous tutorial about &lt;a href=&quot;http://masteruby.github.io/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.html&quot;&gt;how to create todo list app in rails&lt;/a&gt;
 you saw that we will use terminal with Rails most of the time.&lt;/p&gt;
 
@@ -832,7 +832,7 @@ contains Windows equivalent of Linux/Mac/Unix commands.&lt;/strong&gt;&lt;/p&gt;
 			</item>
 		
 			<item>
-				<title>How To Create Todo List App Static Pages</title>
+				<title>How to create todo list app in rails static pages</title>
 				<description>&lt;p&gt;In the following series of posts we gonna create todo list app in rails.
 In this tutorial we&amp;#39;ll create basic structure of our app. In first part of
 tutorial you will learn:&lt;/p&gt;

@@ -1,5 +1,6 @@
 ---
 layout: post
+title: Learning resources for ruby
 ---
 
 In this tutorial i'm gonna to show you some resources to learn ruby. Some are

@@ -1,5 +1,6 @@
 ---
 layout: post
+title: How to create todo list app in rails static pages
 ---
 
 
