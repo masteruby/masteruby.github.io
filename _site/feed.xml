@@ -3,25 +3,8 @@
 	<channel>
 		<title>Masteruby</title>
 		<description>Masteruby is ruby tutorials website</description>		
-		<link>http://www.masteruby.github.io</link>
-		<atom:link href="http://www.masteruby.github.io/feed.xml" rel="self" type="application/rss+xml" />
-		
-			<item>
-				<title>Why to use tmux</title>
-				<description>&lt;p&gt;Today I want to tell about why and how to use tmux. Let&amp;#39;s start with example.
-Let&amp;#39;s assume you&amp;#39;re&lt;/p&gt;
-
-&lt;p&gt;What&amp;#39;ll learn in this tutorial.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;How to create new sessions&lt;/li&gt;
-&lt;li&gt;How to split windows, horizontally and vertically.&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-				<pubDate>Sat, 05 Apr 2014 09:49:54 +0200</pubDate>
-				<link>http://www.masteruby.github.io/2014/04/05/why_tmux.html</link>
-				<guid isPermaLink="true">http://www.masteruby.github.io/2014/04/05/why_tmux.html</guid>
-			</item>
+		<link>http://masteruby.github.io</link>
+		<atom:link href="http://masteruby.github.io/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
 				<title>How to create todo list app adding removing and deleting tasks</title>
@@ -401,8 +384,8 @@ we need to add boolean completed to our tasks table.&lt;/p&gt;
 &lt;p&gt;In next tutorial we&amp;#39;ll look at user authentication.&lt;/p&gt;
 </description>
 				<pubDate>Fri, 04 Apr 2014 00:00:00 +0200</pubDate>
-				<link>http://www.masteruby.github.io/weekly-rails/2014/04/04/how-to-create-todo-list-app-adding-removing-completing-tasks.html</link>
-				<guid isPermaLink="true">http://www.masteruby.github.io/weekly-rails/2014/04/04/how-to-create-todo-list-app-adding-removing-completing-tasks.html</guid>
+				<link>http://masteruby.github.io/weekly-rails/2014/04/04/how-to-create-todo-list-app-adding-removing-completing-tasks.html</link>
+				<guid isPermaLink="true">http://masteruby.github.io/weekly-rails/2014/04/04/how-to-create-todo-list-app-adding-removing-completing-tasks.html</guid>
 			</item>
 		
 			<item>
@@ -492,8 +475,8 @@ rails&lt;/a&gt;,
 so if you want you can check it out.&lt;/p&gt;
 </description>
 				<pubDate>Fri, 28 Mar 2014 00:00:00 +0100</pubDate>
-				<link>http://www.masteruby.github.io/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html</link>
-				<guid isPermaLink="true">http://www.masteruby.github.io/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html</guid>
+				<link>http://masteruby.github.io/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html</link>
+				<guid isPermaLink="true">http://masteruby.github.io/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html</guid>
 			</item>
 		
 			<item>
@@ -568,8 +551,8 @@ start with &lt;a href=&quot;http://shoesrb.com/&quot;&gt;Shoes&lt;/a&gt;, or you
 &lt;strong&gt;Rails&lt;/strong&gt; or Sinatra**&lt;/p&gt;
 </description>
 				<pubDate>Fri, 28 Mar 2014 00:00:00 +0100</pubDate>
-				<link>http://www.masteruby.github.io/learning-resources/2014/03/28/learn-ruby-with-these-resources.html</link>
-				<guid isPermaLink="true">http://www.masteruby.github.io/learning-resources/2014/03/28/learn-ruby-with-these-resources.html</guid>
+				<link>http://masteruby.github.io/learning-resources/2014/03/28/learn-ruby-with-these-resources.html</link>
+				<guid isPermaLink="true">http://masteruby.github.io/learning-resources/2014/03/28/learn-ruby-with-these-resources.html</guid>
 			</item>
 		
 			<item>
@@ -844,8 +827,8 @@ content with cat.&lt;/p&gt;
 contains Windows equivalent of Linux/Mac/Unix commands.&lt;/strong&gt;&lt;/p&gt;
 </description>
 				<pubDate>Wed, 26 Mar 2014 00:00:00 +0100</pubDate>
-				<link>http://www.masteruby.github.io/productivity-booster/2014/03/26/top-ten-commands-in-terminal-you-will-use-everyday.html</link>
-				<guid isPermaLink="true">http://www.masteruby.github.io/productivity-booster/2014/03/26/top-ten-commands-in-terminal-you-will-use-everyday.html</guid>
+				<link>http://masteruby.github.io/productivity-booster/2014/03/26/top-ten-commands-in-terminal-you-will-use-everyday.html</link>
+				<guid isPermaLink="true">http://masteruby.github.io/productivity-booster/2014/03/26/top-ten-commands-in-terminal-you-will-use-everyday.html</guid>
 			</item>
 		
 			<item>
@@ -1311,8 +1294,8 @@ Start rails server. You should something like this:&lt;/p&gt;
 &lt;p&gt;We&amp;#39;re done here. In next tutorial we&amp;#39;ll do some styling to our app&lt;/p&gt;
 </description>
 				<pubDate>Sat, 22 Mar 2014 00:00:00 +0100</pubDate>
-				<link>http://www.masteruby.github.io/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.html</link>
-				<guid isPermaLink="true">http://www.masteruby.github.io/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.html</guid>
+				<link>http://masteruby.github.io/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.html</link>
+				<guid isPermaLink="true">http://masteruby.github.io/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.html</guid>
 			</item>
 		
 	</channel>
