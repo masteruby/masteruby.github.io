@@ -3,5 +3,5 @@ markdown: redcarpet
 pygments: true
 comments: true
 description: Masteruby is ruby tutorials website
-url: http://www.masteruby.github.io
+url: masteruby.github.io
 

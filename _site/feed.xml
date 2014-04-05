@@ -7,6 +7,23 @@
 		<atom:link href="http://www.masteruby.github.io/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>Why to use tmux</title>
+				<description>&lt;p&gt;Today I want to tell about why and how to use tmux. Let&amp;#39;s start with example.
+Let&amp;#39;s assume you&amp;#39;re&lt;/p&gt;
+
+&lt;p&gt;What&amp;#39;ll learn in this tutorial.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;How to create new sessions&lt;/li&gt;
+&lt;li&gt;How to split windows, horizontally and vertically.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+				<pubDate>Sat, 05 Apr 2014 09:49:54 +0200</pubDate>
+				<link>http://www.masteruby.github.io/2014/04/05/why_tmux.html</link>
+				<guid isPermaLink="true">http://www.masteruby.github.io/2014/04/05/why_tmux.html</guid>
+			</item>
+		
+			<item>
 				<title>How to create todo list app adding removing and deleting tasks</title>
 				<description>&lt;p&gt;In previous part of this tutorial we&amp;#39;ve created &lt;a href=&quot;http://masteruby.github.io/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.md&quot;&gt;static pages&lt;/a&gt;&lt;/p&gt;
 
