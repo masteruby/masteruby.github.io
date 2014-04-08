@@ -29,9 +29,11 @@ instructions about &lt;a href=&quot;http://example.com&quot;&gt;how to install r
 
 &lt;h2&gt;Running shoes&lt;/h2&gt;
 
-&lt;p&gt;To run we need to add green_shoes gemto our ruby file.&lt;/p&gt;
+&lt;p&gt;To run we need to add green_shoes gem to our ruby file.&lt;/p&gt;
 
 &lt;p&gt;Go to your favorite text editor and type something like this:&lt;/p&gt;
+
+&lt;h4&gt;calculator.rb&lt;/h4&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;green_shoes&amp;#39;&lt;/span&gt;
 &lt;span class=&quot;no&quot;&gt;Shoes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;My calculator&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
@@ -73,10 +75,12 @@ Shoes.app title: &lt;span class=&quot;s2&quot;&gt;&amp;quot;My calculator&amp;qu
 &lt;span class=&quot;s2&quot;&gt;  button but, **:width =&amp;gt; 40, height:40**&lt;/span&gt;
 &lt;span class=&quot;s2&quot;&gt;  &lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We added height, width and some margin to our app. &lt;/p&gt;
 </description>
-				<pubDate>Mon, 07 Apr 2014 21:09:36 +0200</pubDate>
-				<link>http://masteruby.github.io/2014/04/07/calculator.html</link>
-				<guid isPermaLink="true">http://masteruby.github.io/2014/04/07/calculator.html</guid>
+				<pubDate>Tue, 08 Apr 2014 15:07:28 +0200</pubDate>
+				<link>http://masteruby.github.io/2014/04/08/calculator.html</link>
+				<guid isPermaLink="true">http://masteruby.github.io/2014/04/08/calculator.html</guid>
 			</item>
 		
 			<item>

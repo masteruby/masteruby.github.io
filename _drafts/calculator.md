@@ -23,9 +23,11 @@ $ gem install green_shoes
 
 ## Running shoes
 
-To run we need to add green_shoes gemto our ruby file.
+To run we need to add green_shoes gem to our ruby file.
 
 Go to your favorite text editor and type something like this:
+
+#### calculator.rb
 
 {% highlight ruby %}
 require 'green_shoes'
@@ -69,6 +71,6 @@ Shoes.app title: "My calculator" do
   button but, **:width => 40, height:40**
   {% endhighlight %}
 
-  
+ We added height, width and some margin to our app. 
 
 

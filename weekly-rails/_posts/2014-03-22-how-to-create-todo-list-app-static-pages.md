@@ -20,12 +20,12 @@ tutorial you will learn:
 
 * You need to have some basic knowledge of HTML, CSS. If you haven't learn them  yet go to [web tutorial on codecademy](http://www.codecademy.com/tracks/web)
 
-* You need to have basics in Ruby. If you haven't I wrote post about [learning resources](http://masteruby/github.io/learning-resources/2014/03/28/learn-ruby-with-these-resources.html) for ruby
+* You need to have basics in Ruby. If you haven't I wrote post about [learning resources](http://masteruby.github.io/learning-resources/2014/03/28/learn-ruby-with-these-resources.html) for ruby
 
 * You need to have ruby and ruby on rails installed. I will explain this in next section
 
 ## 2 How to install Ruby
-In [this post](http://www.masteruby.github.io/learning-resources/2014/03/28/how-to-install-ruby.html)
+In [this post](http://masteruby.github.io/learning-resources/2015/03/28/how-to-install-ruby.html)
 I've included installation instructions for Ruby and Rails
 
 ## 3 Choosing your text editor

@@ -7,7 +7,7 @@ In this post I want to show you how to install Ruby and ROR for your operating s
 ##  How to install Ruby and Rails on Windows
 
 
- ### Step 1: Get rails installer
+### Step 1: Get rails installer
 
  Get installer on [rails installer site](http://www.railsinstaller.org/en).
 

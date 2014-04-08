@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Why to use tmux |  Learn Ruby</title>
+    <title>How to create simple calculator in Shoes |  Learn Ruby</title>
     	<!-- Bootstrap CSS -->
     <meta name="google-site-verification" content="UFFQXW8FdLgKuB_vYYy8LTw5aonnBmAHdUhUopMxero" />
     <meta content="Masteruby is tutorials web site about learning ruby">
@@ -125,19 +125,79 @@
       </section>
       
       <section id="posts">
-        <h2>Why to use tmux</h2>
-<p class="meta">05 Apr 2014</p>
+        <h2>How to create simple calculator in Shoes</h2>
+<p class="meta">08 Apr 2014</p>
 
 <div class="post">
-<p>Today I want to tell about why and how to use tmux. Let&#39;s start with example.
-Let&#39;s assume you&#39;re</p>
-
-<p>What&#39;ll learn in this tutorial.</p>
+<p>In this tutorial we&#39;ll cover:</p>
 
 <ul>
-<li>How to create new sessions</li>
-<li>How to split windows, horizontally and vertically.</li>
+<li>How to install Shoes
+*
+*
+*</li>
 </ul>
+
+<h2>How to install Shoes</h2>
+
+<p>Before you can install green_shoes you have to install ruby. I&#39;ve included
+instructions about <a href="http://example.com">how to install ruby</a> in previous post.</p>
+
+<p>If you have ruby installed by rvm, just install green_shoes like this:</p>
+
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>gem install green_shoes
+</code></pre></div>
+
+<h2>Running shoes</h2>
+
+<p>To run we need to add green_shoes gem to our ruby file.</p>
+
+<p>Go to your favorite text editor and type something like this:</p>
+
+<h4>calculator.rb</h4>
+
+<div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;green_shoes&#39;</span>
+<span class="no">Shoes</span><span class="o">.</span><span class="n">app</span> <span class="ss">title</span><span class="p">:</span> <span class="s2">&quot;My calculator&quot;</span> <span class="k">do</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<p>Go to the terminal and run calculator.rb. You should see something like this:</p>
+
+<p><img src="/images/running_shoes.png" alt="how to run shoes"></p>
+
+<h2>Adding calculator buttons</h2>
+
+<p>Let&#39;s add calculator buttons. Insert this code into Shoes.app do block:</p>
+
+<div class="highlight"><pre><code class="sh">require <span class="s1">&#39;green_shoes&#39;</span>
+Shoes.app title: <span class="s2">&quot;My calculator&quot;</span> <span class="k">do</span>
+  **%w<span class="o">(</span>7 8 9 / 4 5 6 * 1 2 3 + 0 - <span class="o">=)</span>.each <span class="k">do</span> <span class="p">|</span>but<span class="p">|</span>**
+    **button but**
+    end
+  end
+  
+</code></pre></div>
+
+<p>We&#39;ve added each button to array and use special <strong>button method</strong> from Shoes
+  class.</p>
+
+<p>You can see result right here:</p>
+
+<p><img src="/images/creating_buttons.png" alt="creating buttons in shoes"></p>
+
+<p>Our buttons are small and not in ordered let&#39;s try to style it. To change
+  size of element you will use width and height shoes methods.</p>
+
+<p>Let&#39;s add some code to our app</p>
+
+<div class="highlight"><pre><code class="ruby"> <span class="nb">require</span> <span class="s1">&#39;green_shoes&#39;</span>
+ <span class="no">Shoes</span><span class="o">.</span><span class="n">app</span> <span class="n">title</span><span class="s2">&quot; &quot;</span><span class="no">My</span> <span class="n">calculator</span><span class="s2">&quot; do</span>
+<span class="s2"> %(7 8 9 / 4 5 6 * 1 2 3 + 0 - =).each do |but|</span>
+<span class="s2">  button but, **:width =&gt; 40, height:40**</span>
+<span class="s2">  </span>
+</code></pre></div>
+
+<p>We added height, width and some margin to our app. </p>
 
 
 
@@ -166,7 +226,7 @@ Let&#39;s assume you&#39;re</p>
 <ul class="posts">
   
 
-  <li><span>08 Apr 2014</span> &raquo; <a href="/2014/04/08/calculator.html#disqus_thread">How to create simple calculator in Shoes</a></li>
+  <li><span>05 Apr 2014</span> &raquo; <a href="/2014/04/05/why_tmux.html#disqus_thread">Why to use tmux</a></li>
   
   
   
