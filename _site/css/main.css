@@ -42,6 +42,10 @@ img.share { height: 40px; width: 40px;}
 
 img.book { width: 200px; height: 250px }
 
+img {
+  width: 100%
+}
+
 .navbar { 
   background-color: rgb(197, 47, 36);
   color: FloralWhite;

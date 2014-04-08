@@ -7,6 +7,96 @@
 		<atom:link href="http://masteruby.github.io/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>How to create simple calculator in Shoes</title>
+				<description>&lt;p&gt;In this tutorial we&amp;#39;ll cover:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;How to install Shoes
+*
+*
+*&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;How to install Shoes&lt;/h2&gt;
+
+&lt;p&gt;Before you can install green_shoes you have to install ruby. I&amp;#39;ve included
+instructions about &lt;a href=&quot;http://example.com&quot;&gt;how to install ruby&lt;/a&gt; in previous post.&lt;/p&gt;
+
+&lt;p&gt;If you have ruby installed by rvm, just install green_shoes like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gem install green_shoes
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;Running shoes&lt;/h2&gt;
+
+&lt;p&gt;To run we need to add green_shoes gemto our ruby file.&lt;/p&gt;
+
+&lt;p&gt;Go to your favorite text editor and type something like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;green_shoes&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Shoes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;My calculator&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Go to the terminal and run calculator.rb. You should see something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/running_shoes.png&quot; alt=&quot;how to run shoes&quot;&gt;&lt;/p&gt;
+
+&lt;h2&gt;Adding calculator buttons&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;#39;s add calculator buttons. Insert this code into Shoes.app do block:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;require &lt;span class=&quot;s1&quot;&gt;&amp;#39;green_shoes&amp;#39;&lt;/span&gt;
+Shoes.app title: &lt;span class=&quot;s2&quot;&gt;&amp;quot;My calculator&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  **%w&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;7 8 9 / 4 5 6 * 1 2 3 + 0 - &lt;span class=&quot;o&quot;&gt;=)&lt;/span&gt;.each &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;but&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;**
+    **button but**
+    end
+  end
+  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We&amp;#39;ve added each button to array and use special &lt;strong&gt;button method&lt;/strong&gt; from Shoes
+  class.&lt;/p&gt;
+
+&lt;p&gt;You can see result right here:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/creating_buttons.png&quot; alt=&quot;creating buttons in shoes&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;Our buttons are small and not in ordered let&amp;#39;s try to style it. To change
+  size of element you will use width and height shoes methods.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;#39;s add some code to our app&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt; &lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;green_shoes&amp;#39;&lt;/span&gt;
+ &lt;span class=&quot;no&quot;&gt;Shoes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot; &amp;quot;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;My&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;calculator&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot; do&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt; %(7 8 9 / 4 5 6 * 1 2 3 + 0 - =).each do |but|&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;  button but, **:width =&amp;gt; 40, height:40**&lt;/span&gt;
+&lt;span class=&quot;s2&quot;&gt;  &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+</description>
+				<pubDate>Mon, 07 Apr 2014 21:09:36 +0200</pubDate>
+				<link>http://masteruby.github.io/2014/04/07/calculator.html</link>
+				<guid isPermaLink="true">http://masteruby.github.io/2014/04/07/calculator.html</guid>
+			</item>
+		
+			<item>
+				<title>Why to use tmux</title>
+				<description>&lt;p&gt;Today I want to tell about why and how to use tmux. Let&amp;#39;s start with example.
+Let&amp;#39;s assume you&amp;#39;re&lt;/p&gt;
+
+&lt;p&gt;What&amp;#39;ll learn in this tutorial.&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;How to create new sessions&lt;/li&gt;
+&lt;li&gt;How to split windows, horizontally and vertically.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+				<pubDate>Sat, 05 Apr 2014 09:49:54 +0200</pubDate>
+				<link>http://masteruby.github.io/2014/04/05/why_tmux.html</link>
+				<guid isPermaLink="true">http://masteruby.github.io/2014/04/05/why_tmux.html</guid>
+			</item>
+		
+			<item>
 				<title>How to create todo list app adding removing and deleting tasks</title>
 				<description>&lt;p&gt;In previous part of this tutorial we&amp;#39;ve created &lt;a href=&quot;http://masteruby.github.io/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.md&quot;&gt;static pages&lt;/a&gt;&lt;/p&gt;
 
@@ -389,18 +479,33 @@ we need to add boolean completed to our tasks table.&lt;/p&gt;
 			</item>
 		
 			<item>
-				<title>Ruby on Rails Installation Guide</title>
-				<description>&lt;p&gt;In this post I want to show you how to install Rails for your operating system.&lt;/p&gt;
+				<title>How to install Ruby and Rails for your operating system</title>
+				<description>&lt;p&gt;In this post I want to show you how to install Ruby and ROR for your operating system.&lt;/p&gt;
 
-&lt;h2&gt;How to install Ruby and Rails&lt;/h2&gt;
+&lt;h2&gt;How to install Ruby and Rails on Windows&lt;/h2&gt;
 
-&lt;h3&gt;Windows&lt;/h3&gt;
+&lt;p&gt;### Step 1: Get rails installer&lt;/p&gt;
 
-&lt;p&gt;Get installer on &lt;a href=&quot;http://www.railsinstaller.org/en&quot;&gt;rails installer site&lt;/a&gt;.
- It will install Ruby with Rails and all dependencies you will use in
+&lt;p&gt;Get installer on &lt;a href=&quot;http://www.railsinstaller.org/en&quot;&gt;rails installer site&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/installer.png&quot; alt=&quot;installing rails on windows step 1&quot;&gt;&lt;/p&gt;
+
+&lt;h3&gt;Step 2: Run rails installer&lt;/h3&gt;
+
+&lt;p&gt;Go to folder where you&amp;#39;ve downloaded installer and run it:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/rails_installer_setup.png&quot; alt=&quot;installing rails on windows step 2&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;It will install Ruby with Rails and all dependencies you will use in
  developing Rails application&lt;/p&gt;
 
-&lt;p&gt;Try checking succesfull installation.  Go to the Start Menu, select Accessories and choose Command prompt.&lt;/p&gt;
+&lt;h3&gt;Step 3: Running installer in Command prompt&lt;/h3&gt;
+
+&lt;p&gt;Try checking succesfull installation.  Go to the Start Menu, select all
+ programs and choose &lt;strong&gt;Rails Installer&lt;/strong&gt; and then &lt;strong&gt;Command Prompt with Ruby
+ and Rails&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/running.png&quot; alt=&quot;how to install ruby and rails on windows step 3&quot;&gt;&lt;/p&gt;
 
 &lt;p&gt;You should see window with your Windows Version and actual directory path. Let&amp;#39;s check it out if Ruby is properly installed. Type this into command prompt:&lt;/p&gt;
 
@@ -411,58 +516,42 @@ we need to add boolean completed to our tasks table.&lt;/p&gt;
 
 &lt;p&gt;You should see something like this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/rails_installation.png&quot; alt=&quot;ruby-on-rails-installation&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/checking.png&quot; alt=&quot;ruby-on-rails-installation&quot;&gt;&lt;/p&gt;
 
-&lt;h3&gt;Mac OS X&lt;/h3&gt;
+&lt;h2&gt;How to install Ruby and Rails on Mac OS X&lt;/h2&gt;
 
-&lt;p&gt;Start on &lt;a href=&quot;http://www.railsinstaller.org&quot;&gt;rails installer  site&lt;/a&gt;. Now open the Terminal and check if ruby is installed with following command.&lt;/p&gt;
+&lt;p&gt;Use either rails installer or go to &lt;a href=&quot;http://pragmaticstudio.com/blog/2010/9/23/install-rails-ruby-mac&quot;&gt;this website&lt;/a&gt; for
+installation instructions&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ruby -v
- 
+&lt;h2&gt;How to install Ruby and Rails on Linux&lt;/h2&gt;
+
+&lt;h3&gt;Step 1: Install RVM&lt;/h3&gt;
+
+&lt;p&gt;RVM(Ruby Version Manager) is a simple tool for easy installation of ruby. First you have to install curl.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sudo apt-get install curl
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;You should see the following result:&lt;/p&gt;
+&lt;p&gt;Then install rvm:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ruby 2.0.0p247
- 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;&lt;img src=&quot;/images/how_to_install_rvm.png&quot; alt=&quot;how to install ruby and rails on linux step 1&quot;&gt;&lt;/p&gt;
 
-&lt;p&gt;If you want to install Rails by command line try this guide:&lt;/p&gt;
+&lt;h3&gt;Step 2: Installing ruby&lt;/h3&gt;
 
-&lt;p&gt;&lt;a href=&quot;http://railsapps.github.io/installrubyonrails-mac.html&quot;&gt;how to install rails on  mac&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;Go and install ruby with RVM:&lt;/p&gt;
 
-&lt;h3&gt;Linux&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/images/ruby_installation.png&quot; alt=&quot;Installing Ruby and Rails on Linux step 3&quot;&gt;&lt;/p&gt;
 
-&lt;p&gt;Start with your package management system. You need to install all dependencies like this:&lt;/p&gt;
+&lt;h3&gt;Step 3: Installing Rails&lt;/h3&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sudo apt-get install apache2 curl git libmysql-client-dev mysql-server nodejs
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;For installing Ruby on Rails you&amp;#39;ll use Rubygems.&lt;/p&gt;
 
-&lt;p&gt;Then you have to install ruby. I recommend you to install it using RVM&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/how_to_install_rails.png&quot; alt=&quot;how to install ruby and rails on linux step 3&quot;&gt;&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;curl -L https://get.rvm.io | bash -s stable
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Ok let&amp;#39;s check out succesfull installation with terminal:&lt;/p&gt;
 
-&lt;p&gt;Execute following command, which install all requirements for your operating system&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rvm requirements --autolibs&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;enable&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Then you can install Ruby.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rvm install ruby 2.0.0
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;After this you can use ruby and install rails&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rvm use 2.0.0
-
-  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gem install rails 
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;You can check succesfull installation with following command:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;  &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rails -v
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rails -v
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ruby -v
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2&gt;What&amp;#39;s next&lt;/h2&gt;

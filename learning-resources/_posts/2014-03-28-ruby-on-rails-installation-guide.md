@@ -1,18 +1,35 @@
 ---
 layout: post
-title: Ruby on Rails Installation Guide
+title: How to install Ruby and Rails for your operating system 
 ---
-In this post I want to show you how to install Rails for your operating system.
+In this post I want to show you how to install Ruby and ROR for your operating system.
 
-##  How to install Ruby and Rails
+##  How to install Ruby and Rails on Windows
 
-###  Windows
+
+ ### Step 1: Get rails installer
 
  Get installer on [rails installer site](http://www.railsinstaller.org/en).
+
+ ![installing rails on windows step 1](/images/installer.png)
+
+### Step 2: Run rails installer
+
+ Go to folder where you've downloaded installer and run it:
+
+ ![installing rails on windows step 2](/images/rails_installer_setup.png)
+
  It will install Ruby with Rails and all dependencies you will use in
  developing Rails application
 
- Try checking succesfull installation.  Go to the Start Menu, select Accessories and choose Command prompt.
+### Step 3: Running installer in Command prompt
+
+ Try checking succesfull installation.  Go to the Start Menu, select all
+ programs and choose **Rails Installer** and then **Command Prompt with Ruby
+ and Rails**
+ 
+ ![how to install ruby and rails on windows step 3](/images/running.png)
+
 
  You should see window with your Windows Version and actual directory path. Let's check it out if Ruby is properly installed. Type this into command prompt:
 
@@ -23,63 +40,46 @@ In this post I want to show you how to install Rails for your operating system.
 
 You should see something like this:
 
-![ruby-on-rails-installation](/images/rails_installation.png)
+![ruby-on-rails-installation](/images/checking.png)
 
-###  Mac OS X
-Start on [rails installer  site](http://www.railsinstaller.org). Now open the Terminal and check if ruby is installed with following command.
+## How to install Ruby and Rails on Mac OS X
+
+Use either rails installer or go to [this website](http://pragmaticstudio.com/blog/2010/9/23/install-rails-ruby-mac) for
+installation instructions
+
+
+## How to install Ruby and Rails on Linux
+
+### Step 1: Install RVM
+
+RVM(Ruby Version Manager) is a simple tool for easy installation of ruby. First you have to install curl.
 
 {% highlight sh %}
- $ ruby -v
- {% endhighlight %}
-
- 
- You should see the following result:
-
- {% highlight sh %}
- $ ruby 2.0.0p247
- {% endhighlight %}
-
- If you want to install Rails by command line try this guide:
-
- [how to install rails on  mac](http://railsapps.github.io/installrubyonrails-mac.html)
-
-###  Linux
-
-  Start with your package management system. You need to install all dependencies like this:
- 
-{% highlight sh %}
-$ sudo apt-get install apache2 curl git libmysql-client-dev mysql-server nodejs
+$ sudo apt-get install curl
 {% endhighlight %}
 
+Then install rvm:
 
+![how to install ruby and rails on linux step 1](/images/how_to_install_rvm.png)
 
-  Then you have to install ruby. I recommend you to install it using RVM
+### Step 2: Installing ruby
+
+Go and install ruby with RVM:
+
+![Installing Ruby and Rails on Linux step 3](/images/ruby_installation.png)
+
+### Step 3: Installing Rails
+
+For installing Ruby on Rails you'll use Rubygems.
+
+![how to install ruby and rails on linux step 3](/images/how_to_install_rails.png)
+   
+
+Ok let's check out succesfull installation with terminal:
+
 {% highlight sh %}
-  $ curl -L https://get.rvm.io | bash -s stable
-{% endhighlight %}
-
-  Execute following command, which install all requirements for your operating system
-{% highlight sh %}
-  $ rvm requirements --autolibs=enable
-{% endhighlight %}
-
-  Then you can install Ruby.
-
-{% highlight sh %}
-  $ rvm install ruby 2.0.0
-{% endhighlight %}
-
-After this you can use ruby and install rails
-
-{% highlight sh %}
-  $ rvm use 2.0.0
-
-  $ gem install rails 
-{% endhighlight %}
-
-  You can check succesfull installation with following command:
-{% highlight sh %}
-  $ rails -v
+$ rails -v
+$ ruby -v
 {% endhighlight %}
 
 ## What's next
