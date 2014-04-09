@@ -49,6 +49,13 @@
   <h1>Recent posts</h1>
 
 <li>
+  <span>09 Apr 2014</span> &raquo;
+
+  <a href="/learning-resources/2014/04/09/learn-ruby-on-rails-book-review.html">
+    Learn Ruby on Rails book review</a>
+</li>
+
+<li>
   <span>08 Apr 2014</span> &raquo;
 
   <a href="/2014/04/08/calculator.html">
@@ -141,7 +148,8 @@
 <h2>How to install Shoes</h2>
 
 <p>Before you can install green_shoes you have to install ruby. I&#39;ve included
-instructions about <a href="http://example.com">how to install ruby</a> in previous post.</p>
+instructions about <a href="http://masteruby.github.io/learning-resources/2014/03/28/ruby-on-rails">how to install
+ruby</a> in previous post.</p>
 
 <p>If you have ruby installed by rvm, just install green_shoes like this:</p>
 
@@ -169,12 +177,12 @@ instructions about <a href="http://example.com">how to install ruby</a> in previ
 
 <p>Let&#39;s add calculator buttons. Insert this code into Shoes.app do block:</p>
 
-<div class="highlight"><pre><code class="sh">require <span class="s1">&#39;green_shoes&#39;</span>
-Shoes.app title: <span class="s2">&quot;My calculator&quot;</span> <span class="k">do</span>
-  **%w<span class="o">(</span>7 8 9 / 4 5 6 * 1 2 3 + 0 - <span class="o">=)</span>.each <span class="k">do</span> <span class="p">|</span>but<span class="p">|</span>**
-    **button but**
-    end
-  end
+<div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;green_shoes&#39;</span>
+<span class="no">Shoes</span><span class="o">.</span><span class="n">app</span> <span class="ss">title</span><span class="p">:</span> <span class="s2">&quot;My calculator&quot;</span> <span class="k">do</span>
+  <span class="sx">%w(7 8 9 / 4 5 6 * 1 2 3 + 0 - =)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">but</span><span class="o">|</span>
+    <span class="n">button</span> <span class="n">but</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
   
 </code></pre></div>
 
@@ -185,19 +193,18 @@ Shoes.app title: <span class="s2">&quot;My calculator&quot;</span> <span class="
 
 <p><img src="/images/creating_buttons.png" alt="creating buttons in shoes"></p>
 
-<p>Our buttons are small and not in ordered let&#39;s try to style it. To change
-  size of element you will use width and height shoes methods.</p>
-
-<p>Let&#39;s add some code to our app</p>
+<p>Our buttons are small and we want to display four buttons in each row. Let&#39;s add some code to our app</p>
 
 <div class="highlight"><pre><code class="ruby"> <span class="nb">require</span> <span class="s1">&#39;green_shoes&#39;</span>
- <span class="no">Shoes</span><span class="o">.</span><span class="n">app</span> <span class="n">title</span><span class="s2">&quot; &quot;</span><span class="no">My</span> <span class="n">calculator</span><span class="s2">&quot; do</span>
-<span class="s2"> %(7 8 9 / 4 5 6 * 1 2 3 + 0 - =).each do |but|</span>
-<span class="s2">  button but, **:width =&gt; 40, height:40**</span>
-<span class="s2">  </span>
+ <span class="no">Shoes</span><span class="o">.</span><span class="n">app</span> <span class="n">title</span> <span class="s2">&quot;My calculator&quot;</span> <span class="k">do</span>
+ <span class="sx">%(7 8 9 / 4 5 6 * 1 2 3 + 0 - =)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">but</span><span class="o">|</span>
+  <span class="n">button</span> <span class="n">but</span><span class="p">,</span> <span class="ss">:width</span> <span class="o">=&gt;</span> <span class="mi">40</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span><span class="mi">40</span>
+  
 </code></pre></div>
 
-<p>We added height, width and some margin to our app. </p>
+<p><img src="/images/changing.png" alt="changing size of element in shoes"></p>
+
+<p>We&#39;ve set size of the buttons with width and height methods.</p>
 
 
 
@@ -224,6 +231,11 @@ Shoes.app title: <span class="s2">&quot;My calculator&quot;</span> <span class="
 
 
 <ul class="posts">
+  
+
+  <li><span>09 Apr 2014</span> &raquo; <a href="/learning-resources/2014/04/09/learn-ruby-on-rails-book-review.html#disqus_thread">Learn Ruby on Rails book review</a></li>
+  
+  
   
 
   <li><span>05 Apr 2014</span> &raquo; <a href="/2014/04/05/why_tmux.html#disqus_thread">Why to use tmux</a></li>

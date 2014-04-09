@@ -3,7 +3,7 @@ layout: post
 title: Learn Ruby on Rails book review
 ---
 
-Recently I received free copy of Learn Ruby on Rails book by Daniel Kehoe, so I've
+Recently I received free copy of [Learn Ruby on Rails](http://learn-rails.com/) book by Daniel Kehoe, so I've
 decided to write this review.
 
 <a href="http://learn-rails.com/"><img class="book"
