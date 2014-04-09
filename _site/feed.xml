@@ -7,97 +7,65 @@
 		<atom:link href="http://masteruby.github.io/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
-				<title>How to create simple calculator in Shoes</title>
-				<description>&lt;p&gt;In this tutorial we&amp;#39;ll cover:&lt;/p&gt;
+				<title>Learn Ruby on Rails book review</title>
+				<description>&lt;p&gt;Recently I received free copy of Learn Ruby on Rails book by Daniel Kehoe, so I&amp;#39;ve
+decided to write this review.&lt;/p&gt;
 
-&lt;ul&gt;
-&lt;li&gt;How to install Shoes
-*
-*
-*&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&quot;http://learn-rails.com/&quot;&gt;&lt;img class=&quot;book&quot;
+src=&quot;/images/learn-rails-book-cover.jpg&quot; alt=&quot;learn ruby on rails&quot;&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2&gt;How to install Shoes&lt;/h2&gt;
+&lt;h2&gt;Who is this book for&lt;/h2&gt;
 
-&lt;p&gt;Before you can install green_shoes you have to install ruby. I&amp;#39;ve included
-instructions about &lt;a href=&quot;http://example.com&quot;&gt;how to install ruby&lt;/a&gt; in previous post.&lt;/p&gt;
+&lt;p&gt;Book is aimed at begining rails developers. So if you have no experiences
+with Rails, that&amp;#39;s first book you should try. You will find out all example
+code on &lt;a href=&quot;https://github.com/RailsApps/learn-rails&quot;&gt;github repository&lt;/a&gt; and because book is part of subscription program
+you will get access to book updates, some other tutorials and another book
+about Bootstrap.&lt;/p&gt;
 
-&lt;p&gt;If you have ruby installed by rvm, just install green_shoes like this:&lt;/p&gt;
+&lt;h2&gt;What&amp;#39;s in this book&lt;/h2&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gem install green_shoes
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Book gives you step by step guide for creating rails application. In example application you will create mailing list with integration with MailChimp and Google Drive. It gives review of how developing applications in rails works.
+You will find out introduction to git, you&amp;#39;ll be explained to models, views
+and controllers and you&amp;#39;ll be introduced to some gems for easier development. &lt;/p&gt;
 
-&lt;h2&gt;Running shoes&lt;/h2&gt;
+&lt;h2&gt;What I like about this book&lt;/h2&gt;
 
-&lt;p&gt;To run we need to add green_shoes gem to our ruby file.&lt;/p&gt;
+&lt;p&gt;What I like about this book is developer&amp;#39;s approach to creating rails applications.
+Maybe you&amp;#39;ll be surprised that in first chapters you will read about things
+like agile practices, creating github account, planning, managing your
+application. That&amp;#39;s interesting approach that I didn&amp;#39;t find in any other
+introductory rails book like Agile Web Development with Rails and Learn Web
+Development with Ruby on Rails by Michael Hartl. &lt;/p&gt;
 
-&lt;p&gt;Go to your favorite text editor and type something like this:&lt;/p&gt;
+&lt;p&gt;I&amp;#39;ve also liked author&amp;#39;s approach to learning about views, controllers. He doesn&amp;#39;t use rails scaffold command, but he want from you to
+build your controllers, models and views from scratch. That&amp;#39;s a best way to
+learning about it. Author encourages you to play with your code and try
+something new.&lt;/p&gt;
 
-&lt;h4&gt;calculator.rb&lt;/h4&gt;
+&lt;p&gt;Book is written in friendly plain language, so you don&amp;#39;t have to worry about
+that you don&amp;#39;t understand. After writing some code author gives you brief
+explanation what he&amp;#39;ve just done. &lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;green_shoes&amp;#39;&lt;/span&gt;
-&lt;span class=&quot;no&quot;&gt;Shoes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;My calculator&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;What I&amp;#39;ve found useful is long gem list for easier development. You&amp;#39;ll be
+introduced to useful gems like &lt;strong&gt;figaro&lt;/strong&gt;, &lt;strong&gt;rails_layout&lt;/strong&gt; for easier web
+development. &lt;/p&gt;
 
-&lt;p&gt;Go to the terminal and run calculator.rb. You should see something like this:&lt;/p&gt;
+&lt;h2&gt;What I&amp;#39;ve been missing&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/running_shoes.png&quot; alt=&quot;how to run shoes&quot;&gt;&lt;/p&gt;
+&lt;p&gt;What I&amp;#39;ve been missing is absence of test driven development, but as author
+explains, this is a prequel book you should read before Michael Hartl Tutorial. If you want to have additional resources about test driven development I recommend you either
+&lt;a href=&quot;http://www.amazon.com/The-Cucumber-Book-Behaviour-Driven-Development/dp/1934356808&quot;&gt;Cucumber&lt;/a&gt;
+and
+&lt;a href=&quot;http://www.amazon.com/RSpec-Book-Behaviour-Development-Cucumber/dp/1934356379/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1397032931&amp;amp;sr=1-1&amp;amp;keywords=rspec&quot;&gt;Rspec&lt;/a&gt; book, or online version of Michael Hartl book.&lt;/p&gt;
 
-&lt;h2&gt;Adding calculator buttons&lt;/h2&gt;
+&lt;h2&gt;Conclusion&lt;/h2&gt;
 
-&lt;p&gt;Let&amp;#39;s add calculator buttons. Insert this code into Shoes.app do block:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;require &lt;span class=&quot;s1&quot;&gt;&amp;#39;green_shoes&amp;#39;&lt;/span&gt;
-Shoes.app title: &lt;span class=&quot;s2&quot;&gt;&amp;quot;My calculator&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-  **%w&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;7 8 9 / 4 5 6 * 1 2 3 + 0 - &lt;span class=&quot;o&quot;&gt;=)&lt;/span&gt;.each &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;but&lt;span class=&quot;p&quot;&gt;|&lt;/span&gt;**
-    **button but**
-    end
-  end
-  
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;We&amp;#39;ve added each button to array and use special &lt;strong&gt;button method&lt;/strong&gt; from Shoes
-  class.&lt;/p&gt;
-
-&lt;p&gt;You can see result right here:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/creating_buttons.png&quot; alt=&quot;creating buttons in shoes&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;Our buttons are small and not in ordered let&amp;#39;s try to style it. To change
-  size of element you will use width and height shoes methods.&lt;/p&gt;
-
-&lt;p&gt;Let&amp;#39;s add some code to our app&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt; &lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;green_shoes&amp;#39;&lt;/span&gt;
- &lt;span class=&quot;no&quot;&gt;Shoes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot; &amp;quot;&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;My&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;calculator&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot; do&lt;/span&gt;
-&lt;span class=&quot;s2&quot;&gt; %(7 8 9 / 4 5 6 * 1 2 3 + 0 - =).each do |but|&lt;/span&gt;
-&lt;span class=&quot;s2&quot;&gt;  button but, **:width =&amp;gt; 40, height:40**&lt;/span&gt;
-&lt;span class=&quot;s2&quot;&gt;  &lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;We added height, width and some margin to our app. &lt;/p&gt;
+&lt;p&gt;So if you&amp;#39;re absolutely new to Ruby on Rails development, Learn Rails Book is a
+must read for you.&lt;/p&gt;
 </description>
-				<pubDate>Tue, 08 Apr 2014 15:07:28 +0200</pubDate>
-				<link>http://masteruby.github.io/2014/04/08/calculator.html</link>
-				<guid isPermaLink="true">http://masteruby.github.io/2014/04/08/calculator.html</guid>
-			</item>
-		
-			<item>
-				<title>Why to use tmux</title>
-				<description>&lt;p&gt;Today I want to tell about why and how to use tmux. Let&amp;#39;s start with example.
-Let&amp;#39;s assume you&amp;#39;re&lt;/p&gt;
-
-&lt;p&gt;What&amp;#39;ll learn in this tutorial.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;How to create new sessions&lt;/li&gt;
-&lt;li&gt;How to split windows, horizontally and vertically.&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-				<pubDate>Sat, 05 Apr 2014 09:49:54 +0200</pubDate>
-				<link>http://masteruby.github.io/2014/04/05/why_tmux.html</link>
-				<guid isPermaLink="true">http://masteruby.github.io/2014/04/05/why_tmux.html</guid>
+				<pubDate>Wed, 09 Apr 2014 00:00:00 +0200</pubDate>
+				<link>http://masteruby.github.io/learning-resources/2014/04/09/learn-ruby-on-rails-book-review.html</link>
+				<guid isPermaLink="true">http://masteruby.github.io/learning-resources/2014/04/09/learn-ruby-on-rails-book-review.html</guid>
 			</item>
 		
 			<item>
@@ -488,7 +456,7 @@ we need to add boolean completed to our tasks table.&lt;/p&gt;
 
 &lt;h2&gt;How to install Ruby and Rails on Windows&lt;/h2&gt;
 
-&lt;p&gt;### Step 1: Get rails installer&lt;/p&gt;
+&lt;h3&gt;Step 1: Get rails installer&lt;/h3&gt;
 
 &lt;p&gt;Get installer on &lt;a href=&quot;http://www.railsinstaller.org/en&quot;&gt;rails installer site&lt;/a&gt;.&lt;/p&gt;
 
@@ -943,13 +911,13 @@ tutorial you will learn:&lt;/p&gt;
 
 &lt;ul&gt;
 &lt;li&gt;&lt;p&gt;You need to have some basic knowledge of HTML, CSS. If you haven&amp;#39;t learn them  yet go to &lt;a href=&quot;http://www.codecademy.com/tracks/web&quot;&gt;web tutorial on codecademy&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;You need to have basics in Ruby. If you haven&amp;#39;t I wrote post about &lt;a href=&quot;http://masteruby/github.io/learning-resources/2014/03/28/learn-ruby-with-these-resources.html&quot;&gt;learning resources&lt;/a&gt; for ruby&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;You need to have basics in Ruby. If you haven&amp;#39;t I wrote post about &lt;a href=&quot;http://masteruby.github.io/learning-resources/2014/03/28/learn-ruby-with-these-resources.html&quot;&gt;learning resources&lt;/a&gt; for ruby&lt;/p&gt;&lt;/li&gt;
 &lt;li&gt;&lt;p&gt;You need to have ruby and ruby on rails installed. I will explain this in next section&lt;/p&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2&gt;2 How to install Ruby&lt;/h2&gt;
 
-&lt;p&gt;In &lt;a href=&quot;http://www.masteruby.github.io/learning-resources/2014/03/28/how-to-install-ruby.html&quot;&gt;this post&lt;/a&gt;
+&lt;p&gt;In &lt;a href=&quot;http://masteruby.github.io/learning-resources/2015/03/28/how-to-install-ruby.html&quot;&gt;this post&lt;/a&gt;
 I&amp;#39;ve included installation instructions for Ruby and Rails&lt;/p&gt;
 
 &lt;h2&gt;3 Choosing your text editor&lt;/h2&gt;
