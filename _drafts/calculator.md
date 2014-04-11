@@ -75,5 +75,17 @@ Shoes.app title: "My calculator" do
 
 We've set size of the buttons with width and height methods.
 
+{% highlight sh %}
+require 'green_shoes'
+Shoes.app title: "My calculator" do
+  flow :width => 160 do
+    %w(7 8 9 / 4 5 6 * 1 2 3 + 0  - =).each do |but|
+      button but, :width => 40, :height => 40
+    end
+  end
+end
+{% endhighlight %}
 
 
+
+ 
