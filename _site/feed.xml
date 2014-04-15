@@ -451,6 +451,82 @@ we need to add boolean completed to our tasks table.&lt;/p&gt;
 			</item>
 		
 			<item>
+				<title>Top 8 Learning resources for ruby beginner</title>
+				<description>&lt;p&gt;In this tutorial i&amp;#39;m gonna to show you some resources to learn ruby. Some are
+paid, some are free, it depends on you what you choose.&lt;/p&gt;
+
+&lt;p&gt;So where to start? It depends on who you are.&lt;/p&gt;
+
+&lt;h2&gt;You have no programming background and you like reading books&lt;/h2&gt;
+
+&lt;h3&gt;Learn to Program by Chris Pine&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.amazon.com/Learn-Program-Second-Facets-Ruby/dp/1934356360/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1396001035&amp;sr=1-1&amp;keywords=learn+to+program&quot;&gt;&lt;img class=&quot;book&quot; src=&quot;/images/learn-to-program.jpg&quot;&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;This book assumes you have no programming background. You will walk
+through practical examples about how to write code in Ruby. You will start
+with basic data types like variables, numbers, strings. Then you will move on
+classes, reading, writting to the file, lambdas, procs. What I like about
+this book is it&amp;#39;s readability and interesting exercises.&lt;/p&gt;
+
+&lt;h3&gt;Begining Ruby from Novice To Professional&lt;/h3&gt;
+
+&lt;p&gt;&lt;a
+href=&quot;http://www.amazon.com/Beginning-Ruby-Novice-Professional-Experts/dp/1430223634/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1396001263&amp;sr=1-1&amp;keywords=beginning+ruby+from+novice+to+professional&quot;&gt;&lt;img
+class=&quot;book&quot; src=&quot;/images/beginning-ruby.jpg&quot;&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;It&amp;#39;s a standard book about how to learn ruby. It begins with baby steps in ruby
+language, then you broad to advanced topics like how to distribute ruby gems,
+how to use threads and sockets, how to use ruby in web development with Rails,
+Sinatra, Ramaze and how to use ruby in &lt;strong&gt;gui&lt;/strong&gt; apps. Only disadvantage of this
+book is that it&amp;#39;s really old. It was published in 2009, so it&amp;#39;s very long time.&lt;/p&gt;
+
+&lt;h2&gt;You like challenges&lt;/h2&gt;
+
+&lt;p&gt;So you want to know ruby language and don&amp;#39;t have time to read book. Try this
+online guide:&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://ruby.learncodethehardway.org/book/&quot;&gt;Learn Ruby Hardway&lt;/a&gt; online book by Zed Shaw.&lt;/p&gt;
+
+&lt;p&gt;What I like about this book is that it moves you straight to action. You walk up through series of exercises. Every exercise contains &lt;strong&gt;what you should see&lt;/strong&gt;
+section. If your screen doesn&amp;#39;t matches with book you should find error in your
+code and try again.&lt;/p&gt;
+
+&lt;h2&gt;You want some online interactive tutorials&lt;/h2&gt;
+
+&lt;p&gt;Try these tutorials:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://tryruby.org/levels/1/challenges/0&quot;&gt;Try Ruby&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;https://rubymonk.com/&quot;&gt;Ruby Monk&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.codecademy.com/tracks/ruby&quot;&gt;Codecademy&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://hackety.com/&quot;&gt;Hackety Hack&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;You have some programming background from other language&lt;/h2&gt;
+
+&lt;p&gt;If you came from object oriented language like Java, Programming Ruby by
+Pragmatic Bookshelf is definitely good place to start and you can use it for
+reference along with ruby docs.&lt;/p&gt;
+
+&lt;h3&gt;Programming Ruby&lt;/h3&gt;
+
+&lt;p&gt;&lt;a
+href=&quot;http://www.amazon.com/Programming-Ruby-1-9-2-0-Programmers/dp/1937785491/ref=pd_sim_b_1/192-2394227-8927164?ie=UTF8&amp;refRID=0YE5JVBZCNGW64CSXBVX&quot;&gt;&lt;img
+class=&quot;book&quot; src=&quot;/images/programming-ruby.jpeg&quot;&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2&gt;What&amp;#39;s next&lt;/h2&gt;
+
+&lt;p&gt;You definitely use Ruby in your apps. If you are into gui development you can
+start with &lt;a href=&quot;http://shoesrb.com/&quot;&gt;Shoes&lt;/a&gt;, or you can try web development with
+&lt;strong&gt;Rails&lt;/strong&gt; or Sinatra**&lt;/p&gt;
+</description>
+				<pubDate>Fri, 28 Mar 2014 00:00:00 +0100</pubDate>
+				<link>http://masteruby.github.io/learning-resources/2014/03/28/top-8-learning-resources-for-ruby-beginner.html</link>
+				<guid isPermaLink="true">http://masteruby.github.io/learning-resources/2014/03/28/top-8-learning-resources-for-ruby-beginner.html</guid>
+			</item>
+		
+			<item>
 				<title>How to install Ruby and Rails for your operating system</title>
 				<description>&lt;p&gt;In this post I want to show you how to install Ruby and ROR for your operating system.&lt;/p&gt;
 
@@ -538,82 +614,6 @@ so if you want you can check it out.&lt;/p&gt;
 				<pubDate>Fri, 28 Mar 2014 00:00:00 +0100</pubDate>
 				<link>http://masteruby.github.io/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html</link>
 				<guid isPermaLink="true">http://masteruby.github.io/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html</guid>
-			</item>
-		
-			<item>
-				<title>Learning resources for ruby</title>
-				<description>&lt;p&gt;In this tutorial i&amp;#39;m gonna to show you some resources to learn ruby. Some are
-paid, some are free, it depends on you what you choose.&lt;/p&gt;
-
-&lt;p&gt;So where to start? It depends on who you are.&lt;/p&gt;
-
-&lt;h2&gt;You have no programming background and you like reading books&lt;/h2&gt;
-
-&lt;h3&gt;Learn to Program by Chris Pine&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.amazon.com/Learn-Program-Second-Facets-Ruby/dp/1934356360/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1396001035&amp;sr=1-1&amp;keywords=learn+to+program&quot;&gt;&lt;img class=&quot;book&quot; src=&quot;/images/learn-to-program.jpg&quot;&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;This book assumes you have no programming background. You will walk
-through practical examples about how to write code in Ruby. You will start
-with basic data types like variables, numbers, strings. Then you will move on
-classes, reading, writting to the file, lambdas, procs. What I like about
-this book is it&amp;#39;s readability and interesting exercises.&lt;/p&gt;
-
-&lt;h3&gt;Begining Ruby from Novice To Professional&lt;/h3&gt;
-
-&lt;p&gt;&lt;a
-href=&quot;http://www.amazon.com/Beginning-Ruby-Novice-Professional-Experts/dp/1430223634/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1396001263&amp;sr=1-1&amp;keywords=beginning+ruby+from+novice+to+professional&quot;&gt;&lt;img
-class=&quot;book&quot; src=&quot;/images/beginning-ruby.jpg&quot;&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;It&amp;#39;s a standard book about how to learn ruby. It begins with baby steps in ruby
-language, then you broad to advanced topics like how to distribute ruby gems,
-how to use threads and sockets, how to use ruby in web development with Rails,
-Sinatra, Ramaze and how to use ruby in &lt;strong&gt;gui&lt;/strong&gt; apps. Only disadvantage of this
-book is that it&amp;#39;s really old. It was published in 2009, so it&amp;#39;s very long time.&lt;/p&gt;
-
-&lt;h2&gt;You like challenges&lt;/h2&gt;
-
-&lt;p&gt;So you want to know ruby language and don&amp;#39;t have time to read book. Try this
-online guide:&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://ruby.learncodethehardway.org/book/&quot;&gt;Learn Ruby Hardway&lt;/a&gt; online book by Zed Shaw.&lt;/p&gt;
-
-&lt;p&gt;What I like about this book is that it moves you straight to action. You walk up through series of exercises. Every exercise contains &lt;strong&gt;what you should see&lt;/strong&gt;
-section. If your screen doesn&amp;#39;t matches with book you should find error in your
-code and try again.&lt;/p&gt;
-
-&lt;h2&gt;You want some online interactive tutorials&lt;/h2&gt;
-
-&lt;p&gt;Try these tutorials:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://tryruby.org/levels/1/challenges/0&quot;&gt;Try Ruby&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;https://rubymonk.com/&quot;&gt;Ruby Monk&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://www.codecademy.com/tracks/ruby&quot;&gt;Codecademy&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;li&gt;&lt;p&gt;&lt;a href=&quot;http://hackety.com/&quot;&gt;Hackety Hack&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2&gt;You have some programming background from other language&lt;/h2&gt;
-
-&lt;p&gt;If you came from object oriented language like Java, Programming Ruby by
-Pragmatic Bookshelf is definitely good place to start and you can use it for
-reference along with ruby docs.&lt;/p&gt;
-
-&lt;h3&gt;Programming Ruby&lt;/h3&gt;
-
-&lt;p&gt;&lt;a
-href=&quot;http://www.amazon.com/Programming-Ruby-1-9-2-0-Programmers/dp/1937785491/ref=pd_sim_b_1/192-2394227-8927164?ie=UTF8&amp;refRID=0YE5JVBZCNGW64CSXBVX&quot;&gt;&lt;img
-class=&quot;book&quot; src=&quot;/images/programming-ruby.jpeg&quot;&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2&gt;What&amp;#39;s next&lt;/h2&gt;
-
-&lt;p&gt;You definitely use Ruby in your apps. If you are into gui development you can
-start with &lt;a href=&quot;http://shoesrb.com/&quot;&gt;Shoes&lt;/a&gt;, or you can try web development with
-&lt;strong&gt;Rails&lt;/strong&gt; or Sinatra**&lt;/p&gt;
-</description>
-				<pubDate>Fri, 28 Mar 2014 00:00:00 +0100</pubDate>
-				<link>http://masteruby.github.io/learning-resources/2014/03/28/learn-ruby-with-these-resources.html</link>
-				<guid isPermaLink="true">http://masteruby.github.io/learning-resources/2014/03/28/learn-ruby-with-these-resources.html</guid>
 			</item>
 		
 			<item>

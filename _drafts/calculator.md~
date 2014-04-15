@@ -65,55 +65,54 @@ Shoes.app(title: "My calculator", width: 200, height: 240) do
 end
 {% endhighlight %}
 
-If you go run shoes again, you should something like this:
-
-![template for calculator](/images/template.png)
-
-Let's look at what we've done.
-
-First we've created flow, who copy size of screen
-{% highlight ruby %}
-  flow width: 200, height: 240 do
-{% endhighlight %}
-
-Our app is divided into three parts: number field, clear button and remaining buttons, so we've created three different flows to match it. 
-
-{% highlight ruby %}
-flow width: 0.7, height: 0.2 do
-  background rgb(0, 157, 228)
-end
-{% endhighlight %}
-
-Here we used floating points to match size of flow. If you type 0.7 it means 70% width of screen and if you type 0.2 it means 20% size. Then we've used background method to change color of the flow.
-
-Ok we've done with preparations, let's create some buttons.
-
 
 
 ## Adding calculator buttons
 
-First we need to add number field:
+Let's add calculator buttons. Insert this code into Shoes.app do block:
 
 {% highlight ruby %}
-
 require 'green_shoes'
-
-number_field = nil
-
-Shoes.app(title: "My calculator", width: 200, height: 240) do
-  @number = 0
-  flow width: 200, height: 240 do
-    flow width: 0.7, height: 0.2 do
-      background rgb(0, 157, 228)
-      number_field = para @number, margin: 10 
+Shoes.app title: "My calculator" do
+  %w(7 8 9 / 4 5 6 * 1 2 3 + 0 - =).each do |but|
+    button but
     end
+  end
+  {% endhighlight %}
 
-    flow width: 0.3, height: 0.2 do
-    end
+  We've added each button to array and use special **button method** from Shoes
+  class.
 
-    flow width: 1.0, height: 0.8 do
-      background rgb(139, 206, 236)
+  You can see result right here:
+
+  ![creating buttons in shoes](/images/creating_buttons.png)
+
+  Our buttons are small and we want to display four buttons in each row. Let's add some code to our app
+
+ {% highlight ruby %}
+ require 'green_shoes'
+ Shoes.app title "My calculator" do
+ %(7 8 9 / 4 5 6 * 1 2 3 + 0 - =).each do |but|
+  button but, :width => 40, height:40
+  {% endhighlight %}
+
+  ![changing size of element in shoes](/images/changing.png)
+
+
+
+We've set size of the buttons with width and height methods.
+
+{% highlight sh %}
+require 'green_shoes'
+Shoes.app title: "My calculator" do
+  flow :width => 160 do
+    %w(7 8 9 / 4 5 6 * 1 2 3 + 0  - =).each do |but|
+      button but, :width => 40, :height => 40
     end
   end
 end
 {% endhighlight %}
+
+
+
+ 
