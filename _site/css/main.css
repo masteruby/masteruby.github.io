@@ -251,4 +251,24 @@ margin: 0 0 2.0em;
   
 }
 
+/* Share This */
+
+.stpulldown-gradient
+{
+background: #E1E1E1;
+background: -moz-linear-gradient(top, #E1E1E1 0%, #A7A7A7 100%); /* firefox */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#E1E1E1), color-stop(100%,#A7A7A7)); /* webkit */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#E1E1E1', endColorstr='#A7A7A7',GradientType=0 ); /* ie */
+background: -o-linear-gradient(top, #E1E1E1 0%,#A7A7A7 100%); /* opera */
+color: #636363;
+}
+#stpulldown .stpulldown-logo
+{
+height: 40px;
+width: 300px;
+margin-left: 20px;
+margin-top: 5px;
+background:url("http://masteruby.github.io") no-repeat;
+}
+
 

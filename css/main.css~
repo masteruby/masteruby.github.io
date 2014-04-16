@@ -21,9 +21,13 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-size: 100%;
+  font-size: 140%;
   color: rgb(197, 47, 36);
   margin: 1.2em 0 1.5em 0;
+}
+
+h4 {
+  font-size: 100%;
 }
 
 
@@ -36,7 +40,15 @@ a:hover   { color: rgb(197, 47, 36) }
 a:visited { color: #a0a; }
 
 img.contact { height: 32px; width: 32px;}
-img { width: 100%;}
+
+img.share { height: 40px; width: 40px;}
+
+
+img.book { width: 200px; height: 250px }
+
+img {
+  width: 100%
+}
 
 .navbar { 
   background-color: rgb(197, 47, 36);
@@ -54,9 +66,6 @@ img { width: 100%;}
 .navbar a:hover {
   color: black;
 }
-
-
-
 
 #sidebar {
   float: left;
@@ -84,14 +93,16 @@ img { width: 100%;}
 
 .posts {
   list-style-type: none;
-  margin-bottom: 1em;
   float: left;
+  margin: 0 1.2em 2em 0;
+  padding: 0 0 0 0; 
   
   
 }
 
 .posts li {
-  line-height: 1.75em;
+  line-height: 1.65em;
+  margin-bottom: 1em;
 }
 
 .posts span {
@@ -224,12 +235,12 @@ section#posts {
 
 .post h2 {
   font-size: 1.8em;
-  line-height: 1.2em;
+  margin: 2.9em 0 0.6em 0;
 }
 
 .post h3 {
-  padding: 0.9em 0 0.6em 0;
-  font-size: 1.4em;
+  margin: 1.9em 0 0.6em 0;
+  font-size: 1.2em;
 }
 
 .post h4 {
@@ -239,3 +250,25 @@ section#posts {
 margin: 0 0 2.0em;
   
 }
+
+/* Share This */
+
+.stpulldown-gradient
+{
+background: #E1E1E1;
+background: -moz-linear-gradient(top, #E1E1E1 0%, #A7A7A7 100%); /* firefox */
+background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#E1E1E1), color-stop(100%,#A7A7A7)); /* webkit */
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#E1E1E1', endColorstr='#A7A7A7',GradientType=0 ); /* ie */
+background: -o-linear-gradient(top, #E1E1E1 0%,#A7A7A7 100%); /* opera */
+color: #636363;
+}
+#stpulldown .stpulldown-logo
+{
+height: 40px;
+width: 300px;
+margin-left: 20px;
+margin-top: 5px;
+background:url("http://masteruby.github.io") no-repeat;
+}
+
+

@@ -4,8 +4,13 @@ layout: default
 <h2>{{ page.title }}</h2>
 <p class="meta">{{ page.date | date_to_string }}</p>
 
+<h4>Posted by Milos Dolobac</h4>
+
 <div class="post">
 {{ content }}
+
+
+
 </div>
 
 {% if page.allow_comments != false %}
@@ -43,10 +48,17 @@ layout: default
 
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function () {
-        var s = document.createElement('script'); s.async = true;
-        s.type = 'text/javascript';
-        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+      var s = document.createElement('script'); s.async = true;
+      s.type = 'text/javascript';
+      s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+      (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     }());
     </script>
+    
+ 
+
+<script type="text/javascript">var switchTo5x=true;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript">stLight.options({publisher: "cb2dec83-4b90-4698-be37-08c277047400", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
+
               

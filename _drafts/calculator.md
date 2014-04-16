@@ -98,18 +98,17 @@ First we need to add number field:
 
 require 'green_shoes'
 
-number_field = nil
-
 Shoes.app(title: "My calculator", width: 200, height: 240) do
+  number_field = nil
   @number = 0
   flow width: 200, height: 240 do
     flow width: 0.7, height: 0.2 do
       background rgb(0, 157, 228)
-      number_field = para @number, margin: 10 
+      number_field = para @number, margin: 10
     end
-
+    
     flow width: 0.3, height: 0.2 do
-    end
+    end    
 
     flow width: 1.0, height: 0.8 do
       background rgb(139, 206, 236)
@@ -117,3 +116,220 @@ Shoes.app(title: "My calculator", width: 200, height: 240) do
   end
 end
 {% endhighlight %}
+
+So if you run code you should number 0 in number field: 
+
+![number field](/images/number_field.png)
+
+Let's take a look at code:
+
+{% highlight ruby %}
+  number_field = nil
+  @number = 0
+{% endhighlight %}
+
+Here we've set two variables. Variable **number_field** is for displaying number field. In variable **@number** we set actual value of number in calculator.
+
+{% highlight ruby %}
+number_field = para @number, margin: 10
+{% endhighlight %}
+
+Here we've changed number field to para. Para is method in shoes for displaying text or numbers in screen. We've used **@number** to set para to 0, but it can be anything you like. After that we've set margin to all sizes.
+
+### Adding Clr Button
+
+Now we have to add clr button. To add button type something like this:
+
+{% highlight ruby %}
+require 'green_shoes'
+
+Shoes.app(title: "My calculator", width: 200, height: 240) do
+  number_field = nil
+  @number = 0
+  flow width: 200, height: 240 do
+    flow width: 0.7, height: 0.2 do
+      background rgb(0, 157, 228)
+      number_field = para @number, margin: 10
+    end
+    
+    flow width: 0.3, height: 0.2 do
+      button 'Clr', width: 1.0, height: 1.0 do
+      end
+    end    
+
+    flow width: 1.0, height: 0.8 do
+      background rgb(139, 206, 236)
+    end
+  end
+end
+{% endhighlight %}
+
+{% highlight ruby %}
+button 'Clr', width: 1.0, height: 1.0 do
+end
+{% endhighlight %}
+
+So here we've added button with name **Clr** and set it's width and height to size of flow. 
+
+## Adding remaining buttons
+
+We need to add all buttons what we need. Add code something like this inside third flow.
+
+{% highlight ruby %}
+
+require 'green_shoes'
+
+Shoes.app(title: "My calculator", width: 200, height: 240) do
+  number_field = nil
+  @number = 0
+  flow width: 200, height: 240 do
+    flow width: 0.7, height: 0.2 do
+      background rgb(0, 157, 228)
+      number_field = para @number, margin: 10
+    end
+    
+    flow width: 0.3, height: 0.2 do
+      button 'Clr', width: 1.0, height: 1.0 do
+      end
+    end    
+
+    flow width: 1.0, height: 0.8 do
+      background rgb(139, 206, 236)
+      %w(7 8 9 + 4 5 6 - 1 2 3 / 0 . = *).each do |btn|
+        button btn, width: 50, height: 50 do
+        end
+      end      
+    end
+  end
+end
+
+{% endhighlight %}
+
+{% highlight ruby %}
+%w(7 8 9 + 4 5 6 - 1 2 3 / 0 . = *).each do |btn|
+  button btn, width: 50, height: 50 do
+  end
+{% endhighlight %}
+
+We've added all buttons to array with %w method and added every button to each loop, then we setup height and width of the buttons.
+
+## Running Buttons
+
+So are buttons now displayed, but if you click at them it doesn't work. Let's fix it. Go to clr button and add code something like this.
+
+{% highlight ruby %}
+require 'green_shoes'
+
+Shoes.app(title: "My calculator", width: 200, height: 240) do
+  number_field = nil
+  @number = 0
+  flow width: 200, height: 240 do
+    flow width: 0.7, height: 0.2 do
+      background rgb(0, 157, 228)
+      number_field = para @number, margin: 10
+    end
+    
+    flow width: 0.3, height: 0.2 do
+      button 'Clr', width: 1.0, height: 1.0 do
+        @number = 0
+        number_field.replace(@number)
+      end
+    end    
+
+    flow width: 1.0, height: 0.8 do
+      background rgb(139, 206, 236)
+      %w(7 8 9 + 4 5 6 - 1 2 3 / 0 . = *).each do |btn|
+        button btn, width: 50, height: 50 do
+        end
+      end      
+    end
+  end
+end
+
+{% endhighlight %}
+
+{% highlight ruby %}
+@number = 0
+number_field.replace(@number)
+{% endhighlight %}
+
+Here we added block of code to button, that every time button Clr is pressed variable @number is set to. Then we use special ruby method **replace** to change actual value of number_field to 0. Maybe it doesn't seems to work, but try change value of variable @number to any other number and then press clr. It should change to zero.
+
+Ok we've added functionality to Clr button let's move on numbers. Inside this block of code inside flow:
+
+{% highlight ruby %}
+require 'green_shoes'
+
+Shoes.app(title: "My calculator", width: 200, height: 240) do
+  number_field = nil
+  @number = 0
+  flow width: 200, height: 240 do
+    flow width: 0.7, height: 0.2 do
+      background rgb(0, 157, 228)
+      number_field = para @number, margin: 10
+    end
+    
+    flow width: 0.3, height: 0.2 do
+      button 'Clr', width: 1.0, height: 1.0 do
+        @number = 0
+        number_field.replace(@number)
+      end
+    end    
+
+    flow width: 1.0, height: 0.8 do
+      background rgb(139, 206, 236)
+      %w(7 8 9 + 4 5 6 - 1 2 3 / 0 . = *).each do |btn|
+        button btn, width: 50, height: 50 do
+          case btn
+            when /[0-9]/ 
+              @number = @number.to_i * 10 + btn.to_i
+          end
+          number_field.replace(@number)    
+        end
+      end      
+    end
+  end
+end
+{% endhighlight %}
+
+{% highlight ruby %}
+case btn
+  when /[0-9]/ 
+    @number = @number.to_i * 10 + btn.to_i
+end
+number_field.replace(@number)
+{% endhighlight %}
+
+Here we use case to instead bla bla.
+
+After that we've used when with regular expression that match every number from zero to nine. After that we converted number and btn to integers and finally we've used replace method to replace number_field with actual number.
+
+## Adding operations
+
+We have working number buttons, but what to do with operators.
+
+First we need to add two variables, **@previous** and **@op** right after variable **@number**
+
+{% highlight ruby %}
+...
+
+@op = nil
+@previous = 0
+
+...
+{% endhighlight %}
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+

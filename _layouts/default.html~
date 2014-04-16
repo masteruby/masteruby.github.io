@@ -3,21 +3,26 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Ruby Tutorials | Learn Ruby</title>
-    <meta name="Description" content="masteruby is ruby tutorials web site. Learn ruby from ruby tutorials. ">
-    <meta name="Keywords" content="learn ruby,web development, ruby tutorials">
-    <meta name="Robots" content="all">
+    <title>{{ page.title }} |  Learn Ruby</title>
+    	<!-- Bootstrap CSS -->
+    <meta name="google-site-verification" content="UFFQXW8FdLgKuB_vYYy8LTw5aonnBmAHdUhUopMxero" />
+    <meta content="Masteruby is tutorials web site about learning ruby">
+    <meta name="robots" content="all">
        
     <meta name="viewport" content="width=device-width">
+  
 
         <!-- syntax highlighting CSS -->
     <link rel="stylesheet" href="/css/syntax.css">
           
         <!-- Custom CSS -->
     <link rel="stylesheet" href="/css/main.css">
-         
+    <link rel="alternate" type="application/rss+xml" title="{{ site.name }}" href="{{ site.url }}/feed.xml">
+    <script type="text/javascript">var switchTo5x=true;</script>
+<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
+<script type="text/javascript" src="http://s.sharethis.com/loader.js"></script>     
 	<!-- Bootstrap CSS -->
-  
+  <meta name="google-site-verification" content="UFFQXW8FdLgKuB_vYYy8LTw5aonnBmAHdUhUopMxero" />
   </head>
   
   <body>
@@ -61,6 +66,15 @@
 
 </script>
 
+<script type="text/javascript">
+  window.onbeforeunload = function (e) {
+    e = e || window.event;
+    if (e) {
+      _gaq.push(['_trackPageview', '/bounce']);
+    }
+    return _gaq.push(['_trackPageview', '/bounce']);
+  };
+</script>
 
   </body>
 </html>    
