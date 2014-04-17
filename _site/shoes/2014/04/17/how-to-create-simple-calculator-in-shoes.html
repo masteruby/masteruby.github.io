@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>How to create simple calculator in Shoes </title>
+    	<!-- Bootstrap CSS -->
+    <meta name="google-site-verification" content="UFFQXW8FdLgKuB_vYYy8LTw5aonnBmAHdUhUopMxero" />
+    <meta content="Masteruby is tutorials web site about learning ruby">
+    <meta name="robots" content="all">
+       
+    <meta name="viewport" content="width=device-width">
+  
+
+        <!-- syntax highlighting CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+          
+        <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="alternate" type="application/rss+xml" title="Masteruby" href="http://masteruby.github.io/feed.xml">
+    
+	<!-- Bootstrap CSS -->
+  <meta name="google-site-verification" content="UFFQXW8FdLgKuB_vYYy8LTw5aonnBmAHdUhUopMxero" />
+  </head>
+  
+  <body>
+    <div class="site">
+      <header class="navbar">
+        <a href="/">Masteruby</a>
+       
+      </header>
+      
+      <section id="sidebar">
+        Subscribe with: <a href="/feed.xml"><img class="contact" src="/images/rss.png"></img></a>
+
+<h1 id="post-categories">Post Categories</h1>
+
+
+<li>
+  <a href="/weekly-rails.html">weekly-rails</a></li>
+
+<li>
+  <a href="/productivity-booster.html">productivity-booster</a></li>
+
+<li>
+  <a href="/learning-resources.html">learning-resources</a></li>
+
+<li>
+  <a href="/shoes.html">shoes</a></li>
+
+
+<ul class="posts">
+  <h1>Recent posts</h1>
+
+<li>
+  <span>17 Apr 2014</span> &raquo;
+
+  <a href="/shoes/2014/04/17/how-to-create-simple-calculator-in-shoes.html">
+    How to create simple calculator in Shoes</a>
+</li>
+
+<li>
+  <span>09 Apr 2014</span> &raquo;
+
+  <a href="/learning-resources/2014/04/09/learn-ruby-on-rails-book-review.html">
+    Learn Ruby on Rails book review</a>
+</li>
+
+<li>
+  <span>04 Apr 2014</span> &raquo;
+
+  <a href="/weekly-rails/2014/04/04/how-to-create-todo-list-app-adding-removing-completing-tasks.html">
+    How to create todo list app adding removing and deleting tasks</a>
+</li>
+
+<li>
+  <span>28 Mar 2014</span> &raquo;
+
+  <a href="/learning-resources/2014/03/28/top-8-learning-resources-for-ruby-beginner.html">
+    Top 8 Learning resources for ruby beginner</a>
+</li>
+
+<li>
+  <span>28 Mar 2014</span> &raquo;
+
+  <a href="/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html">
+    How to install Ruby and Rails for your operating system</a>
+</li>
+
+<li>
+  <span>26 Mar 2014</span> &raquo;
+
+  <a href="/productivity-booster/2014/03/26/top-ten-commands-in-terminal-you-will-use-everyday.html">
+    Top 10 commands in terminal you will use everyday</a>
+</li>
+
+<li>
+  <span>22 Mar 2014</span> &raquo;
+
+  <a href="/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.html">
+    How to create todo list app in rails static pages</a>
+</li>
+
+</ul>
+
+
+
+
+
+
+
+ 
+
+
+
+
+    
+
+      </section>
+      
+      <section id="posts">
+        <!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+<a class="addthis_button_facebook"></a>
+<a class="addthis_button_twitter"></a>
+<a class="addthis_button_pinterest_share"></a>
+<a class="addthis_button_google_plusone_share"></a>
+<a class="addthis_button_reddit"></a>
+<a class="addthis_button_hackernews"></a>
+<a class="addthis_button_stumbleupon"></a>
+<a class="addthis_button_delicious"></a>
+<a class="addthis_button_dzone"></a>
+<a class="addthis_button_blinklist"></a>
+<a class="addthis_button_tumblr"></a>
+<a class="addthis_button_compact"></a><a class="addthis_counter addthis_bubble_style"></a>
+</div>
+
+<h2>How to create simple calculator in Shoes</h2>
+<p class="meta">17 Apr 2014</p>
+
+<h4>Posted by Milos Dolobac</h4>
+
+<div class="post">
+<p>In this tutorial you will learn how to create simple calculator in Shoes that looks like this:</p>
+
+<p><img class="shoes" src="/images/calculator.png" alt="how to create
+calculator"></img></p>
+
+<p>Because original Shoes is outdated and new Shoes 4 isn&#39;t released yet, we&#39;ll use Green Shoes in this tutorial.</p>
+
+<h2>How to install Shoes</h2>
+
+<p>Before you can install green_shoes you have to install ruby. I&#39;ve included instructions about <a href="http://masteruby.github.io/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html">how to install
+ruby</a> in previous post.</p>
+
+<p>If you have ruby installed by rvm, just install green_shoes with rubygems:</p>
+
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>gem install green_shoes
+</code></pre></div>
+
+<p>If you have trouble with installation, you have to install <a href="http://sourceforge.net/projects/ruby-gnome2/">ruby
+gtk2</a>. </p>
+
+<h2>Running shoes</h2>
+
+<p>To run we need to add green_shoes gem to our ruby file.</p>
+
+<p>Go to your favorite text editor, create new file <strong>calculator.rb</strong> and type
+this code:</p>
+
+<h4>calculator.rb</h4>
+
+<div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;green_shoes&#39;</span>
+
+<span class="no">Shoes</span><span class="o">.</span><span class="n">app</span><span class="p">(</span><span class="ss">title</span><span class="p">:</span> <span class="s2">&quot;My calculator&quot;</span><span class="p">,</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">240</span><span class="p">)</span> <span class="k">do</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<p>Go to the terminal and run green shoes:</p>
+
+<div class="highlight"><pre><code class="sh">ruby calculator.rb
+</code></pre></div>
+
+<p>You should see something like this:</p>
+
+<p><img class="shoes" src="/images/running_shoes.png" alt="how to run shoes"></img></p>
+
+<h2>Adding basic template for app</h2>
+
+<p>Let&#39;s add template for our calculator. We need to add place for number field,
+clear button and remaining buttons.</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;green_shoes&#39;</span>
+
+<span class="no">Shoes</span><span class="o">.</span><span class="n">app</span><span class="p">(</span><span class="ss">title</span><span class="p">:</span> <span class="s2">&quot;My calculator&quot;</span><span class="p">,</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">240</span><span class="p">)</span> <span class="k">do</span>
+  <span class="n">flow</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">240</span> <span class="k">do</span>
+    <span class="n">flow</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">7</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">2</span> <span class="k">do</span>
+      <span class="n">background</span> <span class="n">rgb</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">157</span><span class="p">,</span> <span class="mi">228</span><span class="p">)</span>
+    <span class="k">end</span>
+
+    <span class="n">flow</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">2</span> <span class="k">do</span>
+    <span class="k">end</span>
+
+    <span class="n">flow</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">8</span> <span class="k">do</span>
+      <span class="n">background</span> <span class="n">rgb</span><span class="p">(</span><span class="mi">139</span><span class="p">,</span> <span class="mi">206</span><span class="p">,</span> <span class="mi">236</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<p>If you run shoes again, you should see something like this:</p>
+
+<p><img class="shoes" src="/images/template.png" alt="calculator template"></img></p>
+
+<p>Let&#39;s look at what we&#39;ve done. First we&#39;ve created flow, that copy size of screen.</p>
+
+<div class="highlight"><pre><code class="ruby">  <span class="n">flow</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">240</span> <span class="k">do</span>
+</code></pre></div>
+
+<p>Our app is divided into three parts: number field, clear button and remaining buttons, so we&#39;ve created three different flows to match it. </p>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">flow</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">7</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">2</span> <span class="k">do</span>
+  <span class="n">background</span> <span class="n">rgb</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">157</span><span class="p">,</span> <span class="mi">228</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<p>Here we used floating points to match size of flow. If you type 0.7 it means 70% width of screen and if you type 0.2 it means 20% size. Then we&#39;ve used background method to change color of the flow.</p>
+
+<p>Ok we&#39;ve done with preparations, let&#39;s create some buttons.</p>
+
+<h2>Adding calculator buttons</h2>
+
+<p>First we need to add number field:</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;green_shoes&#39;</span>
+
+<span class="no">Shoes</span><span class="o">.</span><span class="n">app</span><span class="p">(</span><span class="ss">title</span><span class="p">:</span> <span class="s2">&quot;My calculator&quot;</span><span class="p">,</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">240</span><span class="p">)</span> <span class="k">do</span>
+  <span class="n">number_field</span> <span class="o">=</span> <span class="kp">nil</span>
+  <span class="vi">@number</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="n">flow</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">240</span> <span class="k">do</span>
+    <span class="n">flow</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">7</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">2</span> <span class="k">do</span>
+      <span class="n">background</span> <span class="n">rgb</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">157</span><span class="p">,</span> <span class="mi">228</span><span class="p">)</span>
+      <span class="n">number_field</span> <span class="o">=</span> <span class="n">para</span> <span class="vi">@number</span><span class="p">,</span> <span class="ss">margin</span><span class="p">:</span> <span class="mi">10</span>
+    <span class="k">end</span>
+    
+    <span class="n">flow</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">2</span> <span class="k">do</span>
+    <span class="k">end</span>    
+
+    <span class="n">flow</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">8</span> <span class="k">do</span>
+      <span class="n">background</span> <span class="n">rgb</span><span class="p">(</span><span class="mi">139</span><span class="p">,</span> <span class="mi">206</span><span class="p">,</span> <span class="mi">236</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<p>So if you run code you should number 0 in number field: </p>
+
+<p><img class="shoes" src="/images/number_field.png" alt="how to create number field for calculator"></img></p>
+
+<p>Let&#39;s take a look at code:</p>
+
+<div class="highlight"><pre><code class="ruby">  <span class="n">number_field</span> <span class="o">=</span> <span class="kp">nil</span>
+  <span class="vi">@number</span> <span class="o">=</span> <span class="mi">0</span>
+</code></pre></div>
+
+<p>Here we&#39;ve set two variables. Variable <strong>number_field</strong> is for displaying number field. In variable <strong>@number</strong> we set actual value of number in the number field.</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">number_field</span> <span class="o">=</span> <span class="n">para</span> <span class="vi">@number</span><span class="p">,</span> <span class="ss">margin</span><span class="p">:</span> <span class="mi">10</span>
+</code></pre></div>
+
+<p>Here we&#39;ve changed number field to para. Para is method in shoes for displaying text or numbers in screen. We&#39;ve used <strong>@number</strong> to set para to 0, but it can be anything you like. After that we&#39;ve set margin to all sizes.</p>
+
+<h3>Adding Clr Button</h3>
+
+<p>Now we have to add clr button. To add button type something like this:</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;green_shoes&#39;</span>
+
+<span class="no">Shoes</span><span class="o">.</span><span class="n">app</span><span class="p">(</span><span class="ss">title</span><span class="p">:</span> <span class="s2">&quot;My calculator&quot;</span><span class="p">,</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">240</span><span class="p">)</span> <span class="k">do</span>
+  <span class="n">number_field</span> <span class="o">=</span> <span class="kp">nil</span>
+  <span class="vi">@number</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="n">flow</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">240</span> <span class="k">do</span>
+    <span class="n">flow</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">7</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">2</span> <span class="k">do</span>
+      <span class="n">background</span> <span class="n">rgb</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">157</span><span class="p">,</span> <span class="mi">228</span><span class="p">)</span>
+      <span class="n">number_field</span> <span class="o">=</span> <span class="n">para</span> <span class="vi">@number</span><span class="p">,</span> <span class="ss">margin</span><span class="p">:</span> <span class="mi">10</span>
+    <span class="k">end</span>
+    
+    <span class="n">flow</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">2</span> <span class="k">do</span>
+      <span class="n">button</span> <span class="s1">&#39;Clr&#39;</span><span class="p">,</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span> <span class="k">do</span>
+      <span class="k">end</span>
+    <span class="k">end</span>    
+
+    <span class="n">flow</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">8</span> <span class="k">do</span>
+      <span class="n">background</span> <span class="n">rgb</span><span class="p">(</span><span class="mi">139</span><span class="p">,</span> <span class="mi">206</span><span class="p">,</span> <span class="mi">236</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<p><img class="shoes" src="/images/adding_clr.png" alt="how to add clear
+button"></img></p>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">button</span> <span class="s1">&#39;Clr&#39;</span><span class="p">,</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span> <span class="k">do</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<p>So here we&#39;ve added button with name <strong>Clr</strong> and set it&#39;s width and height to size of flow. </p>
+
+<h3>Adding remaining buttons</h3>
+
+<p>We need to add all buttons what we need. Add this code into your app.</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;green_shoes&#39;</span>
+
+<span class="no">Shoes</span><span class="o">.</span><span class="n">app</span><span class="p">(</span><span class="ss">title</span><span class="p">:</span> <span class="s2">&quot;My calculator&quot;</span><span class="p">,</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">240</span><span class="p">)</span> <span class="k">do</span>
+  <span class="n">number_field</span> <span class="o">=</span> <span class="kp">nil</span>
+  <span class="vi">@number</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="n">flow</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">240</span> <span class="k">do</span>
+    <span class="n">flow</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">7</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">2</span> <span class="k">do</span>
+      <span class="n">background</span> <span class="n">rgb</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">157</span><span class="p">,</span> <span class="mi">228</span><span class="p">)</span>
+      <span class="n">number_field</span> <span class="o">=</span> <span class="n">para</span> <span class="vi">@number</span><span class="p">,</span> <span class="ss">margin</span><span class="p">:</span> <span class="mi">10</span>
+    <span class="k">end</span>
+    
+    <span class="n">flow</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">2</span> <span class="k">do</span>
+      <span class="n">button</span> <span class="s1">&#39;Clr&#39;</span><span class="p">,</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span> <span class="k">do</span>
+      <span class="k">end</span>
+    <span class="k">end</span>    
+
+    <span class="n">flow</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">8</span> <span class="k">do</span>
+      <span class="n">background</span> <span class="n">rgb</span><span class="p">(</span><span class="mi">139</span><span class="p">,</span> <span class="mi">206</span><span class="p">,</span> <span class="mi">236</span><span class="p">)</span>
+      <span class="sx">%w(7 8 9 + 4 5 6 - 1 2 3 / 0 . = *)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">btn</span><span class="o">|</span>
+        <span class="n">button</span> <span class="n">btn</span><span class="p">,</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">50</span> <span class="k">do</span>
+        <span class="k">end</span>
+      <span class="k">end</span>      
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<p><img class="shoes" src="/images/adding_buttons.png" alt="how to add buttons in
+shoes"></img></p>
+
+<div class="highlight"><pre><code class="ruby"><span class="sx">%w(7 8 9 + 4 5 6 - 1 2 3 / 0 . = *)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">btn</span><span class="o">|</span>
+  <span class="n">button</span> <span class="n">btn</span><span class="p">,</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">50</span> <span class="k">do</span>
+  <span class="k">end</span>
+</code></pre></div>
+
+<p>We&#39;ve added all buttons to array with %w method and added every button to each
+loop, then we&#39;ve set height and width of the buttons.</p>
+
+<h2>Running Buttons</h2>
+
+<p>So our buttons are now displayed, but if you click at them they don&#39;t work.
+Let&#39;s fix it. Go to flow with clr button and add code some code: </p>
+
+<div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;green_shoes&#39;</span>
+
+<span class="no">Shoes</span><span class="o">.</span><span class="n">app</span><span class="p">(</span><span class="ss">title</span><span class="p">:</span> <span class="s2">&quot;My calculator&quot;</span><span class="p">,</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">240</span><span class="p">)</span> <span class="k">do</span>
+  <span class="n">number_field</span> <span class="o">=</span> <span class="kp">nil</span>
+  <span class="vi">@number</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="n">flow</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">240</span> <span class="k">do</span>
+    <span class="n">flow</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">7</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">2</span> <span class="k">do</span>
+      <span class="n">background</span> <span class="n">rgb</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">157</span><span class="p">,</span> <span class="mi">228</span><span class="p">)</span>
+      <span class="n">number_field</span> <span class="o">=</span> <span class="n">para</span> <span class="vi">@number</span><span class="p">,</span> <span class="ss">margin</span><span class="p">:</span> <span class="mi">10</span>
+    <span class="k">end</span>
+    
+    <span class="n">flow</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">2</span> <span class="k">do</span>
+      <span class="n">button</span> <span class="s1">&#39;Clr&#39;</span><span class="p">,</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span> <span class="k">do</span>
+        <span class="vi">@number</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">number_field</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="vi">@number</span><span class="p">)</span>
+      <span class="k">end</span>
+    <span class="k">end</span>    
+
+    <span class="n">flow</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">8</span> <span class="k">do</span>
+      <span class="n">background</span> <span class="n">rgb</span><span class="p">(</span><span class="mi">139</span><span class="p">,</span> <span class="mi">206</span><span class="p">,</span> <span class="mi">236</span><span class="p">)</span>
+      <span class="sx">%w(7 8 9 + 4 5 6 - 1 2 3 / 0 . = *)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">btn</span><span class="o">|</span>
+        <span class="n">button</span> <span class="n">btn</span><span class="p">,</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">50</span> <span class="k">do</span>
+        <span class="k">end</span>
+      <span class="k">end</span>      
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<div class="highlight"><pre><code class="ruby"><span class="vi">@number</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">number_field</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="vi">@number</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Here we&#39;ve added block of code to button, that every time button Clr is pressed
+variable @number is set to 0. Then we use special ruby method <strong>replace</strong> to change actual value of number_field to 0. Maybe it doesn&#39;t seems to work, but try change value of variable @number to any other number and then press clr. It should change to zero.</p>
+
+<p>Ok we&#39;ve added functionality to Clr button let&#39;s move on numbers:</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;green_shoes&#39;</span>
+
+<span class="no">Shoes</span><span class="o">.</span><span class="n">app</span><span class="p">(</span><span class="ss">title</span><span class="p">:</span> <span class="s2">&quot;My calculator&quot;</span><span class="p">,</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">240</span><span class="p">)</span> <span class="k">do</span>
+  <span class="n">number_field</span> <span class="o">=</span> <span class="kp">nil</span>
+  <span class="vi">@number</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="n">flow</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">240</span> <span class="k">do</span>
+    <span class="n">flow</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">7</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">2</span> <span class="k">do</span>
+      <span class="n">background</span> <span class="n">rgb</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">157</span><span class="p">,</span> <span class="mi">228</span><span class="p">)</span>
+      <span class="n">number_field</span> <span class="o">=</span> <span class="n">para</span> <span class="vi">@number</span><span class="p">,</span> <span class="ss">margin</span><span class="p">:</span> <span class="mi">10</span>
+    <span class="k">end</span>
+    
+    <span class="n">flow</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">2</span> <span class="k">do</span>
+      <span class="n">button</span> <span class="s1">&#39;Clr&#39;</span><span class="p">,</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span> <span class="k">do</span>
+        <span class="vi">@number</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">number_field</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="vi">@number</span><span class="p">)</span>
+      <span class="k">end</span>
+    <span class="k">end</span>    
+
+    <span class="n">flow</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">8</span> <span class="k">do</span>
+      <span class="n">background</span> <span class="n">rgb</span><span class="p">(</span><span class="mi">139</span><span class="p">,</span> <span class="mi">206</span><span class="p">,</span> <span class="mi">236</span><span class="p">)</span>
+      <span class="sx">%w(7 8 9 + 4 5 6 - 1 2 3 / 0 . = *)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">btn</span><span class="o">|</span>
+        <span class="n">button</span> <span class="n">btn</span><span class="p">,</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">50</span> <span class="k">do</span>
+          <span class="k">case</span> <span class="n">btn</span>
+            <span class="k">when</span> <span class="sr">/[0-9]/</span> 
+              <span class="vi">@number</span> <span class="o">=</span> <span class="vi">@number</span><span class="o">.</span><span class="n">to_i</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="n">btn</span><span class="o">.</span><span class="n">to_i</span>
+          <span class="k">end</span>
+          <span class="n">number_field</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="vi">@number</span><span class="p">)</span>    
+        <span class="k">end</span>
+      <span class="k">end</span>      
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<p>If you try your calculator in shoes, you should be able to use numbers.</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">case</span> <span class="n">btn</span>
+  <span class="k">when</span> <span class="sr">/[0-9]/</span> 
+    <span class="vi">@number</span> <span class="o">=</span> <span class="vi">@number</span><span class="o">.</span><span class="n">to_i</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="n">btn</span><span class="o">.</span><span class="n">to_i</span>
+<span class="k">end</span>
+<span class="n">number_field</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="vi">@number</span><span class="p">)</span>
+</code></pre></div>
+
+<p>Here we used case statement with when to catch clicks on numbers. We&#39;ve replaced
+value of variable @number with value of our buttons.</p>
+
+<h2>Adding operations</h2>
+
+<p>We have working number buttons, but what to do with operators.</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;green_shoes&#39;</span>
+
+<span class="no">Shoes</span><span class="o">.</span><span class="n">app</span><span class="p">(</span><span class="ss">title</span><span class="p">:</span> <span class="s2">&quot;My calculator&quot;</span><span class="p">,</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">240</span><span class="p">)</span> <span class="k">do</span>
+  <span class="n">number_field</span> <span class="o">=</span> <span class="kp">nil</span>
+  <span class="vi">@number</span> <span class="o">=</span> <span class="mi">0</span>
+  <span class="vi">@op</span> <span class="o">=</span> <span class="kp">nil</span>
+  <span class="vi">@previous</span> <span class="o">=</span> <span class="mi">0</span>
+  
+  <span class="n">flow</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">240</span> <span class="k">do</span>
+    <span class="n">flow</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">7</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">2</span> <span class="k">do</span>
+      <span class="n">background</span> <span class="n">rgb</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">157</span><span class="p">,</span> <span class="mi">228</span><span class="p">)</span>
+      <span class="n">number_field</span> <span class="o">=</span> <span class="n">para</span> <span class="vi">@number</span><span class="p">,</span> <span class="ss">margin</span><span class="p">:</span> <span class="mi">10</span>
+    <span class="k">end</span>
+    
+    <span class="n">flow</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">3</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">2</span> <span class="k">do</span>
+      <span class="n">button</span> <span class="s1">&#39;Clr&#39;</span><span class="p">,</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span> <span class="k">do</span>
+        <span class="vi">@number</span> <span class="o">=</span> <span class="mi">0</span>
+        <span class="n">number_field</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="vi">@number</span><span class="p">)</span>
+      <span class="k">end</span>
+    <span class="k">end</span>    
+
+    <span class="n">flow</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">8</span> <span class="k">do</span>
+      <span class="n">background</span> <span class="n">rgb</span><span class="p">(</span><span class="mi">139</span><span class="p">,</span> <span class="mi">206</span><span class="p">,</span> <span class="mi">236</span><span class="p">)</span>
+      <span class="sx">%w(7 8 9 + 4 5 6 - 1 2 3 / 0 . = *)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">btn</span><span class="o">|</span>
+        <span class="n">button</span> <span class="n">btn</span><span class="p">,</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">50</span> <span class="k">do</span>
+          <span class="k">case</span> <span class="n">btn</span>
+            <span class="k">when</span> <span class="sr">/[0-9]/</span> 
+              <span class="vi">@number</span> <span class="o">=</span> <span class="vi">@number</span><span class="o">.</span><span class="n">to_i</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="n">btn</span><span class="o">.</span><span class="n">to_i</span>
+            
+            <span class="k">when</span> <span class="s1">&#39;=&#39;</span>
+              <span class="vi">@number</span> <span class="o">=</span> <span class="vi">@previous</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="vi">@op</span><span class="p">,</span> <span class="vi">@number</span><span class="p">)</span>
+            <span class="k">else</span>
+              <span class="vi">@previous</span><span class="p">,</span> <span class="vi">@number</span> <span class="o">=</span> <span class="vi">@number</span><span class="p">,</span> <span class="kp">nil</span>
+              <span class="vi">@op</span> <span class="o">=</span> <span class="n">btn</span>
+          <span class="k">end</span>
+          <span class="n">number_field</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="vi">@number</span><span class="p">)</span>    
+        <span class="k">end</span>
+      <span class="k">end</span>      
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre></div>
+
+<div class="highlight"><pre><code class="ruby"><span class="vi">@op</span> <span class="o">=</span> <span class="kp">nil</span>
+<span class="vi">@previous</span> <span class="o">=</span> <span class="mi">0</span>
+</code></pre></div>
+
+<p>First we need to add two variables, <strong>@previous</strong> and <strong>@op</strong> right after
+variable <strong>@number</strong>. We&#39;ll use @op for actual operations and previous to catch
+previous number.</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">when</span> <span class="s1">&#39;=&#39;</span>
+  <span class="vi">@number</span> <span class="o">=</span> <span class="vi">@previous</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="vi">@op</span><span class="p">,</span> <span class="vi">@number</span><span class="p">)</span>
+<span class="k">else</span>
+  <span class="vi">@previous</span><span class="p">,</span> <span class="vi">@number</span> <span class="o">=</span> <span class="vi">@number</span><span class="p">,</span> <span class="kp">nil</span>
+  <span class="vi">@op</span> <span class="o">=</span> <span class="n">btn</span>
+</code></pre></div>
+
+<p>We&#39;ve set value of @op to our operator buttons and save value of actual number to variable @previous. Then we&#39;ve used ruby send method, that when equals button is pressed, it calculate expressions for us.</p>
+
+<p>We&#39;re done with our calculator. See you next time.</p>
+
+
+
+
+</div>
+
+
+        
+        <div id="disqus_thread" name="disqus_thread"></div>
+          <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'mdolobac'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+          </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+
+
+<ul class="posts">
+  
+
+  <li><span>09 Apr 2014</span> &raquo; <a href="/learning-resources/2014/04/09/learn-ruby-on-rails-book-review.html#disqus_thread">Learn Ruby on Rails book review</a></li>
+  
+  
+  
+
+  <li><span>04 Apr 2014</span> &raquo; <a href="/weekly-rails/2014/04/04/how-to-create-todo-list-app-adding-removing-completing-tasks.html#disqus_thread">How to create todo list app adding removing and deleting tasks</a></li>
+  
+  
+  
+
+  <li><span>28 Mar 2014</span> &raquo; <a href="/learning-resources/2014/03/28/top-8-learning-resources-for-ruby-beginner.html#disqus_thread">Top 8 Learning resources for ruby beginner</a></li>
+  
+  
+  
+
+  <li><span>28 Mar 2014</span> &raquo; <a href="/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html#disqus_thread">How to install Ruby and Rails for your operating system</a></li>
+  
+  
+  
+
+  <li><span>26 Mar 2014</span> &raquo; <a href="/productivity-booster/2014/03/26/top-ten-commands-in-terminal-you-will-use-everyday.html#disqus_thread">Top 10 commands in terminal you will use everyday</a></li>
+  
+  
+  
+
+  <li><span>22 Mar 2014</span> &raquo; <a href="/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.html#disqus_thread">How to create todo list app in rails static pages</a></li>
+  
+  
+   
+  
+
+</ul>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'mdolobac'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+      var s = document.createElement('script'); s.async = true;
+      s.type = 'text/javascript';
+      s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+      (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+    
+    <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-534eba9022761f4e"></script>
+<!-- AddThis Button END -->
+    
+ 
+
+
+              
+
+
+        
+      </section> 
+      
+      <footer id="page_footer">
+        <div class="contact"> 
+
+          <a href="https://github.com/MilosDolobac"><img src="/images/github.jpeg" class="contact"></a> 
+          <a href="https://twitter.com/dolobacmilos"><img
+            src="/images/twitter.jpeg" class="contact"></a>
+        
+          <a href="http://sk.linkedin.com/pub/milos-dolobac/59/b4a/538"><img
+            src="/images/linked_in.jpeg" class="contact"></a>
+
+        </div>
+      </footer>
+    </div>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-49278618-1', 'masteruby.github.io');
+  ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+  window.onbeforeunload = function (e) {
+    e = e || window.event;
+    if (e) {
+      _gaq.push(['_trackPageview', '/bounce']);
+    }
+    return _gaq.push(['_trackPageview', '/bounce']);
+  };
+</script>
+
+
+
+  </body>
+</html>    

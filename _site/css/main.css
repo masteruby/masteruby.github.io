@@ -50,6 +50,11 @@ img {
   width: 100%
 }
 
+img.shoes {
+  width: 30%;
+}
+
+
 .navbar { 
   background-color: rgb(197, 47, 36);
   color: FloralWhite;

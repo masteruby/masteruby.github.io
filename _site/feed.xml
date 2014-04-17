@@ -8,31 +8,32 @@
 		
 			<item>
 				<title>How to create simple calculator in Shoes</title>
-				<description>&lt;p&gt;In this tutorial we&amp;#39;ll cover:&lt;/p&gt;
+				<description>&lt;p&gt;In this tutorial you will learn how to create simple calculator in Shoes that looks like this:&lt;/p&gt;
 
-&lt;ul&gt;
-&lt;li&gt;How to install Shoes
-*
-*
-*&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/calculator.png&quot; alt=&quot;how to create
+calculator&quot;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;Because original Shoes is outdated and new Shoes 4 isn&amp;#39;t released yet, we&amp;#39;ll use Green Shoes in this tutorial.&lt;/p&gt;
 
 &lt;h2&gt;How to install Shoes&lt;/h2&gt;
 
-&lt;p&gt;Before you can install green_shoes you have to install ruby. I&amp;#39;ve included
-instructions about &lt;a href=&quot;http://masteruby.github.io/learning-resources/2014/03/28/ruby-on-rails&quot;&gt;how to install
+&lt;p&gt;Before you can install green_shoes you have to install ruby. I&amp;#39;ve included instructions about &lt;a href=&quot;http://masteruby.github.io/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html&quot;&gt;how to install
 ruby&lt;/a&gt; in previous post.&lt;/p&gt;
 
-&lt;p&gt;If you have ruby installed by rvm, just install green_shoes like this:&lt;/p&gt;
+&lt;p&gt;If you have ruby installed by rvm, just install green_shoes with rubygems:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gem install green_shoes
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If you have trouble with installation, you have to install &lt;a href=&quot;http://sourceforge.net/projects/ruby-gnome2/&quot;&gt;ruby
+gtk2&lt;/a&gt;. &lt;/p&gt;
 
 &lt;h2&gt;Running shoes&lt;/h2&gt;
 
 &lt;p&gt;To run we need to add green_shoes gem to our ruby file.&lt;/p&gt;
 
-&lt;p&gt;Go to your favorite text editor and type something like this:&lt;/p&gt;
+&lt;p&gt;Go to your favorite text editor, create new file &lt;strong&gt;calculator.rb&lt;/strong&gt; and type
+this code:&lt;/p&gt;
 
 &lt;h4&gt;calculator.rb&lt;/h4&gt;
 
@@ -42,9 +43,14 @@ ruby&lt;/a&gt; in previous post.&lt;/p&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Go to the terminal and run calculator.rb. You should see something like this:&lt;/p&gt;
+&lt;p&gt;Go to the terminal and run green shoes:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/running_shoes.png&quot; alt=&quot;how to run shoes&quot;&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;ruby calculator.rb
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You should see something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/running_shoes.png&quot; alt=&quot;how to run shoes&quot;&gt;&lt;/img&gt;&lt;/p&gt;
 
 &lt;h2&gt;Adding basic template for app&lt;/h2&gt;
 
@@ -69,13 +75,11 @@ clear button and remaining buttons.&lt;/p&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;If you go run shoes again, you should something like this:&lt;/p&gt;
+&lt;p&gt;If you run shoes again, you should see something like this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/template.png&quot; alt=&quot;template for calculator&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/template.png&quot; alt=&quot;calculator template&quot;&gt;&lt;/img&gt;&lt;/p&gt;
 
-&lt;p&gt;Let&amp;#39;s look at what we&amp;#39;ve done.&lt;/p&gt;
-
-&lt;p&gt;First we&amp;#39;ve created flow, who copy size of screen&lt;/p&gt;
+&lt;p&gt;Let&amp;#39;s look at what we&amp;#39;ve done. First we&amp;#39;ve created flow, that copy size of screen.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;  &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;240&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -118,7 +122,7 @@ clear button and remaining buttons.&lt;/p&gt;
 
 &lt;p&gt;So if you run code you should number 0 in number field: &lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/number_field.png&quot; alt=&quot;number field&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/number_field.png&quot; alt=&quot;how to create number field for calculator&quot;&gt;&lt;/img&gt;&lt;/p&gt;
 
 &lt;p&gt;Let&amp;#39;s take a look at code:&lt;/p&gt;
 
@@ -126,7 +130,7 @@ clear button and remaining buttons.&lt;/p&gt;
   &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Here we&amp;#39;ve set two variables. Variable &lt;strong&gt;number_field&lt;/strong&gt; is for displaying number field. In variable &lt;strong&gt;@number&lt;/strong&gt; we set actual value of number in calculator.&lt;/p&gt;
+&lt;p&gt;Here we&amp;#39;ve set two variables. Variable &lt;strong&gt;number_field&lt;/strong&gt; is for displaying number field. In variable &lt;strong&gt;@number&lt;/strong&gt; we set actual value of number in the number field.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;para&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -160,15 +164,18 @@ clear button and remaining buttons.&lt;/p&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
+&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/adding_clr.png&quot; alt=&quot;how to add clear
+button&quot;&gt;&lt;/img&gt;&lt;/p&gt;
+
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Clr&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;So here we&amp;#39;ve added button with name &lt;strong&gt;Clr&lt;/strong&gt; and set it&amp;#39;s width and height to size of flow. &lt;/p&gt;
 
-&lt;h2&gt;Adding remaining buttons&lt;/h2&gt;
+&lt;h3&gt;Adding remaining buttons&lt;/h3&gt;
 
-&lt;p&gt;We need to add all buttons what we need. Add code something like this inside third flow.&lt;/p&gt;
+&lt;p&gt;We need to add all buttons what we need. Add this code into your app.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;green_shoes&amp;#39;&lt;/span&gt;
 
@@ -197,16 +204,21 @@ clear button and remaining buttons.&lt;/p&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
+&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/adding_buttons.png&quot; alt=&quot;how to add buttons in
+shoes&quot;&gt;&lt;/img&gt;&lt;/p&gt;
+
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;sx&quot;&gt;%w(7 8 9 + 4 5 6 - 1 2 3 / 0 . = *)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;btn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;btn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;We&amp;#39;ve added all buttons to array with %w method and added every button to each loop, then we setup height and width of the buttons.&lt;/p&gt;
+&lt;p&gt;We&amp;#39;ve added all buttons to array with %w method and added every button to each
+loop, then we&amp;#39;ve set height and width of the buttons.&lt;/p&gt;
 
 &lt;h2&gt;Running Buttons&lt;/h2&gt;
 
-&lt;p&gt;So are buttons now displayed, but if you click at them it doesn&amp;#39;t work. Let&amp;#39;s fix it. Go to clr button and add code something like this.&lt;/p&gt;
+&lt;p&gt;So our buttons are now displayed, but if you click at them they don&amp;#39;t work.
+Let&amp;#39;s fix it. Go to flow with clr button and add code some code: &lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;green_shoes&amp;#39;&lt;/span&gt;
 
@@ -241,9 +253,10 @@ clear button and remaining buttons.&lt;/p&gt;
 &lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Here we added block of code to button, that every time button Clr is pressed variable @number is set to. Then we use special ruby method &lt;strong&gt;replace&lt;/strong&gt; to change actual value of number_field to 0. Maybe it doesn&amp;#39;t seems to work, but try change value of variable @number to any other number and then press clr. It should change to zero.&lt;/p&gt;
+&lt;p&gt;Here we&amp;#39;ve added block of code to button, that every time button Clr is pressed
+variable @number is set to 0. Then we use special ruby method &lt;strong&gt;replace&lt;/strong&gt; to change actual value of number_field to 0. Maybe it doesn&amp;#39;t seems to work, but try change value of variable @number to any other number and then press clr. It should change to zero.&lt;/p&gt;
 
-&lt;p&gt;Ok we&amp;#39;ve added functionality to Clr button let&amp;#39;s move on numbers. Inside this block of code inside flow:&lt;/p&gt;
+&lt;p&gt;Ok we&amp;#39;ve added functionality to Clr button let&amp;#39;s move on numbers:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;green_shoes&amp;#39;&lt;/span&gt;
 
@@ -279,6 +292,8 @@ clear button and remaining buttons.&lt;/p&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
+&lt;p&gt;If you try your calculator in shoes, you should be able to use numbers.&lt;/p&gt;
+
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;btn&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/[0-9]/&lt;/span&gt; 
     &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to_i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;btn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to_i&lt;/span&gt;
@@ -286,27 +301,78 @@ clear button and remaining buttons.&lt;/p&gt;
 &lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Here we use case to instead bla bla.&lt;/p&gt;
-
-&lt;p&gt;After that we&amp;#39;ve used when with regular expression that match every number from zero to nine. After that we converted number and btn to integers and finally we&amp;#39;ve used replace method to replace number_field with actual number.&lt;/p&gt;
+&lt;p&gt;Here we used case statement with when to catch clicks on numbers. We&amp;#39;ve replaced
+value of variable @number with value of our buttons.&lt;/p&gt;
 
 &lt;h2&gt;Adding operations&lt;/h2&gt;
 
 &lt;p&gt;We have working number buttons, but what to do with operators.&lt;/p&gt;
 
-&lt;p&gt;First we need to add two variables, &lt;strong&gt;@previous&lt;/strong&gt; and &lt;strong&gt;@op&lt;/strong&gt; right after variable &lt;strong&gt;@number&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;green_shoes&amp;#39;&lt;/span&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;
+&lt;span class=&quot;no&quot;&gt;Shoes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;My calculator&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;240&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;nil&lt;/span&gt;
+  &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+  &lt;span class=&quot;vi&quot;&gt;@op&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;nil&lt;/span&gt;
+  &lt;span class=&quot;vi&quot;&gt;@previous&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+  
+  &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;240&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;background&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rgb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;157&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;228&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;para&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+    
+    &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Clr&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+        &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;    
 
-&lt;span class=&quot;vi&quot;&gt;@op&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;nil&lt;/span&gt;
-&lt;span class=&quot;vi&quot;&gt;@previous&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-
-&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;background&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rgb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;139&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;206&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;236&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+      &lt;span class=&quot;sx&quot;&gt;%w(7 8 9 + 4 5 6 - 1 2 3 / 0 . = *)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;btn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;btn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+          &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;btn&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/[0-9]/&lt;/span&gt; 
+              &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to_i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;btn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to_i&lt;/span&gt;
+            
+            &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;=&amp;#39;&lt;/span&gt;
+              &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@previous&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@op&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+              &lt;span class=&quot;vi&quot;&gt;@previous&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;nil&lt;/span&gt;
+              &lt;span class=&quot;vi&quot;&gt;@op&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;btn&lt;/span&gt;
+          &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+          &lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;    
+        &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;      
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;vi&quot;&gt;@op&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;nil&lt;/span&gt;
+&lt;span class=&quot;vi&quot;&gt;@previous&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;First we need to add two variables, &lt;strong&gt;@previous&lt;/strong&gt; and &lt;strong&gt;@op&lt;/strong&gt; right after
+variable &lt;strong&gt;@number&lt;/strong&gt;. We&amp;#39;ll use @op for actual operations and previous to catch
+previous number.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;=&amp;#39;&lt;/span&gt;
+  &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@previous&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@op&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+  &lt;span class=&quot;vi&quot;&gt;@previous&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;nil&lt;/span&gt;
+  &lt;span class=&quot;vi&quot;&gt;@op&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;btn&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We&amp;#39;ve set value of @op to our operator buttons and save value of actual number to variable @previous. Then we&amp;#39;ve used ruby send method, that when equals button is pressed, it calculate expressions for us.&lt;/p&gt;
+
+&lt;p&gt;We&amp;#39;re done with our calculator. See you next time.&lt;/p&gt;
 </description>
-				<pubDate>Wed, 16 Apr 2014 12:37:58 +0200</pubDate>
-				<link>http://masteruby.github.io/2014/04/16/calculator.html</link>
-				<guid isPermaLink="true">http://masteruby.github.io/2014/04/16/calculator.html</guid>
+				<pubDate>Thu, 17 Apr 2014 00:00:00 +0200</pubDate>
+				<link>http://masteruby.github.io/shoes/2014/04/17/how-to-create-simple-calculator-in-shoes.html</link>
+				<guid isPermaLink="true">http://masteruby.github.io/shoes/2014/04/17/how-to-create-simple-calculator-in-shoes.html</guid>
 			</item>
 		
 			<item>
@@ -369,23 +435,6 @@ must read for you.&lt;/p&gt;
 				<pubDate>Wed, 09 Apr 2014 00:00:00 +0200</pubDate>
 				<link>http://masteruby.github.io/learning-resources/2014/04/09/learn-ruby-on-rails-book-review.html</link>
 				<guid isPermaLink="true">http://masteruby.github.io/learning-resources/2014/04/09/learn-ruby-on-rails-book-review.html</guid>
-			</item>
-		
-			<item>
-				<title>Why to use tmux</title>
-				<description>&lt;p&gt;Today I want to tell about why and how to use tmux. Let&amp;#39;s start with example.
-Let&amp;#39;s assume you&amp;#39;re&lt;/p&gt;
-
-&lt;p&gt;What&amp;#39;ll learn in this tutorial.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;How to create new sessions&lt;/li&gt;
-&lt;li&gt;How to split windows, horizontally and vertically.&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-				<pubDate>Sat, 05 Apr 2014 09:49:54 +0200</pubDate>
-				<link>http://masteruby.github.io/2014/04/05/why_tmux.html</link>
-				<guid isPermaLink="true">http://masteruby.github.io/2014/04/05/why_tmux.html</guid>
 			</item>
 		
 			<item>
