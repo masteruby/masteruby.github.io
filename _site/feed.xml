@@ -7,11 +7,12 @@
 		<atom:link href="http://masteruby.github.io/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
-				<title>How to create simple calculator in Shoes</title>
-				<description>&lt;p&gt;In this tutorial you will learn how to create simple calculator in Shoes that looks like this:&lt;/p&gt;
+				<title>How to create simple calculator in Ruby Shoes</title>
+				<description>&lt;p&gt;In this tutorial you will learn how to create simple calculator in Ruby GUI
+toolkit Shoes that looks like this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/calculator.png&quot; alt=&quot;how to create
-calculator&quot;&gt;&lt;/img&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/calculator.png&quot; alt=&quot;how to make
+calculator in ruby&quot;&gt;&lt;/img&gt;&lt;/p&gt;
 
 &lt;p&gt;Because original Shoes is outdated and new Shoes 4 isn&amp;#39;t released yet, we&amp;#39;ll use Green Shoes in this tutorial.&lt;/p&gt;
 
@@ -371,8 +372,8 @@ previous number.&lt;/p&gt;
 &lt;p&gt;We&amp;#39;re done with our calculator. See you next time.&lt;/p&gt;
 </description>
 				<pubDate>Thu, 17 Apr 2014 00:00:00 +0200</pubDate>
-				<link>http://masteruby.github.io/shoes/2014/04/17/how-to-create-simple-calculator-in-shoes.html</link>
-				<guid isPermaLink="true">http://masteruby.github.io/shoes/2014/04/17/how-to-create-simple-calculator-in-shoes.html</guid>
+				<link>http://masteruby.github.io/shoes/2014/04/17/how-to-create-simple-calculator-in-ruby-shoes.html</link>
+				<guid isPermaLink="true">http://masteruby.github.io/shoes/2014/04/17/how-to-create-simple-calculator-in-ruby-shoes.html</guid>
 			</item>
 		
 			<item>
@@ -438,7 +439,7 @@ must read for you.&lt;/p&gt;
 			</item>
 		
 			<item>
-				<title>How to create todo list app adding removing and deleting tasks</title>
+				<title>How to create todo list app in rails, adding, removing and deleting tasks</title>
 				<description>&lt;p&gt;In previous part of this tutorial we&amp;#39;ve created &lt;a href=&quot;http://masteruby.github.io/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.md&quot;&gt;static pages&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;In this post we&amp;#39;ll learn:&lt;/p&gt;
@@ -815,8 +816,8 @@ we need to add boolean completed to our tasks table.&lt;/p&gt;
 &lt;p&gt;In next tutorial we&amp;#39;ll look at user authentication.&lt;/p&gt;
 </description>
 				<pubDate>Fri, 04 Apr 2014 00:00:00 +0200</pubDate>
-				<link>http://masteruby.github.io/weekly-rails/2014/04/04/how-to-create-todo-list-app-adding-removing-completing-tasks.html</link>
-				<guid isPermaLink="true">http://masteruby.github.io/weekly-rails/2014/04/04/how-to-create-todo-list-app-adding-removing-completing-tasks.html</guid>
+				<link>http://masteruby.github.io/weekly-rails/2014/04/04/how-to-create-todo-list-app-in-rails-adding-removing-completing-tasks.html</link>
+				<guid isPermaLink="true">http://masteruby.github.io/weekly-rails/2014/04/04/how-to-create-todo-list-app-in-rails-adding-removing-completing-tasks.html</guid>
 			</item>
 		
 			<item>
