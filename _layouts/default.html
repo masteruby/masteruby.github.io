@@ -6,7 +6,7 @@
     <title>{{ page.title }} </title>
     	<!-- Bootstrap CSS -->
     <meta name="google-site-verification" content="UFFQXW8FdLgKuB_vYYy8LTw5aonnBmAHdUhUopMxero" />
-    <meta content="Masteruby is tutorials web site about learning ruby">
+    <meta description="Masteruby is tutorials web site about learning ruby">
     <meta name="robots" content="all">
        
     <meta name="viewport" content="width=device-width">
@@ -26,19 +26,47 @@
   <body>
     <div class="site">
       <header class="navbar">
-        <a href="/">{{ site.name }}</a>
-       
+        
+        <nav>
+          <ul>
+            <li id="logo"><a href="/">{{ site.name }}</a>
+          <li><a href="/weekly-rails.html">Rails</a></li>
+          <li><a href="/shoes.html">Shoes</a></li>
+          <li><a href="/learning-resources.html">Learning Resources</a></li>
+          <li><a href="/productivity-booster.html">Productivity
+              Boosters</a></li>
+        </ul>
+      </nav>
+
+          
       </header>
       
-      <section id="sidebar">
-        {% include sidebar.html %}
-      </section>
+      
       
       <section id="posts">
         {{ content }}
-
-        
       </section> 
+
+      <section id="sidebar">
+        <ul class="posts">
+  <h1>Recent posts</h1>
+{% for post in site.posts %}
+<li>
+  <span>{{ post.date | date_to_string }}</span> &raquo;
+
+  <a href="{{ / }}{{ post.url }}">
+    {{ post.title }}</a>
+</li>
+{% endfor %}
+</ul>
+
+
+
+
+
+
+
+      </section>  
       
       <footer id="page_footer">
         <div class="contact"> 

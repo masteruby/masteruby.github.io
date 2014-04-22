@@ -58,9 +58,10 @@ img.shoes {
 .navbar { 
   background-color: rgb(197, 47, 36);
   color: FloralWhite;
-  padding: 1em;
-  text-align: left;
+  
+  text-align: right;
   width: 100%;
+  padding: 1em;
   
 }
 
@@ -72,20 +73,45 @@ img.shoes {
   color: black;
 }
 
-#sidebar {
-  float: left;
-  width: 20%;
+.navbar > nav > ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  
   
 }
 
-#post-categories {
-  margin: 1.2em 0 0.8em 0;
+.navbar > nav > ul > li {
+  margin: 0 20px 0 0;
+  display: inline;
+  font-weight: bold;
+  text-align: right;
+  
+}
+
+#logo {
+  float: left;
 }
 
 #posts {
   float: left;
-  width: 74%;
+  width: 60%;
+  border: 1px solid rgb(161, 161, 161);
+  border-radius: 5px;
+  margin-top: 3.2em;
 }
+
+#sidebar {
+  float: left;
+  margin-top: 3.2em;
+  width: 25%;
+  margin-left: 1.5em;
+  border: 1px solid rgb(161, 161, 161);
+  border-radius: 5px;
+}
+
+
+
 
 
 /*****************************************************************************/
@@ -114,6 +140,14 @@ img.shoes {
   color: #aaa;
   font-family: Monaco, "Courier New", monospace;
   font-size: 80%;
+}
+
+.categories {
+  display: inline;
+}
+
+.categories li {
+  display: block;
 }
 
 /*****************************************************************************/
@@ -189,12 +223,11 @@ footer .contact a {
   color: #666;
   border-top: 4px solid #eee;
   margin-top: 2em;
-  overflow: hidden;
   width: 100%;
 }
 
-section#posts {
-  padding: 0 0 0 1.2em;
+#posts {
+  padding: 1.4em 1.3em 0 5.2em;
   
 }
 
@@ -254,26 +287,6 @@ section#posts {
 .post p {
 margin: 0 0 2.0em;
   
-}
-
-/* Share This */
-
-.stpulldown-gradient
-{
-background: #E1E1E1;
-background: -moz-linear-gradient(top, #E1E1E1 0%, #A7A7A7 100%); /* firefox */
-background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#E1E1E1), color-stop(100%,#A7A7A7)); /* webkit */
-filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#E1E1E1', endColorstr='#A7A7A7',GradientType=0 ); /* ie */
-background: -o-linear-gradient(top, #E1E1E1 0%,#A7A7A7 100%); /* opera */
-color: #636363;
-}
-#stpulldown .stpulldown-logo
-{
-height: 40px;
-width: 300px;
-margin-left: 20px;
-margin-top: 5px;
-background:url("http://masteruby.github.io") no-repeat;
 }
 
 
