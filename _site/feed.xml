@@ -7,6 +7,111 @@
 		<atom:link href="http://masteruby.github.io/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>6 Books for learning or advancing your rails knowledge</title>
+				<description>&lt;p&gt;In this post I want to give you list of books for rails beginner or
+intermediate developer.&lt;/p&gt;
+
+&lt;h2&gt;For Beginner&lt;/h2&gt;
+
+&lt;h3&gt;1. &lt;a href=&quot;http://learn-rails.com/learn-ruby-on-rails.html&quot;&gt;Learn Ruby on Rails&lt;/a&gt; by Daniel Kehoe&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://learn-rails.com/learn-ruby-on-rails.html&quot;&gt;&lt;img src=&quot;/images/learn-rails-book-cover.jpg&quot; class=&quot;book&quot; alt=&quot;learn ruby on rails
+book&quot;&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Here&amp;#39;s the first book you should read. This book will give you basic
+introduction to
+rails. In step by step guide you will learn how to create mailing list with
+integration with MailChimp and GoogleDrive. I&amp;#39;ve included detailed review of
+&lt;a href=&quot;/learning-resources/2014/04/09/learn-ruby-on-rails-book-review.html&quot;&gt;learn ruby on rails book&lt;/a&gt; right here.&lt;/p&gt;
+
+&lt;h3&gt;2. &lt;a href=&quot;http://www.amazon.com/Ruby-Rails-Tutorial-Addison-Wesley-Professional/dp/0321832051/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1398328251&amp;amp;sr=1-1&amp;amp;keywords=ruby+on+rails+tutorial&quot;&gt;Ruby on Rails Tutorial&lt;/a&gt; by Michael Hartl&lt;/h3&gt;
+
+&lt;p&gt;&lt;a
+href=&quot;http://www.amazon.com/Ruby-Rails-Tutorial-Addison-Wesley-Professional/dp/0321832051/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1398328251&amp;sr=1-1&amp;keywords=ruby+on+rails+tutorial&quot;&gt;&lt;img
+src=&quot;/images/ruby_on_rails_tutorial.jpeg&quot; class=&quot;book&quot; alt=&quot;ruby on rails
+tutorial&quot;&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Ruby on Rails Tutorial is a must read for every rails beginner. I think you should
+read this after learn ruby on rails book.&lt;/p&gt;
+
+&lt;p&gt;Are you bored with building example
+applications like how to create blog in rails? So here&amp;#39;s the step by step guide
+to creating Twitter like social network.&lt;/p&gt;
+
+&lt;p&gt;Not only this book covers rails
+perfectly, but it is perfect introduction to test driven development in rspec,
+styling with sass and tracking changes in your code in git.&lt;/p&gt;
+
+&lt;h3&gt;3. &lt;a href=&quot;http://www.amazon.com/Agile-Development-Rails-Facets-Ruby/dp/1937785564/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1398328340&amp;amp;sr=1-1&amp;amp;keywords=agile+web+development+with+rails+4&quot;&gt;Agile Web Development with Rails&lt;/a&gt; by David Heinemeier Hansson, Dave Thomas&lt;/h3&gt;
+
+&lt;p&gt;&lt;a
+href=&quot;http://www.amazon.com/Agile-Development-Rails-Facets-Ruby/dp/1937785564/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1398328340&amp;sr=1-1&amp;keywords=agile+web+development+with+rails+4&quot;&gt;&lt;img src=&quot;/images/agile_web_development_with_rails.jpg&quot; class=&quot;book&quot; alt=&quot;agile web
+development with rails&quot;&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Here is the book written by two legendary figures in programming. David
+Heinemeier Hannson, founder of 37 signals, creator of Ruby on Rails framework and
+author of books like Getting Real, Rework and Remote and Dave Thomas author of
+legendary book Pragmatic Programmer that every developer should read. In this
+book you will learn how to create Depot, web based shopping cart application.&lt;/p&gt;
+
+&lt;h2&gt;For intermediate developer&lt;/h2&gt;
+
+&lt;h3&gt;4. &lt;a href=&quot;http://www.amazon.com/Rails-AntiPatterns-Refactoring-Addison-Wesley-Professional/dp/0321604814/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1398326493&amp;amp;sr=1-1&amp;amp;keywords=rails+antipatterns&quot;&gt;Rails Antipatterns&lt;/a&gt; by Chad Pytel and Tammer Saleh&lt;/h3&gt;
+
+&lt;p&gt;&lt;a
+href=&quot;http://www.amazon.com/Rails-AntiPatterns-Refactoring-Addison-Wesley-Professional/dp/0321604814/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1398326493&amp;sr=1-1&amp;keywords=rails+antipatterns&quot;&gt;&lt;img
+src=&quot;/images/rails_antipatterns.jpg&quot; class=&quot;book&quot; alt=&quot;rails
+antipatterns&quot;&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Are you getting headaches from your masses of code? Did you find your rails code unreadable, difficult to maintain?&lt;/p&gt;
+
+&lt;p&gt;Maybe you will find your rails antipattern. Here&amp;#39;s the problem and solution guide to your problems.&lt;/p&gt;
+
+&lt;p&gt;What I like about this book that takes every part of Rails application separately. You
+will look at problems like too much code in models, using sql code where it
+don&amp;#39;t belong, bad habits brought from php and else.&lt;/p&gt;
+
+&lt;h3&gt;5. &lt;a href=&quot;http://www.amazon.com/The-Rails-View-Maintainable-Experience/dp/1934356875&quot;&gt;The Rails View&lt;/a&gt; by Bruce Williams and Bruce Athayde&lt;/h3&gt;
+
+&lt;p&gt;&lt;a
+href=&quot;http://www.amazon.com/Rails-View-Beautiful-Maintainable-Experience/dp/1934356875/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1398343196&amp;sr=1-1&amp;keywords=the+rails+view&quot;&gt;&lt;img
+src=&quot;/images/rails_view.jpg&quot; class=&quot;book&quot; alt=&quot;rails view&quot;&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Are you getting sick from combination of html and your template language in
+your views? Are you hoping that your views code should look better, but don&amp;#39;t know how? &lt;/p&gt;
+
+&lt;p&gt;Try Rails View book, in this book you will look at each part of
+views, you will find out solutions about how to improve your layout, you will
+learn some tricks about how to improve your stylesheets, adding some beauty to
+your forms, better javascripts code and other.&lt;/p&gt;
+
+&lt;h3&gt;6. &lt;a href=&quot;http://example.com&quot;&gt;Deploying Rails&lt;/a&gt; by Anthony Burns and Tom Copeland&lt;/h3&gt;
+
+&lt;p&gt;&lt;a
+href=&quot;http://www.amazon.com/Deploying-Rails-Automate-Deploy-Maintain/dp/1934356956&quot;&gt;&lt;img
+src=&quot;/images/deploying_rails.jpg&quot; class=&quot;book&quot; alt=&quot;deploying rails&quot;&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Are you developing real world rails application and you wonder how to deploy it?
+Deploying Rails book is here for you.&lt;/p&gt;
+
+&lt;p&gt;In first part of the book you will learn
+how to create your own virtual server with Vagrant, then you move on open
+source server provision tool Puppet. Then you will be introduced to gems like
+Capistrano, Nagios for better deployment.&lt;/p&gt;
+
+&lt;h2&gt;What&amp;#39;s next&lt;/h2&gt;
+
+&lt;p&gt;If you&amp;#39;re beginner I recommend you to learn ruby first, I&amp;#39;ve wrote post about &lt;a href=&quot;/learning-resources/2014/03/28/learn-ruby-with-these-resources.html&quot;&gt;learning resources
+for ruby&lt;/a&gt; and if you have trouble with rails
+installation I wrote about &lt;a href=&quot;/learning-resources&quot;&gt;how to install rails&lt;/a&gt; in my
+previous post. I hope that my list of books about Rails was helpful for you.&lt;/p&gt;
+</description>
+				<pubDate>Thu, 24 Apr 2014 00:00:00 +0200</pubDate>
+				<link>http://masteruby.github.io/learning-resources/2014/04/24/books-for-learning-rails.html</link>
+				<guid isPermaLink="true">http://masteruby.github.io/learning-resources/2014/04/24/books-for-learning-rails.html</guid>
+			</item>
+		
+			<item>
 				<title>How to create simple calculator in Ruby Shoes</title>
 				<description>&lt;p&gt;In this tutorial you will learn how to create simple calculator in Ruby GUI
 toolkit Shoes that looks like this:&lt;/p&gt;
