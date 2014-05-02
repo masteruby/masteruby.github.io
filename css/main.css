@@ -54,6 +54,10 @@ img.shoes {
   width: 30%;
 }
 
+img.vim {
+	width: 50%;
+}
+
 
 .navbar { 
   background-color: rgb(197, 47, 36);
