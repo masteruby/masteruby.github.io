@@ -31,10 +31,6 @@
         <lastmod>2014-04-29T09:56:37+02:00</lastmod>
     </url>
     <url>
-        <loc>http://masteruby.github.io/2014/04/05/why_tmux.html</loc>
-        <lastmod>2014-04-29T09:56:37+02:00</lastmod>
-    </url>
-    <url>
         <loc>
             http://masteruby.github.io/learning-resources/2014/04/09/learn-ruby-on-rails-book-review.html
         </loc>
@@ -47,22 +43,16 @@
         <lastmod>2014-04-29T09:56:37+02:00</lastmod>
     </url>
     <url>
-        <loc>http://masteruby.github.io/2014/04/17/calculator.html</loc>
-        <lastmod>2014-04-29T09:56:37+02:00</lastmod>
-    </url>
-    <url>
         <loc>
             http://masteruby.github.io/learning-resources/2014/04/24/books-for-learning-rails.html
         </loc>
         <lastmod>2014-04-29T09:56:37+02:00</lastmod>
     </url>
     <url>
-        <loc>http://masteruby.github.io/2014/04/24/rails.html</loc>
-        <lastmod>2014-04-29T09:56:37+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://masteruby.github.io/2014/05/02/vim-addons.html</loc>
-        <lastmod>2014-05-02T10:09:06+02:00</lastmod>
+        <loc>
+            http://masteruby.github.io/productivity-booster/2014/05/02/vim-plugins-for-ruby.html
+        </loc>
+        <lastmod>2014-05-02T15:47:07+02:00</lastmod>
     </url>
     <url>
         <loc>http://masteruby.github.io/weekly-rails.html</loc>
@@ -78,7 +68,7 @@
     </url>
     <url>
         <loc>http://masteruby.github.io/</loc>
-        <lastmod>2014-05-02T10:09:06+02:00</lastmod>
+        <lastmod>2014-05-02T15:47:07+02:00</lastmod>
     </url>
     <url>
         <loc>http://masteruby.github.io/automate-this-with-ruby.html</loc>

@@ -7,18 +7,18 @@
 		<atom:link href="http://masteruby.github.io/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
-				<title>Vim for Rubyist</title>
-				<description>&lt;p&gt;In this post I want to show some useful Vim addons, that are true productivity boosters for every Rails programmer. You can install it by either &lt;a href=&quot;https://github.com/tpope/vim-pathogen&quot;&gt;Pathogen&lt;/a&gt; or &lt;a href=&quot;https://github.com/gmarik/Vundle.vim&quot;&gt;Vundle&lt;/a&gt;.&lt;/p&gt;
+				<title>Vim for Rubyist&amp;#58; 10 useful vim plugins for Ruby</title>
+				<description>&lt;p&gt;In this post I want to show some useful Vim plugins, that are true productivity boosters for every Ruby programmer. You can install them by either &lt;a href=&quot;https://github.com/tpope/vim-pathogen&quot;&gt;Pathogen&lt;/a&gt; or &lt;a href=&quot;https://github.com/gmarik/Vundle.vim&quot;&gt;Vundle&lt;/a&gt;.&lt;/p&gt;
 
 &lt;h2&gt;1. &lt;a href=&quot;https://github.com/tpope/vim-rails&quot;&gt;Vim-Rails&lt;/a&gt;&lt;/h2&gt;
 
-&lt;p&gt;Here is the first addon you should try. What I&amp;#39;ve find useful:&lt;/p&gt;
+&lt;p&gt;Vim-Rails plugin is must for every Rails Developer working in Vim. Here&amp;#39;s what I&amp;#39;ve found useful:&lt;/p&gt;
 
 &lt;h3&gt;Easy navigation&lt;/h3&gt;
 
 &lt;p&gt;Want to find some file but don&amp;#39;t know its path? Try to use &lt;strong&gt;:find&lt;/strong&gt; command:&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;:find Rakefile
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;:find schema.rb
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;You can also move up in your Rails application by finding related files. For example, let&amp;#39;s assume you&amp;#39;re editing &lt;strong&gt;home.html.slim&lt;/strong&gt;. Try to find related file&lt;/p&gt;
@@ -26,7 +26,7 @@
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;:R
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;You should see that you&amp;#39;re in file &lt;strong&gt;static&lt;em&gt;pages&lt;/em&gt;controller.rb&lt;/strong&gt; and havecursor at method named home.&lt;/p&gt;
+&lt;p&gt;You should see that you&amp;#39;re in file &lt;strong&gt;static&lt;em&gt;pages&lt;/em&gt;controller.rb&lt;/strong&gt; and that you have cursor at method named home.&lt;/p&gt;
 
 &lt;h3&gt;Great Editing&lt;/h3&gt;
 
@@ -43,7 +43,7 @@ set file extension or whole path, just add name of your controller and name of y
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;vim&quot;&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;Econtroller static_pages
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Here&amp;#39;s list of remaining editing commands you will use:&lt;/p&gt;
+&lt;p&gt;Here are commands for editing your layouts, stylesheets and models:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;:Elayout header
 :Emodel User
@@ -52,7 +52,7 @@ set file extension or whole path, just add name of your controller and name of y
 
 &lt;h3&gt;Generator Commands&lt;/h3&gt;
 
-&lt;p&gt;So you want to run migration, generate model or controller. Before vim-rails plugin you have to either close your vim session and go to terminal, not anymore. Here&amp;#39;s useful commands you should know. Let&amp;#39;s assume you&amp;#39;re building model named User, you can simply create model with :Rgenerate and destroy model with :Rdestroy.&lt;/p&gt;
+&lt;p&gt;So you want to run migration, generate model or controller. Before vim-rails plugin you have to close your vim session and go back to terminal, not anymore. Here&amp;#39;s useful commands you should know. Let&amp;#39;s assume you&amp;#39;re building model named User, you can simply create model with :Rgenerate and destroy model with :Rdestroy.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;:Rgenerate model User
 :Rdestroy model User
@@ -65,11 +65,63 @@ set file extension or whole path, just add name of your controller and name of y
 
 &lt;p&gt;Of course syntax highlighting is included too. Vim-rails has built syntax highlighting for special Active Record methods and all keywords that Rails has unique.&lt;/p&gt;
 
-&lt;p&gt;That&amp;#39;s only small part of what pluginprovides, to see list of all commands, go to &lt;a href=&quot;https://raw.githubusercontent.com/tpope/vim-rails/master/doc/rails.txt&quot;&gt;project documentation&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;That&amp;#39;s only small part of what plugin provides, to see list of all commands, go to &lt;a href=&quot;https://raw.githubusercontent.com/tpope/vim-rails/master/doc/rails.txt&quot;&gt;project documentation&lt;/a&gt;. For example, it provides commands forrefactoring your code, it has built support for Rake and other.&lt;/p&gt;
 
-&lt;h2&gt;2. &lt;a href=&quot;https://github.com/tpope/vim-bundler&quot;&gt;Vim-Bundler&lt;/a&gt;&lt;/h2&gt;
+&lt;h2&gt;2. &lt;a href=&quot;https://github.com/scrooloose/nerdtree&quot;&gt;NerdTree&lt;/a&gt;&lt;/h2&gt;
 
-&lt;p&gt;You don&amp;#39;t have exit vim or attach another tmux session to install gems anymore. Just run :Bundle in command mode in Vim:&lt;/p&gt;
+&lt;p&gt;Navigation by vim-rails plugin can be great, but only when you know what you&amp;#39;re looking for. For other purposes, you can use &lt;strong&gt;NERDTree&lt;/strong&gt; as file navigator. &lt;/p&gt;
+
+&lt;p&gt;Type this into vim session to run NerdTree:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;:NERDTree
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You should see content of current working directory. NerdTree use vim navigation keys to move up and down to directory tree.&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&quot;vim&quot; src=&quot;/images/nerd_tree.png&quot; alt=&quot;nerd tree&quot;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;p&gt;Let&amp;#39;s assume you want to open up directory &lt;strong&gt;app&lt;/strong&gt;. Navigate to app with Vim and press key &lt;strong&gt;o&lt;/strong&gt;. You should see content of app directory:&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&quot;vim&quot; src=&quot;/images/nerd_tree_app.png&quot; alt=&quot;nerd tree app&quot;&gt;&lt;/img&gt;&lt;/p&gt;
+
+&lt;h2&gt;3. &lt;a href=&quot;https://github.com/tpope/vim-fugitive&quot;&gt;Vim-fugitive&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;If you have your project tracked with Git, switching between terminal sessions can be really painful. Fugitive is absolutely greatly tool for using Git inside Vim.&lt;/p&gt;
+
+&lt;p&gt;For example let&amp;#39;see what&amp;#39;s changed with git status&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;:Git status
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Let&amp;#39;s add changes to repository&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;:Git add .
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Let&amp;#39;s push it to origin master&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;:Git push origin master
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;4. &lt;a href=&quot;https://github.com/vim-ruby/vim-ruby&quot;&gt;Vim-Ruby&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Vim-Ruby provides useful things like easy navigation and syntax highlighting in ruby&lt;/p&gt;
+
+&lt;p&gt;Here&amp;#39;s list of useful navigation methods in vim-ruby&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;c&quot;&gt;# To edit start of next method definition&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;m
+&lt;span class=&quot;c&quot;&gt;# To go to end of next method definition&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;M
+&lt;span class=&quot;c&quot;&gt;# To start of previous method definition&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;m
+&lt;span class=&quot;c&quot;&gt;# To end of previous method definition&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;M
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;5. &lt;a href=&quot;https://github.com/tpope/vim-bundler&quot;&gt;Vim-Bundler&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;You don&amp;#39;t have exit vim or attach another tmux session to install gems anymore. Just run :Bundle in command mode in Vim and gems will be installed:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;:Bundle
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -79,154 +131,34 @@ set file extension or whole path, just add name of your controller and name of y
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;:Bopen
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h3&gt;3. &lt;a href=&quot;https://github.com/tpope/vim-cucumber&quot;&gt;Vim-Cucumber&lt;/a&gt;&lt;/h3&gt;
+&lt;h2&gt;6. &lt;a href=&quot;https://github.com/tpope/vim-cucumber&quot;&gt;Vim-Cucumber&lt;/a&gt;&lt;/h2&gt;
 
 &lt;p&gt;Vim-Cucumber plugin provides syntax highlighting and indentation for Cucumber.&lt;/p&gt;
 
-&lt;h3&gt;4. &lt;a href=&quot;https://github.com/slim-template/vim-slim&quot;&gt;Vim-slim&lt;/a&gt;&lt;a href=&quot;https://github.com/tpope/vim-haml&quot;&gt;Vim-haml&lt;/a&gt;&lt;/h3&gt;
+&lt;h2&gt;7. &lt;a href=&quot;https://github.com/slim-template/vim-slim&quot;&gt;Vim-slim&lt;/a&gt;/&lt;a href=&quot;https://github.com/tpope/vim-haml&quot;&gt;Vim-haml&lt;/a&gt;&lt;/h2&gt;
 
-&lt;p&gt;Here&amp;#39;s the plugin that provides syntax highlighting for your favorite template language, maybe it is erb, slim or haml.&lt;/p&gt;
+&lt;p&gt;Here&amp;#39;s the plugin that provides syntax highlighting for your favorite template language, it can be haml or slim.&lt;/p&gt;
 
-&lt;h3&gt;5. &lt;a href=&quot;https://github.com/tpope/vim-rake&quot;&gt;Vim-rake&lt;/a&gt;&lt;/h3&gt;
+&lt;h2&gt;8. &lt;a href=&quot;https://github.com/skalnik/vim-vroom&quot;&gt;Vim-Vroom&lt;/a&gt;&lt;/h2&gt;
 
-&lt;h3&gt;6. &lt;a href=&quot;https://github.com/tpope/vim-fugitive&quot;&gt;Vim-fugitive&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;With Vroom you can run your tests inside Vim. Supports Rspec, Cucumber and MiniTest. You can run your tests with:&lt;/p&gt;
 
-&lt;p&gt;If you have your project tracked with Git, switching between terminal sessions can be really painful. What about&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;:git
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;:VroomRunTestFile
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h3&gt;7. &lt;a href=&quot;https://github.com/tpope/vim-endwise&quot;&gt;Vim-endwise&lt;/a&gt;&lt;/h3&gt;
+&lt;h2&gt;9. &lt;a href=&quot;https://github.com/tpope/vim-endwise&quot;&gt;Vim-endwise&lt;/a&gt;&lt;/h2&gt;
 
 &lt;p&gt;Here&amp;#39;s the useful plugin that adds end after if, do, def keywords.&lt;/p&gt;
 
-&lt;h3&gt;8. &lt;a href=&quot;https://github.com/vim-ruby/vim-ruby&quot;&gt;Vim-Ruby&lt;/a&gt;&lt;/h3&gt;
+&lt;h2&gt;10. &lt;a href=&quot;https://github.com/ervandew/supertab&quot;&gt;Supertab&lt;/a&gt;&lt;/h2&gt;
 
-&lt;h3&gt;9. &lt;a href=&quot;https://github.com/scrooloose/nerdtree&quot;&gt;NerdTree&lt;/a&gt;&lt;/h3&gt;
+&lt;p&gt;Supertab is useful in situations when you have lot of repetiting words like &lt;strong&gt;def&lt;/strong&gt;. It works that you press Tab and it completes word for you.&lt;/p&gt;
 
-&lt;p&gt;Navigation by vim-rails plugin can be great, but only when youknow what you&amp;#39;re looking for. For other purposes, you can use &lt;strong&gt;NERDTree&lt;/strong&gt; absolutely great file navigator.&lt;/p&gt;
-
-&lt;p&gt;Open up and type this into vim session:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;:NERDTree
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;You will see something like this:&lt;/p&gt;
-
-&lt;p&gt;&lt;img class=&quot;vim&quot; src=&quot;/images/nerd_tree.png&quot; alt=&quot;nerd tree&quot;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;p&gt;Let&amp;#39;s assume you want to open up directory &lt;strong&gt;app&lt;/strong&gt;. Navigate to app with Vim and press key &lt;strong&gt;o&lt;/strong&gt;. You should see content of app directory:&lt;/p&gt;
-
-&lt;p&gt;&lt;img class=&quot;vim&quot; src=&quot;/images/nerd_tree_app.png&quot; alt=&quot;nerd tree app&quot;&gt;&lt;/img&gt;&lt;/p&gt;
+&lt;p&gt;If you like this post, share it with clicking on social network toolbar at the top of page. &lt;/p&gt;
 </description>
-				<pubDate>Fri, 02 May 2014 10:09:06 +0200</pubDate>
-				<link>http://masteruby.github.io/2014/05/02/vim-addons.html</link>
-				<guid isPermaLink="true">http://masteruby.github.io/2014/05/02/vim-addons.html</guid>
-			</item>
-		
-			<item>
-				<title>6 Books for learning or advancing your rails knowledge</title>
-				<description>&lt;p&gt;In this post I want to give you list of books for rails beginner or
-intermediate developer.&lt;/p&gt;
-
-&lt;h2&gt;For Beginner&lt;/h2&gt;
-
-&lt;h3&gt;1. &lt;a href=&quot;http://learn-rails.com/learn-ruby-on-rails.html&quot;&gt;Learn Ruby on Rails&lt;/a&gt; by Daniel Kehoe&lt;/h3&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://learn-rails.com/learn-ruby-on-rails.html&quot;&gt;&lt;img src=&quot;/images/learn-rails-book-cover.jpg&quot; class=&quot;book&quot; alt=&quot;learn ruby on rails
-book&quot;&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Here&amp;#39;s the first book you should read. This book will give you basic
-introduction to
-rails. In step by step guide you will learn how to create mailing list with
-integration with MailChimp and GoogleDrive. I&amp;#39;ve included detailed review of
-&lt;a href=&quot;/learning-resources/2014/04/09/learn-ruby-on-rails-book-review.html&quot;&gt;learn ruby on rails book&lt;/a&gt; right here.&lt;/p&gt;
-
-&lt;h3&gt;2. &lt;a href=&quot;http://www.amazon.com/Ruby-Rails-Tutorial-Addison-Wesley-Professional/dp/0321832051/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1398328251&amp;amp;sr=1-1&amp;amp;keywords=ruby+on+rails+tutorial&quot;&gt;Ruby on Rails Tutorial&lt;/a&gt; by Michael Hartl&lt;/h3&gt;
-
-&lt;p&gt;&lt;a
-href=&quot;http://www.amazon.com/Ruby-Rails-Tutorial-Addison-Wesley-Professional/dp/0321832051/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1398328251&amp;sr=1-1&amp;keywords=ruby+on+rails+tutorial&quot;&gt;&lt;img
-src=&quot;/images/ruby_on_rails_tutorial.jpeg&quot; class=&quot;book&quot; alt=&quot;ruby on rails
-tutorial&quot;&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Ruby on Rails Tutorial is a must read for every rails beginner. I think you should
-read this after learn ruby on rails book.&lt;/p&gt;
-
-&lt;p&gt;Are you bored with building example
-applications like how to create blog in rails? So here&amp;#39;s the step by step guide
-to creating Twitter like social network.&lt;/p&gt;
-
-&lt;p&gt;Not only this book covers rails
-perfectly, but it is perfect introduction to test driven development in rspec,
-styling with sass and tracking changes in your code in git.&lt;/p&gt;
-
-&lt;h3&gt;3. &lt;a href=&quot;http://www.amazon.com/Agile-Development-Rails-Facets-Ruby/dp/1937785564/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1398328340&amp;amp;sr=1-1&amp;amp;keywords=agile+web+development+with+rails+4&quot;&gt;Agile Web Development with Rails&lt;/a&gt; by David Heinemeier Hansson, Dave Thomas&lt;/h3&gt;
-
-&lt;p&gt;&lt;a
-href=&quot;http://www.amazon.com/Agile-Development-Rails-Facets-Ruby/dp/1937785564/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1398328340&amp;sr=1-1&amp;keywords=agile+web+development+with+rails+4&quot;&gt;&lt;img src=&quot;/images/agile_web_development_with_rails.jpg&quot; class=&quot;book&quot; alt=&quot;agile web
-development with rails&quot;&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Here is the book written by two legendary figures in programming. David
-Heinemeier Hannson, founder of 37 signals, creator of Ruby on Rails framework and
-author of books like Getting Real, Rework and Remote and Dave Thomas author of
-legendary book Pragmatic Programmer that every developer should read. In this
-book you will learn how to create Depot, web based shopping cart application.&lt;/p&gt;
-
-&lt;h2&gt;For intermediate developer&lt;/h2&gt;
-
-&lt;h3&gt;4. &lt;a href=&quot;http://www.amazon.com/Rails-AntiPatterns-Refactoring-Addison-Wesley-Professional/dp/0321604814/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1398326493&amp;amp;sr=1-1&amp;amp;keywords=rails+antipatterns&quot;&gt;Rails Antipatterns&lt;/a&gt; by Chad Pytel and Tammer Saleh&lt;/h3&gt;
-
-&lt;p&gt;&lt;a
-href=&quot;http://www.amazon.com/Rails-AntiPatterns-Refactoring-Addison-Wesley-Professional/dp/0321604814/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1398326493&amp;sr=1-1&amp;keywords=rails+antipatterns&quot;&gt;&lt;img
-src=&quot;/images/rails_antipatterns.jpg&quot; class=&quot;book&quot; alt=&quot;rails
-antipatterns&quot;&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Are you getting headaches from your masses of code? Did you find your rails code unreadable, difficult to maintain?&lt;/p&gt;
-
-&lt;p&gt;Maybe you will find your rails antipattern. Here&amp;#39;s the problem and solution guide to your problems.&lt;/p&gt;
-
-&lt;p&gt;What I like about this book that takes every part of Rails application separately. You
-will look at problems like too much code in models, using sql code where it
-don&amp;#39;t belong, bad habits brought from php and else.&lt;/p&gt;
-
-&lt;h3&gt;5. &lt;a href=&quot;http://www.amazon.com/The-Rails-View-Maintainable-Experience/dp/1934356875&quot;&gt;The Rails View&lt;/a&gt; by Bruce Williams and Bruce Athayde&lt;/h3&gt;
-
-&lt;p&gt;&lt;a
-href=&quot;http://www.amazon.com/Rails-View-Beautiful-Maintainable-Experience/dp/1934356875/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1398343196&amp;sr=1-1&amp;keywords=the+rails+view&quot;&gt;&lt;img
-src=&quot;/images/rails_view.jpg&quot; class=&quot;book&quot; alt=&quot;rails view&quot;&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Are you getting sick from combination of html and your template language in
-your views? Are you hoping that your views code should look better, but don&amp;#39;t know how? &lt;/p&gt;
-
-&lt;p&gt;Try Rails View book, in this book you will look at each part of
-views, you will find out solutions about how to improve your layout, you will
-learn some tricks about how to improve your stylesheets, adding some beauty to
-your forms, better javascripts code and other.&lt;/p&gt;
-
-&lt;h3&gt;6. &lt;a href=&quot;http://example.com&quot;&gt;Deploying Rails&lt;/a&gt; by Anthony Burns and Tom Copeland&lt;/h3&gt;
-
-&lt;p&gt;&lt;a
-href=&quot;http://www.amazon.com/Deploying-Rails-Automate-Deploy-Maintain/dp/1934356956&quot;&gt;&lt;img
-src=&quot;/images/deploying_rails.jpg&quot; class=&quot;book&quot; alt=&quot;deploying rails&quot;&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;Are you developing real world rails application and you wonder how to deploy it?
-Deploying Rails book is here for you.&lt;/p&gt;
-
-&lt;p&gt;In first part of the book you will learn
-how to create your own virtual server with Vagrant, then you move on open
-source server provision tool Puppet. Then you will be introduced to gems like
-Capistrano, Nagios for better deployment.&lt;/p&gt;
-
-&lt;h2&gt;What&amp;#39;s next&lt;/h2&gt;
-
-&lt;p&gt;If you&amp;#39;re beginner I recommend you to learn ruby first, I&amp;#39;ve wrote post about &lt;a href=&quot;/learning-resources/2014/03/28/learn-ruby-with-these-resources.html&quot;&gt;learning resources
-for ruby&lt;/a&gt; and if you have trouble with rails
-installation I wrote about &lt;a href=&quot;/learning-resources&quot;&gt;how to install rails&lt;/a&gt; in my
-previous post. I hope that my list of books about Rails was helpful for you.&lt;/p&gt;
-</description>
-				<pubDate>Thu, 24 Apr 2014 14:56:35 +0200</pubDate>
-				<link>http://masteruby.github.io/2014/04/24/rails.html</link>
-				<guid isPermaLink="true">http://masteruby.github.io/2014/04/24/rails.html</guid>
+				<pubDate>Fri, 02 May 2014 00:00:00 +0200</pubDate>
+				<link>http://masteruby.github.io/productivity-booster/2014/05/02/vim-plugins-for-ruby.html</link>
+				<guid isPermaLink="true">http://masteruby.github.io/productivity-booster/2014/05/02/vim-plugins-for-ruby.html</guid>
 			</item>
 		
 			<item>
@@ -332,375 +264,6 @@ previous post. I hope that my list of books about Rails was helpful for you.&lt;
 				<pubDate>Thu, 24 Apr 2014 00:00:00 +0200</pubDate>
 				<link>http://masteruby.github.io/learning-resources/2014/04/24/books-for-learning-rails.html</link>
 				<guid isPermaLink="true">http://masteruby.github.io/learning-resources/2014/04/24/books-for-learning-rails.html</guid>
-			</item>
-		
-			<item>
-				<title>How to create simple calculator in Shoes</title>
-				<description>&lt;p&gt;In this tutorial you will learn how to create simple calculator in Shoes that looks like this:&lt;/p&gt;
-
-&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/calculator.png&quot; alt=&quot;how to create
-calculator&quot;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;p&gt;Because original Shoes is outdated and new Shoes 4 isn&amp;#39;t released yet, we&amp;#39;ll use Green Shoes in this tutorial.&lt;/p&gt;
-
-&lt;h2&gt;How to install Shoes&lt;/h2&gt;
-
-&lt;p&gt;Before you can install green_shoes you have to install ruby. I&amp;#39;ve included instructions about &lt;a href=&quot;http://masteruby.github.io/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html&quot;&gt;how to install
-ruby&lt;/a&gt; in previous post.&lt;/p&gt;
-
-&lt;p&gt;If you have ruby installed by rvm, just install green_shoes with rubygems:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gem install green_shoes
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;If you have trouble with installation, you have to install &lt;a href=&quot;http://sourceforge.net/projects/ruby-gnome2/&quot;&gt;ruby
-gtk2&lt;/a&gt;. &lt;/p&gt;
-
-&lt;h2&gt;Running shoes&lt;/h2&gt;
-
-&lt;p&gt;To run we need to add green_shoes gem to our ruby file.&lt;/p&gt;
-
-&lt;p&gt;Go to your favorite text editor, create new file &lt;strong&gt;calculator.rb&lt;/strong&gt; and type
-this code:&lt;/p&gt;
-
-&lt;h4&gt;calculator.rb&lt;/h4&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;green_shoes&amp;#39;&lt;/span&gt;
-
-&lt;span class=&quot;no&quot;&gt;Shoes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;My calculator&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;240&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Go to the terminal and run green shoes:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;ruby calculator.rb
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;You should see something like this:&lt;/p&gt;
-
-&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/running_shoes.png&quot; alt=&quot;how to run shoes&quot;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;h2&gt;Adding basic template for app&lt;/h2&gt;
-
-&lt;p&gt;Let&amp;#39;s add template for our calculator. We need to add place for number field,
-clear button and remaining buttons.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;green_shoes&amp;#39;&lt;/span&gt;
-
-&lt;span class=&quot;no&quot;&gt;Shoes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;My calculator&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;240&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;240&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;background&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rgb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;157&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;228&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-
-    &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;background&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rgb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;139&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;206&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;236&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;If you run shoes again, you should see something like this:&lt;/p&gt;
-
-&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/template.png&quot; alt=&quot;calculator template&quot;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;p&gt;Let&amp;#39;s look at what we&amp;#39;ve done. First we&amp;#39;ve created flow, that copy size of screen.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;  &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;240&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Our app is divided into three parts: number field, clear button and remaining buttons, so we&amp;#39;ve created three different flows to match it. &lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;background&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rgb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;157&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;228&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Here we used floating points to match size of flow. If you type 0.7 it means 70% width of screen and if you type 0.2 it means 20% size. Then we&amp;#39;ve used background method to change color of the flow.&lt;/p&gt;
-
-&lt;p&gt;Ok we&amp;#39;ve done with preparations, let&amp;#39;s create some buttons.&lt;/p&gt;
-
-&lt;h2&gt;Adding calculator buttons&lt;/h2&gt;
-
-&lt;p&gt;First we need to add number field:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;green_shoes&amp;#39;&lt;/span&gt;
-
-&lt;span class=&quot;no&quot;&gt;Shoes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;My calculator&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;240&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;nil&lt;/span&gt;
-  &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;240&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;background&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rgb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;157&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;228&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;para&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-    
-    &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;    
-
-    &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;background&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rgb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;139&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;206&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;236&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;So if you run code you should number 0 in number field: &lt;/p&gt;
-
-&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/number_field.png&quot; alt=&quot;how to create number field for calculator&quot;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;p&gt;Let&amp;#39;s take a look at code:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;  &lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;nil&lt;/span&gt;
-  &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Here we&amp;#39;ve set two variables. Variable &lt;strong&gt;number_field&lt;/strong&gt; is for displaying number field. In variable &lt;strong&gt;@number&lt;/strong&gt; we set actual value of number in the number field.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;para&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Here we&amp;#39;ve changed number field to para. Para is method in shoes for displaying text or numbers in screen. We&amp;#39;ve used &lt;strong&gt;@number&lt;/strong&gt; to set para to 0, but it can be anything you like. After that we&amp;#39;ve set margin to all sizes.&lt;/p&gt;
-
-&lt;h3&gt;Adding Clr Button&lt;/h3&gt;
-
-&lt;p&gt;Now we have to add clr button. To add button type something like this:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;green_shoes&amp;#39;&lt;/span&gt;
-
-&lt;span class=&quot;no&quot;&gt;Shoes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;My calculator&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;240&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;nil&lt;/span&gt;
-  &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;240&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;background&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rgb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;157&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;228&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;para&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-    
-    &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Clr&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;    
-
-    &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;background&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rgb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;139&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;206&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;236&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/adding_clr.png&quot; alt=&quot;how to add clear
-button&quot;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Clr&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;So here we&amp;#39;ve added button with name &lt;strong&gt;Clr&lt;/strong&gt; and set it&amp;#39;s width and height to size of flow. &lt;/p&gt;
-
-&lt;h3&gt;Adding remaining buttons&lt;/h3&gt;
-
-&lt;p&gt;We need to add all buttons what we need. Add this code into your app.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;green_shoes&amp;#39;&lt;/span&gt;
-
-&lt;span class=&quot;no&quot;&gt;Shoes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;My calculator&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;240&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;nil&lt;/span&gt;
-  &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;240&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;background&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rgb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;157&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;228&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;para&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-    
-    &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Clr&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;    
-
-    &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;background&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rgb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;139&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;206&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;236&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-      &lt;span class=&quot;sx&quot;&gt;%w(7 8 9 + 4 5 6 - 1 2 3 / 0 . = *)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;btn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;btn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;      
-    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/adding_buttons.png&quot; alt=&quot;how to add buttons in
-shoes&quot;&gt;&lt;/img&gt;&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;sx&quot;&gt;%w(7 8 9 + 4 5 6 - 1 2 3 / 0 . = *)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;btn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;btn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;We&amp;#39;ve added all buttons to array with %w method and added every button to each
-loop, then we&amp;#39;ve set height and width of the buttons.&lt;/p&gt;
-
-&lt;h2&gt;Running Buttons&lt;/h2&gt;
-
-&lt;p&gt;So our buttons are now displayed, but if you click at them they don&amp;#39;t work.
-Let&amp;#39;s fix it. Go to flow with clr button and add code some code: &lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;green_shoes&amp;#39;&lt;/span&gt;
-
-&lt;span class=&quot;no&quot;&gt;Shoes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;My calculator&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;240&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;nil&lt;/span&gt;
-  &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;240&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;background&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rgb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;157&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;228&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;para&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-    
-    &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Clr&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-        &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;    
-
-    &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;background&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rgb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;139&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;206&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;236&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-      &lt;span class=&quot;sx&quot;&gt;%w(7 8 9 + 4 5 6 - 1 2 3 / 0 . = *)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;btn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;btn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-        &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;      
-    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Here we&amp;#39;ve added block of code to button, that every time button Clr is pressed
-variable @number is set to 0. Then we use special ruby method &lt;strong&gt;replace&lt;/strong&gt; to change actual value of number_field to 0. Maybe it doesn&amp;#39;t seems to work, but try change value of variable @number to any other number and then press clr. It should change to zero.&lt;/p&gt;
-
-&lt;p&gt;Ok we&amp;#39;ve added functionality to Clr button let&amp;#39;s move on numbers:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;green_shoes&amp;#39;&lt;/span&gt;
-
-&lt;span class=&quot;no&quot;&gt;Shoes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;My calculator&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;240&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;nil&lt;/span&gt;
-  &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;240&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;background&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rgb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;157&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;228&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;para&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-    
-    &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Clr&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-        &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;    
-
-    &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;background&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rgb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;139&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;206&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;236&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-      &lt;span class=&quot;sx&quot;&gt;%w(7 8 9 + 4 5 6 - 1 2 3 / 0 . = *)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;btn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;btn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-          &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;btn&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/[0-9]/&lt;/span&gt; 
-              &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to_i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;btn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to_i&lt;/span&gt;
-          &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-          &lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;    
-        &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;      
-    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;If you try your calculator in shoes, you should be able to use numbers.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;btn&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/[0-9]/&lt;/span&gt; 
-    &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to_i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;btn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to_i&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Here we used case statement with when to catch clicks on numbers. We&amp;#39;ve replaced
-value of variable @number with value of our buttons.&lt;/p&gt;
-
-&lt;h2&gt;Adding operations&lt;/h2&gt;
-
-&lt;p&gt;We have working number buttons, but what to do with operators.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;green_shoes&amp;#39;&lt;/span&gt;
-
-&lt;span class=&quot;no&quot;&gt;Shoes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;My calculator&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;240&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;nil&lt;/span&gt;
-  &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-  &lt;span class=&quot;vi&quot;&gt;@op&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;nil&lt;/span&gt;
-  &lt;span class=&quot;vi&quot;&gt;@previous&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-  
-  &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;240&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;background&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rgb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;157&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;228&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;para&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-    
-    &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Clr&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-        &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;    
-
-    &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-      &lt;span class=&quot;n&quot;&gt;background&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rgb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;139&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;206&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;236&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-      &lt;span class=&quot;sx&quot;&gt;%w(7 8 9 + 4 5 6 - 1 2 3 / 0 . = *)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;btn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
-        &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;btn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-          &lt;span class=&quot;k&quot;&gt;case&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;btn&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/[0-9]/&lt;/span&gt; 
-              &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to_i&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;btn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to_i&lt;/span&gt;
-            
-            &lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;=&amp;#39;&lt;/span&gt;
-              &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@previous&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@op&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-            &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
-              &lt;span class=&quot;vi&quot;&gt;@previous&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;nil&lt;/span&gt;
-              &lt;span class=&quot;vi&quot;&gt;@op&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;btn&lt;/span&gt;
-          &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-          &lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;    
-        &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-      &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;      
-    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;vi&quot;&gt;@op&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;nil&lt;/span&gt;
-&lt;span class=&quot;vi&quot;&gt;@previous&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;First we need to add two variables, &lt;strong&gt;@previous&lt;/strong&gt; and &lt;strong&gt;@op&lt;/strong&gt; right after
-variable &lt;strong&gt;@number&lt;/strong&gt;. We&amp;#39;ll use @op for actual operations and previous to catch
-previous number.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;=&amp;#39;&lt;/span&gt;
-  &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@previous&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;send&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@op&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
-  &lt;span class=&quot;vi&quot;&gt;@previous&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;nil&lt;/span&gt;
-  &lt;span class=&quot;vi&quot;&gt;@op&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;btn&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;We&amp;#39;ve set value of @op to our operator buttons and save value of actual number to variable @previous. Then we&amp;#39;ve used ruby send method, that when equals button is pressed, it calculate expressions for us.&lt;/p&gt;
-
-&lt;p&gt;We&amp;#39;re done with our calculator. See you next time.&lt;/p&gt;
-</description>
-				<pubDate>Thu, 17 Apr 2014 15:33:41 +0200</pubDate>
-				<link>http://masteruby.github.io/2014/04/17/calculator.html</link>
-				<guid isPermaLink="true">http://masteruby.github.io/2014/04/17/calculator.html</guid>
 			</item>
 		
 			<item>
@@ -1133,23 +696,6 @@ must read for you.&lt;/p&gt;
 				<pubDate>Wed, 09 Apr 2014 00:00:00 +0200</pubDate>
 				<link>http://masteruby.github.io/learning-resources/2014/04/09/learn-ruby-on-rails-book-review.html</link>
 				<guid isPermaLink="true">http://masteruby.github.io/learning-resources/2014/04/09/learn-ruby-on-rails-book-review.html</guid>
-			</item>
-		
-			<item>
-				<title>Why to use tmux</title>
-				<description>&lt;p&gt;Today I want to tell about why and how to use tmux. Let&amp;#39;s start with example.
-Let&amp;#39;s assume you&amp;#39;re&lt;/p&gt;
-
-&lt;p&gt;What&amp;#39;ll learn in this tutorial.&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;How to create new sessions&lt;/li&gt;
-&lt;li&gt;How to split windows, horizontally and vertically.&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-				<pubDate>Sat, 05 Apr 2014 09:49:54 +0200</pubDate>
-				<link>http://masteruby.github.io/2014/04/05/why_tmux.html</link>
-				<guid isPermaLink="true">http://masteruby.github.io/2014/04/05/why_tmux.html</guid>
 			</item>
 		
 			<item>
@@ -1699,6 +1245,749 @@ start with &lt;a href=&quot;http://shoesrb.com/&quot;&gt;Shoes&lt;/a&gt;, or you
 				<pubDate>Fri, 28 Mar 2014 00:00:00 +0100</pubDate>
 				<link>http://masteruby.github.io/learning-resources/2014/03/28/learn-ruby-with-these-resources.html</link>
 				<guid isPermaLink="true">http://masteruby.github.io/learning-resources/2014/03/28/learn-ruby-with-these-resources.html</guid>
+			</item>
+		
+			<item>
+				<title>Top 10 commands in terminal you will use everyday</title>
+				<description>&lt;p&gt;In previous tutorial about &lt;a href=&quot;http://masteruby.github.io/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.html&quot;&gt;how to create todo list app in rails&lt;/a&gt;
+you saw that we will use terminal with Rails most of the time.&lt;/p&gt;
+
+&lt;p&gt;In this tutorial you will learn top ten commands you will use everyday in
+terminal.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;#39;s get started. First go to menu and open up: &lt;strong&gt;Command Prompt&lt;/strong&gt; or
+&lt;strong&gt;PowerShell&lt;/strong&gt; in Windows and &lt;strong&gt;Terminal&lt;/strong&gt; in Linux and Mac. You should see something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/terminal-screen.png&quot; alt=&quot;terminal-screen&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;Ok so everything works let&amp;#39;s begin.&lt;/p&gt;
+
+&lt;h2&gt;1. cd(change directory)&lt;/h2&gt;
+
+&lt;p&gt;To change actual working directory you use &lt;strong&gt;cd&lt;/strong&gt; command. Type cd and
+directory into you want to move.&lt;/p&gt;
+
+&lt;h3&gt;Move to another directory&lt;/h3&gt;
+
+&lt;p&gt;To move into Desktop directory you will use this command:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd &lt;/span&gt;Desktop
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;Go back to previous directory&lt;/h3&gt;
+
+&lt;p&gt;You can go back to previous directory with &lt;strong&gt;cd ..&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;cd&lt;/span&gt; ..
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;2.ls or dir(list directory)&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;ls&lt;/strong&gt; command shows list of all files and directories in current working 
+directory. For example to see list of files of your home directory type this
+into command line in Linux and Mac.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ls
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Type this in &lt;strong&gt;Windows&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;dir
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You should see something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/list-of-directories.png&quot; alt=&quot;list-of-directories&quot;&gt;&lt;/p&gt;
+
+&lt;h2&gt;3. touch or copy con&lt;/h2&gt;
+
+&lt;p&gt;Touch command creates empty file. For example try to create empty file in home
+folder:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;touch empty.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Copy con&lt;/strong&gt; command serves for creating empty file in &lt;strong&gt;Windows&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;copy con empty.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You should see your file in home directory.&lt;/p&gt;
+
+&lt;h2&gt;4. mkdir(make directory)&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;mkdir&lt;/strong&gt; command creates empty folder. Navigate to home folder and create
+folder of your choice:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;mkdir my_folder
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Check it out if folder has been created with &lt;strong&gt;ls&lt;/strong&gt; or &lt;strong&gt;dir&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/create-folder.png&quot; alt=&quot;create-folder&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;You should see your folder in list. You can create any number of directories what you like. For example try create three directories:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;mkdir folder1 folder2 folder3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You should see three new folders in current working directory. Let&amp;#39;s move on.&lt;/p&gt;
+
+&lt;h2&gt;5. rm(remove)&lt;/h2&gt;
+
+&lt;p&gt;Remove command deletes folder or file.&lt;/p&gt;
+
+&lt;h3&gt;Remove folder&lt;/h3&gt;
+
+&lt;p&gt;You type rm with -r and add name of the directory you want to remove:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rm -r my_folder
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You should see that our folder has been removed. Option -r means recursive, it
+removes directory with all of his content. Let&amp;#39;s try something:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/remove-directory.png&quot; alt=&quot;remove-directory&quot;&gt; &lt;/p&gt;
+
+&lt;h3&gt;Removing files&lt;/h3&gt;
+
+&lt;p&gt;You can use rm for removing files too. For example create file with touch
+command or copy con in Windows.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;touch abc.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;copy con abc.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Remove it with &lt;strong&gt;rm&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rm abc.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;On windows you remove files with &lt;strong&gt;del&lt;/strong&gt; command following name of the file you want to remove.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;del abc.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;6. mv(move file or directory)&lt;/h2&gt;
+
+&lt;p&gt;Move command serves for renaming or moving directories.&lt;/p&gt;
+
+&lt;h3&gt;Rename directory or file with move&lt;/h3&gt;
+
+&lt;p&gt;To rename your file type filename of file you want change and name of the file
+you want to change it.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mv abc.txt empty.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;In Windows this won&amp;#39;t work. You have to use &lt;strong&gt;ren&lt;/strong&gt; command to rename your
+file.&lt;/p&gt;
+
+&lt;p&gt;Check it out with ls or dir. You should see that file abc.txt is now renamed to
+empty.txt. &lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/rename-file.png&quot; alt=&quot;rename-file&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;We can use mv for renaming directories too. Try something like this: Create directory &lt;strong&gt;new_folder&lt;/strong&gt; in your home directory. Now rename it to
+&lt;strong&gt;dir&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mkdir new_folder
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mv new_folder dir 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mkdir new_folder
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ren new_folder dir
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;Moving files or directory with mv&lt;/h3&gt;
+
+&lt;p&gt;You can use mv command to move files to specific directory. Move your
+&lt;strong&gt;empty.txt&lt;/strong&gt; file to &lt;strong&gt;dir&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mv empty.txt ~/dir
+&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ls
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You can move any number of files as you want. For example create some files.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;touch test1.txt test2.txt test3.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;copy con test1.txt test2.txt test3.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now move them to your folder.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mv test1.txt test2.txt test3.txt ~/dir
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;In Windows you will use &lt;strong&gt;move&lt;/strong&gt; command instead of mv.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;move test1.txt test2.txt test3.txt c:&lt;span class=&quot;se&quot;&gt;\d&lt;/span&gt;ir
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You don&amp;#39;t have to type name of files to terminal, you can use regular
+expressions. Try something like that:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;mv *.txt ~/dir
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;move *.txt c:&lt;span class=&quot;se&quot;&gt;\d&lt;/span&gt;ir
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If you type &lt;strong&gt;*.txt&lt;/strong&gt; it means move all files to folder.&lt;/p&gt;
+
+&lt;h2&gt;7. cp(copy)&lt;/h2&gt;
+
+&lt;p&gt;Copy command takes file or group or files and copy it to specific directory. For example try copy our text files back to home directory.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;cp *.txt ~
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;On Windows instead of cp you will use &lt;strong&gt;copy&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;copy *.txt c:&lt;span class=&quot;se&quot;&gt;\&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Go back to your home directory. You should see our files.&lt;/p&gt;
+
+&lt;h2&gt;8. sudo or runas(switch user do)&lt;/h2&gt;
+
+&lt;p&gt;If you want to install some programs  on your Linux or Mac operating system you
+will have to use sudo. Let&amp;#39;s try to install &lt;strong&gt;Openbox&lt;/strong&gt;, tool for creating and
+editing videos in terminal.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sudo apt-get install openbox
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Or you can use runas in Windows. Type this:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;runas /user:&amp;lt;localmachine&amp;gt;&lt;span class=&quot;se&quot;&gt;\a&lt;/span&gt;dminstrator.cmd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You will be prompted for your user password.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/sudo.png&quot; alt=&quot;sudo&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;Type this in and type letter Y for installation.&lt;/p&gt;
+
+&lt;h2&gt;9. cat or type(concatenate)&lt;/h2&gt;
+
+&lt;p&gt;Cat command serves for viewing of contents and concatenation of multiple files.&lt;/p&gt;
+
+&lt;h3&gt;Viewing content of the file with cat&lt;/h3&gt;
+
+&lt;p&gt;Create some file and type something in it with your text editor. Then view its
+content with cat.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;cat test1.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;On windows instead of cat you will use &lt;strong&gt;type&lt;/strong&gt; command.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;Type test1.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You should see content of your file like this.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/cat-command.png&quot; alt=&quot;cat-command&quot;&gt;&lt;/p&gt;
+
+&lt;h3&gt;Joining multiple files to one file with cat&lt;/h3&gt;
+
+&lt;p&gt;Let&amp;#39;s try to join our test files to one file with cat.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;cat test1.txt test2.txt test3.txt &amp;gt; test.txt
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2&gt;10. clear&lt;/h2&gt;
+
+&lt;p&gt;Clear command  remove all previous commands from screen&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;clear
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;On windows you will use &lt;strong&gt;cls&lt;/strong&gt; command.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;cls
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;That&amp;#39;s all for now.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;27-03-2014 - I&amp;#39;ve updated my post after critical responses on Reddit. Now it 
+contains Windows equivalent of Linux/Mac/Unix commands.&lt;/strong&gt;&lt;/p&gt;
+</description>
+				<pubDate>Wed, 26 Mar 2014 00:00:00 +0100</pubDate>
+				<link>http://masteruby.github.io/productivity-booster/2014/03/26/top-ten-commands-in-terminal-you-will-use-everyday.html</link>
+				<guid isPermaLink="true">http://masteruby.github.io/productivity-booster/2014/03/26/top-ten-commands-in-terminal-you-will-use-everyday.html</guid>
+			</item>
+		
+			<item>
+				<title>How to create todo list app in rails static pages</title>
+				<description>&lt;p&gt;In the following series of posts we gonna create todo list app in rails.
+In this tutorial we&amp;#39;ll create basic structure of our app. In first part of
+tutorial you will learn:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;How to install &lt;strong&gt;Rails&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;How to choose text editor for your operating system&lt;/li&gt;
+&lt;li&gt;How to use &lt;strong&gt;Rails&lt;/strong&gt; in command line &lt;/li&gt;
+&lt;li&gt;How to use &lt;strong&gt;Bundler&lt;/strong&gt; to install gems&lt;/li&gt;
+&lt;li&gt;How to use &lt;strong&gt;Cucumber&lt;/strong&gt; with &lt;strong&gt;Capybara&lt;/strong&gt; to test our pages&lt;/li&gt;
+&lt;li&gt;How to create our static_pages(home,about,contact)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;1 What do you need&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;p&gt;You need to have some basic knowledge of HTML, CSS. If you haven&amp;#39;t learn them  yet go to &lt;a href=&quot;http://www.codecademy.com/tracks/web&quot;&gt;web tutorial on codecademy&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;You need to have basics in Ruby. If you haven&amp;#39;t I wrote post about &lt;a href=&quot;http://masteruby.github.io/learning-resources/2014/03/28/learn-ruby-with-these-resources.html&quot;&gt;learning resources&lt;/a&gt; for ruby&lt;/p&gt;&lt;/li&gt;
+&lt;li&gt;&lt;p&gt;You need to have ruby and ruby on rails installed. I will explain this in next section&lt;/p&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2&gt;2 How to install Ruby&lt;/h2&gt;
+
+&lt;p&gt;In &lt;a href=&quot;http://masteruby.github.io/learning-resources/2015/03/28/how-to-install-ruby.html&quot;&gt;this post&lt;/a&gt;
+I&amp;#39;ve included installation instructions for Ruby and Rails&lt;/p&gt;
+
+&lt;h2&gt;3 Choosing your text editor&lt;/h2&gt;
+
+&lt;p&gt;You write all your ruby programs using text editor.&lt;/p&gt;
+
+&lt;h3&gt;3.1 &lt;a href=&quot;http://notepad-plus-plus.org/download/v6.5.3.html&quot;&gt;Notepad++&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;For Windows  I recommend you this editor. It&amp;#39;s free and it includes syntax highlighting and auto completion for ruby. &lt;/p&gt;
+
+&lt;h3&gt;3.2 &lt;a href=&quot;http://macromates.com&quot;&gt;TextMate&lt;/a&gt;&lt;/h3&gt;
+
+&lt;p&gt;On Mac you can use TextMate. You can download it and install for free.&lt;/p&gt;
+
+&lt;h3&gt;3.3 Gedit&lt;/h3&gt;
+
+&lt;p&gt;On Linux you can use gedit.&lt;/p&gt;
+
+&lt;h2&gt;4 Creating basic structure of the app&lt;/h2&gt;
+
+&lt;p&gt;Ok so you&amp;#39;ve got your tools in order, so we can start to  create application. Open up terminal window or command prompt if you&amp;#39;re on Windows and enter following code:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rails new todo --skip-test-unit
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This will create rails application named todo. It takes a while. Ok let&amp;#39;s check out some folders that we&amp;#39;re created.&lt;/p&gt;
+
+&lt;h4&gt;Gemfile&lt;/h4&gt;
+
+&lt;p&gt;That&amp;#39;s the file that you will use to install all dependencies what you need
+ for your applications. They&amp;#39;re called gems. Just add name of gem to your
+ Gemfile and let Bundler to take care of installation.&lt;/p&gt;
+
+&lt;h4&gt;app/views&lt;/h4&gt;
+
+&lt;p&gt;In this folder you place your html templates.&lt;/p&gt;
+
+&lt;h4&gt;app/assets&lt;/h4&gt;
+
+&lt;p&gt;Images, Javascript and CSS files belongs here.&lt;/p&gt;
+
+&lt;h3&gt;4.1 How to use Bundler&lt;/h3&gt;
+
+&lt;p&gt;After creating rails application you should use Bundler to use all dependencies
+what you need. First add name of the gem to your Gemfile, then open up terminal
+and add following command:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle install
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Let&amp;#39;s add some gems to your Gemfile. Open up your Gemfile and add following
+gems:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;slim-rails&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;capybara&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;cucumber-rails&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:require&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;false&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;database_cleaner&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;rspec-expectations&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;selenium-webdriver&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Install it with Bundler:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle install
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;4.2 Starting our application&lt;/h3&gt;
+
+&lt;p&gt;To run your application, type this into command line:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rails server
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Go to web browser and type localhost:3000. Your output screen should look like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/rails-opening-screen.png&quot; alt=&quot;rails-opening-screen&quot;&gt;&lt;/p&gt;
+
+&lt;h2&gt;5 Creating Static Pages&lt;/h2&gt;
+
+&lt;p&gt;We have our web server running let&amp;#39;s build some pages.&lt;/p&gt;
+
+&lt;h3&gt;5.1 Creating controllers&lt;/h3&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rails generate controller StaticPages home &lt;span class=&quot;nb&quot;&gt;help &lt;/span&gt;about --no-test-framework
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If you open your views folder, you should see that you have new folder named
+&lt;strong&gt;static_pages&lt;/strong&gt; with some files in it. Go to the &lt;strong&gt;config/routes.rb&lt;/strong&gt;, you should see path of our pages that we&amp;#39;re created. Type for example, localhost:3000/static_pages into your web browser.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/home.png&quot; alt=&quot;home&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;We created StaticPages controller and we can populate our files. Testing every
+change in a browser would be tedious. So we gonna need Cucumber and Capybara to
+do it for us.&lt;/p&gt;
+
+&lt;h3&gt;5.2 Cucumber&lt;/h3&gt;
+
+&lt;p&gt;Cucumber lets software developers and shareholders to use simple plain language
+to describe features. If you want to know more about Cucumber, try
+&lt;a href=&quot;http://www.amazon.com/The-Cucumber-Book-Behaviour-Driven-Development/dp/1934356808&quot;&gt;CucumberBook&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4&gt;How Cucumber works&lt;/h4&gt;
+
+&lt;p&gt;Cucumber works in features which are written in plain text and step definitions which are written in regular ruby code. If you go to your app folder, you should see that folder named features  was created.  &lt;/p&gt;
+
+&lt;p&gt;First we need to setup folder structure of Cucumber. Run following command:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rails generate cucumber:install
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We need to test all our static pages. Open up folder features in your main
+ directory and add file &lt;strong&gt;static_pages.feature&lt;/strong&gt; into your features directory.&lt;/p&gt;
+
+&lt;h4&gt;static_pages.feature&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;gherkin&quot;&gt;&lt;span class=&quot;k&quot;&gt;Feature:&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt; Static Pages content&lt;/span&gt;
+
+&lt;span class=&quot;nf&quot;&gt; User should see static pages content&lt;/span&gt;
+
+&lt;span class=&quot;nf&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;Scenario Outline:&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt; Path testing&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;    When &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;I visit &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;&amp;lt;Path&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt; path &lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;Then &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;I should see following content: &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;&amp;lt;Content&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;    &lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;    &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;Examples:&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;      |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; Path&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;     |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; Content&lt;/span&gt;&lt;span class=&quot;k&quot;&gt; | &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;      |&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; Home&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;     |&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; Todo&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;    |&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;      |&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; About&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;    |&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; About&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;   |&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;      |&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; Help&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;     |&lt;/span&gt;&lt;span class=&quot;s&quot;&gt; Help&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;    |&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;   &lt;/span&gt;
+
+
+&lt;span class=&quot;k&quot;&gt; &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This is how it works. At first line you define your feature, in our example
+ StaticPages content. Then you define your steps. Steps always begin with
+ keywords: Given,When,Then,And and continue with regular expression. It can be
+ any text. Don&amp;#39;t forget to surround your text in regular expression like this: &lt;strong&gt;/^some text$/&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;We have our feature defined, let&amp;#39;s test it with Cucumber&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt; &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;cucumber
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You should see something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/static-pages-failing-steps.png&quot; alt=&quot;failing steps&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;Ok we&amp;#39;ve saw undefined scenarios and steps let&amp;#39;s actually implement it. Open
+ up folder step-definitions and create file &lt;strong&gt;static&lt;em&gt;pages&lt;/em&gt;steps.rb&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h4&gt;static&lt;em&gt;pages&lt;/em&gt;steps.rb&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;When&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^I visit Home path$/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; 
+  &lt;span class=&quot;n&quot;&gt;visit&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;static_pages/home&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;In first line we match name of our step with name in the feature file.
+Then we use capybara to visit home path in the browser. Run your test with cucumber. You should see one passing test.&lt;/p&gt;
+
+&lt;p&gt;Now we need to test content of our home page. Add this into features/step&lt;em&gt;definitions/static&lt;/em&gt;pages_steps.rb:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;Then&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^I should see following content: Todo$/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;expect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;have_content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;Todo&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;In first line we match second step with feature file.
+On the second line we use &lt;strong&gt;Rspec Expectations&lt;/strong&gt; to test content of our home page.&lt;/p&gt;
+
+&lt;p&gt;Run cucumber again. You should see failing tests. Of course that test is falling, we don&amp;#39;t have content Todo in our templates.&lt;/p&gt;
+
+&lt;p&gt;Open up folder app/views/static_pages and edit file named &lt;strong&gt;home.html.slim&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;h3&gt;5.3 Why to use Slim&lt;/h3&gt;
+
+&lt;p&gt;Maybe you wonder why we&amp;#39;re using files with slim ending. Slim is a template
+language that strips all unnecessary elements as opening and closing tags. For example this is a code in html: &lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;My WebPage&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;My heading&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;My paragraph&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;
+
+  
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And this is code in Slim:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;  html
+    head
+     title My WebPage
+    body
+      h1 My heading
+      p My paragraph
+   
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You see that Slim code is shorter and easier to read as Html code. 
+  Let&amp;#39;s return to our file. Replace content of &lt;strong&gt;home.html.slim&lt;/strong&gt; with following
+  content:&lt;/p&gt;
+
+&lt;h4&gt;home.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;h1 Todo 
+ 
+ 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You should see that our test is now passing. Implement this to remaining steps
+in our feature file.&lt;/p&gt;
+
+&lt;h4&gt;static&lt;em&gt;pages&lt;/em&gt;steps.rb(excerpt)&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;When&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^I visit About path$/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;visit&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;static_pages/about&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;no&quot;&gt;Then&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^I should see following content: About$/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;expect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;have_content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;About&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt; 
+
+&lt;span class=&quot;no&quot;&gt;When&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^I visit Help path$/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;visit&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;static_pages/help&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;no&quot;&gt;Then&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^I should see following content: Help$/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;expect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;have_content&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;Help&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4&gt;about.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt; h1 About
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4&gt;help.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt; 
+ h1 Help
+ 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;All our tests are now passing, next step will be implement title tests. Open up
+ your &lt;strong&gt;static_pages.feature&lt;/strong&gt; file and append following line:&lt;/p&gt;
+
+&lt;h4&gt;static_pages.feature&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;gherkin&quot;&gt;&lt;span class=&quot;nf&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;And &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;I should see following title: &lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;&amp;lt;Title&amp;gt;&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;&lt;/span&gt;
+
+&lt;span class=&quot;nf&quot;&gt; &lt;/span&gt;&lt;span class=&quot;k&quot;&gt;Examples:&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;   |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; Path&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;     |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; Content&lt;/span&gt;&lt;span class=&quot;k&quot;&gt; |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; **Title&lt;/span&gt;&lt;span class=&quot;k&quot;&gt; |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;   |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; Home&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;     |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; Todo&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;    |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; **Todo&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;  |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;   |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; About&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;    |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; About&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;   |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; **About&lt;/span&gt;&lt;span class=&quot;k&quot;&gt; |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;**&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;   |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; Help&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;     |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; Help&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;    |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt; **Help&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;  |&lt;/span&gt;&lt;span class=&quot;nv&quot;&gt;**&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt; &lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Let&amp;#39;s implement our test. Add these lines to our steps file.&lt;/p&gt;
+
+&lt;h4&gt;static&lt;em&gt;pages&lt;/em&gt;steps.rb&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;And&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^I should see following title: Todo$/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;expect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;have_title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;Todo&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;no&quot;&gt;And&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^I should see following title: About$/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;expect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;have_title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;About&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+ &lt;span class=&quot;no&quot;&gt;And&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^I should see following title: Help$/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;expect&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;page&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;have_title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;Help&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Let&amp;#39;s fix failing tests. We need to change our title in our templates.&lt;/p&gt;
+
+&lt;h4&gt;home.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;html
+  head
+    title Todo
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4&gt;about.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;html
+  head
+    title About
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4&gt;help.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;html
+  head
+    title Help
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Let&amp;#39;s run cucumber again. You should see that&amp;#39;s all our steps are now passing. We are done.&lt;/p&gt;
+
+&lt;h2&gt;6 What to improve&lt;/h2&gt;
+
+&lt;h3&gt;6.1 Watching step changes with Guard&lt;/h3&gt;
+
+&lt;p&gt;There&amp;#39;s lot a place to improve. For example running cucumber every time for
+every change in terminal it&amp;#39;s disgusting. Let&amp;#39;s change it. We can use &lt;strong&gt;Guard&lt;/strong&gt;
+to watch every change in our features folder. Add Guard to your Gemfile.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;guard-cucumber&amp;#39;&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And install it:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle install
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Let&amp;#39;s add Guard to Cucumber.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;guard init cucumber
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If you open your app&amp;#39;s folder you should see that file named &lt;strong&gt;Guardfile&lt;/strong&gt; was
+created.&lt;/p&gt;
+
+&lt;p&gt;Let&amp;#39;s run Guard to run our features automatically.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;guard
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;All features are running automatically by now.&lt;/p&gt;
+
+&lt;h3&gt;6.2 Eliminate duplication in title&lt;/h3&gt;
+
+&lt;p&gt;Take a look at files in views folder.
+You saw that we&amp;#39;ve writed title tag three times. That&amp;#39;s terrible, let&amp;#39;s do
+something about that. First rename file in &lt;strong&gt;app/views/layouts&lt;/strong&gt; directory.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;mv application.html.erb application.html.slim
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Delete all content and replace it with following:&lt;/p&gt;
+
+&lt;h4&gt;app/views/layouts/application.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;doctype html
+html
+  head
+    title Todo
+    = stylesheet_link_tag    &amp;quot;application&amp;quot;, media: &amp;quot;all&amp;quot;, &amp;quot;data-turbolinks-track&amp;quot; =&amp;gt; true
+    = javascript_include_tag &amp;quot;application&amp;quot;, &amp;quot;data-turbolinks-track&amp;quot; =&amp;gt; true
+    = csrf_meta_tags
+  body
+    = yield
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4&gt;app/views/static_pages/about.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;- provide(:title, &amp;#39;About&amp;#39;)
+h1 About
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4&gt;app/views/static_pages/help.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt; - provide(:title, &amp;#39;Help&amp;#39;)
+h1 Help
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3&gt;6.3 Linking our pages and updating routes&lt;/h3&gt;
+
+&lt;p&gt;Typing long adresses like &lt;strong&gt;static_pages/home&lt;/strong&gt; is very disgusting, if we
+instead use shorter address, it wouldbe much better.&lt;/p&gt;
+
+&lt;p&gt;Open up &lt;strong&gt;config/routes.rb&lt;/strong&gt; and replace it content with following:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;cucumber&quot;&gt;&lt;span class=&quot;nf&quot;&gt;root &amp;quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;static_pages#home&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;&amp;quot;&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;match &amp;quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;/help&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;&amp;quot;, to: &amp;quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;static_pages#help&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;&amp;quot;, via: &amp;#39;get&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;nf&quot;&gt;match &amp;quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;/about&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;&amp;quot;, to: &amp;quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;static_pages#about&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;&amp;quot;, via: &amp;#39;get&amp;#39;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And change tests in &lt;strong&gt;features/step&lt;em&gt;definitions/static&lt;/em&gt;pages_steps.rb&lt;/strong&gt; like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;features/step&lt;em&gt;definitions/static&lt;/em&gt;pages_steps.rb&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;When&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^I visit Home path$/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;visit&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;/&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;  
+
+&lt;span class=&quot;no&quot;&gt;When&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^I visit About path$/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;visit&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;/about&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;no&quot;&gt;When&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^I visit Help path$/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;visit&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;/help&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Let&amp;#39;s take a look at code we&amp;#39;ve just wrote.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;root &lt;span class=&quot;s2&quot;&gt;&amp;quot;static_pages#home&amp;quot;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;This code creates root path for our pages. In this time it&amp;#39;s
+&lt;strong&gt;static_pages#home&lt;/strong&gt;. So you don&amp;#39;t have to write your path to web browser.
+Start rails server. You should something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/root_path.png&quot; alt=&quot;how-to-create-root-path-in-rails&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;That&amp;#39;s good but your visitors don&amp;#39;t have time to write short path like
+&lt;strong&gt;/help&lt;/strong&gt; to your webrowser. You haveto include links on your root page.&lt;/p&gt;
+
+&lt;p&gt;Add this code for adding links to your
+&lt;strong&gt;app/views/static_pages/layouts/application.html&lt;/strong&gt; file after the body tag.&lt;/p&gt;
+
+&lt;h4&gt;application.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;nav
+  ul
+    &lt;span class=&quot;nv&quot;&gt;li&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; link_to &lt;span class=&quot;s2&quot;&gt;&amp;quot;Home&amp;quot;&lt;/span&gt;, root_path
+    &lt;span class=&quot;nv&quot;&gt;li&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; link_to &lt;span class=&quot;s2&quot;&gt;&amp;quot;Help&amp;quot;&lt;/span&gt;, help_path
+    &lt;span class=&quot;nv&quot;&gt;li&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; link_to &lt;span class=&quot;s2&quot;&gt;&amp;quot;About&amp;quot;&lt;/span&gt;, about_path
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You should see links on your home page.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/linked-pages.png&quot; alt=&quot;linked pages&quot;&gt;&lt;/p&gt;
+
+&lt;p&gt;We&amp;#39;re done here. In next tutorial we&amp;#39;ll do some styling to our app&lt;/p&gt;
+</description>
+				<pubDate>Sat, 22 Mar 2014 00:00:00 +0100</pubDate>
+				<link>http://masteruby.github.io/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.html</link>
+				<guid isPermaLink="true">http://masteruby.github.io/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.html</guid>
 			</item>
 		
 	</channel>
