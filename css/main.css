@@ -14,8 +14,10 @@ html, body { height: 100%; }
 
 body {
   background-color: #FFF;
-  font: 13.34px Helvetica, Arial, sans-serif;
-  font-size: small;
+  font-family: 'Droid Sans', sans-serif;
+  font-size: 16px;
+	font-weight: 400;
+	color: rgb(51,51,51);
   text-align: center;
   line-height: 1.20px;
 }

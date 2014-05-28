@@ -29,7 +29,8 @@
         
         <nav>
           <ul>
-            <li id="logo"><a href="/">Masteruby</a>
+						<li id="logo"><a href="/">Masteruby</a>
+						<li><a href="/">Start here</a>
           <li><a href="/weekly-rails.html">Rails</a></li>
           <li><a href="/shoes.html">Shoes</a></li>
           <li><a href="/learning-resources.html">Learning Resources</a></li>
@@ -78,13 +79,11 @@
 
 <p>Want to find some file but don&#39;t know its path? Try to use <strong>:find</strong> command:</p>
 
-<div class="highlight"><pre><code class="sh">:find schema.rb
-</code></pre></div>
+<div class="highlight"><pre><code class="sh">:find schema.rb</code></pre></div>
 
 <p>You can also move up in your Rails application by finding related files. For example, let&#39;s assume you&#39;re editing <strong>home.html.slim</strong>. Try to find related file</p>
 
-<div class="highlight"><pre><code class="sh">:R
-</code></pre></div>
+<div class="highlight"><pre><code class="sh">:R</code></pre></div>
 
 <p>You should see that you&#39;re in file <strong>static<em>pages</em>controller.rb</strong> and that you have cursor at method named home.</p>
 
@@ -92,23 +91,20 @@
 
 <p>Jumping from views to controllers to models can be really painful. Here&#39;s where <strong>vim-rails</strong> plugin excels. For example let&#39;s assume you have file named <strong>home.html.slim</strong> in your <strong>views</strong> directory. You can edit it with simple <strong>Eview</strong>:</p>
 
-<div class="highlight"><pre><code class="sh">:Eview static_pages/home
-</code></pre></div>
+<div class="highlight"><pre><code class="sh">:Eview static_pages/home</code></pre></div>
 
 <p>You see? You don&#39;t have to
 set file extension or whole path, just add name of your controller and name of your view file.</p>
 
 <p>Similarily you can edit controller too:</p>
 
-<div class="highlight"><pre><code class="vim"><span class="p">:</span>Econtroller static_pages
-</code></pre></div>
+<div class="highlight"><pre><code class="vim"><span class="p">:</span>Econtroller static_pages</code></pre></div>
 
 <p>Here are commands for editing your layouts, stylesheets and models:</p>
 
 <div class="highlight"><pre><code class="sh">:Elayout header
 :Emodel User
-:Estylesheet main
-</code></pre></div>
+:Estylesheet main</code></pre></div>
 
 <h3>Generator Commands</h3>
 
@@ -116,8 +112,7 @@ set file extension or whole path, just add name of your controller and name of y
 
 <div class="highlight"><pre><code class="sh">:Rgenerate model User
 :Rdestroy model User
-:Rserver
-</code></pre></div>
+:Rserver</code></pre></div>
 
 <p>To run rails server within background of Vim you will use Rserver command. </p>
 
@@ -133,8 +128,7 @@ set file extension or whole path, just add name of your controller and name of y
 
 <p>Type this into vim session to run NerdTree:</p>
 
-<div class="highlight"><pre><code class="sh">:NERDTree
-</code></pre></div>
+<div class="highlight"><pre><code class="sh">:NERDTree</code></pre></div>
 
 <p>You should see content of current working directory. NerdTree use vim navigation keys to move up and down to directory tree.</p>
 
@@ -150,18 +144,15 @@ set file extension or whole path, just add name of your controller and name of y
 
 <p>For example let&#39;see what&#39;s changed with git status</p>
 
-<div class="highlight"><pre><code class="sh">:Git status
-</code></pre></div>
+<div class="highlight"><pre><code class="sh">:Git status</code></pre></div>
 
 <p>Let&#39;s add changes to repository</p>
 
-<div class="highlight"><pre><code class="sh">:Git add .
-</code></pre></div>
+<div class="highlight"><pre><code class="sh">:Git add .</code></pre></div>
 
 <p>Let&#39;s push it to origin master</p>
 
-<div class="highlight"><pre><code class="sh">:Git push origin master
-</code></pre></div>
+<div class="highlight"><pre><code class="sh">:Git push origin master</code></pre></div>
 
 <h2>4. <a href="https://github.com/vim-ruby/vim-ruby">Vim-Ruby</a></h2>
 
@@ -176,20 +167,17 @@ set file extension or whole path, just add name of your controller and name of y
 <span class="c"># To start of previous method definition</span>
 <span class="o">[</span>m
 <span class="c"># To end of previous method definition</span>
-<span class="o">[</span>M
-</code></pre></div>
+<span class="o">[</span>M</code></pre></div>
 
 <h2>5. <a href="https://github.com/tpope/vim-bundler">Vim-Bundler</a></h2>
 
 <p>You don&#39;t have exit vim or attach another tmux session to install gems anymore. Just run :Bundle in command mode in Vim and gems will be installed:</p>
 
-<div class="highlight"><pre><code class="sh">:Bundle
-</code></pre></div>
+<div class="highlight"><pre><code class="sh">:Bundle</code></pre></div>
 
 <p>To edit Gemfile you will use this command:</p>
 
-<div class="highlight"><pre><code class="sh">:Bopen
-</code></pre></div>
+<div class="highlight"><pre><code class="sh">:Bopen</code></pre></div>
 
 <h2>6. <a href="https://github.com/tpope/vim-cucumber">Vim-Cucumber</a></h2>
 
@@ -203,8 +191,7 @@ set file extension or whole path, just add name of your controller and name of y
 
 <p>With Vroom you can run your tests inside Vim. Supports Rspec, Cucumber and MiniTest. You can run your tests with:</p>
 
-<div class="highlight"><pre><code class="sh">:VroomRunTestFile
-</code></pre></div>
+<div class="highlight"><pre><code class="sh">:VroomRunTestFile</code></pre></div>
 
 <h2>9. <a href="https://github.com/tpope/vim-endwise">Vim-endwise</a></h2>
 
@@ -243,7 +230,22 @@ set file extension or whole path, just add name of your controller and name of y
 <ul class="posts">
   
 
+  <li><span>27 May 2014</span> &raquo; <a href="/2014/05/27/link.html#disqus_thread">Link</a></li>
+  
+  
+  
+
+  <li><span>24 Apr 2014</span> &raquo; <a href="/2014/04/24/rails.html#disqus_thread">6 Books for learning or advancing your rails knowledge</a></li>
+  
+  
+  
+
   <li><span>24 Apr 2014</span> &raquo; <a href="/learning-resources/2014/04/24/books-for-learning-rails.html#disqus_thread">6 Books for learning or advancing your rails knowledge</a></li>
+  
+  
+  
+
+  <li><span>17 Apr 2014</span> &raquo; <a href="/2014/04/17/calculator.html#disqus_thread">How to create simple calculator in Shoes</a></li>
   
   
   
@@ -254,6 +256,11 @@ set file extension or whole path, just add name of your controller and name of y
   
 
   <li><span>09 Apr 2014</span> &raquo; <a href="/learning-resources/2014/04/09/learn-ruby-on-rails-book-review.html#disqus_thread">Learn Ruby on Rails book review</a></li>
+  
+  
+  
+
+  <li><span>05 Apr 2014</span> &raquo; <a href="/2014/04/05/why_tmux.html#disqus_thread">Why to use tmux</a></li>
   
   
   
@@ -269,16 +276,6 @@ set file extension or whole path, just add name of your controller and name of y
   
 
   <li><span>28 Mar 2014</span> &raquo; <a href="/learning-resources/2014/03/28/learn-ruby-with-these-resources.html#disqus_thread">Top 8 Learning resources for ruby beginner</a></li>
-  
-  
-  
-
-  <li><span>26 Mar 2014</span> &raquo; <a href="/productivity-booster/2014/03/26/top-ten-commands-in-terminal-you-will-use-everyday.html#disqus_thread">Top 10 commands in terminal you will use everyday</a></li>
-  
-  
-  
-
-  <li><span>22 Mar 2014</span> &raquo; <a href="/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.html#disqus_thread">How to create todo list app in rails static pages</a></li>
   
   
    
@@ -314,6 +311,13 @@ set file extension or whole path, just add name of your controller and name of y
   <h1>Recent posts</h1>
 
 <li>
+  <span>27 May 2014</span> &raquo;
+
+  <a href="/2014/05/27/link.html">
+    Link</a>
+</li>
+
+<li>
   <span>02 May 2014</span> &raquo;
 
   <a href="/productivity-booster/2014/05/02/vim-plugins-for-ruby.html">
@@ -323,8 +327,22 @@ set file extension or whole path, just add name of your controller and name of y
 <li>
   <span>24 Apr 2014</span> &raquo;
 
+  <a href="/2014/04/24/rails.html">
+    6 Books for learning or advancing your rails knowledge</a>
+</li>
+
+<li>
+  <span>24 Apr 2014</span> &raquo;
+
   <a href="/learning-resources/2014/04/24/books-for-learning-rails.html">
     6 Books for learning or advancing your rails knowledge</a>
+</li>
+
+<li>
+  <span>17 Apr 2014</span> &raquo;
+
+  <a href="/2014/04/17/calculator.html">
+    How to create simple calculator in Shoes</a>
 </li>
 
 <li>
@@ -339,6 +357,13 @@ set file extension or whole path, just add name of your controller and name of y
 
   <a href="/learning-resources/2014/04/09/learn-ruby-on-rails-book-review.html">
     Learn Ruby on Rails book review</a>
+</li>
+
+<li>
+  <span>05 Apr 2014</span> &raquo;
+
+  <a href="/2014/04/05/why_tmux.html">
+    Why to use tmux</a>
 </li>
 
 <li>

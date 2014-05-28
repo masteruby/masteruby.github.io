@@ -1,12 +1,34 @@
 ---
 layout: default
-title: Masteruby
+title: Ruby Tutorials Website
 ---
 
 <div id="home">
-  <p>Masteruby is a ruby tutorials website, you will learn ruby in rails apps and command line apps.</p>
-  <h1>Blog Posts</h1>
-  <ul class="posts">
+	<h1>New?Start Here</h1>
+	<p>Masteruby is a ruby tutorials website where you can find out tutorials about Ruby on Rails, learning resources for Ruby, tips and tricks for better productivity with Ruby and how to create GUI apps.</p>
+
+	<h1>New to Ruby?</h1>
+
+	<ul>
+		<li><a href="/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html">How to install Ruby</a>- start with my installation guide</li>
+		<li><a href="/learning-resources/2014/03/28/learn-ruby-with-these-resources.html">8 books or online tutorials for Ruby beginners</a> - Here you can find my list of books and tutorials for learning ruby.</li>
+    
+		<li><a href="/learning-resources/2014/04/24/books-for-learning-rails.html">6 Rails books for beginner or intermediate developer</a> - If you're just getting started with Rails you can read my list of books for Rails beginner.</li>
+
+   <li><a href="/productivity-booster/2014/03/26/top-ten-commands-in-terminal-you-will-use-everyday.html">Terminal introduction</a>- if you don't know how to use terminal try my post.
+
+  <h2>Howto tutorials</h2>
+  <li><a href="/weekly-rails/2014/04/04/how-to-create-todo-list-app-in-rails-adding-removing-completing-tasks.html">How to create todo list app in rails</a> - In this post you will learn to create todo list app.
+
+	<li><a href="shoes/2014/04/17/how-to-create-simple-calculator-in-shoes.html">How to create calculator in Ruby</a>- In this guide you will learn to create calculator in Shoes GUI toolkit
+
+	<h2>Tips and Tricks for using Ruby</h2>
+
+	<li><a href="/productivity-booster/2014/05/02/vim-plugins-for-ruby.html"</a>10 Vim plugins for Ruby</a>- if you're looking for tools to boost your productivity with Ruby, try my list of vim plugins for better Ruby development.</li>
+
+</ul>
+	
+		<h1>Blog Posts</h1> <ul class="posts">
     {% for post in site.posts %}
     <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
         {% endfor %}

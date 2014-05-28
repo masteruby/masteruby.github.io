@@ -29,7 +29,8 @@
         
         <nav>
           <ul>
-            <li id="logo"><a href="/">Masteruby</a>
+						<li id="logo"><a href="/">Masteruby</a>
+						<li><a href="/">Start here</a>
           <li><a href="/weekly-rails.html">Rails</a></li>
           <li><a href="/shoes.html">Shoes</a></li>
           <li><a href="/learning-resources.html">Learning Resources</a></li>
@@ -82,8 +83,7 @@ ruby</a> in previous post.</p>
 
 <p>If you have ruby installed by rvm, just install green_shoes with rubygems:</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>gem install green_shoes
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>gem install green_shoes</code></pre></div>
 
 <p>If you have trouble with installation, you have to install <a href="http://sourceforge.net/projects/ruby-gnome2/">ruby
 gtk2</a>. </p>
@@ -100,13 +100,11 @@ this code:</p>
 <div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;green_shoes&#39;</span>
 
 <span class="no">Shoes</span><span class="o">.</span><span class="n">app</span><span class="p">(</span><span class="ss">title</span><span class="p">:</span> <span class="s2">&quot;My calculator&quot;</span><span class="p">,</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">240</span><span class="p">)</span> <span class="k">do</span>
-<span class="k">end</span>
-</code></pre></div>
+<span class="k">end</span></code></pre></div>
 
 <p>Go to the terminal and run green shoes:</p>
 
-<div class="highlight"><pre><code class="sh">ruby calculator.rb
-</code></pre></div>
+<div class="highlight"><pre><code class="sh">ruby calculator.rb</code></pre></div>
 
 <p>You should see something like this:</p>
 
@@ -132,8 +130,7 @@ clear button and remaining buttons.</p>
       <span class="n">background</span> <span class="n">rgb</span><span class="p">(</span><span class="mi">139</span><span class="p">,</span> <span class="mi">206</span><span class="p">,</span> <span class="mi">236</span><span class="p">)</span>
     <span class="k">end</span>
   <span class="k">end</span>
-<span class="k">end</span>
-</code></pre></div>
+<span class="k">end</span></code></pre></div>
 
 <p>If you run shoes again, you should see something like this:</p>
 
@@ -141,15 +138,13 @@ clear button and remaining buttons.</p>
 
 <p>Let&#39;s look at what we&#39;ve done. First we&#39;ve created flow, that copy size of screen.</p>
 
-<div class="highlight"><pre><code class="ruby">  <span class="n">flow</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">240</span> <span class="k">do</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="ruby"><span class="n">flow</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">240</span> <span class="k">do</span></code></pre></div>
 
 <p>Our app is divided into three parts: number field, clear button and remaining buttons, so we&#39;ve created three different flows to match it. </p>
 
 <div class="highlight"><pre><code class="ruby"><span class="n">flow</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">7</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">2</span> <span class="k">do</span>
   <span class="n">background</span> <span class="n">rgb</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">157</span><span class="p">,</span> <span class="mi">228</span><span class="p">)</span>
-<span class="k">end</span>
-</code></pre></div>
+<span class="k">end</span></code></pre></div>
 
 <p>Here we used floating points to match size of flow. If you type 0.7 it means 70% width of screen and if you type 0.2 it means 20% size. Then we&#39;ve used background method to change color of the flow.</p>
 
@@ -177,8 +172,7 @@ clear button and remaining buttons.</p>
       <span class="n">background</span> <span class="n">rgb</span><span class="p">(</span><span class="mi">139</span><span class="p">,</span> <span class="mi">206</span><span class="p">,</span> <span class="mi">236</span><span class="p">)</span>
     <span class="k">end</span>
   <span class="k">end</span>
-<span class="k">end</span>
-</code></pre></div>
+<span class="k">end</span></code></pre></div>
 
 <p>So if you run code you should number 0 in number field: </p>
 
@@ -186,14 +180,12 @@ clear button and remaining buttons.</p>
 
 <p>Let&#39;s take a look at code:</p>
 
-<div class="highlight"><pre><code class="ruby">  <span class="n">number_field</span> <span class="o">=</span> <span class="kp">nil</span>
-  <span class="vi">@number</span> <span class="o">=</span> <span class="mi">0</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="ruby"><span class="n">number_field</span> <span class="o">=</span> <span class="kp">nil</span>
+  <span class="vi">@number</span> <span class="o">=</span> <span class="mi">0</span></code></pre></div>
 
 <p>Here we&#39;ve set two variables. Variable <strong>number_field</strong> is for displaying number field. In variable <strong>@number</strong> we set actual value of number in the number field.</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="n">number_field</span> <span class="o">=</span> <span class="n">para</span> <span class="vi">@number</span><span class="p">,</span> <span class="ss">margin</span><span class="p">:</span> <span class="mi">10</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="ruby"><span class="n">number_field</span> <span class="o">=</span> <span class="n">para</span> <span class="vi">@number</span><span class="p">,</span> <span class="ss">margin</span><span class="p">:</span> <span class="mi">10</span></code></pre></div>
 
 <p>Here we&#39;ve changed number field to para. Para is method in shoes for displaying text or numbers in screen. We&#39;ve used <strong>@number</strong> to set para to 0, but it can be anything you like. After that we&#39;ve set margin to all sizes.</p>
 
@@ -221,15 +213,13 @@ clear button and remaining buttons.</p>
       <span class="n">background</span> <span class="n">rgb</span><span class="p">(</span><span class="mi">139</span><span class="p">,</span> <span class="mi">206</span><span class="p">,</span> <span class="mi">236</span><span class="p">)</span>
     <span class="k">end</span>
   <span class="k">end</span>
-<span class="k">end</span>
-</code></pre></div>
+<span class="k">end</span></code></pre></div>
 
 <p><img class="shoes" src="/images/adding_clr.png" alt="how to add clear
 button"></img></p>
 
 <div class="highlight"><pre><code class="ruby"><span class="n">button</span> <span class="s1">&#39;Clr&#39;</span><span class="p">,</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span> <span class="k">do</span>
-<span class="k">end</span>
-</code></pre></div>
+<span class="k">end</span></code></pre></div>
 
 <p>So here we&#39;ve added button with name <strong>Clr</strong> and set it&#39;s width and height to size of flow. </p>
 
@@ -261,16 +251,14 @@ button"></img></p>
       <span class="k">end</span>      
     <span class="k">end</span>
   <span class="k">end</span>
-<span class="k">end</span>
-</code></pre></div>
+<span class="k">end</span></code></pre></div>
 
 <p><img class="shoes" src="/images/adding_buttons.png" alt="how to add buttons in
 shoes"></img></p>
 
 <div class="highlight"><pre><code class="ruby"><span class="sx">%w(7 8 9 + 4 5 6 - 1 2 3 / 0 . = *)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">btn</span><span class="o">|</span>
   <span class="n">button</span> <span class="n">btn</span><span class="p">,</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">50</span> <span class="k">do</span>
-  <span class="k">end</span>
-</code></pre></div>
+  <span class="k">end</span></code></pre></div>
 
 <p>We&#39;ve added all buttons to array with %w method and added every button to each
 loop, then we&#39;ve set height and width of the buttons.</p>
@@ -306,12 +294,10 @@ Let&#39;s fix it. Go to flow with clr button and add code some code: </p>
       <span class="k">end</span>      
     <span class="k">end</span>
   <span class="k">end</span>
-<span class="k">end</span>
-</code></pre></div>
+<span class="k">end</span></code></pre></div>
 
 <div class="highlight"><pre><code class="ruby"><span class="vi">@number</span> <span class="o">=</span> <span class="mi">0</span>
-<span class="n">number_field</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="vi">@number</span><span class="p">)</span>
-</code></pre></div>
+<span class="n">number_field</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="vi">@number</span><span class="p">)</span></code></pre></div>
 
 <p>Here we&#39;ve added block of code to button, that every time button Clr is pressed
 variable @number is set to 0. Then we use special ruby method <strong>replace</strong> to change actual value of number_field to 0. Maybe it doesn&#39;t seems to work, but try change value of variable @number to any other number and then press clr. It should change to zero.</p>
@@ -349,8 +335,7 @@ variable @number is set to 0. Then we use special ruby method <strong>replace</s
       <span class="k">end</span>      
     <span class="k">end</span>
   <span class="k">end</span>
-<span class="k">end</span>
-</code></pre></div>
+<span class="k">end</span></code></pre></div>
 
 <p>If you try your calculator in shoes, you should be able to use numbers.</p>
 
@@ -358,8 +343,7 @@ variable @number is set to 0. Then we use special ruby method <strong>replace</s
   <span class="k">when</span> <span class="sr">/[0-9]/</span> 
     <span class="vi">@number</span> <span class="o">=</span> <span class="vi">@number</span><span class="o">.</span><span class="n">to_i</span> <span class="o">*</span> <span class="mi">10</span> <span class="o">+</span> <span class="n">btn</span><span class="o">.</span><span class="n">to_i</span>
 <span class="k">end</span>
-<span class="n">number_field</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="vi">@number</span><span class="p">)</span>
-</code></pre></div>
+<span class="n">number_field</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="vi">@number</span><span class="p">)</span></code></pre></div>
 
 <p>Here we used case statement with when to catch clicks on numbers. We&#39;ve replaced
 value of variable @number with value of our buttons.</p>
@@ -408,12 +392,10 @@ value of variable @number with value of our buttons.</p>
       <span class="k">end</span>      
     <span class="k">end</span>
   <span class="k">end</span>
-<span class="k">end</span>
-</code></pre></div>
+<span class="k">end</span></code></pre></div>
 
 <div class="highlight"><pre><code class="ruby"><span class="vi">@op</span> <span class="o">=</span> <span class="kp">nil</span>
-<span class="vi">@previous</span> <span class="o">=</span> <span class="mi">0</span>
-</code></pre></div>
+<span class="vi">@previous</span> <span class="o">=</span> <span class="mi">0</span></code></pre></div>
 
 <p>First we need to add two variables, <strong>@previous</strong> and <strong>@op</strong> right after
 variable <strong>@number</strong>. We&#39;ll use @op for actual operations and previous to catch
@@ -423,8 +405,7 @@ previous number.</p>
   <span class="vi">@number</span> <span class="o">=</span> <span class="vi">@previous</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="vi">@op</span><span class="p">,</span> <span class="vi">@number</span><span class="p">)</span>
 <span class="k">else</span>
   <span class="vi">@previous</span><span class="p">,</span> <span class="vi">@number</span> <span class="o">=</span> <span class="vi">@number</span><span class="p">,</span> <span class="kp">nil</span>
-  <span class="vi">@op</span> <span class="o">=</span> <span class="n">btn</span>
-</code></pre></div>
+  <span class="vi">@op</span> <span class="o">=</span> <span class="n">btn</span></code></pre></div>
 
 <p>We&#39;ve set value of @op to our operator buttons and save value of actual number to variable @previous. Then we&#39;ve used ruby send method, that when equals button is pressed, it calculate expressions for us.</p>
 
@@ -457,7 +438,12 @@ previous number.</p>
 <ul class="posts">
   
 
-  <li><span>02 May 2014</span> &raquo; <a href="/2014/05/02/vim-addons.html#disqus_thread">Vim for Rubyist</a></li>
+  <li><span>27 May 2014</span> &raquo; <a href="/2014/05/27/link.html#disqus_thread">Link</a></li>
+  
+  
+  
+
+  <li><span>02 May 2014</span> &raquo; <a href="/productivity-booster/2014/05/02/vim-plugins-for-ruby.html#disqus_thread">Vim for Rubyist&#58; 10 useful vim plugins for Ruby</a></li>
   
   
   
@@ -500,11 +486,6 @@ previous number.</p>
   <li><span>28 Mar 2014</span> &raquo; <a href="/learning-resources/2014/03/28/learn-ruby-with-these-resources.html#disqus_thread">Top 8 Learning resources for ruby beginner</a></li>
   
   
-  
-
-  <li><span>26 Mar 2014</span> &raquo; <a href="/productivity-booster/2014/03/26/top-ten-commands-in-terminal-you-will-use-everyday.html#disqus_thread">Top 10 commands in terminal you will use everyday</a></li>
-  
-  
    
   
 
@@ -538,10 +519,17 @@ previous number.</p>
   <h1>Recent posts</h1>
 
 <li>
+  <span>27 May 2014</span> &raquo;
+
+  <a href="/2014/05/27/link.html">
+    Link</a>
+</li>
+
+<li>
   <span>02 May 2014</span> &raquo;
 
-  <a href="/2014/05/02/vim-addons.html">
-    Vim for Rubyist</a>
+  <a href="/productivity-booster/2014/05/02/vim-plugins-for-ruby.html">
+    Vim for Rubyist&#58; 10 useful vim plugins for Ruby</a>
 </li>
 
 <li>

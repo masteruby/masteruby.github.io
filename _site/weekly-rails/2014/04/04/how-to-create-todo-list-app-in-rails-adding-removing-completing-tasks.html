@@ -29,7 +29,8 @@
         
         <nav>
           <ul>
-            <li id="logo"><a href="/">Masteruby</a>
+						<li id="logo"><a href="/">Masteruby</a>
+						<li><a href="/">Start here</a>
           <li><a href="/weekly-rails.html">Rails</a></li>
           <li><a href="/shoes.html">Shoes</a></li>
           <li><a href="/learning-resources.html">Learning Resources</a></li>
@@ -91,11 +92,9 @@ pages</a></p>
 
 <h4>Gemfile</h4>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>gem <span class="s1">&#39;bootstrap-sass&#39;</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>gem <span class="s1">&#39;bootstrap-sass&#39;</span></code></pre></div>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>bundle install
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>bundle install</code></pre></div>
 
 <h3>Styling Navigation with Boostrap</h3>
 
@@ -110,9 +109,7 @@ pages</a></p>
         ul.nav.navbar-nav
           li = link_to &quot;Home&quot;, root_path
           li = link_to &quot;Help&quot;, help_path
-          li = link_to &quot;About&quot;, about_path
-          
-</code></pre></div>
+          li = link_to &quot;About&quot;, about_path</code></pre></div>
 
 <p>To work we need to import bootstrap from our extended css file. Create file <strong>main.css.scss</strong> in <strong>app/assets/stylesheets</strong> directory.</p>
 
@@ -125,8 +122,7 @@ pages</a></p>
 
 <h4>app/assets/stylesheets/main.css.scss</h4>
 
-<div class="highlight"><pre><code class="css"><span class="k">@import</span> <span class="s2">&quot;bootstrap&quot;</span><span class="p">;</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="css"><span class="k">@import</span> <span class="s2">&quot;bootstrap&quot;</span><span class="p">;</span></code></pre></div>
 
 <p>So we have bootstrap imported,let&#39;s look at the home page:</p>
 
@@ -138,8 +134,7 @@ pages</a></p>
 
 <p>To manipulate tasks we need to create a new controller:</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>rails generate controller Tasks
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>rails generate controller Tasks</code></pre></div>
 
 <p>That&#39;s fine, but we need to record tasks do database. Writing all sql code would be tedious, fortunately there is <strong>Active Record</strong> to help.</p>
 
@@ -152,25 +147,21 @@ want to know more about Active Record you can try <a href="http://guides.rubyonr
 
 <p>We need to create models to add records to database.</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>rails generate model Task name:string
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>rails generate model Task name:string</code></pre></div>
 
 <p>Our model isn&#39;t already in database, we need to move our migration. Go to db/migrate folder. You should see migration <strong>create_tasks.rb</strong></p>
 
 <p><img src="/images/migration_file.png" alt="rails migration"></p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>rake db:migrate
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>rake db:migrate</code></pre></div>
 
 <p>And move it for test purposes.</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>rake db:test:prepare
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>rake db:test:prepare</code></pre></div>
 
 <p>Let&#39;s go to rails console and create some tasks. </p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>rails console
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>rails console</code></pre></div>
 
 <p><img src="/images/creating_task.png" alt="creating task in console"></p>
 
@@ -183,8 +174,7 @@ route with tasks controller. Go to <strong>app/controllers/static<em>pages</em>c
 <h4>app/controllers/static<em>pages</em>controller.rb</h4>
 
 <div class="highlight"><pre><code class="ruby"><span class="k">def</span> <span class="nf">home</span>
-  <span class="vi">@tasks</span> <span class="o">=</span> <span class="no">Task</span><span class="o">.</span><span class="n">all</span>
-</code></pre></div>
+  <span class="vi">@tasks</span> <span class="o">=</span> <span class="no">Task</span><span class="o">.</span><span class="n">all</span></code></pre></div>
 
 <p>This code will check all instances of object Task and save it into variable <strong>@tasks</strong></p>
 
@@ -195,9 +185,7 @@ route with tasks controller. Go to <strong>app/controllers/static<em>pages</em>c
 
 <div class="highlight"><pre><code class="html">ul#tasks
   - @tasks.each do |task|
-    li = task.name
- 
-</code></pre></div>
+    li = task.name</code></pre></div>
  
 
 <p>In this code we connect view with static_pages controller and with each method
@@ -219,8 +207,7 @@ we loop through all the tasks and add their names to unordered list.</p>
 <span class="nf">  In order to use my todo list app I want to add, remove and complete my tasks.</span>
 <span class="nf">    </span><span class="k">Scenario:</span><span class="nf"> Adding task</span>
 <span class="k">    When </span><span class="nf">I add a new task</span>
-<span class="nf">    </span><span class="k">Then </span><span class="nf">I should see task added message</span>
-</code></pre></div>
+<span class="nf">    </span><span class="k">Then </span><span class="nf">I should see task added message</span></code></pre></div>
 
 <p>Now write some step definitions.</p>
 
@@ -230,8 +217,7 @@ we loop through all the tasks and add their names to unordered list.</p>
   <span class="n">visit</span> <span class="n">root_path</span>
   <span class="n">fill_in</span> <span class="s1">&#39;task_name&#39;</span><span class="p">,</span> <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s1">&#39;Pay a bill&#39;</span>
   <span class="n">expect</span> <span class="p">{</span> <span class="n">click_button</span> <span class="s2">&quot;Add task&quot;</span> <span class="p">}</span><span class="o">.</span><span class="n">to</span> <span class="n">change</span><span class="p">(</span><span class="no">Task</span><span class="p">,</span> <span class="ss">:count</span><span class="p">)</span><span class="o">.</span><span class="n">by</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
-<span class="k">end</span>
-</code></pre></div>
+<span class="k">end</span></code></pre></div>
 
 <p>We used capybara methods to fill in form for task. fill<em>in method fills text field **task</em>name** and click button with value <strong>Add task</strong>, then it count
 number of tasks and if one more tasks has been it will pass.</p>
@@ -245,8 +231,7 @@ all the routes for tasks.</p>
 
 <h4>config/routes.rb</h4>
 
-<div class="highlight"><pre><code class="ruby"><span class="n">resources</span> <span class="ss">:tasks</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="ruby"><span class="n">resources</span> <span class="ss">:tasks</span></code></pre></div>
 
 <p>Let&#39;s try to create our form.</p>
 
@@ -255,8 +240,7 @@ all the routes for tasks.</p>
 <div class="highlight"><pre><code class="html">= form_for :task, url: tasks_path do |f|
   = f.label :name
   = f.text_field :name
-  = f.submit &quot;Add task&quot;, class: &quot;btn btn-large btn-primary&quot;
-</code></pre></div>
+  = f.submit &quot;Add task&quot;, class: &quot;btn btn-large btn-primary&quot;</code></pre></div>
 
 <p>Maybe you wonder what <strong>form_for</strong> method does. Take look at this at the browser.</p>
 
@@ -273,9 +257,7 @@ picture.</p>
 <div class="highlight"><pre><code class="ruby"><span class="k">def</span> <span class="nf">create</span>
  <span class="vi">@task</span> <span class="o">=</span> <span class="no">Task</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">task_params</span><span class="p">)</span>
  <span class="vi">@task</span><span class="o">.</span><span class="n">save</span>
- <span class="n">redirect_to</span> <span class="n">root_path</span>
- 
-</code></pre></div>
+ <span class="n">redirect_to</span> <span class="n">root_path</span></code></pre></div>
 
 <p>Maybe you wonder what means <strong>task_params</strong>. Due to security issues Rails
  developers add some safer code to create new objects.</p>
@@ -284,11 +266,10 @@ picture.</p>
 
 <h4>app/controllers/tasks_controller.rb</h4>
 
-<div class="highlight"><pre><code class="ruby"> <span class="kp">private</span>
+<div class="highlight"><pre><code class="ruby"><span class="kp">private</span>
   <span class="k">def</span> <span class="nf">task_params</span>
     <span class="n">params</span><span class="o">.</span><span class="n">require</span><span class="p">(</span><span class="ss">:task</span><span class="p">)</span><span class="o">.</span><span class="n">permit</span><span class="p">(</span><span class="ss">:name</span><span class="p">)</span>
-    <span class="k">end</span>
-</code></pre></div>
+    <span class="k">end</span></code></pre></div>
     
 
 <p>We&#39;ve completed our test let&#39;s move on second. We need to add Task added
@@ -301,23 +282,20 @@ hash.</p>
 
 <div class="highlight"><pre><code class="gherkin"><span class="k">Then </span><span class="nf">/^I should see task added message$/ do</span>
 <span class="nf">  expect(page).to have_content &quot;</span><span class="s">Task added</span><span class="nf">&quot;</span>
-<span class="nf">end</span>
-</code></pre></div>
+<span class="nf">end</span></code></pre></div>
 
 <p>Our test should fail. To work we need to add flash notice to our controller and add it to layout.</p>
 
 <h4>app/controllers/tasks_controller.rb</h4>
 
-<div class="highlight"><pre><code class="ruby"><span class="n">flash</span><span class="o">[</span><span class="ss">:notice</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;Task added&quot;</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="ruby"><span class="n">flash</span><span class="o">[</span><span class="ss">:notice</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;Task added&quot;</span></code></pre></div>
 
 <h4>application.html.slim</h4>
 
 <div class="highlight"><pre><code class="html">- if notice
   = notice
 - if alert
-  = alert
-</code></pre></div>
+  = alert</code></pre></div>
   
 
 <p>Try to run test now you should see passing tests. If you go to web browser you should see task added message at the top of the page</p>
@@ -331,8 +309,7 @@ hash.</p>
 <h4>features/tasks.feature</h4>
 
 <div class="highlight"><pre><code class="gherkin"><span class="k">When </span><span class="nf">I delete task</span>
-<span class="k">Then </span><span class="nf">I should see task deleted message</span>
-</code></pre></div>
+<span class="k">Then </span><span class="nf">I should see task deleted message</span></code></pre></div>
 
 <h4>features/step<em>definitions/tasks</em>steps.rb</h4>
 
@@ -343,8 +320,7 @@ hash.</p>
 
 <span class="no">Then</span> <span class="sr">/^I should see task deleted message$/</span> <span class="k">do</span>
   <span class="n">expect</span><span class="p">(</span><span class="n">page</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_content</span><span class="p">(</span><span class="s2">&quot;Task deleted&quot;</span><span class="p">)</span>
-<span class="k">end</span>
-</code></pre></div>
+<span class="k">end</span></code></pre></div>
 
 <p>Our tests should fail. We need to add some code to our views and controllers.</p>
 
@@ -352,9 +328,7 @@ hash.</p>
   <span class="vi">@task</span> <span class="o">=</span> <span class="no">Task</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
   <span class="vi">@task</span><span class="o">.</span><span class="n">destroy</span>
   <span class="n">redirect_to</span> <span class="n">root_path</span>
-  <span class="n">flash</span><span class="o">[</span><span class="ss">:alert</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;Task deleted&quot;</span>
- 
-</code></pre></div>
+  <span class="n">flash</span><span class="o">[</span><span class="ss">:alert</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;Task deleted&quot;</span></code></pre></div>
  
 
 <p>This code will find Task by id and saves it to variable and then it will use
@@ -364,8 +338,7 @@ Active Record destroy method to remove it.</p>
 
 <h4>app/views/static_pages/home.html.slim</h4>
 
-<div class="highlight"><pre><code class="html">= link_to &#39;Delete task&#39;, task, method: :delete
-</code></pre></div>
+<div class="highlight"><pre><code class="html">= link_to &#39;Delete task&#39;, task, method: :delete</code></pre></div>
 
 <p>If you test it right now. You should see passing tests.</p>
 
@@ -374,8 +347,7 @@ Active Record destroy method to remove it.</p>
 <p>We want to complete tasks and display it as completed. To do it 
 we need to add boolean completed to our tasks table.</p>
 
-<div class="highlight"><pre><code class="sh">rails generate migration AddCompletedToTask
-</code></pre></div>
+<div class="highlight"><pre><code class="sh">rails generate migration AddCompletedToTask</code></pre></div>
 
 <p>We need to edit our migration manually. Open up
 <strong>db/migrate/add<em>completed</em>to_task.rb</strong> and add some content:</p>
@@ -384,23 +356,19 @@ we need to add boolean completed to our tasks table.</p>
 
 <div class="highlight"><pre><code class="ruby"><span class="k">def</span> <span class="nf">change</span>
   <span class="n">add_column</span> <span class="ss">:tasks</span><span class="p">,</span> <span class="ss">:completed</span><span class="p">,</span> <span class="ss">:boolean</span>
-  <span class="k">end</span>
-  
-</code></pre></div>
+  <span class="k">end</span></code></pre></div>
 
 <p>We need to add new route.</p>
 
 <h4>config/routes.rb</h4>
 
-<div class="highlight"><pre><code class="ruby"> <span class="n">match</span> <span class="s1">&#39;tasks/complete&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;tasks#complete&#39;</span> <span class="ss">:via</span> <span class="o">=&gt;</span> <span class="n">post</span>
- 
-</code></pre></div>
+<div class="highlight"><pre><code class="ruby"><span class="n">match</span> <span class="s1">&#39;tasks/complete&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;tasks#complete&#39;</span> <span class="ss">:via</span> <span class="o">=&gt;</span> <span class="n">post</span></code></pre></div>
 
 <p>And view and controller</p>
 
 <h4>app/views/static_pages/home.html.slim</h4>
 
-<div class="highlight"><pre><code class="html"> = form_tag(&quot;/tasks/complete&quot;, :method =&gt; &quot;post&quot;) do
+<div class="highlight"><pre><code class="html">= form_tag(&quot;/tasks/complete&quot;, :method =&gt; &quot;post&quot;) do
   ul#tasks
     - @tasks.each do |task|
       - if task.completed == true
@@ -420,15 +388,13 @@ we need to add boolean completed to our tasks table.</p>
 = form_for :task, url: tasks_path do |f|
   = f.label :name
   = f.text_field :name
-  = f.submit &quot;Add task&quot;, class: &quot;btn btn-large btn-primary&quot;
-  
-</code></pre></div>
+  = f.submit &quot;Add task&quot;, class: &quot;btn btn-large btn-primary&quot;</code></pre></div>
 
 <p>We checkout if task has attribute <strong>completed</strong> set to true and if it does we use strike and little css styling.</p>
 
 <h4>app/controllers/tasks_controller.rb</h4>
 
-<div class="highlight"><pre><code class="ruby">  <span class="k">def</span> <span class="nf">complete</span>
+<div class="highlight"><pre><code class="ruby"><span class="k">def</span> <span class="nf">complete</span>
     <span class="n">params</span><span class="o">[</span><span class="ss">:tasks_checkbox</span><span class="o">].</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">check</span><span class="o">|</span>
       <span class="n">task_id</span> <span class="o">=</span> <span class="n">check</span>
       <span class="n">t</span> <span class="o">=</span> <span class="no">Task</span><span class="o">.</span><span class="n">find_by_id</span><span class="p">(</span><span class="n">task_id</span><span class="p">)</span>
@@ -436,8 +402,7 @@ we need to add boolean completed to our tasks table.</p>
       <span class="n">flash</span><span class="o">[</span><span class="ss">:notice</span><span class="o">]</span> <span class="o">=</span> <span class="s2">&quot;Task completed&quot;</span>
     <span class="k">end</span>
     <span class="n">redirect_to</span> <span class="n">root_path</span>
-  <span class="k">end</span>
-</code></pre></div>
+  <span class="k">end</span></code></pre></div>
  
 
 <h2>What&#39;s next</h2>
@@ -471,12 +436,27 @@ we need to add boolean completed to our tasks table.</p>
 <ul class="posts">
   
 
+  <li><span>27 May 2014</span> &raquo; <a href="/2014/05/27/link.html#disqus_thread">Link</a></li>
+  
+  
+  
+
   <li><span>02 May 2014</span> &raquo; <a href="/productivity-booster/2014/05/02/vim-plugins-for-ruby.html#disqus_thread">Vim for Rubyist&#58; 10 useful vim plugins for Ruby</a></li>
   
   
   
 
+  <li><span>24 Apr 2014</span> &raquo; <a href="/2014/04/24/rails.html#disqus_thread">6 Books for learning or advancing your rails knowledge</a></li>
+  
+  
+  
+
   <li><span>24 Apr 2014</span> &raquo; <a href="/learning-resources/2014/04/24/books-for-learning-rails.html#disqus_thread">6 Books for learning or advancing your rails knowledge</a></li>
+  
+  
+  
+
+  <li><span>17 Apr 2014</span> &raquo; <a href="/2014/04/17/calculator.html#disqus_thread">How to create simple calculator in Shoes</a></li>
   
   
   
@@ -491,22 +471,17 @@ we need to add boolean completed to our tasks table.</p>
   
   
 
+  <li><span>05 Apr 2014</span> &raquo; <a href="/2014/04/05/why_tmux.html#disqus_thread">Why to use tmux</a></li>
+  
+  
+  
+
   <li><span>28 Mar 2014</span> &raquo; <a href="/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html#disqus_thread">How to install Ruby and Rails for your operating system</a></li>
   
   
   
 
   <li><span>28 Mar 2014</span> &raquo; <a href="/learning-resources/2014/03/28/learn-ruby-with-these-resources.html#disqus_thread">Top 8 Learning resources for ruby beginner</a></li>
-  
-  
-  
-
-  <li><span>26 Mar 2014</span> &raquo; <a href="/productivity-booster/2014/03/26/top-ten-commands-in-terminal-you-will-use-everyday.html#disqus_thread">Top 10 commands in terminal you will use everyday</a></li>
-  
-  
-  
-
-  <li><span>22 Mar 2014</span> &raquo; <a href="/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.html#disqus_thread">How to create todo list app in rails static pages</a></li>
   
   
    
@@ -542,6 +517,13 @@ we need to add boolean completed to our tasks table.</p>
   <h1>Recent posts</h1>
 
 <li>
+  <span>27 May 2014</span> &raquo;
+
+  <a href="/2014/05/27/link.html">
+    Link</a>
+</li>
+
+<li>
   <span>02 May 2014</span> &raquo;
 
   <a href="/productivity-booster/2014/05/02/vim-plugins-for-ruby.html">
@@ -551,8 +533,22 @@ we need to add boolean completed to our tasks table.</p>
 <li>
   <span>24 Apr 2014</span> &raquo;
 
+  <a href="/2014/04/24/rails.html">
+    6 Books for learning or advancing your rails knowledge</a>
+</li>
+
+<li>
+  <span>24 Apr 2014</span> &raquo;
+
   <a href="/learning-resources/2014/04/24/books-for-learning-rails.html">
     6 Books for learning or advancing your rails knowledge</a>
+</li>
+
+<li>
+  <span>17 Apr 2014</span> &raquo;
+
+  <a href="/2014/04/17/calculator.html">
+    How to create simple calculator in Shoes</a>
 </li>
 
 <li>
@@ -567,6 +563,13 @@ we need to add boolean completed to our tasks table.</p>
 
   <a href="/learning-resources/2014/04/09/learn-ruby-on-rails-book-review.html">
     Learn Ruby on Rails book review</a>
+</li>
+
+<li>
+  <span>05 Apr 2014</span> &raquo;
+
+  <a href="/2014/04/05/why_tmux.html">
+    Why to use tmux</a>
 </li>
 
 <li>

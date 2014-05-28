@@ -29,7 +29,8 @@
         
         <nav>
           <ul>
-            <li id="logo"><a href="/">Masteruby</a>
+						<li id="logo"><a href="/">Masteruby</a>
+						<li><a href="/">Start here</a>
           <li><a href="/weekly-rails.html">Rails</a></li>
           <li><a href="/shoes.html">Shoes</a></li>
           <li><a href="/learning-resources.html">Learning Resources</a></li>
@@ -90,15 +91,13 @@ directory into you want to move.</p>
 
 <p>To move into Desktop directory you will use this command:</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span><span class="nb">cd </span>Desktop
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span><span class="nb">cd </span>Desktop</code></pre></div>
 
 <h3>Go back to previous directory</h3>
 
 <p>You can go back to previous directory with <strong>cd ..</strong></p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span><span class="nb">cd</span> ..
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span><span class="nb">cd</span> ..</code></pre></div>
 
 <h2>2.ls or dir(list directory)</h2>
 
@@ -106,13 +105,11 @@ directory into you want to move.</p>
 directory. For example to see list of files of your home directory type this
 into command line in Linux and Mac.</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>ls
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>ls</code></pre></div>
 
 <p>Type this in <strong>Windows</strong></p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>dir
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>dir</code></pre></div>
 
 <p>You should see something like this:</p>
 
@@ -123,13 +120,11 @@ into command line in Linux and Mac.</p>
 <p>Touch command creates empty file. For example try to create empty file in home
 folder:</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>touch empty.txt
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>touch empty.txt</code></pre></div>
 
 <p><strong>Copy con</strong> command serves for creating empty file in <strong>Windows</strong></p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>copy con empty.txt
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>copy con empty.txt</code></pre></div>
 
 <p>You should see your file in home directory.</p>
 
@@ -138,8 +133,7 @@ folder:</p>
 <p><strong>mkdir</strong> command creates empty folder. Navigate to home folder and create
 folder of your choice:</p>
 
-<div class="highlight"><pre><code class="sh">mkdir my_folder
-</code></pre></div>
+<div class="highlight"><pre><code class="sh">mkdir my_folder</code></pre></div>
 
 <p>Check it out if folder has been created with <strong>ls</strong> or <strong>dir</strong>.</p>
 
@@ -147,8 +141,7 @@ folder of your choice:</p>
 
 <p>You should see your folder in list. You can create any number of directories what you like. For example try create three directories:</p>
 
-<div class="highlight"><pre><code class="sh">mkdir folder1 folder2 folder3
-</code></pre></div>
+<div class="highlight"><pre><code class="sh">mkdir folder1 folder2 folder3</code></pre></div>
 
 <p>You should see three new folders in current working directory. Let&#39;s move on.</p>
 
@@ -160,8 +153,7 @@ folder of your choice:</p>
 
 <p>You type rm with -r and add name of the directory you want to remove:</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>rm -r my_folder
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>rm -r my_folder</code></pre></div>
 
 <p>You should see that our folder has been removed. Option -r means recursive, it
 removes directory with all of his content. Let&#39;s try something:</p>
@@ -173,21 +165,17 @@ removes directory with all of his content. Let&#39;s try something:</p>
 <p>You can use rm for removing files too. For example create file with touch
 command or copy con in Windows.</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>touch abc.txt
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>touch abc.txt</code></pre></div>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>copy con abc.txt
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>copy con abc.txt</code></pre></div>
 
 <p>Remove it with <strong>rm</strong></p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>rm abc.txt
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>rm abc.txt</code></pre></div>
 
 <p>On windows you remove files with <strong>del</strong> command following name of the file you want to remove.</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>del abc.txt
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>del abc.txt</code></pre></div>
 
 <h2>6. mv(move file or directory)</h2>
 
@@ -198,8 +186,7 @@ command or copy con in Windows.</p>
 <p>To rename your file type filename of file you want change and name of the file
 you want to change it.</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>mv abc.txt empty.txt
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>mv abc.txt empty.txt</code></pre></div>
 
 <p>In Windows this won&#39;t work. You have to use <strong>ren</strong> command to rename your
 file.</p>
@@ -213,12 +200,10 @@ empty.txt. </p>
 <strong>dir</strong></p>
 
 <div class="highlight"><pre><code class="sh"><span class="nv">$ </span>mkdir new_folder
-<span class="nv">$ </span>mv new_folder dir 
-</code></pre></div>
+<span class="nv">$ </span>mv new_folder dir</code></pre></div>
 
 <div class="highlight"><pre><code class="sh"><span class="nv">$ </span>mkdir new_folder
-<span class="nv">$ </span>ren new_folder dir
-</code></pre></div>
+<span class="nv">$ </span>ren new_folder dir</code></pre></div>
 
 <h3>Moving files or directory with mv</h3>
 
@@ -226,35 +211,28 @@ empty.txt. </p>
 <strong>empty.txt</strong> file to <strong>dir</strong>.</p>
 
 <div class="highlight"><pre><code class="sh"><span class="nv">$ </span>mv empty.txt ~/dir
-<span class="nv">$ </span>ls
-</code></pre></div>
+<span class="nv">$ </span>ls</code></pre></div>
 
 <p>You can move any number of files as you want. For example create some files.</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>touch test1.txt test2.txt test3.txt
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>touch test1.txt test2.txt test3.txt</code></pre></div>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>copy con test1.txt test2.txt test3.txt
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>copy con test1.txt test2.txt test3.txt</code></pre></div>
 
 <p>Now move them to your folder.</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>mv test1.txt test2.txt test3.txt ~/dir
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>mv test1.txt test2.txt test3.txt ~/dir</code></pre></div>
 
 <p>In Windows you will use <strong>move</strong> command instead of mv.</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>move test1.txt test2.txt test3.txt c:<span class="se">\d</span>ir
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>move test1.txt test2.txt test3.txt c:<span class="se">\d</span>ir</code></pre></div>
 
 <p>You don&#39;t have to type name of files to terminal, you can use regular
 expressions. Try something like that:</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>mv *.txt ~/dir
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>mv *.txt ~/dir</code></pre></div>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>move *.txt c:<span class="se">\d</span>ir
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>move *.txt c:<span class="se">\d</span>ir</code></pre></div>
 
 <p>If you type <strong>*.txt</strong> it means move all files to folder.</p>
 
@@ -262,13 +240,11 @@ expressions. Try something like that:</p>
 
 <p>Copy command takes file or group or files and copy it to specific directory. For example try copy our text files back to home directory.</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>cp *.txt ~
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>cp *.txt ~</code></pre></div>
 
 <p>On Windows instead of cp you will use <strong>copy</strong></p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>copy *.txt c:<span class="se">\</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>copy *.txt c:<span class="se">\</span></code></pre></div>
 
 <p>Go back to your home directory. You should see our files.</p>
 
@@ -278,13 +254,11 @@ expressions. Try something like that:</p>
 will have to use sudo. Let&#39;s try to install <strong>Openbox</strong>, tool for creating and
 editing videos in terminal.</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>sudo apt-get install openbox
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>sudo apt-get install openbox</code></pre></div>
 
 <p>Or you can use runas in Windows. Type this:</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>runas /user:&lt;localmachine&gt;<span class="se">\a</span>dminstrator.cmd
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>runas /user:&lt;localmachine&gt;<span class="se">\a</span>dminstrator.cmd</code></pre></div>
 
 <p>You will be prompted for your user password.</p>
 
@@ -301,13 +275,11 @@ editing videos in terminal.</p>
 <p>Create some file and type something in it with your text editor. Then view its
 content with cat.</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>cat test1.txt
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>cat test1.txt</code></pre></div>
 
 <p>On windows instead of cat you will use <strong>type</strong> command.</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>Type test1.txt
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>Type test1.txt</code></pre></div>
 
 <p>You should see content of your file like this.</p>
 
@@ -317,20 +289,17 @@ content with cat.</p>
 
 <p>Let&#39;s try to join our test files to one file with cat.</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>cat test1.txt test2.txt test3.txt &gt; test.txt
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>cat test1.txt test2.txt test3.txt &gt; test.txt</code></pre></div>
 
 <h2>10. clear</h2>
 
 <p>Clear command  remove all previous commands from screen</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>clear
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>clear</code></pre></div>
 
 <p>On windows you will use <strong>cls</strong> command.</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>cls
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>cls</code></pre></div>
 
 <p>That&#39;s all for now.</p>
 
@@ -364,12 +333,27 @@ contains Windows equivalent of Linux/Mac/Unix commands.</strong></p>
 <ul class="posts">
   
 
+  <li><span>27 May 2014</span> &raquo; <a href="/2014/05/27/link.html#disqus_thread">Link</a></li>
+  
+  
+  
+
   <li><span>02 May 2014</span> &raquo; <a href="/productivity-booster/2014/05/02/vim-plugins-for-ruby.html#disqus_thread">Vim for Rubyist&#58; 10 useful vim plugins for Ruby</a></li>
   
   
   
 
+  <li><span>24 Apr 2014</span> &raquo; <a href="/2014/04/24/rails.html#disqus_thread">6 Books for learning or advancing your rails knowledge</a></li>
+  
+  
+  
+
   <li><span>24 Apr 2014</span> &raquo; <a href="/learning-resources/2014/04/24/books-for-learning-rails.html#disqus_thread">6 Books for learning or advancing your rails knowledge</a></li>
+  
+  
+  
+
+  <li><span>17 Apr 2014</span> &raquo; <a href="/2014/04/17/calculator.html#disqus_thread">How to create simple calculator in Shoes</a></li>
   
   
   
@@ -384,22 +368,17 @@ contains Windows equivalent of Linux/Mac/Unix commands.</strong></p>
   
   
 
+  <li><span>05 Apr 2014</span> &raquo; <a href="/2014/04/05/why_tmux.html#disqus_thread">Why to use tmux</a></li>
+  
+  
+  
+
   <li><span>04 Apr 2014</span> &raquo; <a href="/weekly-rails/2014/04/04/how-to-create-todo-list-app-in-rails-adding-removing-completing-tasks.html#disqus_thread">How to create todo list app in rails, adding, removing and deleting tasks</a></li>
   
   
   
 
   <li><span>28 Mar 2014</span> &raquo; <a href="/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html#disqus_thread">How to install Ruby and Rails for your operating system</a></li>
-  
-  
-  
-
-  <li><span>28 Mar 2014</span> &raquo; <a href="/learning-resources/2014/03/28/learn-ruby-with-these-resources.html#disqus_thread">Top 8 Learning resources for ruby beginner</a></li>
-  
-  
-  
-
-  <li><span>22 Mar 2014</span> &raquo; <a href="/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.html#disqus_thread">How to create todo list app in rails static pages</a></li>
   
   
    
@@ -435,6 +414,13 @@ contains Windows equivalent of Linux/Mac/Unix commands.</strong></p>
   <h1>Recent posts</h1>
 
 <li>
+  <span>27 May 2014</span> &raquo;
+
+  <a href="/2014/05/27/link.html">
+    Link</a>
+</li>
+
+<li>
   <span>02 May 2014</span> &raquo;
 
   <a href="/productivity-booster/2014/05/02/vim-plugins-for-ruby.html">
@@ -444,8 +430,22 @@ contains Windows equivalent of Linux/Mac/Unix commands.</strong></p>
 <li>
   <span>24 Apr 2014</span> &raquo;
 
+  <a href="/2014/04/24/rails.html">
+    6 Books for learning or advancing your rails knowledge</a>
+</li>
+
+<li>
+  <span>24 Apr 2014</span> &raquo;
+
   <a href="/learning-resources/2014/04/24/books-for-learning-rails.html">
     6 Books for learning or advancing your rails knowledge</a>
+</li>
+
+<li>
+  <span>17 Apr 2014</span> &raquo;
+
+  <a href="/2014/04/17/calculator.html">
+    How to create simple calculator in Shoes</a>
 </li>
 
 <li>
@@ -460,6 +460,13 @@ contains Windows equivalent of Linux/Mac/Unix commands.</strong></p>
 
   <a href="/learning-resources/2014/04/09/learn-ruby-on-rails-book-review.html">
     Learn Ruby on Rails book review</a>
+</li>
+
+<li>
+  <span>05 Apr 2014</span> &raquo;
+
+  <a href="/2014/04/05/why_tmux.html">
+    Why to use tmux</a>
 </li>
 
 <li>

@@ -29,7 +29,8 @@
         
         <nav>
           <ul>
-            <li id="logo"><a href="/">Masteruby</a>
+						<li id="logo"><a href="/">Masteruby</a>
+						<li><a href="/">Start here</a>
           <li><a href="/weekly-rails.html">Rails</a></li>
           <li><a href="/shoes.html">Shoes</a></li>
           <li><a href="/learning-resources.html">Learning Resources</a></li>
@@ -114,8 +115,7 @@ I&#39;ve included installation instructions for Ruby and Rails</p>
 
 <p>Ok so you&#39;ve got your tools in order, so we can start to  create application. Open up terminal window or command prompt if you&#39;re on Windows and enter following code:</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>rails new todo --skip-test-unit
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>rails new todo --skip-test-unit</code></pre></div>
 
 <p>This will create rails application named todo. It takes a while. Ok let&#39;s check out some folders that we&#39;re created.</p>
 
@@ -139,8 +139,7 @@ I&#39;ve included installation instructions for Ruby and Rails</p>
 what you need. First add name of the gem to your Gemfile, then open up terminal
 and add following command:</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>bundle install
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>bundle install</code></pre></div>
 
 <p>Let&#39;s add some gems to your Gemfile. Open up your Gemfile and add following
 gems:</p>
@@ -150,20 +149,17 @@ gems:</p>
 <span class="n">gem</span> <span class="s1">&#39;cucumber-rails&#39;</span><span class="p">,</span> <span class="ss">:require</span> <span class="o">=&gt;</span> <span class="kp">false</span>
 <span class="n">gem</span> <span class="s1">&#39;database_cleaner&#39;</span>
 <span class="n">gem</span> <span class="s1">&#39;rspec-expectations&#39;</span>
-<span class="n">gem</span> <span class="s1">&#39;selenium-webdriver&#39;</span>
-</code></pre></div>
+<span class="n">gem</span> <span class="s1">&#39;selenium-webdriver&#39;</span></code></pre></div>
 
 <p>Install it with Bundler:</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>bundle install
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>bundle install</code></pre></div>
 
 <h3>4.2 Starting our application</h3>
 
 <p>To run your application, type this into command line:</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>rails server
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>rails server</code></pre></div>
 
 <p>Go to web browser and type localhost:3000. Your output screen should look like this:</p>
 
@@ -175,8 +171,7 @@ gems:</p>
 
 <h3>5.1 Creating controllers</h3>
 
-<div class="highlight"><pre><code class="sh"> <span class="nv">$ </span>rails generate controller StaticPages home <span class="nb">help </span>about --no-test-framework
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>rails generate controller StaticPages home <span class="nb">help </span>about --no-test-framework</code></pre></div>
 
 <p>If you open your views folder, you should see that you have new folder named
 <strong>static_pages</strong> with some files in it. Go to the <strong>config/routes.rb</strong>, you should see path of our pages that we&#39;re created. Type for example, localhost:3000/static_pages into your web browser.</p>
@@ -199,8 +194,7 @@ to describe features. If you want to know more about Cucumber, try
 
 <p>First we need to setup folder structure of Cucumber. Run following command:</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>rails generate cucumber:install
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>rails generate cucumber:install</code></pre></div>
 
 <p>We need to test all our static pages. Open up folder features in your main
  directory and add file <strong>static_pages.feature</strong> into your features directory.</p>
@@ -220,13 +214,7 @@ to describe features. If you want to know more about Cucumber, try
 <span class="k">      |</span><span class="nv"> Path</span><span class="k">     |</span><span class="nv"> Content</span><span class="k"> | </span><span class="nf"></span>
 <span class="k">      |</span><span class="s"> Home</span><span class="k">     |</span><span class="s"> Todo</span><span class="k">    |</span><span class="nf"></span>
 <span class="k">      |</span><span class="s"> About</span><span class="k">    |</span><span class="s"> About</span><span class="k">   |</span><span class="nf"></span>
-<span class="k">      |</span><span class="s"> Help</span><span class="k">     |</span><span class="s"> Help</span><span class="k">    |</span>
-
-<span class="k">   </span>
-
-
-<span class="k"> </span>
-</code></pre></div>
+<span class="k">      |</span><span class="s"> Help</span><span class="k">     |</span><span class="s"> Help</span><span class="k">    |</span></code></pre></div>
 
 <p>This is how it works. At first line you define your feature, in our example
  StaticPages content. Then you define your steps. Steps always begin with
@@ -235,8 +223,7 @@ to describe features. If you want to know more about Cucumber, try
 
 <p>We have our feature defined, let&#39;s test it with Cucumber</p>
 
-<div class="highlight"><pre><code class="sh"> <span class="nv">$ </span>cucumber
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>cucumber</code></pre></div>
 
 <p>You should see something like this:</p>
 
@@ -249,8 +236,7 @@ to describe features. If you want to know more about Cucumber, try
 
 <div class="highlight"><pre><code class="ruby"><span class="no">When</span> <span class="sr">/^I visit Home path$/</span> <span class="k">do</span> 
   <span class="n">visit</span> <span class="s1">&#39;static_pages/home&#39;</span>
-<span class="k">end</span>
-</code></pre></div>
+<span class="k">end</span></code></pre></div>
 
 <p>In first line we match name of our step with name in the feature file.
 Then we use capybara to visit home path in the browser. Run your test with cucumber. You should see one passing test.</p>
@@ -259,8 +245,7 @@ Then we use capybara to visit home path in the browser. Run your test with cucum
 
 <div class="highlight"><pre><code class="ruby"><span class="no">Then</span> <span class="sr">/^I should see following content: Todo$/</span> <span class="k">do</span>
   <span class="n">expect</span><span class="p">(</span><span class="n">page</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_content</span><span class="p">(</span><span class="s2">&quot;Todo&quot;</span><span class="p">)</span>
-<span class="k">end</span> 
-</code></pre></div>
+<span class="k">end</span></code></pre></div>
 
 <p>In first line we match second step with feature file.
 On the second line we use <strong>Rspec Expectations</strong> to test content of our home page.</p>
@@ -282,21 +267,16 @@ language that strips all unnecessary elements as opening and closing tags. For e
     <span class="nt">&lt;h1&gt;</span>My heading<span class="nt">&lt;/h1&gt;</span>
     <span class="nt">&lt;p&gt;</span>My paragraph<span class="nt">&lt;/p&gt;</span>
   <span class="nt">&lt;/body&gt;</span>
-  <span class="nt">&lt;/html&gt;</span>
-
-  
-</code></pre></div>
+  <span class="nt">&lt;/html&gt;</span></code></pre></div>
 
 <p>And this is code in Slim:</p>
 
-<div class="highlight"><pre><code class="html">  html
+<div class="highlight"><pre><code class="html">html
     head
      title My WebPage
     body
       h1 My heading
-      p My paragraph
-   
-</code></pre></div>
+      p My paragraph</code></pre></div>
 
 <p>You see that Slim code is shorter and easier to read as Html code. 
   Let&#39;s return to our file. Replace content of <strong>home.html.slim</strong> with following
@@ -304,10 +284,7 @@ language that strips all unnecessary elements as opening and closing tags. For e
 
 <h4>home.html.slim</h4>
 
-<div class="highlight"><pre><code class="html">h1 Todo 
- 
- 
-</code></pre></div>
+<div class="highlight"><pre><code class="html">h1 Todo</code></pre></div>
 
 <p>You should see that our test is now passing. Implement this to remaining steps
 in our feature file.</p>
@@ -328,35 +305,28 @@ in our feature file.</p>
 
 <span class="no">Then</span> <span class="sr">/^I should see following content: Help$/</span> <span class="k">do</span>
   <span class="n">expect</span><span class="p">(</span><span class="n">page</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_content</span><span class="p">(</span><span class="s2">&quot;Help&quot;</span><span class="p">)</span>
-<span class="k">end</span>
-</code></pre></div>
+<span class="k">end</span></code></pre></div>
 
 <h4>about.html.slim</h4>
 
-<div class="highlight"><pre><code class="html"> h1 About
-</code></pre></div>
+<div class="highlight"><pre><code class="html">h1 About</code></pre></div>
 
 <h4>help.html.slim</h4>
 
-<div class="highlight"><pre><code class="html"> 
- h1 Help
- 
-</code></pre></div>
+<div class="highlight"><pre><code class="html">h1 Help</code></pre></div>
 
 <p>All our tests are now passing, next step will be implement title tests. Open up
  your <strong>static_pages.feature</strong> file and append following line:</p>
 
 <h4>static_pages.feature</h4>
 
-<div class="highlight"><pre><code class="gherkin"><span class="nf"> </span><span class="k">And </span><span class="nf">I should see following title: </span><span class="nv">&lt;Title&gt;</span><span class="nf"></span>
+<div class="highlight"><pre><code class="gherkin"><span class="k">And </span><span class="nf">I should see following title: </span><span class="nv">&lt;Title&gt;</span><span class="nf"></span>
 
 <span class="nf"> </span><span class="k">Examples:</span>
 <span class="k">   |</span><span class="nv"> Path</span><span class="k">     |</span><span class="nv"> Content</span><span class="k"> |</span><span class="nv"> **Title</span><span class="k"> |</span><span class="nv">**</span><span class="k"></span>
 <span class="k">   |</span><span class="nv"> Home</span><span class="k">     |</span><span class="nv"> Todo</span><span class="k">    |</span><span class="nv"> **Todo</span><span class="k">  |</span><span class="nv">**</span><span class="k"></span>
 <span class="k">   |</span><span class="nv"> About</span><span class="k">    |</span><span class="nv"> About</span><span class="k">   |</span><span class="nv"> **About</span><span class="k"> |</span><span class="nv">**</span><span class="k"></span>
-<span class="k">   |</span><span class="nv"> Help</span><span class="k">     |</span><span class="nv"> Help</span><span class="k">    |</span><span class="nv"> **Help</span><span class="k">  |</span><span class="nv">**</span>
-<span class="nv"> </span>
-</code></pre></div>
+<span class="k">   |</span><span class="nv"> Help</span><span class="k">     |</span><span class="nv"> Help</span><span class="k">    |</span><span class="nv"> **Help</span><span class="k">  |</span><span class="nv">**</span></code></pre></div>
 
 <p>Let&#39;s implement our test. Add these lines to our steps file.</p>
 
@@ -372,8 +342,7 @@ in our feature file.</p>
 
  <span class="no">And</span> <span class="sr">/^I should see following title: Help$/</span> <span class="k">do</span>
   <span class="n">expect</span><span class="p">(</span><span class="n">page</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_title</span><span class="p">(</span><span class="s2">&quot;Help&quot;</span><span class="p">)</span>
-<span class="k">end</span>
-</code></pre></div>
+<span class="k">end</span></code></pre></div>
 
 <p>Let&#39;s fix failing tests. We need to change our title in our templates.</p>
 
@@ -381,22 +350,19 @@ in our feature file.</p>
 
 <div class="highlight"><pre><code class="html">html
   head
-    title Todo
-</code></pre></div>
+    title Todo</code></pre></div>
 
 <h4>about.html.slim</h4>
 
 <div class="highlight"><pre><code class="html">html
   head
-    title About
-</code></pre></div>
+    title About</code></pre></div>
 
 <h4>help.html.slim</h4>
 
 <div class="highlight"><pre><code class="html">html
   head
-    title Help
-</code></pre></div>
+    title Help</code></pre></div>
 
 <p>Let&#39;s run cucumber again. You should see that&#39;s all our steps are now passing. We are done.</p>
 
@@ -408,26 +374,22 @@ in our feature file.</p>
 every change in terminal it&#39;s disgusting. Let&#39;s change it. We can use <strong>Guard</strong>
 to watch every change in our features folder. Add Guard to your Gemfile.</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="n">gem</span> <span class="s1">&#39;guard-cucumber&#39;</span> 
-</code></pre></div>
+<div class="highlight"><pre><code class="ruby"><span class="n">gem</span> <span class="s1">&#39;guard-cucumber&#39;</span></code></pre></div>
 
 <p>And install it:</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>bundle install
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>bundle install</code></pre></div>
 
 <p>Let&#39;s add Guard to Cucumber.</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>guard init cucumber
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>guard init cucumber</code></pre></div>
 
 <p>If you open your app&#39;s folder you should see that file named <strong>Guardfile</strong> was
 created.</p>
 
 <p>Let&#39;s run Guard to run our features automatically.</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>guard
-</code></pre></div>
+<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>guard</code></pre></div>
 
 <p>All features are running automatically by now.</p>
 
@@ -437,8 +399,7 @@ created.</p>
 You saw that we&#39;ve writed title tag three times. That&#39;s terrible, let&#39;s do
 something about that. First rename file in <strong>app/views/layouts</strong> directory.</p>
 
-<div class="highlight"><pre><code class="sh">mv application.html.erb application.html.slim
-</code></pre></div>
+<div class="highlight"><pre><code class="sh">mv application.html.erb application.html.slim</code></pre></div>
 
 <p>Delete all content and replace it with following:</p>
 
@@ -452,20 +413,17 @@ html
     = javascript_include_tag &quot;application&quot;, &quot;data-turbolinks-track&quot; =&gt; true
     = csrf_meta_tags
   body
-    = yield
-</code></pre></div>
+    = yield</code></pre></div>
 
 <h4>app/views/static_pages/about.html.slim</h4>
 
 <div class="highlight"><pre><code class="html">- provide(:title, &#39;About&#39;)
-h1 About
-</code></pre></div>
+h1 About</code></pre></div>
 
 <h4>app/views/static_pages/help.html.slim</h4>
 
-<div class="highlight"><pre><code class="html"> - provide(:title, &#39;Help&#39;)
-h1 Help
-</code></pre></div>
+<div class="highlight"><pre><code class="html">- provide(:title, &#39;Help&#39;)
+h1 Help</code></pre></div>
 
 <h3>6.3 Linking our pages and updating routes</h3>
 
@@ -476,8 +434,7 @@ instead use shorter address, it wouldbe much better.</p>
 
 <div class="highlight"><pre><code class="cucumber"><span class="nf">root &quot;</span><span class="s">static_pages#home</span><span class="nf">&quot;</span>
 <span class="nf">match &quot;</span><span class="s">/help</span><span class="nf">&quot;, to: &quot;</span><span class="s">static_pages#help</span><span class="nf">&quot;, via: &#39;get&#39;</span>
-<span class="nf">match &quot;</span><span class="s">/about</span><span class="nf">&quot;, to: &quot;</span><span class="s">static_pages#about</span><span class="nf">&quot;, via: &#39;get&#39;</span>
-</code></pre></div>
+<span class="nf">match &quot;</span><span class="s">/about</span><span class="nf">&quot;, to: &quot;</span><span class="s">static_pages#about</span><span class="nf">&quot;, via: &#39;get&#39;</span></code></pre></div>
 
 <p>And change tests in <strong>features/step<em>definitions/static</em>pages_steps.rb</strong> like this:</p>
 
@@ -493,13 +450,11 @@ instead use shorter address, it wouldbe much better.</p>
 
 <span class="no">When</span> <span class="sr">/^I visit Help path$/</span> <span class="k">do</span>
   <span class="n">visit</span> <span class="s1">&#39;/help&#39;</span>
-<span class="k">end</span>
-</code></pre></div>
+<span class="k">end</span></code></pre></div>
 
 <p>Let&#39;s take a look at code we&#39;ve just wrote.</p>
 
-<div class="highlight"><pre><code class="sh">root <span class="s2">&quot;static_pages#home&quot;</span>
-</code></pre></div>
+<div class="highlight"><pre><code class="sh">root <span class="s2">&quot;static_pages#home&quot;</span></code></pre></div>
 
 <p>This code creates root path for our pages. In this time it&#39;s
 <strong>static_pages#home</strong>. So you don&#39;t have to write your path to web browser.
@@ -519,8 +474,7 @@ Start rails server. You should something like this:</p>
   ul
     <span class="nv">li</span> <span class="o">=</span> link_to <span class="s2">&quot;Home&quot;</span>, root_path
     <span class="nv">li</span> <span class="o">=</span> link_to <span class="s2">&quot;Help&quot;</span>, help_path
-    <span class="nv">li</span> <span class="o">=</span> link_to <span class="s2">&quot;About&quot;</span>, about_path
-</code></pre></div>
+    <span class="nv">li</span> <span class="o">=</span> link_to <span class="s2">&quot;About&quot;</span>, about_path</code></pre></div>
 
 <p>You should see links on your home page.</p>
 
@@ -555,12 +509,27 @@ Start rails server. You should something like this:</p>
 <ul class="posts">
   
 
+  <li><span>27 May 2014</span> &raquo; <a href="/2014/05/27/link.html#disqus_thread">Link</a></li>
+  
+  
+  
+
   <li><span>02 May 2014</span> &raquo; <a href="/productivity-booster/2014/05/02/vim-plugins-for-ruby.html#disqus_thread">Vim for Rubyist&#58; 10 useful vim plugins for Ruby</a></li>
   
   
   
 
+  <li><span>24 Apr 2014</span> &raquo; <a href="/2014/04/24/rails.html#disqus_thread">6 Books for learning or advancing your rails knowledge</a></li>
+  
+  
+  
+
   <li><span>24 Apr 2014</span> &raquo; <a href="/learning-resources/2014/04/24/books-for-learning-rails.html#disqus_thread">6 Books for learning or advancing your rails knowledge</a></li>
+  
+  
+  
+
+  <li><span>17 Apr 2014</span> &raquo; <a href="/2014/04/17/calculator.html#disqus_thread">How to create simple calculator in Shoes</a></li>
   
   
   
@@ -575,22 +544,17 @@ Start rails server. You should something like this:</p>
   
   
 
+  <li><span>05 Apr 2014</span> &raquo; <a href="/2014/04/05/why_tmux.html#disqus_thread">Why to use tmux</a></li>
+  
+  
+  
+
   <li><span>04 Apr 2014</span> &raquo; <a href="/weekly-rails/2014/04/04/how-to-create-todo-list-app-in-rails-adding-removing-completing-tasks.html#disqus_thread">How to create todo list app in rails, adding, removing and deleting tasks</a></li>
   
   
   
 
   <li><span>28 Mar 2014</span> &raquo; <a href="/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html#disqus_thread">How to install Ruby and Rails for your operating system</a></li>
-  
-  
-  
-
-  <li><span>28 Mar 2014</span> &raquo; <a href="/learning-resources/2014/03/28/learn-ruby-with-these-resources.html#disqus_thread">Top 8 Learning resources for ruby beginner</a></li>
-  
-  
-  
-
-  <li><span>26 Mar 2014</span> &raquo; <a href="/productivity-booster/2014/03/26/top-ten-commands-in-terminal-you-will-use-everyday.html#disqus_thread">Top 10 commands in terminal you will use everyday</a></li>
   
   
    
@@ -626,6 +590,13 @@ Start rails server. You should something like this:</p>
   <h1>Recent posts</h1>
 
 <li>
+  <span>27 May 2014</span> &raquo;
+
+  <a href="/2014/05/27/link.html">
+    Link</a>
+</li>
+
+<li>
   <span>02 May 2014</span> &raquo;
 
   <a href="/productivity-booster/2014/05/02/vim-plugins-for-ruby.html">
@@ -635,8 +606,22 @@ Start rails server. You should something like this:</p>
 <li>
   <span>24 Apr 2014</span> &raquo;
 
+  <a href="/2014/04/24/rails.html">
+    6 Books for learning or advancing your rails knowledge</a>
+</li>
+
+<li>
+  <span>24 Apr 2014</span> &raquo;
+
   <a href="/learning-resources/2014/04/24/books-for-learning-rails.html">
     6 Books for learning or advancing your rails knowledge</a>
+</li>
+
+<li>
+  <span>17 Apr 2014</span> &raquo;
+
+  <a href="/2014/04/17/calculator.html">
+    How to create simple calculator in Shoes</a>
 </li>
 
 <li>
@@ -651,6 +636,13 @@ Start rails server. You should something like this:</p>
 
   <a href="/learning-resources/2014/04/09/learn-ruby-on-rails-book-review.html">
     Learn Ruby on Rails book review</a>
+</li>
+
+<li>
+  <span>05 Apr 2014</span> &raquo;
+
+  <a href="/2014/04/05/why_tmux.html">
+    Why to use tmux</a>
 </li>
 
 <li>
