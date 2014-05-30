@@ -75,31 +75,31 @@ you saw that we will use terminal with Rails most of the time.</p>
 <p>In this tutorial you will learn top ten commands you will use everyday in
 terminal.</p>
 
-<p>Let&#39;s get started. First go to menu and open up: <strong>Command Prompt</strong> or
+<p>Let’s get started. First go to menu and open up: <strong>Command Prompt</strong> or
 <strong>PowerShell</strong> in Windows and <strong>Terminal</strong> in Linux and Mac. You should see something like this:</p>
 
-<p><img src="/images/terminal-screen.png" alt="terminal-screen"></p>
+<p><img src="/images/terminal-screen.png" alt="terminal-screen" /></p>
 
-<p>Ok so everything works let&#39;s begin.</p>
+<p>Ok so everything works let’s begin.</p>
 
-<h2>1. cd(change directory)</h2>
+<h2 id="cdchange-directory">1. cd(change directory)</h2>
 
 <p>To change actual working directory you use <strong>cd</strong> command. Type cd and
 directory into you want to move.</p>
 
-<h3>Move to another directory</h3>
+<h3 id="move-to-another-directory">Move to another directory</h3>
 
 <p>To move into Desktop directory you will use this command:</p>
 
 <div class="highlight"><pre><code class="sh"><span class="nv">$ </span><span class="nb">cd </span>Desktop</code></pre></div>
 
-<h3>Go back to previous directory</h3>
+<h3 id="go-back-to-previous-directory">Go back to previous directory</h3>
 
 <p>You can go back to previous directory with <strong>cd ..</strong></p>
 
 <div class="highlight"><pre><code class="sh"><span class="nv">$ </span><span class="nb">cd</span> ..</code></pre></div>
 
-<h2>2.ls or dir(list directory)</h2>
+<h2 id="ls-or-dirlist-directory">2.ls or dir(list directory)</h2>
 
 <p><strong>ls</strong> command shows list of all files and directories in current working 
 directory. For example to see list of files of your home directory type this
@@ -113,10 +113,9 @@ into command line in Linux and Mac.</p>
 
 <p>You should see something like this:</p>
 
-<p><img src="/images/list-of-directories.png" alt="list-of-directories"></p>
+<p><img src="/images/list-of-directories.png" alt="list-of-directories" /></p>
 
-<h2>3. touch or copy con</h2>
-
+<h2 id="touch-or-copy-con">3. touch or copy con</h2>
 <p>Touch command creates empty file. For example try to create empty file in home
 folder:</p>
 
@@ -128,7 +127,7 @@ folder:</p>
 
 <p>You should see your file in home directory.</p>
 
-<h2>4. mkdir(make directory)</h2>
+<h2 id="mkdirmake-directory">4. mkdir(make directory)</h2>
 
 <p><strong>mkdir</strong> command creates empty folder. Navigate to home folder and create
 folder of your choice:</p>
@@ -137,30 +136,29 @@ folder of your choice:</p>
 
 <p>Check it out if folder has been created with <strong>ls</strong> or <strong>dir</strong>.</p>
 
-<p><img src="/images/create-folder.png" alt="create-folder"></p>
+<p><img src="/images/create-folder.png" alt="create-folder" /></p>
 
 <p>You should see your folder in list. You can create any number of directories what you like. For example try create three directories:</p>
 
 <div class="highlight"><pre><code class="sh">mkdir folder1 folder2 folder3</code></pre></div>
 
-<p>You should see three new folders in current working directory. Let&#39;s move on.</p>
+<p>You should see three new folders in current working directory. Let’s move on.</p>
 
-<h2>5. rm(remove)</h2>
+<h2 id="rmremove">5. rm(remove)</h2>
 
 <p>Remove command deletes folder or file.</p>
 
-<h3>Remove folder</h3>
-
+<h3 id="remove-folder">Remove folder</h3>
 <p>You type rm with -r and add name of the directory you want to remove:</p>
 
 <div class="highlight"><pre><code class="sh"><span class="nv">$ </span>rm -r my_folder</code></pre></div>
 
 <p>You should see that our folder has been removed. Option -r means recursive, it
-removes directory with all of his content. Let&#39;s try something:</p>
+removes directory with all of his content. Let’s try something:</p>
 
-<p><img src="/images/remove-directory.png" alt="remove-directory"> </p>
+<p><img src="/images/remove-directory.png" alt="remove-directory" /> </p>
 
-<h3>Removing files</h3>
+<h3 id="removing-files">Removing files</h3>
 
 <p>You can use rm for removing files too. For example create file with touch
 command or copy con in Windows.</p>
@@ -177,24 +175,23 @@ command or copy con in Windows.</p>
 
 <div class="highlight"><pre><code class="sh"><span class="nv">$ </span>del abc.txt</code></pre></div>
 
-<h2>6. mv(move file or directory)</h2>
-
+<h2 id="mvmove-file-or-directory">6. mv(move file or directory)</h2>
 <p>Move command serves for renaming or moving directories.</p>
 
-<h3>Rename directory or file with move</h3>
+<h3 id="rename-directory-or-file-with-move">Rename directory or file with move</h3>
 
 <p>To rename your file type filename of file you want change and name of the file
 you want to change it.</p>
 
 <div class="highlight"><pre><code class="sh"><span class="nv">$ </span>mv abc.txt empty.txt</code></pre></div>
 
-<p>In Windows this won&#39;t work. You have to use <strong>ren</strong> command to rename your
+<p>In Windows this won’t work. You have to use <strong>ren</strong> command to rename your
 file.</p>
 
 <p>Check it out with ls or dir. You should see that file abc.txt is now renamed to
 empty.txt. </p>
 
-<p><img src="/images/rename-file.png" alt="rename-file"></p>
+<p><img src="/images/rename-file.png" alt="rename-file" /></p>
 
 <p>We can use mv for renaming directories too. Try something like this: Create directory <strong>new_folder</strong> in your home directory. Now rename it to
 <strong>dir</strong></p>
@@ -205,7 +202,7 @@ empty.txt. </p>
 <div class="highlight"><pre><code class="sh"><span class="nv">$ </span>mkdir new_folder
 <span class="nv">$ </span>ren new_folder dir</code></pre></div>
 
-<h3>Moving files or directory with mv</h3>
+<h3 id="moving-files-or-directory-with-mv">Moving files or directory with mv</h3>
 
 <p>You can use mv command to move files to specific directory. Move your
 <strong>empty.txt</strong> file to <strong>dir</strong>.</p>
@@ -227,7 +224,7 @@ empty.txt. </p>
 
 <div class="highlight"><pre><code class="sh"><span class="nv">$ </span>move test1.txt test2.txt test3.txt c:<span class="se">\d</span>ir</code></pre></div>
 
-<p>You don&#39;t have to type name of files to terminal, you can use regular
+<p>You don’t have to type name of files to terminal, you can use regular
 expressions. Try something like that:</p>
 
 <div class="highlight"><pre><code class="sh"><span class="nv">$ </span>mv *.txt ~/dir</code></pre></div>
@@ -236,7 +233,7 @@ expressions. Try something like that:</p>
 
 <p>If you type <strong>*.txt</strong> it means move all files to folder.</p>
 
-<h2>7. cp(copy)</h2>
+<h2 id="cpcopy">7. cp(copy)</h2>
 
 <p>Copy command takes file or group or files and copy it to specific directory. For example try copy our text files back to home directory.</p>
 
@@ -248,10 +245,10 @@ expressions. Try something like that:</p>
 
 <p>Go back to your home directory. You should see our files.</p>
 
-<h2>8. sudo or runas(switch user do)</h2>
+<h2 id="sudo-or-runasswitch-user-do">8. sudo or runas(switch user do)</h2>
 
 <p>If you want to install some programs  on your Linux or Mac operating system you
-will have to use sudo. Let&#39;s try to install <strong>Openbox</strong>, tool for creating and
+will have to use sudo. Let’s try to install <strong>Openbox</strong>, tool for creating and
 editing videos in terminal.</p>
 
 <div class="highlight"><pre><code class="sh"><span class="nv">$ </span>sudo apt-get install openbox</code></pre></div>
@@ -262,15 +259,15 @@ editing videos in terminal.</p>
 
 <p>You will be prompted for your user password.</p>
 
-<p><img src="/images/sudo.png" alt="sudo"></p>
+<p><img src="/images/sudo.png" alt="sudo" /></p>
 
 <p>Type this in and type letter Y for installation.</p>
 
-<h2>9. cat or type(concatenate)</h2>
+<h2 id="cat-or-typeconcatenate">9. cat or type(concatenate)</h2>
 
 <p>Cat command serves for viewing of contents and concatenation of multiple files.</p>
 
-<h3>Viewing content of the file with cat</h3>
+<h3 id="viewing-content-of-the-file-with-cat">Viewing content of the file with cat</h3>
 
 <p>Create some file and type something in it with your text editor. Then view its
 content with cat.</p>
@@ -283,15 +280,15 @@ content with cat.</p>
 
 <p>You should see content of your file like this.</p>
 
-<p><img src="/images/cat-command.png" alt="cat-command"></p>
+<p><img src="/images/cat-command.png" alt="cat-command" /></p>
 
-<h3>Joining multiple files to one file with cat</h3>
+<h3 id="joining-multiple-files-to-one-file-with-cat">Joining multiple files to one file with cat</h3>
 
-<p>Let&#39;s try to join our test files to one file with cat.</p>
+<p>Let’s try to join our test files to one file with cat.</p>
 
 <div class="highlight"><pre><code class="sh"><span class="nv">$ </span>cat test1.txt test2.txt test3.txt &gt; test.txt</code></pre></div>
 
-<h2>10. clear</h2>
+<h2 id="clear">10. clear</h2>
 
 <p>Clear command  remove all previous commands from screen</p>
 
@@ -301,9 +298,9 @@ content with cat.</p>
 
 <div class="highlight"><pre><code class="sh"><span class="nv">$ </span>cls</code></pre></div>
 
-<p>That&#39;s all for now.</p>
+<p>That’s all for now.</p>
 
-<p><strong>27-03-2014 - I&#39;ve updated my post after critical responses on Reddit. Now it 
+<p><strong>27-03-2014 - I’ve updated my post after critical responses on Reddit. Now it 
 contains Windows equivalent of Linux/Mac/Unix commands.</strong></p>
 
 
@@ -333,7 +330,12 @@ contains Windows equivalent of Linux/Mac/Unix commands.</strong></p>
 <ul class="posts">
   
 
-  <li><span>27 May 2014</span> &raquo; <a href="/2014/05/27/link.html#disqus_thread">Link</a></li>
+  <li><span>30 May 2014</span> &raquo; <a href="/2014/05/30/link.html#disqus_thread">Link</a></li>
+  
+  
+  
+
+  <li><span>30 May 2014</span> &raquo; <a href="/learning-resources/2014/05/30/ruby-news-websites.html#disqus_thread">7 Websites to Get Latest News About Ruby</a></li>
   
   
   
@@ -376,11 +378,6 @@ contains Windows equivalent of Linux/Mac/Unix commands.</strong></p>
   <li><span>04 Apr 2014</span> &raquo; <a href="/weekly-rails/2014/04/04/how-to-create-todo-list-app-in-rails-adding-removing-completing-tasks.html#disqus_thread">How to create todo list app in rails, adding, removing and deleting tasks</a></li>
   
   
-  
-
-  <li><span>28 Mar 2014</span> &raquo; <a href="/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html#disqus_thread">How to install Ruby and Rails for your operating system</a></li>
-  
-  
    
   
 
@@ -414,10 +411,17 @@ contains Windows equivalent of Linux/Mac/Unix commands.</strong></p>
   <h1>Recent posts</h1>
 
 <li>
-  <span>27 May 2014</span> &raquo;
+  <span>30 May 2014</span> &raquo;
 
-  <a href="/2014/05/27/link.html">
+  <a href="/2014/05/30/link.html">
     Link</a>
+</li>
+
+<li>
+  <span>30 May 2014</span> &raquo;
+
+  <a href="/learning-resources/2014/05/30/ruby-news-websites.html">
+    7 Websites to Get Latest News About Ruby</a>
 </li>
 
 <li>

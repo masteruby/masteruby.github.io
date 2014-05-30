@@ -71,29 +71,29 @@
 <div class="post">
 <p>In this post I want to show some useful Vim plugins, that are true productivity boosters for every Ruby programmer. You can install them by either <a href="https://github.com/tpope/vim-pathogen">Pathogen</a> or <a href="https://github.com/gmarik/Vundle.vim">Vundle</a>.</p>
 
-<h2>1. <a href="https://github.com/tpope/vim-rails">Vim-Rails</a></h2>
+<h2 id="vim-railshttpsgithubcomtpopevim-rails">1. <a href="https://github.com/tpope/vim-rails">Vim-Rails</a></h2>
 
-<p>Vim-Rails plugin is must for every Rails Developer working in Vim. Here&#39;s what I&#39;ve found useful:</p>
+<p>Vim-Rails plugin is must for every Rails Developer working in Vim. Here’s what I’ve found useful:</p>
 
-<h3>Easy navigation</h3>
+<h3 id="easy-navigation">Easy navigation</h3>
 
-<p>Want to find some file but don&#39;t know its path? Try to use <strong>:find</strong> command:</p>
+<p>Want to find some file but don’t know its path? Try to use <strong>:find</strong> command:</p>
 
 <div class="highlight"><pre><code class="sh">:find schema.rb</code></pre></div>
 
-<p>You can also move up in your Rails application by finding related files. For example, let&#39;s assume you&#39;re editing <strong>home.html.slim</strong>. Try to find related file</p>
+<p>You can also move up in your Rails application by finding related files. For example, let’s assume you’re editing <strong>home.html.slim</strong>. Try to find related file</p>
 
 <div class="highlight"><pre><code class="sh">:R</code></pre></div>
 
-<p>You should see that you&#39;re in file <strong>static<em>pages</em>controller.rb</strong> and that you have cursor at method named home.</p>
+<p>You should see that you’re in file <strong>static_pages_controller.rb</strong> and that you have cursor at method named home.</p>
 
-<h3>Great Editing</h3>
+<h3 id="great-editing">Great Editing</h3>
 
-<p>Jumping from views to controllers to models can be really painful. Here&#39;s where <strong>vim-rails</strong> plugin excels. For example let&#39;s assume you have file named <strong>home.html.slim</strong> in your <strong>views</strong> directory. You can edit it with simple <strong>Eview</strong>:</p>
+<p>Jumping from views to controllers to models can be really painful. Here’s where <strong>vim-rails</strong> plugin excels. For example let’s assume you have file named <strong>home.html.slim</strong> in your <strong>views</strong> directory. You can edit it with simple <strong>Eview</strong>:</p>
 
 <div class="highlight"><pre><code class="sh">:Eview static_pages/home</code></pre></div>
 
-<p>You see? You don&#39;t have to
+<p>You see? You don’t have to
 set file extension or whole path, just add name of your controller and name of your view file.</p>
 
 <p>Similarily you can edit controller too:</p>
@@ -106,25 +106,24 @@ set file extension or whole path, just add name of your controller and name of y
 :Emodel User
 :Estylesheet main</code></pre></div>
 
-<h3>Generator Commands</h3>
+<h3 id="generator-commands">Generator Commands</h3>
 
-<p>So you want to run migration, generate model or controller. Before vim-rails plugin you have to close your vim session and go back to terminal, not anymore. Here&#39;s useful commands you should know. Let&#39;s assume you&#39;re building model named User, you can simply create model with :Rgenerate and destroy model with :Rdestroy.</p>
+<p>So you want to run migration, generate model or controller. Before vim-rails plugin you have to close your vim session and go back to terminal, not anymore. Here’s useful commands you should know. Let’s assume you’re building model named User, you can simply create model with :Rgenerate and destroy model with :Rdestroy.</p>
 
 <div class="highlight"><pre><code class="sh">:Rgenerate model User
 :Rdestroy model User
 :Rserver</code></pre></div>
 
-<p>To run rails server within background of Vim you will use Rserver command. </p>
-
-<h3>Syntax highlighting</h3>
+<p>To run rails server within background of Vim you will use Rserver command. 
+### Syntax highlighting</p>
 
 <p>Of course syntax highlighting is included too. Vim-rails has built syntax highlighting for special Active Record methods and all keywords that Rails has unique.</p>
 
-<p>That&#39;s only small part of what plugin provides, to see list of all commands, go to <a href="https://raw.githubusercontent.com/tpope/vim-rails/master/doc/rails.txt">project documentation</a>. For example, it provides commands forrefactoring your code, it has built support for Rake and other.</p>
+<p>That’s only small part of what plugin provides, to see list of all commands, go to <a href="https://raw.githubusercontent.com/tpope/vim-rails/master/doc/rails.txt">project documentation</a>. For example, it provides commands forrefactoring your code, it has built support for Rake and other.</p>
 
-<h2>2. <a href="https://github.com/scrooloose/nerdtree">NerdTree</a></h2>
+<h2 id="nerdtreehttpsgithubcomscrooloosenerdtree">2. <a href="https://github.com/scrooloose/nerdtree">NerdTree</a></h2>
 
-<p>Navigation by vim-rails plugin can be great, but only when you know what you&#39;re looking for. For other purposes, you can use <strong>NERDTree</strong> as file navigator. </p>
+<p>Navigation by vim-rails plugin can be great, but only when you know what you’re looking for. For other purposes, you can use <strong>NERDTree</strong> as file navigator. </p>
 
 <p>Type this into vim session to run NerdTree:</p>
 
@@ -132,33 +131,33 @@ set file extension or whole path, just add name of your controller and name of y
 
 <p>You should see content of current working directory. NerdTree use vim navigation keys to move up and down to directory tree.</p>
 
-<p><img class="vim" src="/images/nerd_tree.png" alt="nerd tree"></img></p>
+<p><img class="vim" src="/images/nerd_tree.png" alt="nerd tree" />&lt;/img&gt;</p>
 
-<p>Let&#39;s assume you want to open up directory <strong>app</strong>. Navigate to app with Vim and press key <strong>o</strong>. You should see content of app directory:</p>
+<p>Let’s assume you want to open up directory <strong>app</strong>. Navigate to app with Vim and press key <strong>o</strong>. You should see content of app directory:</p>
 
-<p><img class="vim" src="/images/nerd_tree_app.png" alt="nerd tree app"></img></p>
+<p><img class="vim" src="/images/nerd_tree_app.png" alt="nerd tree app" />&lt;/img&gt;</p>
 
-<h2>3. <a href="https://github.com/tpope/vim-fugitive">Vim-fugitive</a></h2>
+<h2 id="vim-fugitivehttpsgithubcomtpopevim-fugitive">3. <a href="https://github.com/tpope/vim-fugitive">Vim-fugitive</a></h2>
 
 <p>If you have your project tracked with Git, switching between terminal sessions can be really painful. Fugitive is absolutely greatly tool for using Git inside Vim.</p>
 
-<p>For example let&#39;see what&#39;s changed with git status</p>
+<p>For example let’see what’s changed with git status</p>
 
 <div class="highlight"><pre><code class="sh">:Git status</code></pre></div>
 
-<p>Let&#39;s add changes to repository</p>
+<p>Let’s add changes to repository</p>
 
 <div class="highlight"><pre><code class="sh">:Git add .</code></pre></div>
 
-<p>Let&#39;s push it to origin master</p>
+<p>Let’s push it to origin master</p>
 
 <div class="highlight"><pre><code class="sh">:Git push origin master</code></pre></div>
 
-<h2>4. <a href="https://github.com/vim-ruby/vim-ruby">Vim-Ruby</a></h2>
+<h2 id="vim-rubyhttpsgithubcomvim-rubyvim-ruby">4. <a href="https://github.com/vim-ruby/vim-ruby">Vim-Ruby</a></h2>
 
 <p>Vim-Ruby provides useful things like easy navigation and syntax highlighting in ruby</p>
 
-<p>Here&#39;s list of useful navigation methods in vim-ruby</p>
+<p>Here’s list of useful navigation methods in vim-ruby</p>
 
 <div class="highlight"><pre><code class="sh"><span class="c"># To edit start of next method definition</span>
 <span class="o">]</span>m
@@ -169,9 +168,9 @@ set file extension or whole path, just add name of your controller and name of y
 <span class="c"># To end of previous method definition</span>
 <span class="o">[</span>M</code></pre></div>
 
-<h2>5. <a href="https://github.com/tpope/vim-bundler">Vim-Bundler</a></h2>
+<h2 id="vim-bundlerhttpsgithubcomtpopevim-bundler">5. <a href="https://github.com/tpope/vim-bundler">Vim-Bundler</a></h2>
 
-<p>You don&#39;t have exit vim or attach another tmux session to install gems anymore. Just run :Bundle in command mode in Vim and gems will be installed:</p>
+<p>You don’t have exit vim or attach another tmux session to install gems anymore. Just run :Bundle in command mode in Vim and gems will be installed:</p>
 
 <div class="highlight"><pre><code class="sh">:Bundle</code></pre></div>
 
@@ -179,29 +178,30 @@ set file extension or whole path, just add name of your controller and name of y
 
 <div class="highlight"><pre><code class="sh">:Bopen</code></pre></div>
 
-<h2>6. <a href="https://github.com/tpope/vim-cucumber">Vim-Cucumber</a></h2>
+<h2 id="vim-cucumberhttpsgithubcomtpopevim-cucumber">6. <a href="https://github.com/tpope/vim-cucumber">Vim-Cucumber</a></h2>
 
 <p>Vim-Cucumber plugin provides syntax highlighting and indentation for Cucumber.</p>
 
-<h2>7. <a href="https://github.com/slim-template/vim-slim">Vim-slim</a>/<a href="https://github.com/tpope/vim-haml">Vim-haml</a></h2>
+<h2 id="vim-slimhttpsgithubcomslim-templatevim-slimvim-hamlhttpsgithubcomtpopevim-haml">7. <a href="https://github.com/slim-template/vim-slim">Vim-slim</a>/<a href="https://github.com/tpope/vim-haml">Vim-haml</a></h2>
 
-<p>Here&#39;s the plugin that provides syntax highlighting for your favorite template language, it can be haml or slim.</p>
+<p>Here’s the plugin that provides syntax highlighting for your favorite template language, it can be haml or slim.</p>
 
-<h2>8. <a href="https://github.com/skalnik/vim-vroom">Vim-Vroom</a></h2>
+<h2 id="vim-vroomhttpsgithubcomskalnikvim-vroom">8. <a href="https://github.com/skalnik/vim-vroom">Vim-Vroom</a></h2>
 
 <p>With Vroom you can run your tests inside Vim. Supports Rspec, Cucumber and MiniTest. You can run your tests with:</p>
 
 <div class="highlight"><pre><code class="sh">:VroomRunTestFile</code></pre></div>
 
-<h2>9. <a href="https://github.com/tpope/vim-endwise">Vim-endwise</a></h2>
+<h2 id="vim-endwisehttpsgithubcomtpopevim-endwise">9. <a href="https://github.com/tpope/vim-endwise">Vim-endwise</a></h2>
 
-<p>Here&#39;s the useful plugin that adds end after if, do, def keywords.</p>
+<p>Here’s the useful plugin that adds end after if, do, def keywords.</p>
 
-<h2>10. <a href="https://github.com/ervandew/supertab">Supertab</a></h2>
+<h2 id="supertabhttpsgithubcomervandewsupertab">10. <a href="https://github.com/ervandew/supertab">Supertab</a></h2>
 
 <p>Supertab is useful in situations when you have lot of repetiting words like <strong>def</strong>. It works that you press Tab and it completes word for you.</p>
 
 <p>If you like this post, share it with clicking on social network toolbar at the top of page. </p>
+
 
 
 
@@ -230,7 +230,12 @@ set file extension or whole path, just add name of your controller and name of y
 <ul class="posts">
   
 
-  <li><span>27 May 2014</span> &raquo; <a href="/2014/05/27/link.html#disqus_thread">Link</a></li>
+  <li><span>30 May 2014</span> &raquo; <a href="/2014/05/30/link.html#disqus_thread">Link</a></li>
+  
+  
+  
+
+  <li><span>30 May 2014</span> &raquo; <a href="/learning-resources/2014/05/30/ruby-news-websites.html#disqus_thread">7 Websites to Get Latest News About Ruby</a></li>
   
   
   
@@ -273,11 +278,6 @@ set file extension or whole path, just add name of your controller and name of y
   <li><span>28 Mar 2014</span> &raquo; <a href="/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html#disqus_thread">How to install Ruby and Rails for your operating system</a></li>
   
   
-  
-
-  <li><span>28 Mar 2014</span> &raquo; <a href="/learning-resources/2014/03/28/learn-ruby-with-these-resources.html#disqus_thread">Top 8 Learning resources for ruby beginner</a></li>
-  
-  
    
   
 
@@ -311,10 +311,17 @@ set file extension or whole path, just add name of your controller and name of y
   <h1>Recent posts</h1>
 
 <li>
-  <span>27 May 2014</span> &raquo;
+  <span>30 May 2014</span> &raquo;
 
-  <a href="/2014/05/27/link.html">
+  <a href="/2014/05/30/link.html">
     Link</a>
+</li>
+
+<li>
+  <span>30 May 2014</span> &raquo;
+
+  <a href="/learning-resources/2014/05/30/ruby-news-websites.html">
+    7 Websites to Get Latest News About Ruby</a>
 </li>
 
 <li>

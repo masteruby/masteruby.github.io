@@ -67,8 +67,14 @@
         <lastmod>2014-05-28T09:51:22+02:00</lastmod>
     </url>
     <url>
-        <loc>http://masteruby.github.io/2014/05/27/link.html</loc>
-        <lastmod>2014-05-27T18:53:49+02:00</lastmod>
+        <loc>
+            http://masteruby.github.io/learning-resources/2014/05/30/ruby-news-websites.html
+        </loc>
+        <lastmod>2014-05-30T19:01:00+02:00</lastmod>
+    </url>
+    <url>
+        <loc>http://masteruby.github.io/2014/05/30/link.html</loc>
+        <lastmod>2014-05-30T09:55:31+02:00</lastmod>
     </url>
     <url>
         <loc>http://masteruby.github.io/automate-this-with-ruby.html</loc>
@@ -76,7 +82,7 @@
     </url>
     <url>
         <loc>http://masteruby.github.io/</loc>
-        <lastmod>2014-05-28T09:52:08+02:00</lastmod>
+        <lastmod>2014-05-30T19:01:00+02:00</lastmod>
     </url>
     <url>
         <loc>http://masteruby.github.io/learning-resources.html</loc>

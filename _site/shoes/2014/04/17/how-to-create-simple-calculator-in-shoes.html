@@ -72,14 +72,13 @@
 <p>In this tutorial you will learn how to create simple calculator in Ruby GUI
 toolkit Shoes that looks like this:</p>
 
-<p><img class="shoes" src="/images/calculator.png" alt="how to make
-calculator in ruby"></img></p>
+<p><img class="shoes" src="/images/calculator.png" alt="how to make calculator in ruby" />&lt;/img&gt;</p>
 
-<p>Because original Shoes is outdated and new Shoes 4 isn&#39;t released yet, we&#39;ll use Green Shoes in this tutorial.</p>
+<p>Because original Shoes is outdated and new Shoes 4 isn’t released yet, we’ll use Green Shoes in this tutorial.</p>
 
-<h2>How to install Shoes</h2>
+<h2 id="how-to-install-shoes">How to install Shoes</h2>
 
-<p>Before you can install green_shoes you have to install ruby. I&#39;ve included instructions about <a href="http://masteruby.github.io/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html">how to install
+<p>Before you can install green_shoes you have to install ruby. I’ve included instructions about <a href="http://masteruby.github.io/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html">how to install
 ruby</a> in previous post.</p>
 
 <p>If you have ruby installed by rvm, just install green_shoes with rubygems:</p>
@@ -89,14 +88,14 @@ ruby</a> in previous post.</p>
 <p>If you have trouble with installation, you have to install <a href="http://sourceforge.net/projects/ruby-gnome2/">ruby
 gtk2</a>. </p>
 
-<h2>Running shoes</h2>
+<h2 id="running-shoes">Running shoes</h2>
 
 <p>To run we need to add green_shoes gem to our ruby file.</p>
 
 <p>Go to your favorite text editor, create new file <strong>calculator.rb</strong> and type
 this code:</p>
 
-<h4>calculator.rb</h4>
+<h4 id="calculatorrb">calculator.rb</h4>
 
 <div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;green_shoes&#39;</span>
 
@@ -109,11 +108,11 @@ this code:</p>
 
 <p>You should see something like this:</p>
 
-<p><img class="shoes" src="/images/running_shoes.png" alt="how to run shoes"></img></p>
+<p><img class="shoes" src="/images/running_shoes.png" alt="how to run shoes" />&lt;/img&gt;</p>
 
-<h2>Adding basic template for app</h2>
+<h2 id="adding-basic-template-for-app">Adding basic template for app</h2>
 
-<p>Let&#39;s add template for our calculator. We need to add place for number field,
+<p>Let’s add template for our calculator. We need to add place for number field,
 clear button and remaining buttons.</p>
 
 <div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;green_shoes&#39;</span>
@@ -135,23 +134,23 @@ clear button and remaining buttons.</p>
 
 <p>If you run shoes again, you should see something like this:</p>
 
-<p><img class="shoes" src="/images/template.png" alt="calculator template"></img></p>
+<p><img class="shoes" src="/images/template.png" alt="calculator template" />&lt;/img&gt;</p>
 
-<p>Let&#39;s look at what we&#39;ve done. First we&#39;ve created flow, that copy size of screen.</p>
+<p>Let’s look at what we’ve done. First we’ve created flow, that copy size of screen.</p>
 
 <div class="highlight"><pre><code class="ruby"><span class="n">flow</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">240</span> <span class="k">do</span></code></pre></div>
 
-<p>Our app is divided into three parts: number field, clear button and remaining buttons, so we&#39;ve created three different flows to match it. </p>
+<p>Our app is divided into three parts: number field, clear button and remaining buttons, so we’ve created three different flows to match it. </p>
 
 <div class="highlight"><pre><code class="ruby"><span class="n">flow</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">7</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">0</span><span class="o">.</span><span class="mi">2</span> <span class="k">do</span>
   <span class="n">background</span> <span class="n">rgb</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">157</span><span class="p">,</span> <span class="mi">228</span><span class="p">)</span>
 <span class="k">end</span></code></pre></div>
 
-<p>Here we used floating points to match size of flow. If you type 0.7 it means 70% width of screen and if you type 0.2 it means 20% size. Then we&#39;ve used background method to change color of the flow.</p>
+<p>Here we used floating points to match size of flow. If you type 0.7 it means 70% width of screen and if you type 0.2 it means 20% size. Then we’ve used background method to change color of the flow.</p>
 
-<p>Ok we&#39;ve done with preparations, let&#39;s create some buttons.</p>
+<p>Ok we’ve done with preparations, let’s create some buttons.</p>
 
-<h2>Adding calculator buttons</h2>
+<h2 id="adding-calculator-buttons">Adding calculator buttons</h2>
 
 <p>First we need to add number field:</p>
 
@@ -177,20 +176,20 @@ clear button and remaining buttons.</p>
 
 <p>So if you run code you should number 0 in number field: </p>
 
-<p><img class="shoes" src="/images/number_field.png" alt="how to create number field for calculator"></img></p>
+<p><img class="shoes" src="/images/number_field.png" alt="how to create number field for calculator" />&lt;/img&gt;</p>
 
-<p>Let&#39;s take a look at code:</p>
+<p>Let’s take a look at code:</p>
 
 <div class="highlight"><pre><code class="ruby"><span class="n">number_field</span> <span class="o">=</span> <span class="kp">nil</span>
   <span class="vi">@number</span> <span class="o">=</span> <span class="mi">0</span></code></pre></div>
 
-<p>Here we&#39;ve set two variables. Variable <strong>number_field</strong> is for displaying number field. In variable <strong>@number</strong> we set actual value of number in the number field.</p>
+<p>Here we’ve set two variables. Variable <strong>number_field</strong> is for displaying number field. In variable <strong>@number</strong> we set actual value of number in the number field.</p>
 
 <div class="highlight"><pre><code class="ruby"><span class="n">number_field</span> <span class="o">=</span> <span class="n">para</span> <span class="vi">@number</span><span class="p">,</span> <span class="ss">margin</span><span class="p">:</span> <span class="mi">10</span></code></pre></div>
 
-<p>Here we&#39;ve changed number field to para. Para is method in shoes for displaying text or numbers in screen. We&#39;ve used <strong>@number</strong> to set para to 0, but it can be anything you like. After that we&#39;ve set margin to all sizes.</p>
+<p>Here we’ve changed number field to para. Para is method in shoes for displaying text or numbers in screen. We’ve used <strong>@number</strong> to set para to 0, but it can be anything you like. After that we’ve set margin to all sizes.</p>
 
-<h3>Adding Clr Button</h3>
+<h3 id="adding-clr-button">Adding Clr Button</h3>
 
 <p>Now we have to add clr button. To add button type something like this:</p>
 
@@ -216,15 +215,14 @@ clear button and remaining buttons.</p>
   <span class="k">end</span>
 <span class="k">end</span></code></pre></div>
 
-<p><img class="shoes" src="/images/adding_clr.png" alt="how to add clear
-button"></img></p>
+<p><img class="shoes" src="/images/adding_clr.png" alt="how to add clear button" />&lt;/img&gt;</p>
 
 <div class="highlight"><pre><code class="ruby"><span class="n">button</span> <span class="s1">&#39;Clr&#39;</span><span class="p">,</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">1</span><span class="o">.</span><span class="mi">0</span> <span class="k">do</span>
 <span class="k">end</span></code></pre></div>
 
-<p>So here we&#39;ve added button with name <strong>Clr</strong> and set it&#39;s width and height to size of flow. </p>
+<p>So here we’ve added button with name <strong>Clr</strong> and set it’s width and height to size of flow. </p>
 
-<h3>Adding remaining buttons</h3>
+<h3 id="adding-remaining-buttons">Adding remaining buttons</h3>
 
 <p>We need to add all buttons what we need. Add this code into your app.</p>
 
@@ -254,20 +252,19 @@ button"></img></p>
   <span class="k">end</span>
 <span class="k">end</span></code></pre></div>
 
-<p><img class="shoes" src="/images/adding_buttons.png" alt="how to add buttons in
-shoes"></img></p>
+<p><img class="shoes" src="/images/adding_buttons.png" alt="how to add buttons in shoes" />&lt;/img&gt;</p>
 
 <div class="highlight"><pre><code class="ruby"><span class="sx">%w(7 8 9 + 4 5 6 - 1 2 3 / 0 . = *)</span><span class="o">.</span><span class="n">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">btn</span><span class="o">|</span>
   <span class="n">button</span> <span class="n">btn</span><span class="p">,</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">50</span> <span class="k">do</span>
   <span class="k">end</span></code></pre></div>
 
-<p>We&#39;ve added all buttons to array with %w method and added every button to each
-loop, then we&#39;ve set height and width of the buttons.</p>
+<p>We’ve added all buttons to array with %w method and added every button to each
+loop, then we’ve set height and width of the buttons.</p>
 
-<h2>Running Buttons</h2>
+<h2 id="running-buttons">Running Buttons</h2>
 
-<p>So our buttons are now displayed, but if you click at them they don&#39;t work.
-Let&#39;s fix it. Go to flow with clr button and add code some code: </p>
+<p>So our buttons are now displayed, but if you click at them they don’t work.
+Let’s fix it. Go to flow with clr button and add code some code: </p>
 
 <div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;green_shoes&#39;</span>
 
@@ -300,10 +297,10 @@ Let&#39;s fix it. Go to flow with clr button and add code some code: </p>
 <div class="highlight"><pre><code class="ruby"><span class="vi">@number</span> <span class="o">=</span> <span class="mi">0</span>
 <span class="n">number_field</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="vi">@number</span><span class="p">)</span></code></pre></div>
 
-<p>Here we&#39;ve added block of code to button, that every time button Clr is pressed
-variable @number is set to 0. Then we use special ruby method <strong>replace</strong> to change actual value of number_field to 0. Maybe it doesn&#39;t seems to work, but try change value of variable @number to any other number and then press clr. It should change to zero.</p>
+<p>Here we’ve added block of code to button, that every time button Clr is pressed
+variable @number is set to 0. Then we use special ruby method <strong>replace</strong> to change actual value of number_field to 0. Maybe it doesn’t seems to work, but try change value of variable @number to any other number and then press clr. It should change to zero.</p>
 
-<p>Ok we&#39;ve added functionality to Clr button let&#39;s move on numbers:</p>
+<p>Ok we’ve added functionality to Clr button let’s move on numbers:</p>
 
 <div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;green_shoes&#39;</span>
 
@@ -346,10 +343,10 @@ variable @number is set to 0. Then we use special ruby method <strong>replace</s
 <span class="k">end</span>
 <span class="n">number_field</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="vi">@number</span><span class="p">)</span></code></pre></div>
 
-<p>Here we used case statement with when to catch clicks on numbers. We&#39;ve replaced
+<p>Here we used case statement with when to catch clicks on numbers. We’ve replaced
 value of variable @number with value of our buttons.</p>
 
-<h2>Adding operations</h2>
+<h2 id="adding-operations">Adding operations</h2>
 
 <p>We have working number buttons, but what to do with operators.</p>
 
@@ -399,7 +396,7 @@ value of variable @number with value of our buttons.</p>
 <span class="vi">@previous</span> <span class="o">=</span> <span class="mi">0</span></code></pre></div>
 
 <p>First we need to add two variables, <strong>@previous</strong> and <strong>@op</strong> right after
-variable <strong>@number</strong>. We&#39;ll use @op for actual operations and previous to catch
+variable <strong>@number</strong>. We’ll use @op for actual operations and previous to catch
 previous number.</p>
 
 <div class="highlight"><pre><code class="ruby"><span class="k">when</span> <span class="s1">&#39;=&#39;</span>
@@ -408,9 +405,10 @@ previous number.</p>
   <span class="vi">@previous</span><span class="p">,</span> <span class="vi">@number</span> <span class="o">=</span> <span class="vi">@number</span><span class="p">,</span> <span class="kp">nil</span>
   <span class="vi">@op</span> <span class="o">=</span> <span class="n">btn</span></code></pre></div>
 
-<p>We&#39;ve set value of @op to our operator buttons and save value of actual number to variable @previous. Then we&#39;ve used ruby send method, that when equals button is pressed, it calculate expressions for us.</p>
+<p>We’ve set value of @op to our operator buttons and save value of actual number to variable @previous. Then we’ve used ruby send method, that when equals button is pressed, it calculate expressions for us.</p>
 
-<p>We&#39;re done with our calculator. See you next time.</p>
+<p>We’re done with our calculator. See you next time.</p>
+
 
 
 
@@ -439,7 +437,12 @@ previous number.</p>
 <ul class="posts">
   
 
-  <li><span>27 May 2014</span> &raquo; <a href="/2014/05/27/link.html#disqus_thread">Link</a></li>
+  <li><span>30 May 2014</span> &raquo; <a href="/2014/05/30/link.html#disqus_thread">Link</a></li>
+  
+  
+  
+
+  <li><span>30 May 2014</span> &raquo; <a href="/learning-resources/2014/05/30/ruby-news-websites.html#disqus_thread">7 Websites to Get Latest News About Ruby</a></li>
   
   
   
@@ -482,11 +485,6 @@ previous number.</p>
   <li><span>28 Mar 2014</span> &raquo; <a href="/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html#disqus_thread">How to install Ruby and Rails for your operating system</a></li>
   
   
-  
-
-  <li><span>28 Mar 2014</span> &raquo; <a href="/learning-resources/2014/03/28/learn-ruby-with-these-resources.html#disqus_thread">Top 8 Learning resources for ruby beginner</a></li>
-  
-  
    
   
 
@@ -520,10 +518,17 @@ previous number.</p>
   <h1>Recent posts</h1>
 
 <li>
-  <span>27 May 2014</span> &raquo;
+  <span>30 May 2014</span> &raquo;
 
-  <a href="/2014/05/27/link.html">
+  <a href="/2014/05/30/link.html">
     Link</a>
+</li>
+
+<li>
+  <span>30 May 2014</span> &raquo;
+
+  <a href="/learning-resources/2014/05/30/ruby-news-websites.html">
+    7 Websites to Get Latest News About Ruby</a>
 </li>
 
 <li>

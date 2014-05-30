@@ -8,46 +8,144 @@
 		
 			<item>
 				<title>Link</title>
-				<description>&lt;h2&gt;How to create link aggregation site&lt;/h2&gt;
+				<description>&lt;h2 id=&quot;how-to-create-link-aggregation-site&quot;&gt;How to create link aggregation site&lt;/h2&gt;
 
-&lt;p&gt;In this post we&amp;#39;ll create link aggregation that look like &lt;strong&gt;Hacker News&lt;/strong&gt;.&lt;/p&gt;
+&lt;p&gt;In this post we’ll create link aggregation that look like &lt;strong&gt;Hacker News&lt;/strong&gt;.&lt;/p&gt;
 
-&lt;p&gt;Here&amp;#39;s how it&amp;#39;ll be look like:&lt;/p&gt;
+&lt;p&gt;Here’s how it’ll be look like:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/&quot; alt=&quot;link aggregation site&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/&quot; alt=&quot;link aggregation site&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In this tutorial we’ll cover:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Design our page with HTML, CSS&lt;/li&gt;
+  &lt;li&gt;Creating authentication with Devise&lt;/li&gt;
+  &lt;li&gt;How to create, edit and delete links&lt;/li&gt;
+  &lt;li&gt;How to show link user and time whenpost was submitted.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;design-our-page&quot;&gt;Design our page&lt;/h2&gt;
+
+&lt;p&gt;First we creat our app&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;rails new mlink&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We’ll start with designing how our page will be look like.&lt;/p&gt;
+
+&lt;p&gt;Add slim or haml gem to your Gemfile.&lt;/p&gt;
+
+&lt;h4 id=&quot;gemfile&quot;&gt;Gemfile&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;slim-rails&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;creating-navigation&quot;&gt;Creating navigation&lt;/h3&gt;
+
+&lt;p&gt;We’ll start with basic navigation, wewant to show things related to links on left side and authentication on right side. Create controller named home&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;rails generate controller home&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Create &lt;strong&gt;home.html.slim&lt;/strong&gt; in app/views/home:&lt;/p&gt;
+
+&lt;h4 id=&quot;appviewshomehomehtmlslim&quot;&gt;app/views/home/home.html.slim&lt;/h4&gt;
+
+&lt;p&gt;```html
+#wrapper
+  header.navbar&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ul.links 
+&lt;/code&gt;&lt;/pre&gt;
+
+ 	li = link_to “Mlink”, ‘#’
+&lt;pre&gt;&lt;code&gt;li = link_to &quot;Home&quot;, &#39;#&#39;
+li = link_to &quot;Submit&quot;, &#39;#&#39;
+ul.auth ```
+	li = link_to &quot;Login&quot;, &#39;#&#39;
+li = link_to &quot;Signup&quot;, &#39;#&#39;
+section#content
+	ol#link
+		li
+			span.link
+				= link_to &quot;Geeklist - social network for geeks&quot;, &#39;#&#39;
+ 				span.details
+				p
+ 						| posted by
+					= link_to &quot;ed wood&quot;, &#39;#&#39;
+					| 20 minutes ago
+&lt;/code&gt;&lt;/pre&gt;
+
 </description>
-				<pubDate>Tue, 27 May 2014 18:53:49 +0200</pubDate>
-				<link>http://masteruby.github.io/2014/05/27/link.html</link>
-				<guid isPermaLink="true">http://masteruby.github.io/2014/05/27/link.html</guid>
+				<pubDate>Fri, 30 May 2014 09:55:31 +0200</pubDate>
+				<link>http://masteruby.github.io/2014/05/30/link.html</link>
+				<guid isPermaLink="true">http://masteruby.github.io/2014/05/30/link.html</guid>
+			</item>
+		
+			<item>
+				<title>7 Websites to Get Latest News About Ruby</title>
+				<description>&lt;p&gt;In this post I want to show you some ruby news websites. It includes some ruby newsletters, blog directories and link aggregation sites.&lt;/p&gt;
+
+&lt;h2 id=&quot;ruby-weeklyhttprubyweeklycom&quot;&gt;1. &lt;a href=&quot;http://rubyweekly.com/&quot;&gt;Ruby Weekly&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Ruby Weekly is a email newsletter curated by Peter Cooper. If you subscribe you get into your emailbox every week collection of videos, tools and news from last week.&lt;/p&gt;
+
+&lt;h2 id=&quot;ruby-dailyhttprubydailyorg&quot;&gt;2. &lt;a href=&quot;http://rubydaily.org/&quot;&gt;Ruby Daily&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Ruby Daily is a link aggregation website by Nick Kugaevsky. It covers wide range of Ruby related subjects for example: Sinatra, Ruby on Rails, Heroku, RVM, TDD and more.&lt;/p&gt;
+
+&lt;h2 id=&quot;alltophttprubyalltopcom&quot;&gt;3. &lt;a href=&quot;http://ruby.alltop.com/&quot;&gt;Alltop&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Ruby section of Alltop collects stories from Ruby related blogs. If you want to find out some good Ruby blogs here’s the place you can start.&lt;/p&gt;
+
+&lt;h2 id=&quot;green-rubyhttpgreenrubyorg&quot;&gt;4. &lt;a href=&quot;http://greenruby.org/&quot;&gt;Green Ruby&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Another newsletter for Ruby. You can find out news from blogosphere, latest gem releases, podcasts, tools for easier development, screencasts and conference talks. &lt;/p&gt;
+
+&lt;h2 id=&quot;rubyflowhttpwwwrubyflowcom&quot;&gt;5. &lt;a href=&quot;http://www.rubyflow.com/&quot;&gt;Rubyflow&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Rubyflow is a link aggregation site for Ruby.&lt;/p&gt;
+
+&lt;h2 id=&quot;ruby5httpruby5envylabscom&quot;&gt;6. &lt;a href=&quot;http://ruby5.envylabs.com/&quot;&gt;Ruby5&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;5 minutes series of podcasts about latest news in ruby world.&lt;/p&gt;
+
+&lt;h2 id=&quot;reddithttpwwwredditcomrruby&quot;&gt;7. &lt;a href=&quot;http://www.reddit.com/r/ruby/&quot;&gt;Reddit&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;I guess I don’t have to introduce Reddit. You can also checkout rails section of Reddit.&lt;/p&gt;
+
+&lt;p&gt;Am I forgotten something? You can add your favorite news websites on &lt;a href=&quot;http://list.ly/list/LEy-ruby-news-websites&quot;&gt;Listly&lt;/a&gt; &lt;/p&gt;
+</description>
+				<pubDate>Fri, 30 May 2014 00:00:00 +0200</pubDate>
+				<link>http://masteruby.github.io/learning-resources/2014/05/30/ruby-news-websites.html</link>
+				<guid isPermaLink="true">http://masteruby.github.io/learning-resources/2014/05/30/ruby-news-websites.html</guid>
 			</item>
 		
 			<item>
 				<title>Vim for Rubyist&amp;#58; 10 useful vim plugins for Ruby</title>
 				<description>&lt;p&gt;In this post I want to show some useful Vim plugins, that are true productivity boosters for every Ruby programmer. You can install them by either &lt;a href=&quot;https://github.com/tpope/vim-pathogen&quot;&gt;Pathogen&lt;/a&gt; or &lt;a href=&quot;https://github.com/gmarik/Vundle.vim&quot;&gt;Vundle&lt;/a&gt;.&lt;/p&gt;
 
-&lt;h2&gt;1. &lt;a href=&quot;https://github.com/tpope/vim-rails&quot;&gt;Vim-Rails&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;vim-railshttpsgithubcomtpopevim-rails&quot;&gt;1. &lt;a href=&quot;https://github.com/tpope/vim-rails&quot;&gt;Vim-Rails&lt;/a&gt;&lt;/h2&gt;
 
-&lt;p&gt;Vim-Rails plugin is must for every Rails Developer working in Vim. Here&amp;#39;s what I&amp;#39;ve found useful:&lt;/p&gt;
+&lt;p&gt;Vim-Rails plugin is must for every Rails Developer working in Vim. Here’s what I’ve found useful:&lt;/p&gt;
 
-&lt;h3&gt;Easy navigation&lt;/h3&gt;
+&lt;h3 id=&quot;easy-navigation&quot;&gt;Easy navigation&lt;/h3&gt;
 
-&lt;p&gt;Want to find some file but don&amp;#39;t know its path? Try to use &lt;strong&gt;:find&lt;/strong&gt; command:&lt;/p&gt;
+&lt;p&gt;Want to find some file but don’t know its path? Try to use &lt;strong&gt;:find&lt;/strong&gt; command:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;:find schema.rb&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;You can also move up in your Rails application by finding related files. For example, let&amp;#39;s assume you&amp;#39;re editing &lt;strong&gt;home.html.slim&lt;/strong&gt;. Try to find related file&lt;/p&gt;
+&lt;p&gt;You can also move up in your Rails application by finding related files. For example, let’s assume you’re editing &lt;strong&gt;home.html.slim&lt;/strong&gt;. Try to find related file&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;:R&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;You should see that you&amp;#39;re in file &lt;strong&gt;static&lt;em&gt;pages&lt;/em&gt;controller.rb&lt;/strong&gt; and that you have cursor at method named home.&lt;/p&gt;
+&lt;p&gt;You should see that you’re in file &lt;strong&gt;static_pages_controller.rb&lt;/strong&gt; and that you have cursor at method named home.&lt;/p&gt;
 
-&lt;h3&gt;Great Editing&lt;/h3&gt;
+&lt;h3 id=&quot;great-editing&quot;&gt;Great Editing&lt;/h3&gt;
 
-&lt;p&gt;Jumping from views to controllers to models can be really painful. Here&amp;#39;s where &lt;strong&gt;vim-rails&lt;/strong&gt; plugin excels. For example let&amp;#39;s assume you have file named &lt;strong&gt;home.html.slim&lt;/strong&gt; in your &lt;strong&gt;views&lt;/strong&gt; directory. You can edit it with simple &lt;strong&gt;Eview&lt;/strong&gt;:&lt;/p&gt;
+&lt;p&gt;Jumping from views to controllers to models can be really painful. Here’s where &lt;strong&gt;vim-rails&lt;/strong&gt; plugin excels. For example let’s assume you have file named &lt;strong&gt;home.html.slim&lt;/strong&gt; in your &lt;strong&gt;views&lt;/strong&gt; directory. You can edit it with simple &lt;strong&gt;Eview&lt;/strong&gt;:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;:Eview static_pages/home&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;You see? You don&amp;#39;t have to
+&lt;p&gt;You see? You don’t have to
 set file extension or whole path, just add name of your controller and name of your view file.&lt;/p&gt;
 
 &lt;p&gt;Similarily you can edit controller too:&lt;/p&gt;
@@ -60,25 +158,24 @@ set file extension or whole path, just add name of your controller and name of y
 :Emodel User
 :Estylesheet main&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h3&gt;Generator Commands&lt;/h3&gt;
+&lt;h3 id=&quot;generator-commands&quot;&gt;Generator Commands&lt;/h3&gt;
 
-&lt;p&gt;So you want to run migration, generate model or controller. Before vim-rails plugin you have to close your vim session and go back to terminal, not anymore. Here&amp;#39;s useful commands you should know. Let&amp;#39;s assume you&amp;#39;re building model named User, you can simply create model with :Rgenerate and destroy model with :Rdestroy.&lt;/p&gt;
+&lt;p&gt;So you want to run migration, generate model or controller. Before vim-rails plugin you have to close your vim session and go back to terminal, not anymore. Here’s useful commands you should know. Let’s assume you’re building model named User, you can simply create model with :Rgenerate and destroy model with :Rdestroy.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;:Rgenerate model User
 :Rdestroy model User
 :Rserver&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;To run rails server within background of Vim you will use Rserver command. &lt;/p&gt;
-
-&lt;h3&gt;Syntax highlighting&lt;/h3&gt;
+&lt;p&gt;To run rails server within background of Vim you will use Rserver command. 
+### Syntax highlighting&lt;/p&gt;
 
 &lt;p&gt;Of course syntax highlighting is included too. Vim-rails has built syntax highlighting for special Active Record methods and all keywords that Rails has unique.&lt;/p&gt;
 
-&lt;p&gt;That&amp;#39;s only small part of what plugin provides, to see list of all commands, go to &lt;a href=&quot;https://raw.githubusercontent.com/tpope/vim-rails/master/doc/rails.txt&quot;&gt;project documentation&lt;/a&gt;. For example, it provides commands forrefactoring your code, it has built support for Rake and other.&lt;/p&gt;
+&lt;p&gt;That’s only small part of what plugin provides, to see list of all commands, go to &lt;a href=&quot;https://raw.githubusercontent.com/tpope/vim-rails/master/doc/rails.txt&quot;&gt;project documentation&lt;/a&gt;. For example, it provides commands forrefactoring your code, it has built support for Rake and other.&lt;/p&gt;
 
-&lt;h2&gt;2. &lt;a href=&quot;https://github.com/scrooloose/nerdtree&quot;&gt;NerdTree&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;nerdtreehttpsgithubcomscrooloosenerdtree&quot;&gt;2. &lt;a href=&quot;https://github.com/scrooloose/nerdtree&quot;&gt;NerdTree&lt;/a&gt;&lt;/h2&gt;
 
-&lt;p&gt;Navigation by vim-rails plugin can be great, but only when you know what you&amp;#39;re looking for. For other purposes, you can use &lt;strong&gt;NERDTree&lt;/strong&gt; as file navigator. &lt;/p&gt;
+&lt;p&gt;Navigation by vim-rails plugin can be great, but only when you know what you’re looking for. For other purposes, you can use &lt;strong&gt;NERDTree&lt;/strong&gt; as file navigator. &lt;/p&gt;
 
 &lt;p&gt;Type this into vim session to run NerdTree:&lt;/p&gt;
 
@@ -86,33 +183,33 @@ set file extension or whole path, just add name of your controller and name of y
 
 &lt;p&gt;You should see content of current working directory. NerdTree use vim navigation keys to move up and down to directory tree.&lt;/p&gt;
 
-&lt;p&gt;&lt;img class=&quot;vim&quot; src=&quot;/images/nerd_tree.png&quot; alt=&quot;nerd tree&quot;&gt;&lt;/img&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;vim&quot; src=&quot;/images/nerd_tree.png&quot; alt=&quot;nerd tree&quot; /&gt;&amp;lt;/img&amp;gt;&lt;/p&gt;
 
-&lt;p&gt;Let&amp;#39;s assume you want to open up directory &lt;strong&gt;app&lt;/strong&gt;. Navigate to app with Vim and press key &lt;strong&gt;o&lt;/strong&gt;. You should see content of app directory:&lt;/p&gt;
+&lt;p&gt;Let’s assume you want to open up directory &lt;strong&gt;app&lt;/strong&gt;. Navigate to app with Vim and press key &lt;strong&gt;o&lt;/strong&gt;. You should see content of app directory:&lt;/p&gt;
 
-&lt;p&gt;&lt;img class=&quot;vim&quot; src=&quot;/images/nerd_tree_app.png&quot; alt=&quot;nerd tree app&quot;&gt;&lt;/img&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;vim&quot; src=&quot;/images/nerd_tree_app.png&quot; alt=&quot;nerd tree app&quot; /&gt;&amp;lt;/img&amp;gt;&lt;/p&gt;
 
-&lt;h2&gt;3. &lt;a href=&quot;https://github.com/tpope/vim-fugitive&quot;&gt;Vim-fugitive&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;vim-fugitivehttpsgithubcomtpopevim-fugitive&quot;&gt;3. &lt;a href=&quot;https://github.com/tpope/vim-fugitive&quot;&gt;Vim-fugitive&lt;/a&gt;&lt;/h2&gt;
 
 &lt;p&gt;If you have your project tracked with Git, switching between terminal sessions can be really painful. Fugitive is absolutely greatly tool for using Git inside Vim.&lt;/p&gt;
 
-&lt;p&gt;For example let&amp;#39;see what&amp;#39;s changed with git status&lt;/p&gt;
+&lt;p&gt;For example let’see what’s changed with git status&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;:Git status&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Let&amp;#39;s add changes to repository&lt;/p&gt;
+&lt;p&gt;Let’s add changes to repository&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;:Git add .&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Let&amp;#39;s push it to origin master&lt;/p&gt;
+&lt;p&gt;Let’s push it to origin master&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;:Git push origin master&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h2&gt;4. &lt;a href=&quot;https://github.com/vim-ruby/vim-ruby&quot;&gt;Vim-Ruby&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;vim-rubyhttpsgithubcomvim-rubyvim-ruby&quot;&gt;4. &lt;a href=&quot;https://github.com/vim-ruby/vim-ruby&quot;&gt;Vim-Ruby&lt;/a&gt;&lt;/h2&gt;
 
 &lt;p&gt;Vim-Ruby provides useful things like easy navigation and syntax highlighting in ruby&lt;/p&gt;
 
-&lt;p&gt;Here&amp;#39;s list of useful navigation methods in vim-ruby&lt;/p&gt;
+&lt;p&gt;Here’s list of useful navigation methods in vim-ruby&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;c&quot;&gt;# To edit start of next method definition&lt;/span&gt;
 &lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;m
@@ -123,9 +220,9 @@ set file extension or whole path, just add name of your controller and name of y
 &lt;span class=&quot;c&quot;&gt;# To end of previous method definition&lt;/span&gt;
 &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;M&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h2&gt;5. &lt;a href=&quot;https://github.com/tpope/vim-bundler&quot;&gt;Vim-Bundler&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;vim-bundlerhttpsgithubcomtpopevim-bundler&quot;&gt;5. &lt;a href=&quot;https://github.com/tpope/vim-bundler&quot;&gt;Vim-Bundler&lt;/a&gt;&lt;/h2&gt;
 
-&lt;p&gt;You don&amp;#39;t have exit vim or attach another tmux session to install gems anymore. Just run :Bundle in command mode in Vim and gems will be installed:&lt;/p&gt;
+&lt;p&gt;You don’t have exit vim or attach another tmux session to install gems anymore. Just run :Bundle in command mode in Vim and gems will be installed:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;:Bundle&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
@@ -133,29 +230,30 @@ set file extension or whole path, just add name of your controller and name of y
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;:Bopen&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h2&gt;6. &lt;a href=&quot;https://github.com/tpope/vim-cucumber&quot;&gt;Vim-Cucumber&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;vim-cucumberhttpsgithubcomtpopevim-cucumber&quot;&gt;6. &lt;a href=&quot;https://github.com/tpope/vim-cucumber&quot;&gt;Vim-Cucumber&lt;/a&gt;&lt;/h2&gt;
 
 &lt;p&gt;Vim-Cucumber plugin provides syntax highlighting and indentation for Cucumber.&lt;/p&gt;
 
-&lt;h2&gt;7. &lt;a href=&quot;https://github.com/slim-template/vim-slim&quot;&gt;Vim-slim&lt;/a&gt;/&lt;a href=&quot;https://github.com/tpope/vim-haml&quot;&gt;Vim-haml&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;vim-slimhttpsgithubcomslim-templatevim-slimvim-hamlhttpsgithubcomtpopevim-haml&quot;&gt;7. &lt;a href=&quot;https://github.com/slim-template/vim-slim&quot;&gt;Vim-slim&lt;/a&gt;/&lt;a href=&quot;https://github.com/tpope/vim-haml&quot;&gt;Vim-haml&lt;/a&gt;&lt;/h2&gt;
 
-&lt;p&gt;Here&amp;#39;s the plugin that provides syntax highlighting for your favorite template language, it can be haml or slim.&lt;/p&gt;
+&lt;p&gt;Here’s the plugin that provides syntax highlighting for your favorite template language, it can be haml or slim.&lt;/p&gt;
 
-&lt;h2&gt;8. &lt;a href=&quot;https://github.com/skalnik/vim-vroom&quot;&gt;Vim-Vroom&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;vim-vroomhttpsgithubcomskalnikvim-vroom&quot;&gt;8. &lt;a href=&quot;https://github.com/skalnik/vim-vroom&quot;&gt;Vim-Vroom&lt;/a&gt;&lt;/h2&gt;
 
 &lt;p&gt;With Vroom you can run your tests inside Vim. Supports Rspec, Cucumber and MiniTest. You can run your tests with:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;:VroomRunTestFile&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h2&gt;9. &lt;a href=&quot;https://github.com/tpope/vim-endwise&quot;&gt;Vim-endwise&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;vim-endwisehttpsgithubcomtpopevim-endwise&quot;&gt;9. &lt;a href=&quot;https://github.com/tpope/vim-endwise&quot;&gt;Vim-endwise&lt;/a&gt;&lt;/h2&gt;
 
-&lt;p&gt;Here&amp;#39;s the useful plugin that adds end after if, do, def keywords.&lt;/p&gt;
+&lt;p&gt;Here’s the useful plugin that adds end after if, do, def keywords.&lt;/p&gt;
 
-&lt;h2&gt;10. &lt;a href=&quot;https://github.com/ervandew/supertab&quot;&gt;Supertab&lt;/a&gt;&lt;/h2&gt;
+&lt;h2 id=&quot;supertabhttpsgithubcomervandewsupertab&quot;&gt;10. &lt;a href=&quot;https://github.com/ervandew/supertab&quot;&gt;Supertab&lt;/a&gt;&lt;/h2&gt;
 
 &lt;p&gt;Supertab is useful in situations when you have lot of repetiting words like &lt;strong&gt;def&lt;/strong&gt;. It works that you press Tab and it completes word for you.&lt;/p&gt;
 
 &lt;p&gt;If you like this post, share it with clicking on social network toolbar at the top of page. &lt;/p&gt;
+
 </description>
 				<pubDate>Fri, 02 May 2014 00:00:00 +0200</pubDate>
 				<link>http://masteruby.github.io/productivity-booster/2014/05/02/vim-plugins-for-ruby.html</link>
@@ -167,42 +265,36 @@ set file extension or whole path, just add name of your controller and name of y
 				<description>&lt;p&gt;In this post I want to give you list of books for rails beginner or
 intermediate developer.&lt;/p&gt;
 
-&lt;h2&gt;For Beginner&lt;/h2&gt;
+&lt;h2 id=&quot;for-beginner&quot;&gt;For Beginner&lt;/h2&gt;
 
-&lt;h3&gt;1. &lt;a href=&quot;http://learn-rails.com/learn-ruby-on-rails.html&quot;&gt;Learn Ruby on Rails&lt;/a&gt; by Daniel Kehoe&lt;/h3&gt;
+&lt;h3 id=&quot;learn-ruby-on-railshttplearn-railscomlearn-ruby-on-railshtml-by-daniel-kehoe&quot;&gt;1. &lt;a href=&quot;http://learn-rails.com/learn-ruby-on-rails.html&quot;&gt;Learn Ruby on Rails&lt;/a&gt; by Daniel Kehoe&lt;/h3&gt;
 
-&lt;p&gt;&lt;a href=&quot;http://learn-rails.com/learn-ruby-on-rails.html&quot;&gt;&lt;img src=&quot;/images/learn-rails-book-cover.jpg&quot; class=&quot;book&quot; alt=&quot;learn ruby on rails
-book&quot;&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://learn-rails.com/learn-ruby-on-rails.html&quot;&gt;&lt;img src=&quot;/images/learn-rails-book-cover.jpg&quot; class=&quot;book&quot; alt=&quot;learn ruby on rails book&quot; /&gt;&amp;lt;/img&amp;gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;Here&amp;#39;s the first book you should read. This book will give you basic
+&lt;p&gt;Here’s the first book you should read. This book will give you basic
 introduction to
 rails. In step by step guide you will learn how to create mailing list with
-integration with MailChimp and GoogleDrive. I&amp;#39;ve included detailed review of
+integration with MailChimp and GoogleDrive. I’ve included detailed review of
 &lt;a href=&quot;/learning-resources/2014/04/09/learn-ruby-on-rails-book-review.html&quot;&gt;learn ruby on rails book&lt;/a&gt; right here.&lt;/p&gt;
 
-&lt;h3&gt;2. &lt;a href=&quot;http://www.amazon.com/Ruby-Rails-Tutorial-Addison-Wesley-Professional/dp/0321832051/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1398328251&amp;amp;sr=1-1&amp;amp;keywords=ruby+on+rails+tutorial&quot;&gt;Ruby on Rails Tutorial&lt;/a&gt; by Michael Hartl&lt;/h3&gt;
+&lt;h3 id=&quot;ruby-on-rails-tutorialhttpwwwamazoncomruby-rails-tutorial-addison-wesley-professionaldp0321832051refsr11sbooksieutf8qid1398328251sr1-1keywordsrubyonrailstutorial-by-michael-hartl&quot;&gt;2. &lt;a href=&quot;http://www.amazon.com/Ruby-Rails-Tutorial-Addison-Wesley-Professional/dp/0321832051/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1398328251&amp;amp;sr=1-1&amp;amp;keywords=ruby+on+rails+tutorial&quot;&gt;Ruby on Rails Tutorial&lt;/a&gt; by Michael Hartl&lt;/h3&gt;
 
-&lt;p&gt;&lt;a
-href=&quot;http://www.amazon.com/Ruby-Rails-Tutorial-Addison-Wesley-Professional/dp/0321832051/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1398328251&amp;sr=1-1&amp;keywords=ruby+on+rails+tutorial&quot;&gt;&lt;img
-src=&quot;/images/ruby_on_rails_tutorial.jpeg&quot; class=&quot;book&quot; alt=&quot;ruby on rails
-tutorial&quot;&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.amazon.com/Ruby-Rails-Tutorial-Addison-Wesley-Professional/dp/0321832051/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1398328251&amp;amp;sr=1-1&amp;amp;keywords=ruby+on+rails+tutorial&quot;&gt;&lt;img src=&quot;/images/ruby_on_rails_tutorial.jpeg&quot; class=&quot;book&quot; alt=&quot;ruby on rails tutorial&quot; /&gt;&amp;lt;/img&amp;gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Ruby on Rails Tutorial is a must read for every rails beginner. I think you should
 read this after learn ruby on rails book.&lt;/p&gt;
 
 &lt;p&gt;Are you bored with building example
-applications like how to create blog in rails? So here&amp;#39;s the step by step guide
+applications like how to create blog in rails? So here’s the step by step guide
 to creating Twitter like social network.&lt;/p&gt;
 
 &lt;p&gt;Not only this book covers rails
 perfectly, but it is perfect introduction to test driven development in rspec,
 styling with sass and tracking changes in your code in git.&lt;/p&gt;
 
-&lt;h3&gt;3. &lt;a href=&quot;http://www.amazon.com/Agile-Development-Rails-Facets-Ruby/dp/1937785564/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1398328340&amp;amp;sr=1-1&amp;amp;keywords=agile+web+development+with+rails+4&quot;&gt;Agile Web Development with Rails&lt;/a&gt; by David Heinemeier Hansson, Dave Thomas&lt;/h3&gt;
+&lt;h3 id=&quot;agile-web-development-with-railshttpwwwamazoncomagile-development-rails-facets-rubydp1937785564refsr11sbooksieutf8qid1398328340sr1-1keywordsagilewebdevelopmentwithrails4-by-david-heinemeier-hansson-dave-thomas&quot;&gt;3. &lt;a href=&quot;http://www.amazon.com/Agile-Development-Rails-Facets-Ruby/dp/1937785564/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1398328340&amp;amp;sr=1-1&amp;amp;keywords=agile+web+development+with+rails+4&quot;&gt;Agile Web Development with Rails&lt;/a&gt; by David Heinemeier Hansson, Dave Thomas&lt;/h3&gt;
 
-&lt;p&gt;&lt;a
-href=&quot;http://www.amazon.com/Agile-Development-Rails-Facets-Ruby/dp/1937785564/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1398328340&amp;sr=1-1&amp;keywords=agile+web+development+with+rails+4&quot;&gt;&lt;img src=&quot;/images/agile_web_development_with_rails.jpg&quot; class=&quot;book&quot; alt=&quot;agile web
-development with rails&quot;&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.amazon.com/Agile-Development-Rails-Facets-Ruby/dp/1937785564/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1398328340&amp;amp;sr=1-1&amp;amp;keywords=agile+web+development+with+rails+4&quot;&gt;&lt;img src=&quot;/images/agile_web_development_with_rails.jpg&quot; class=&quot;book&quot; alt=&quot;agile web development with rails&quot; /&gt;&amp;lt;/img&amp;gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Here is the book written by two legendary figures in programming. David
 Heinemeier Hannson, founder of 37 signals, creator of Ruby on Rails framework and
@@ -210,42 +302,35 @@ author of books like Getting Real, Rework and Remote and Dave Thomas author of
 legendary book Pragmatic Programmer that every developer should read. In this
 book you will learn how to create Depot, web based shopping cart application.&lt;/p&gt;
 
-&lt;h2&gt;For intermediate developer&lt;/h2&gt;
+&lt;h2 id=&quot;for-intermediate-developer&quot;&gt;For intermediate developer&lt;/h2&gt;
 
-&lt;h3&gt;4. &lt;a href=&quot;http://www.amazon.com/Rails-AntiPatterns-Refactoring-Addison-Wesley-Professional/dp/0321604814/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1398326493&amp;amp;sr=1-1&amp;amp;keywords=rails+antipatterns&quot;&gt;Rails Antipatterns&lt;/a&gt; by Chad Pytel and Tammer Saleh&lt;/h3&gt;
+&lt;h3 id=&quot;rails-antipatternshttpwwwamazoncomrails-antipatterns-refactoring-addison-wesley-professionaldp0321604814refsr11sbooksieutf8qid1398326493sr1-1keywordsrailsantipatterns-by-chad-pytel-and-tammer-saleh&quot;&gt;4. &lt;a href=&quot;http://www.amazon.com/Rails-AntiPatterns-Refactoring-Addison-Wesley-Professional/dp/0321604814/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1398326493&amp;amp;sr=1-1&amp;amp;keywords=rails+antipatterns&quot;&gt;Rails Antipatterns&lt;/a&gt; by Chad Pytel and Tammer Saleh&lt;/h3&gt;
 
-&lt;p&gt;&lt;a
-href=&quot;http://www.amazon.com/Rails-AntiPatterns-Refactoring-Addison-Wesley-Professional/dp/0321604814/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1398326493&amp;sr=1-1&amp;keywords=rails+antipatterns&quot;&gt;&lt;img
-src=&quot;/images/rails_antipatterns.jpg&quot; class=&quot;book&quot; alt=&quot;rails
-antipatterns&quot;&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.amazon.com/Rails-AntiPatterns-Refactoring-Addison-Wesley-Professional/dp/0321604814/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1398326493&amp;amp;sr=1-1&amp;amp;keywords=rails+antipatterns&quot;&gt;&lt;img src=&quot;/images/rails_antipatterns.jpg&quot; class=&quot;book&quot; alt=&quot;rails antipatterns&quot; /&gt;&amp;lt;/img&amp;gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Are you getting headaches from your masses of code? Did you find your rails code unreadable, difficult to maintain?&lt;/p&gt;
 
-&lt;p&gt;Maybe you will find your rails antipattern. Here&amp;#39;s the problem and solution guide to your problems.&lt;/p&gt;
+&lt;p&gt;Maybe you will find your rails antipattern. Here’s the problem and solution guide to your problems.&lt;/p&gt;
 
 &lt;p&gt;What I like about this book that takes every part of Rails application separately. You
 will look at problems like too much code in models, using sql code where it
-don&amp;#39;t belong, bad habits brought from php and else.&lt;/p&gt;
+don’t belong, bad habits brought from php and else.&lt;/p&gt;
 
-&lt;h3&gt;5. &lt;a href=&quot;http://www.amazon.com/The-Rails-View-Maintainable-Experience/dp/1934356875&quot;&gt;The Rails View&lt;/a&gt; by Bruce Williams and Bruce Athayde&lt;/h3&gt;
+&lt;h3 id=&quot;the-rails-viewhttpwwwamazoncomthe-rails-view-maintainable-experiencedp1934356875-by-bruce-williams-and-bruce-athayde&quot;&gt;5. &lt;a href=&quot;http://www.amazon.com/The-Rails-View-Maintainable-Experience/dp/1934356875&quot;&gt;The Rails View&lt;/a&gt; by Bruce Williams and Bruce Athayde&lt;/h3&gt;
 
-&lt;p&gt;&lt;a
-href=&quot;http://www.amazon.com/Rails-View-Beautiful-Maintainable-Experience/dp/1934356875/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1398343196&amp;sr=1-1&amp;keywords=the+rails+view&quot;&gt;&lt;img
-src=&quot;/images/rails_view.jpg&quot; class=&quot;book&quot; alt=&quot;rails view&quot;&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.amazon.com/Rails-View-Beautiful-Maintainable-Experience/dp/1934356875/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1398343196&amp;amp;sr=1-1&amp;amp;keywords=the+rails+view&quot;&gt;&lt;img src=&quot;/images/rails_view.jpg&quot; class=&quot;book&quot; alt=&quot;rails view&quot; /&gt;&amp;lt;/img&amp;gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Are you getting sick from combination of html and your template language in
-your views? Are you hoping that your views code should look better, but don&amp;#39;t know how? &lt;/p&gt;
+your views? Are you hoping that your views code should look better, but don’t know how? &lt;/p&gt;
 
 &lt;p&gt;Try Rails View book, in this book you will look at each part of
 views, you will find out solutions about how to improve your layout, you will
 learn some tricks about how to improve your stylesheets, adding some beauty to
 your forms, better javascripts code and other.&lt;/p&gt;
 
-&lt;h3&gt;6. &lt;a href=&quot;http://example.com&quot;&gt;Deploying Rails&lt;/a&gt; by Anthony Burns and Tom Copeland&lt;/h3&gt;
+&lt;h3 id=&quot;deploying-railshttpexamplecom-by-anthony-burns-and-tom-copeland&quot;&gt;6. &lt;a href=&quot;http://example.com&quot;&gt;Deploying Rails&lt;/a&gt; by Anthony Burns and Tom Copeland&lt;/h3&gt;
 
-&lt;p&gt;&lt;a
-href=&quot;http://www.amazon.com/Deploying-Rails-Automate-Deploy-Maintain/dp/1934356956&quot;&gt;&lt;img
-src=&quot;/images/deploying_rails.jpg&quot; class=&quot;book&quot; alt=&quot;deploying rails&quot;&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.amazon.com/Deploying-Rails-Automate-Deploy-Maintain/dp/1934356956&quot;&gt;&lt;img src=&quot;/images/deploying_rails.jpg&quot; class=&quot;book&quot; alt=&quot;deploying rails&quot; /&gt;&amp;lt;/img&amp;gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Are you developing real world rails application and you wonder how to deploy it?
 Deploying Rails book is here for you.&lt;/p&gt;
@@ -255,9 +340,9 @@ how to create your own virtual server with Vagrant, then you move on open
 source server provision tool Puppet. Then you will be introduced to gems like
 Capistrano, Nagios for better deployment.&lt;/p&gt;
 
-&lt;h2&gt;What&amp;#39;s next&lt;/h2&gt;
+&lt;h2 id=&quot;whats-next&quot;&gt;What’s next&lt;/h2&gt;
 
-&lt;p&gt;If you&amp;#39;re beginner I recommend you to learn ruby first, I&amp;#39;ve wrote post about &lt;a href=&quot;/learning-resources/2014/03/28/learn-ruby-with-these-resources.html&quot;&gt;learning resources
+&lt;p&gt;If you’re beginner I recommend you to learn ruby first, I’ve wrote post about &lt;a href=&quot;/learning-resources/2014/03/28/learn-ruby-with-these-resources.html&quot;&gt;learning resources
 for ruby&lt;/a&gt; and if you have trouble with rails
 installation I wrote about &lt;a href=&quot;/learning-resources&quot;&gt;how to install rails&lt;/a&gt; in my
 previous post. I hope that my list of books about Rails was helpful for you.&lt;/p&gt;
@@ -272,42 +357,36 @@ previous post. I hope that my list of books about Rails was helpful for you.&lt;
 				<description>&lt;p&gt;In this post I want to give you list of books for rails beginner or
 intermediate developer.&lt;/p&gt;
 
-&lt;h2&gt;For Beginner&lt;/h2&gt;
+&lt;h2 id=&quot;for-beginner&quot;&gt;For Beginner&lt;/h2&gt;
 
-&lt;h3&gt;1. &lt;a href=&quot;http://learn-rails.com/learn-ruby-on-rails.html&quot;&gt;Learn Ruby on Rails&lt;/a&gt; by Daniel Kehoe&lt;/h3&gt;
+&lt;h3 id=&quot;learn-ruby-on-railshttplearn-railscomlearn-ruby-on-railshtml-by-daniel-kehoe&quot;&gt;1. &lt;a href=&quot;http://learn-rails.com/learn-ruby-on-rails.html&quot;&gt;Learn Ruby on Rails&lt;/a&gt; by Daniel Kehoe&lt;/h3&gt;
 
-&lt;p&gt;&lt;a href=&quot;http://learn-rails.com/learn-ruby-on-rails.html&quot;&gt;&lt;img src=&quot;/images/learn-rails-book-cover.jpg&quot; class=&quot;book&quot; alt=&quot;learn ruby on rails
-book&quot;&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://learn-rails.com/learn-ruby-on-rails.html&quot;&gt;&lt;img src=&quot;/images/learn-rails-book-cover.jpg&quot; class=&quot;book&quot; alt=&quot;learn ruby on rails book&quot; /&gt;&amp;lt;/img&amp;gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;Here&amp;#39;s the first book you should read. This book will give you basic
+&lt;p&gt;Here’s the first book you should read. This book will give you basic
 introduction to
 rails. In step by step guide you will learn how to create mailing list with
-integration with MailChimp and GoogleDrive. I&amp;#39;ve included detailed review of
+integration with MailChimp and GoogleDrive. I’ve included detailed review of
 &lt;a href=&quot;/learning-resources/2014/04/09/learn-ruby-on-rails-book-review.html&quot;&gt;learn ruby on rails book&lt;/a&gt; right here.&lt;/p&gt;
 
-&lt;h3&gt;2. &lt;a href=&quot;http://www.amazon.com/Ruby-Rails-Tutorial-Addison-Wesley-Professional/dp/0321832051/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1398328251&amp;amp;sr=1-1&amp;amp;keywords=ruby+on+rails+tutorial&quot;&gt;Ruby on Rails Tutorial&lt;/a&gt; by Michael Hartl&lt;/h3&gt;
+&lt;h3 id=&quot;ruby-on-rails-tutorialhttpwwwamazoncomruby-rails-tutorial-addison-wesley-professionaldp0321832051refsr11sbooksieutf8qid1398328251sr1-1keywordsrubyonrailstutorial-by-michael-hartl&quot;&gt;2. &lt;a href=&quot;http://www.amazon.com/Ruby-Rails-Tutorial-Addison-Wesley-Professional/dp/0321832051/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1398328251&amp;amp;sr=1-1&amp;amp;keywords=ruby+on+rails+tutorial&quot;&gt;Ruby on Rails Tutorial&lt;/a&gt; by Michael Hartl&lt;/h3&gt;
 
-&lt;p&gt;&lt;a
-href=&quot;http://www.amazon.com/Ruby-Rails-Tutorial-Addison-Wesley-Professional/dp/0321832051/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1398328251&amp;sr=1-1&amp;keywords=ruby+on+rails+tutorial&quot;&gt;&lt;img
-src=&quot;/images/ruby_on_rails_tutorial.jpeg&quot; class=&quot;book&quot; alt=&quot;ruby on rails
-tutorial&quot;&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.amazon.com/Ruby-Rails-Tutorial-Addison-Wesley-Professional/dp/0321832051/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1398328251&amp;amp;sr=1-1&amp;amp;keywords=ruby+on+rails+tutorial&quot;&gt;&lt;img src=&quot;/images/ruby_on_rails_tutorial.jpeg&quot; class=&quot;book&quot; alt=&quot;ruby on rails tutorial&quot; /&gt;&amp;lt;/img&amp;gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Ruby on Rails Tutorial is a must read for every rails beginner. I think you should
 read this after learn ruby on rails book.&lt;/p&gt;
 
 &lt;p&gt;Are you bored with building example
-applications like how to create blog in rails? So here&amp;#39;s the step by step guide
+applications like how to create blog in rails? So here’s the step by step guide
 to creating Twitter like social network.&lt;/p&gt;
 
 &lt;p&gt;Not only this book covers rails
 perfectly, but it is perfect introduction to test driven development in rspec,
 styling with sass and tracking changes in your code in git.&lt;/p&gt;
 
-&lt;h3&gt;3. &lt;a href=&quot;http://www.amazon.com/Agile-Development-Rails-Facets-Ruby/dp/1937785564/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1398328340&amp;amp;sr=1-1&amp;amp;keywords=agile+web+development+with+rails+4&quot;&gt;Agile Web Development with Rails&lt;/a&gt; by David Heinemeier Hansson, Dave Thomas&lt;/h3&gt;
+&lt;h3 id=&quot;agile-web-development-with-railshttpwwwamazoncomagile-development-rails-facets-rubydp1937785564refsr11sbooksieutf8qid1398328340sr1-1keywordsagilewebdevelopmentwithrails4-by-david-heinemeier-hansson-dave-thomas&quot;&gt;3. &lt;a href=&quot;http://www.amazon.com/Agile-Development-Rails-Facets-Ruby/dp/1937785564/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1398328340&amp;amp;sr=1-1&amp;amp;keywords=agile+web+development+with+rails+4&quot;&gt;Agile Web Development with Rails&lt;/a&gt; by David Heinemeier Hansson, Dave Thomas&lt;/h3&gt;
 
-&lt;p&gt;&lt;a
-href=&quot;http://www.amazon.com/Agile-Development-Rails-Facets-Ruby/dp/1937785564/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1398328340&amp;sr=1-1&amp;keywords=agile+web+development+with+rails+4&quot;&gt;&lt;img src=&quot;/images/agile_web_development_with_rails.jpg&quot; class=&quot;book&quot; alt=&quot;agile web
-development with rails&quot;&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.amazon.com/Agile-Development-Rails-Facets-Ruby/dp/1937785564/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1398328340&amp;amp;sr=1-1&amp;amp;keywords=agile+web+development+with+rails+4&quot;&gt;&lt;img src=&quot;/images/agile_web_development_with_rails.jpg&quot; class=&quot;book&quot; alt=&quot;agile web development with rails&quot; /&gt;&amp;lt;/img&amp;gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Here is the book written by two legendary figures in programming. David
 Heinemeier Hannson, founder of 37 signals, creator of Ruby on Rails framework and
@@ -315,42 +394,35 @@ author of books like Getting Real, Rework and Remote and Dave Thomas author of
 legendary book Pragmatic Programmer that every developer should read. In this
 book you will learn how to create Depot, web based shopping cart application.&lt;/p&gt;
 
-&lt;h2&gt;For intermediate developer&lt;/h2&gt;
+&lt;h2 id=&quot;for-intermediate-developer&quot;&gt;For intermediate developer&lt;/h2&gt;
 
-&lt;h3&gt;4. &lt;a href=&quot;http://www.amazon.com/Rails-AntiPatterns-Refactoring-Addison-Wesley-Professional/dp/0321604814/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1398326493&amp;amp;sr=1-1&amp;amp;keywords=rails+antipatterns&quot;&gt;Rails Antipatterns&lt;/a&gt; by Chad Pytel and Tammer Saleh&lt;/h3&gt;
+&lt;h3 id=&quot;rails-antipatternshttpwwwamazoncomrails-antipatterns-refactoring-addison-wesley-professionaldp0321604814refsr11sbooksieutf8qid1398326493sr1-1keywordsrailsantipatterns-by-chad-pytel-and-tammer-saleh&quot;&gt;4. &lt;a href=&quot;http://www.amazon.com/Rails-AntiPatterns-Refactoring-Addison-Wesley-Professional/dp/0321604814/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1398326493&amp;amp;sr=1-1&amp;amp;keywords=rails+antipatterns&quot;&gt;Rails Antipatterns&lt;/a&gt; by Chad Pytel and Tammer Saleh&lt;/h3&gt;
 
-&lt;p&gt;&lt;a
-href=&quot;http://www.amazon.com/Rails-AntiPatterns-Refactoring-Addison-Wesley-Professional/dp/0321604814/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1398326493&amp;sr=1-1&amp;keywords=rails+antipatterns&quot;&gt;&lt;img
-src=&quot;/images/rails_antipatterns.jpg&quot; class=&quot;book&quot; alt=&quot;rails
-antipatterns&quot;&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.amazon.com/Rails-AntiPatterns-Refactoring-Addison-Wesley-Professional/dp/0321604814/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1398326493&amp;amp;sr=1-1&amp;amp;keywords=rails+antipatterns&quot;&gt;&lt;img src=&quot;/images/rails_antipatterns.jpg&quot; class=&quot;book&quot; alt=&quot;rails antipatterns&quot; /&gt;&amp;lt;/img&amp;gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Are you getting headaches from your masses of code? Did you find your rails code unreadable, difficult to maintain?&lt;/p&gt;
 
-&lt;p&gt;Maybe you will find your rails antipattern. Here&amp;#39;s the problem and solution guide to your problems.&lt;/p&gt;
+&lt;p&gt;Maybe you will find your rails antipattern. Here’s the problem and solution guide to your problems.&lt;/p&gt;
 
 &lt;p&gt;What I like about this book that takes every part of Rails application separately. You
 will look at problems like too much code in models, using sql code where it
-don&amp;#39;t belong, bad habits brought from php and else.&lt;/p&gt;
+don’t belong, bad habits brought from php and else.&lt;/p&gt;
 
-&lt;h3&gt;5. &lt;a href=&quot;http://www.amazon.com/The-Rails-View-Maintainable-Experience/dp/1934356875&quot;&gt;The Rails View&lt;/a&gt; by Bruce Williams and Bruce Athayde&lt;/h3&gt;
+&lt;h3 id=&quot;the-rails-viewhttpwwwamazoncomthe-rails-view-maintainable-experiencedp1934356875-by-bruce-williams-and-bruce-athayde&quot;&gt;5. &lt;a href=&quot;http://www.amazon.com/The-Rails-View-Maintainable-Experience/dp/1934356875&quot;&gt;The Rails View&lt;/a&gt; by Bruce Williams and Bruce Athayde&lt;/h3&gt;
 
-&lt;p&gt;&lt;a
-href=&quot;http://www.amazon.com/Rails-View-Beautiful-Maintainable-Experience/dp/1934356875/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1398343196&amp;sr=1-1&amp;keywords=the+rails+view&quot;&gt;&lt;img
-src=&quot;/images/rails_view.jpg&quot; class=&quot;book&quot; alt=&quot;rails view&quot;&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.amazon.com/Rails-View-Beautiful-Maintainable-Experience/dp/1934356875/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1398343196&amp;amp;sr=1-1&amp;amp;keywords=the+rails+view&quot;&gt;&lt;img src=&quot;/images/rails_view.jpg&quot; class=&quot;book&quot; alt=&quot;rails view&quot; /&gt;&amp;lt;/img&amp;gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Are you getting sick from combination of html and your template language in
-your views? Are you hoping that your views code should look better, but don&amp;#39;t know how? &lt;/p&gt;
+your views? Are you hoping that your views code should look better, but don’t know how? &lt;/p&gt;
 
 &lt;p&gt;Try Rails View book, in this book you will look at each part of
 views, you will find out solutions about how to improve your layout, you will
 learn some tricks about how to improve your stylesheets, adding some beauty to
 your forms, better javascripts code and other.&lt;/p&gt;
 
-&lt;h3&gt;6. &lt;a href=&quot;http://example.com&quot;&gt;Deploying Rails&lt;/a&gt; by Anthony Burns and Tom Copeland&lt;/h3&gt;
+&lt;h3 id=&quot;deploying-railshttpexamplecom-by-anthony-burns-and-tom-copeland&quot;&gt;6. &lt;a href=&quot;http://example.com&quot;&gt;Deploying Rails&lt;/a&gt; by Anthony Burns and Tom Copeland&lt;/h3&gt;
 
-&lt;p&gt;&lt;a
-href=&quot;http://www.amazon.com/Deploying-Rails-Automate-Deploy-Maintain/dp/1934356956&quot;&gt;&lt;img
-src=&quot;/images/deploying_rails.jpg&quot; class=&quot;book&quot; alt=&quot;deploying rails&quot;&gt;&lt;/img&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.amazon.com/Deploying-Rails-Automate-Deploy-Maintain/dp/1934356956&quot;&gt;&lt;img src=&quot;/images/deploying_rails.jpg&quot; class=&quot;book&quot; alt=&quot;deploying rails&quot; /&gt;&amp;lt;/img&amp;gt;&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;Are you developing real world rails application and you wonder how to deploy it?
 Deploying Rails book is here for you.&lt;/p&gt;
@@ -360,9 +432,9 @@ how to create your own virtual server with Vagrant, then you move on open
 source server provision tool Puppet. Then you will be introduced to gems like
 Capistrano, Nagios for better deployment.&lt;/p&gt;
 
-&lt;h2&gt;What&amp;#39;s next&lt;/h2&gt;
+&lt;h2 id=&quot;whats-next&quot;&gt;What’s next&lt;/h2&gt;
 
-&lt;p&gt;If you&amp;#39;re beginner I recommend you to learn ruby first, I&amp;#39;ve wrote post about &lt;a href=&quot;/learning-resources/2014/03/28/learn-ruby-with-these-resources.html&quot;&gt;learning resources
+&lt;p&gt;If you’re beginner I recommend you to learn ruby first, I’ve wrote post about &lt;a href=&quot;/learning-resources/2014/03/28/learn-ruby-with-these-resources.html&quot;&gt;learning resources
 for ruby&lt;/a&gt; and if you have trouble with rails
 installation I wrote about &lt;a href=&quot;/learning-resources&quot;&gt;how to install rails&lt;/a&gt; in my
 previous post. I hope that my list of books about Rails was helpful for you.&lt;/p&gt;
@@ -376,14 +448,13 @@ previous post. I hope that my list of books about Rails was helpful for you.&lt;
 				<title>How to create simple calculator in Shoes</title>
 				<description>&lt;p&gt;In this tutorial you will learn how to create simple calculator in Shoes that looks like this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/calculator.png&quot; alt=&quot;how to create
-calculator&quot;&gt;&lt;/img&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/calculator.png&quot; alt=&quot;how to create calculator&quot; /&gt;&amp;lt;/img&amp;gt;&lt;/p&gt;
 
-&lt;p&gt;Because original Shoes is outdated and new Shoes 4 isn&amp;#39;t released yet, we&amp;#39;ll use Green Shoes in this tutorial.&lt;/p&gt;
+&lt;p&gt;Because original Shoes is outdated and new Shoes 4 isn’t released yet, we’ll use Green Shoes in this tutorial.&lt;/p&gt;
 
-&lt;h2&gt;How to install Shoes&lt;/h2&gt;
+&lt;h2 id=&quot;how-to-install-shoes&quot;&gt;How to install Shoes&lt;/h2&gt;
 
-&lt;p&gt;Before you can install green_shoes you have to install ruby. I&amp;#39;ve included instructions about &lt;a href=&quot;http://masteruby.github.io/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html&quot;&gt;how to install
+&lt;p&gt;Before you can install green_shoes you have to install ruby. I’ve included instructions about &lt;a href=&quot;http://masteruby.github.io/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html&quot;&gt;how to install
 ruby&lt;/a&gt; in previous post.&lt;/p&gt;
 
 &lt;p&gt;If you have ruby installed by rvm, just install green_shoes with rubygems:&lt;/p&gt;
@@ -393,14 +464,14 @@ ruby&lt;/a&gt; in previous post.&lt;/p&gt;
 &lt;p&gt;If you have trouble with installation, you have to install &lt;a href=&quot;http://sourceforge.net/projects/ruby-gnome2/&quot;&gt;ruby
 gtk2&lt;/a&gt;. &lt;/p&gt;
 
-&lt;h2&gt;Running shoes&lt;/h2&gt;
+&lt;h2 id=&quot;running-shoes&quot;&gt;Running shoes&lt;/h2&gt;
 
 &lt;p&gt;To run we need to add green_shoes gem to our ruby file.&lt;/p&gt;
 
 &lt;p&gt;Go to your favorite text editor, create new file &lt;strong&gt;calculator.rb&lt;/strong&gt; and type
 this code:&lt;/p&gt;
 
-&lt;h4&gt;calculator.rb&lt;/h4&gt;
+&lt;h4 id=&quot;calculatorrb&quot;&gt;calculator.rb&lt;/h4&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;green_shoes&amp;#39;&lt;/span&gt;
 
@@ -413,11 +484,11 @@ this code:&lt;/p&gt;
 
 &lt;p&gt;You should see something like this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/running_shoes.png&quot; alt=&quot;how to run shoes&quot;&gt;&lt;/img&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/running_shoes.png&quot; alt=&quot;how to run shoes&quot; /&gt;&amp;lt;/img&amp;gt;&lt;/p&gt;
 
-&lt;h2&gt;Adding basic template for app&lt;/h2&gt;
+&lt;h2 id=&quot;adding-basic-template-for-app&quot;&gt;Adding basic template for app&lt;/h2&gt;
 
-&lt;p&gt;Let&amp;#39;s add template for our calculator. We need to add place for number field,
+&lt;p&gt;Let’s add template for our calculator. We need to add place for number field,
 clear button and remaining buttons.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;green_shoes&amp;#39;&lt;/span&gt;
@@ -439,23 +510,23 @@ clear button and remaining buttons.&lt;/p&gt;
 
 &lt;p&gt;If you run shoes again, you should see something like this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/template.png&quot; alt=&quot;calculator template&quot;&gt;&lt;/img&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/template.png&quot; alt=&quot;calculator template&quot; /&gt;&amp;lt;/img&amp;gt;&lt;/p&gt;
 
-&lt;p&gt;Let&amp;#39;s look at what we&amp;#39;ve done. First we&amp;#39;ve created flow, that copy size of screen.&lt;/p&gt;
+&lt;p&gt;Let’s look at what we’ve done. First we’ve created flow, that copy size of screen.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;240&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Our app is divided into three parts: number field, clear button and remaining buttons, so we&amp;#39;ve created three different flows to match it. &lt;/p&gt;
+&lt;p&gt;Our app is divided into three parts: number field, clear button and remaining buttons, so we’ve created three different flows to match it. &lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;background&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rgb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;157&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;228&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Here we used floating points to match size of flow. If you type 0.7 it means 70% width of screen and if you type 0.2 it means 20% size. Then we&amp;#39;ve used background method to change color of the flow.&lt;/p&gt;
+&lt;p&gt;Here we used floating points to match size of flow. If you type 0.7 it means 70% width of screen and if you type 0.2 it means 20% size. Then we’ve used background method to change color of the flow.&lt;/p&gt;
 
-&lt;p&gt;Ok we&amp;#39;ve done with preparations, let&amp;#39;s create some buttons.&lt;/p&gt;
+&lt;p&gt;Ok we’ve done with preparations, let’s create some buttons.&lt;/p&gt;
 
-&lt;h2&gt;Adding calculator buttons&lt;/h2&gt;
+&lt;h2 id=&quot;adding-calculator-buttons&quot;&gt;Adding calculator buttons&lt;/h2&gt;
 
 &lt;p&gt;First we need to add number field:&lt;/p&gt;
 
@@ -481,20 +552,20 @@ clear button and remaining buttons.&lt;/p&gt;
 
 &lt;p&gt;So if you run code you should number 0 in number field: &lt;/p&gt;
 
-&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/number_field.png&quot; alt=&quot;how to create number field for calculator&quot;&gt;&lt;/img&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/number_field.png&quot; alt=&quot;how to create number field for calculator&quot; /&gt;&amp;lt;/img&amp;gt;&lt;/p&gt;
 
-&lt;p&gt;Let&amp;#39;s take a look at code:&lt;/p&gt;
+&lt;p&gt;Let’s take a look at code:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;nil&lt;/span&gt;
   &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Here we&amp;#39;ve set two variables. Variable &lt;strong&gt;number_field&lt;/strong&gt; is for displaying number field. In variable &lt;strong&gt;@number&lt;/strong&gt; we set actual value of number in the number field.&lt;/p&gt;
+&lt;p&gt;Here we’ve set two variables. Variable &lt;strong&gt;number_field&lt;/strong&gt; is for displaying number field. In variable &lt;strong&gt;@number&lt;/strong&gt; we set actual value of number in the number field.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;para&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Here we&amp;#39;ve changed number field to para. Para is method in shoes for displaying text or numbers in screen. We&amp;#39;ve used &lt;strong&gt;@number&lt;/strong&gt; to set para to 0, but it can be anything you like. After that we&amp;#39;ve set margin to all sizes.&lt;/p&gt;
+&lt;p&gt;Here we’ve changed number field to para. Para is method in shoes for displaying text or numbers in screen. We’ve used &lt;strong&gt;@number&lt;/strong&gt; to set para to 0, but it can be anything you like. After that we’ve set margin to all sizes.&lt;/p&gt;
 
-&lt;h3&gt;Adding Clr Button&lt;/h3&gt;
+&lt;h3 id=&quot;adding-clr-button&quot;&gt;Adding Clr Button&lt;/h3&gt;
 
 &lt;p&gt;Now we have to add clr button. To add button type something like this:&lt;/p&gt;
 
@@ -520,15 +591,14 @@ clear button and remaining buttons.&lt;/p&gt;
   &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/adding_clr.png&quot; alt=&quot;how to add clear
-button&quot;&gt;&lt;/img&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/adding_clr.png&quot; alt=&quot;how to add clear button&quot; /&gt;&amp;lt;/img&amp;gt;&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Clr&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;So here we&amp;#39;ve added button with name &lt;strong&gt;Clr&lt;/strong&gt; and set it&amp;#39;s width and height to size of flow. &lt;/p&gt;
+&lt;p&gt;So here we’ve added button with name &lt;strong&gt;Clr&lt;/strong&gt; and set it’s width and height to size of flow. &lt;/p&gt;
 
-&lt;h3&gt;Adding remaining buttons&lt;/h3&gt;
+&lt;h3 id=&quot;adding-remaining-buttons&quot;&gt;Adding remaining buttons&lt;/h3&gt;
 
 &lt;p&gt;We need to add all buttons what we need. Add this code into your app.&lt;/p&gt;
 
@@ -558,20 +628,19 @@ button&quot;&gt;&lt;/img&gt;&lt;/p&gt;
   &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/adding_buttons.png&quot; alt=&quot;how to add buttons in
-shoes&quot;&gt;&lt;/img&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/adding_buttons.png&quot; alt=&quot;how to add buttons in shoes&quot; /&gt;&amp;lt;/img&amp;gt;&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;sx&quot;&gt;%w(7 8 9 + 4 5 6 - 1 2 3 / 0 . = *)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;btn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;btn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;We&amp;#39;ve added all buttons to array with %w method and added every button to each
-loop, then we&amp;#39;ve set height and width of the buttons.&lt;/p&gt;
+&lt;p&gt;We’ve added all buttons to array with %w method and added every button to each
+loop, then we’ve set height and width of the buttons.&lt;/p&gt;
 
-&lt;h2&gt;Running Buttons&lt;/h2&gt;
+&lt;h2 id=&quot;running-buttons&quot;&gt;Running Buttons&lt;/h2&gt;
 
-&lt;p&gt;So our buttons are now displayed, but if you click at them they don&amp;#39;t work.
-Let&amp;#39;s fix it. Go to flow with clr button and add code some code: &lt;/p&gt;
+&lt;p&gt;So our buttons are now displayed, but if you click at them they don’t work.
+Let’s fix it. Go to flow with clr button and add code some code: &lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;green_shoes&amp;#39;&lt;/span&gt;
 
@@ -604,10 +673,10 @@ Let&amp;#39;s fix it. Go to flow with clr button and add code some code: &lt;/p&
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Here we&amp;#39;ve added block of code to button, that every time button Clr is pressed
-variable @number is set to 0. Then we use special ruby method &lt;strong&gt;replace&lt;/strong&gt; to change actual value of number_field to 0. Maybe it doesn&amp;#39;t seems to work, but try change value of variable @number to any other number and then press clr. It should change to zero.&lt;/p&gt;
+&lt;p&gt;Here we’ve added block of code to button, that every time button Clr is pressed
+variable @number is set to 0. Then we use special ruby method &lt;strong&gt;replace&lt;/strong&gt; to change actual value of number_field to 0. Maybe it doesn’t seems to work, but try change value of variable @number to any other number and then press clr. It should change to zero.&lt;/p&gt;
 
-&lt;p&gt;Ok we&amp;#39;ve added functionality to Clr button let&amp;#39;s move on numbers:&lt;/p&gt;
+&lt;p&gt;Ok we’ve added functionality to Clr button let’s move on numbers:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;green_shoes&amp;#39;&lt;/span&gt;
 
@@ -650,10 +719,10 @@ variable @number is set to 0. Then we use special ruby method &lt;strong&gt;repl
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Here we used case statement with when to catch clicks on numbers. We&amp;#39;ve replaced
+&lt;p&gt;Here we used case statement with when to catch clicks on numbers. We’ve replaced
 value of variable @number with value of our buttons.&lt;/p&gt;
 
-&lt;h2&gt;Adding operations&lt;/h2&gt;
+&lt;h2 id=&quot;adding-operations&quot;&gt;Adding operations&lt;/h2&gt;
 
 &lt;p&gt;We have working number buttons, but what to do with operators.&lt;/p&gt;
 
@@ -703,7 +772,7 @@ value of variable @number with value of our buttons.&lt;/p&gt;
 &lt;span class=&quot;vi&quot;&gt;@previous&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;First we need to add two variables, &lt;strong&gt;@previous&lt;/strong&gt; and &lt;strong&gt;@op&lt;/strong&gt; right after
-variable &lt;strong&gt;@number&lt;/strong&gt;. We&amp;#39;ll use @op for actual operations and previous to catch
+variable &lt;strong&gt;@number&lt;/strong&gt;. We’ll use @op for actual operations and previous to catch
 previous number.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;=&amp;#39;&lt;/span&gt;
@@ -712,9 +781,10 @@ previous number.&lt;/p&gt;
   &lt;span class=&quot;vi&quot;&gt;@previous&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;nil&lt;/span&gt;
   &lt;span class=&quot;vi&quot;&gt;@op&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;btn&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;We&amp;#39;ve set value of @op to our operator buttons and save value of actual number to variable @previous. Then we&amp;#39;ve used ruby send method, that when equals button is pressed, it calculate expressions for us.&lt;/p&gt;
+&lt;p&gt;We’ve set value of @op to our operator buttons and save value of actual number to variable @previous. Then we’ve used ruby send method, that when equals button is pressed, it calculate expressions for us.&lt;/p&gt;
 
-&lt;p&gt;We&amp;#39;re done with our calculator. See you next time.&lt;/p&gt;
+&lt;p&gt;We’re done with our calculator. See you next time.&lt;/p&gt;
+
 </description>
 				<pubDate>Thu, 17 Apr 2014 15:33:41 +0200</pubDate>
 				<link>http://masteruby.github.io/2014/04/17/calculator.html</link>
@@ -726,14 +796,13 @@ previous number.&lt;/p&gt;
 				<description>&lt;p&gt;In this tutorial you will learn how to create simple calculator in Ruby GUI
 toolkit Shoes that looks like this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/calculator.png&quot; alt=&quot;how to make
-calculator in ruby&quot;&gt;&lt;/img&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/calculator.png&quot; alt=&quot;how to make calculator in ruby&quot; /&gt;&amp;lt;/img&amp;gt;&lt;/p&gt;
 
-&lt;p&gt;Because original Shoes is outdated and new Shoes 4 isn&amp;#39;t released yet, we&amp;#39;ll use Green Shoes in this tutorial.&lt;/p&gt;
+&lt;p&gt;Because original Shoes is outdated and new Shoes 4 isn’t released yet, we’ll use Green Shoes in this tutorial.&lt;/p&gt;
 
-&lt;h2&gt;How to install Shoes&lt;/h2&gt;
+&lt;h2 id=&quot;how-to-install-shoes&quot;&gt;How to install Shoes&lt;/h2&gt;
 
-&lt;p&gt;Before you can install green_shoes you have to install ruby. I&amp;#39;ve included instructions about &lt;a href=&quot;http://masteruby.github.io/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html&quot;&gt;how to install
+&lt;p&gt;Before you can install green_shoes you have to install ruby. I’ve included instructions about &lt;a href=&quot;http://masteruby.github.io/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html&quot;&gt;how to install
 ruby&lt;/a&gt; in previous post.&lt;/p&gt;
 
 &lt;p&gt;If you have ruby installed by rvm, just install green_shoes with rubygems:&lt;/p&gt;
@@ -743,14 +812,14 @@ ruby&lt;/a&gt; in previous post.&lt;/p&gt;
 &lt;p&gt;If you have trouble with installation, you have to install &lt;a href=&quot;http://sourceforge.net/projects/ruby-gnome2/&quot;&gt;ruby
 gtk2&lt;/a&gt;. &lt;/p&gt;
 
-&lt;h2&gt;Running shoes&lt;/h2&gt;
+&lt;h2 id=&quot;running-shoes&quot;&gt;Running shoes&lt;/h2&gt;
 
 &lt;p&gt;To run we need to add green_shoes gem to our ruby file.&lt;/p&gt;
 
 &lt;p&gt;Go to your favorite text editor, create new file &lt;strong&gt;calculator.rb&lt;/strong&gt; and type
 this code:&lt;/p&gt;
 
-&lt;h4&gt;calculator.rb&lt;/h4&gt;
+&lt;h4 id=&quot;calculatorrb&quot;&gt;calculator.rb&lt;/h4&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;green_shoes&amp;#39;&lt;/span&gt;
 
@@ -763,11 +832,11 @@ this code:&lt;/p&gt;
 
 &lt;p&gt;You should see something like this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/running_shoes.png&quot; alt=&quot;how to run shoes&quot;&gt;&lt;/img&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/running_shoes.png&quot; alt=&quot;how to run shoes&quot; /&gt;&amp;lt;/img&amp;gt;&lt;/p&gt;
 
-&lt;h2&gt;Adding basic template for app&lt;/h2&gt;
+&lt;h2 id=&quot;adding-basic-template-for-app&quot;&gt;Adding basic template for app&lt;/h2&gt;
 
-&lt;p&gt;Let&amp;#39;s add template for our calculator. We need to add place for number field,
+&lt;p&gt;Let’s add template for our calculator. We need to add place for number field,
 clear button and remaining buttons.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;green_shoes&amp;#39;&lt;/span&gt;
@@ -789,23 +858,23 @@ clear button and remaining buttons.&lt;/p&gt;
 
 &lt;p&gt;If you run shoes again, you should see something like this:&lt;/p&gt;
 
-&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/template.png&quot; alt=&quot;calculator template&quot;&gt;&lt;/img&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/template.png&quot; alt=&quot;calculator template&quot; /&gt;&amp;lt;/img&amp;gt;&lt;/p&gt;
 
-&lt;p&gt;Let&amp;#39;s look at what we&amp;#39;ve done. First we&amp;#39;ve created flow, that copy size of screen.&lt;/p&gt;
+&lt;p&gt;Let’s look at what we’ve done. First we’ve created flow, that copy size of screen.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;240&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Our app is divided into three parts: number field, clear button and remaining buttons, so we&amp;#39;ve created three different flows to match it. &lt;/p&gt;
+&lt;p&gt;Our app is divided into three parts: number field, clear button and remaining buttons, so we’ve created three different flows to match it. &lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;background&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rgb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;157&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;228&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Here we used floating points to match size of flow. If you type 0.7 it means 70% width of screen and if you type 0.2 it means 20% size. Then we&amp;#39;ve used background method to change color of the flow.&lt;/p&gt;
+&lt;p&gt;Here we used floating points to match size of flow. If you type 0.7 it means 70% width of screen and if you type 0.2 it means 20% size. Then we’ve used background method to change color of the flow.&lt;/p&gt;
 
-&lt;p&gt;Ok we&amp;#39;ve done with preparations, let&amp;#39;s create some buttons.&lt;/p&gt;
+&lt;p&gt;Ok we’ve done with preparations, let’s create some buttons.&lt;/p&gt;
 
-&lt;h2&gt;Adding calculator buttons&lt;/h2&gt;
+&lt;h2 id=&quot;adding-calculator-buttons&quot;&gt;Adding calculator buttons&lt;/h2&gt;
 
 &lt;p&gt;First we need to add number field:&lt;/p&gt;
 
@@ -831,20 +900,20 @@ clear button and remaining buttons.&lt;/p&gt;
 
 &lt;p&gt;So if you run code you should number 0 in number field: &lt;/p&gt;
 
-&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/number_field.png&quot; alt=&quot;how to create number field for calculator&quot;&gt;&lt;/img&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/number_field.png&quot; alt=&quot;how to create number field for calculator&quot; /&gt;&amp;lt;/img&amp;gt;&lt;/p&gt;
 
-&lt;p&gt;Let&amp;#39;s take a look at code:&lt;/p&gt;
+&lt;p&gt;Let’s take a look at code:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;nil&lt;/span&gt;
   &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Here we&amp;#39;ve set two variables. Variable &lt;strong&gt;number_field&lt;/strong&gt; is for displaying number field. In variable &lt;strong&gt;@number&lt;/strong&gt; we set actual value of number in the number field.&lt;/p&gt;
+&lt;p&gt;Here we’ve set two variables. Variable &lt;strong&gt;number_field&lt;/strong&gt; is for displaying number field. In variable &lt;strong&gt;@number&lt;/strong&gt; we set actual value of number in the number field.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;para&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Here we&amp;#39;ve changed number field to para. Para is method in shoes for displaying text or numbers in screen. We&amp;#39;ve used &lt;strong&gt;@number&lt;/strong&gt; to set para to 0, but it can be anything you like. After that we&amp;#39;ve set margin to all sizes.&lt;/p&gt;
+&lt;p&gt;Here we’ve changed number field to para. Para is method in shoes for displaying text or numbers in screen. We’ve used &lt;strong&gt;@number&lt;/strong&gt; to set para to 0, but it can be anything you like. After that we’ve set margin to all sizes.&lt;/p&gt;
 
-&lt;h3&gt;Adding Clr Button&lt;/h3&gt;
+&lt;h3 id=&quot;adding-clr-button&quot;&gt;Adding Clr Button&lt;/h3&gt;
 
 &lt;p&gt;Now we have to add clr button. To add button type something like this:&lt;/p&gt;
 
@@ -870,15 +939,14 @@ clear button and remaining buttons.&lt;/p&gt;
   &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/adding_clr.png&quot; alt=&quot;how to add clear
-button&quot;&gt;&lt;/img&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/adding_clr.png&quot; alt=&quot;how to add clear button&quot; /&gt;&amp;lt;/img&amp;gt;&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;Clr&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;So here we&amp;#39;ve added button with name &lt;strong&gt;Clr&lt;/strong&gt; and set it&amp;#39;s width and height to size of flow. &lt;/p&gt;
+&lt;p&gt;So here we’ve added button with name &lt;strong&gt;Clr&lt;/strong&gt; and set it’s width and height to size of flow. &lt;/p&gt;
 
-&lt;h3&gt;Adding remaining buttons&lt;/h3&gt;
+&lt;h3 id=&quot;adding-remaining-buttons&quot;&gt;Adding remaining buttons&lt;/h3&gt;
 
 &lt;p&gt;We need to add all buttons what we need. Add this code into your app.&lt;/p&gt;
 
@@ -908,20 +976,19 @@ button&quot;&gt;&lt;/img&gt;&lt;/p&gt;
   &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/adding_buttons.png&quot; alt=&quot;how to add buttons in
-shoes&quot;&gt;&lt;/img&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/adding_buttons.png&quot; alt=&quot;how to add buttons in shoes&quot; /&gt;&amp;lt;/img&amp;gt;&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;sx&quot;&gt;%w(7 8 9 + 4 5 6 - 1 2 3 / 0 . = *)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;btn&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;btn&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;We&amp;#39;ve added all buttons to array with %w method and added every button to each
-loop, then we&amp;#39;ve set height and width of the buttons.&lt;/p&gt;
+&lt;p&gt;We’ve added all buttons to array with %w method and added every button to each
+loop, then we’ve set height and width of the buttons.&lt;/p&gt;
 
-&lt;h2&gt;Running Buttons&lt;/h2&gt;
+&lt;h2 id=&quot;running-buttons&quot;&gt;Running Buttons&lt;/h2&gt;
 
-&lt;p&gt;So our buttons are now displayed, but if you click at them they don&amp;#39;t work.
-Let&amp;#39;s fix it. Go to flow with clr button and add code some code: &lt;/p&gt;
+&lt;p&gt;So our buttons are now displayed, but if you click at them they don’t work.
+Let’s fix it. Go to flow with clr button and add code some code: &lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;green_shoes&amp;#39;&lt;/span&gt;
 
@@ -954,10 +1021,10 @@ Let&amp;#39;s fix it. Go to flow with clr button and add code some code: &lt;/p&
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Here we&amp;#39;ve added block of code to button, that every time button Clr is pressed
-variable @number is set to 0. Then we use special ruby method &lt;strong&gt;replace&lt;/strong&gt; to change actual value of number_field to 0. Maybe it doesn&amp;#39;t seems to work, but try change value of variable @number to any other number and then press clr. It should change to zero.&lt;/p&gt;
+&lt;p&gt;Here we’ve added block of code to button, that every time button Clr is pressed
+variable @number is set to 0. Then we use special ruby method &lt;strong&gt;replace&lt;/strong&gt; to change actual value of number_field to 0. Maybe it doesn’t seems to work, but try change value of variable @number to any other number and then press clr. It should change to zero.&lt;/p&gt;
 
-&lt;p&gt;Ok we&amp;#39;ve added functionality to Clr button let&amp;#39;s move on numbers:&lt;/p&gt;
+&lt;p&gt;Ok we’ve added functionality to Clr button let’s move on numbers:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;green_shoes&amp;#39;&lt;/span&gt;
 
@@ -1000,10 +1067,10 @@ variable @number is set to 0. Then we use special ruby method &lt;strong&gt;repl
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;span class=&quot;n&quot;&gt;number_field&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;replace&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Here we used case statement with when to catch clicks on numbers. We&amp;#39;ve replaced
+&lt;p&gt;Here we used case statement with when to catch clicks on numbers. We’ve replaced
 value of variable @number with value of our buttons.&lt;/p&gt;
 
-&lt;h2&gt;Adding operations&lt;/h2&gt;
+&lt;h2 id=&quot;adding-operations&quot;&gt;Adding operations&lt;/h2&gt;
 
 &lt;p&gt;We have working number buttons, but what to do with operators.&lt;/p&gt;
 
@@ -1053,7 +1120,7 @@ value of variable @number with value of our buttons.&lt;/p&gt;
 &lt;span class=&quot;vi&quot;&gt;@previous&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;First we need to add two variables, &lt;strong&gt;@previous&lt;/strong&gt; and &lt;strong&gt;@op&lt;/strong&gt; right after
-variable &lt;strong&gt;@number&lt;/strong&gt;. We&amp;#39;ll use @op for actual operations and previous to catch
+variable &lt;strong&gt;@number&lt;/strong&gt;. We’ll use @op for actual operations and previous to catch
 previous number.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;when&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;=&amp;#39;&lt;/span&gt;
@@ -1062,9 +1129,10 @@ previous number.&lt;/p&gt;
   &lt;span class=&quot;vi&quot;&gt;@previous&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;nil&lt;/span&gt;
   &lt;span class=&quot;vi&quot;&gt;@op&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;btn&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;We&amp;#39;ve set value of @op to our operator buttons and save value of actual number to variable @previous. Then we&amp;#39;ve used ruby send method, that when equals button is pressed, it calculate expressions for us.&lt;/p&gt;
+&lt;p&gt;We’ve set value of @op to our operator buttons and save value of actual number to variable @previous. Then we’ve used ruby send method, that when equals button is pressed, it calculate expressions for us.&lt;/p&gt;
 
-&lt;p&gt;We&amp;#39;re done with our calculator. See you next time.&lt;/p&gt;
+&lt;p&gt;We’re done with our calculator. See you next time.&lt;/p&gt;
+
 </description>
 				<pubDate>Thu, 17 Apr 2014 00:00:00 +0200</pubDate>
 				<link>http://masteruby.github.io/shoes/2014/04/17/how-to-create-simple-calculator-in-shoes.html</link>
@@ -1073,60 +1141,60 @@ previous number.&lt;/p&gt;
 		
 			<item>
 				<title>Learn Ruby on Rails book review</title>
-				<description>&lt;p&gt;Recently I received free copy of &lt;a href=&quot;http://learn-rails.com/learn-ruby-on-rails.html&quot;&gt;Learn Ruby on Rails&lt;/a&gt; book by Daniel Kehoe, so I&amp;#39;ve
+				<description>&lt;p&gt;Recently I received free copy of &lt;a href=&quot;http://learn-rails.com/learn-ruby-on-rails.html&quot;&gt;Learn Ruby on Rails&lt;/a&gt; book by Daniel Kehoe, so I’ve
 decided to write this review.&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;http://learn-rails.com/learn-ruby-on-rails.html&quot;&gt;&lt;img class=&quot;book&quot;
-src=&quot;/images/learn-rails-book-cover.jpg&quot; alt=&quot;learn ruby on rails&quot;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://learn-rails.com/learn-ruby-on-rails.html&quot;&gt;&lt;img class=&quot;book&quot; src=&quot;/images/learn-rails-book-cover.jpg&quot; alt=&quot;learn ruby on rails&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2&gt;Who is this book for&lt;/h2&gt;
+&lt;h2 id=&quot;who-is-this-book-for&quot;&gt;Who is this book for&lt;/h2&gt;
 
 &lt;p&gt;Book is aimed at begining rails developers. So if you have no experiences
-with Rails, that&amp;#39;s first book you should try. You will find out all example
+with Rails, that’s first book you should try. You will find out all example
 code on &lt;a href=&quot;https://github.com/RailsApps/learn-rails&quot;&gt;github repository&lt;/a&gt; and because book is part of subscription program
 you will get access to book updates, some other tutorials and another book
 about Bootstrap.&lt;/p&gt;
 
-&lt;h2&gt;What&amp;#39;s in this book&lt;/h2&gt;
+&lt;h2 id=&quot;whats-in-this-book&quot;&gt;What’s in this book&lt;/h2&gt;
 
 &lt;p&gt;Book gives you step by step guide for creating rails application. In example application you will create mailing list with integration with MailChimp and Google Drive. It gives review of how developing applications in rails works.
-You will find out introduction to git, you&amp;#39;ll be explained to models, views
-and controllers and you&amp;#39;ll be introduced to some gems for easier development. &lt;/p&gt;
+You will find out introduction to git, you’ll be explained to models, views
+and controllers and you’ll be introduced to some gems for easier development. &lt;/p&gt;
 
-&lt;h2&gt;What I like about this book&lt;/h2&gt;
+&lt;h2 id=&quot;what-i-like-about-this-book&quot;&gt;What I like about this book&lt;/h2&gt;
 
-&lt;p&gt;What I like about this book is developer&amp;#39;s approach to creating rails applications.
-Maybe you&amp;#39;ll be surprised that in first chapters you will read about things
+&lt;p&gt;What I like about this book is developer’s approach to creating rails applications.
+Maybe you’ll be surprised that in first chapters you will read about things
 like agile practices, creating github account, planning, managing your
-application. That&amp;#39;s interesting approach that I didn&amp;#39;t find in any other
+application. That’s interesting approach that I didn’t find in any other
 introductory rails book like Agile Web Development with Rails and Learn Web
 Development with Ruby on Rails by Michael Hartl. &lt;/p&gt;
 
-&lt;p&gt;I&amp;#39;ve also liked author&amp;#39;s approach to learning about views, controllers. He doesn&amp;#39;t use rails scaffold command, but he want from you to
-build your controllers, models and views from scratch. That&amp;#39;s a best way to
+&lt;p&gt;I’ve also liked author’s approach to learning about views, controllers. He doesn’t use rails scaffold command, but he want from you to
+build your controllers, models and views from scratch. That’s a best way to
 learning about it. Author encourages you to play with your code and try
 something new.&lt;/p&gt;
 
-&lt;p&gt;Book is written in friendly plain language, so you don&amp;#39;t have to worry about
-that you don&amp;#39;t understand. After writing some code author gives you brief
-explanation what he&amp;#39;ve just done. &lt;/p&gt;
+&lt;p&gt;Book is written in friendly plain language, so you don’t have to worry about
+that you don’t understand. After writing some code author gives you brief
+explanation what he’ve just done. &lt;/p&gt;
 
-&lt;p&gt;What I&amp;#39;ve found useful is long gem list for easier development. You&amp;#39;ll be
+&lt;p&gt;What I’ve found useful is long gem list for easier development. You’ll be
 introduced to useful gems like &lt;strong&gt;figaro&lt;/strong&gt;, &lt;strong&gt;rails_layout&lt;/strong&gt; for easier web
 development. &lt;/p&gt;
 
-&lt;h2&gt;What I&amp;#39;ve been missing&lt;/h2&gt;
+&lt;h2 id=&quot;what-ive-been-missing&quot;&gt;What I’ve been missing&lt;/h2&gt;
 
-&lt;p&gt;What I&amp;#39;ve been missing is absence of test driven development, but as author
+&lt;p&gt;What I’ve been missing is absence of test driven development, but as author
 explains, this is a prequel book you should read before Michael Hartl Tutorial. If you want to have additional resources about test driven development I recommend you either
 &lt;a href=&quot;http://www.amazon.com/The-Cucumber-Book-Behaviour-Driven-Development/dp/1934356808&quot;&gt;Cucumber&lt;/a&gt;
 and
 &lt;a href=&quot;http://www.amazon.com/RSpec-Book-Behaviour-Development-Cucumber/dp/1934356379/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1397032931&amp;amp;sr=1-1&amp;amp;keywords=rspec&quot;&gt;Rspec&lt;/a&gt; book, or online version of Michael Hartl book.&lt;/p&gt;
 
-&lt;h2&gt;Conclusion&lt;/h2&gt;
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
 
-&lt;p&gt;So if you&amp;#39;re absolutely new to Ruby on Rails development, Learn Rails Book is a
+&lt;p&gt;So if you’re absolutely new to Ruby on Rails development, Learn Rails Book is a
 must read for you.&lt;/p&gt;
+
 </description>
 				<pubDate>Wed, 09 Apr 2014 00:00:00 +0200</pubDate>
 				<link>http://masteruby.github.io/learning-resources/2014/04/09/learn-ruby-on-rails-book-review.html</link>
@@ -1135,14 +1203,14 @@ must read for you.&lt;/p&gt;
 		
 			<item>
 				<title>Why to use tmux</title>
-				<description>&lt;p&gt;Today I want to tell about why and how to use tmux. Let&amp;#39;s start with example.
-Let&amp;#39;s assume you&amp;#39;re&lt;/p&gt;
+				<description>&lt;p&gt;Today I want to tell about why and how to use tmux. Let’s start with example.
+Let’s assume you’re&lt;/p&gt;
 
-&lt;p&gt;What&amp;#39;ll learn in this tutorial.&lt;/p&gt;
+&lt;p&gt;What’ll learn in this tutorial.&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;How to create new sessions&lt;/li&gt;
-&lt;li&gt;How to split windows, horizontally and vertically.&lt;/li&gt;
+  &lt;li&gt;How to create new sessions&lt;/li&gt;
+  &lt;li&gt;How to split windows, horizontally and vertically.&lt;/li&gt;
 &lt;/ul&gt;
 </description>
 				<pubDate>Sat, 05 Apr 2014 09:49:54 +0200</pubDate>
@@ -1152,38 +1220,38 @@ Let&amp;#39;s assume you&amp;#39;re&lt;/p&gt;
 		
 			<item>
 				<title>How to create todo list app in rails, adding, removing and deleting tasks</title>
-				<description>&lt;p&gt;In previous part of this tutorial we&amp;#39;ve created &lt;a href=&quot;http://masteruby.github.io/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.html&quot;&gt;static
+				<description>&lt;p&gt;In previous part of this tutorial we’ve created &lt;a href=&quot;http://masteruby.github.io/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.html&quot;&gt;static
 pages&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;In this post we&amp;#39;ll learn:&lt;/p&gt;
+&lt;p&gt;In this post we’ll learn:&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;How to style our app with Bootstrap&lt;/li&gt;
-&lt;li&gt;Showing list of all tasks&lt;/li&gt;
-&lt;li&gt;Adding tasks&lt;/li&gt;
-&lt;li&gt;Deleting Tasks&lt;/li&gt;
-&lt;li&gt;Completing Tasks&lt;/li&gt;
+  &lt;li&gt;How to style our app with Bootstrap&lt;/li&gt;
+  &lt;li&gt;Showing list of all tasks&lt;/li&gt;
+  &lt;li&gt;Adding tasks&lt;/li&gt;
+  &lt;li&gt;Deleting Tasks&lt;/li&gt;
+  &lt;li&gt;Completing Tasks&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2&gt;Styling our app with Bootstrap&lt;/h2&gt;
+&lt;h2 id=&quot;styling-our-app-with-bootstrap&quot;&gt;Styling our app with Bootstrap&lt;/h2&gt;
 
-&lt;p&gt;Our app is little bit boring, just html, no css. Let&amp;#39;s do something about that we will use Bootstrap to take care of basic design&lt;/p&gt;
+&lt;p&gt;Our app is little bit boring, just html, no css. Let’s do something about that we will use Bootstrap to take care of basic design&lt;/p&gt;
 
-&lt;h3&gt;Get started with Bootstrap&lt;/h3&gt;
+&lt;h3 id=&quot;get-started-with-bootstrap&quot;&gt;Get started with Bootstrap&lt;/h3&gt;
 
 &lt;p&gt;Bootstrap is a framework for easier developing websites. To use it we have to install &lt;strong&gt;bootstrap-sass&lt;/strong&gt; gem&lt;/p&gt;
 
-&lt;h4&gt;Gemfile&lt;/h4&gt;
+&lt;h4 id=&quot;gemfile&quot;&gt;Gemfile&lt;/h4&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;gem &lt;span class=&quot;s1&quot;&gt;&amp;#39;bootstrap-sass&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;bundle install&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h3&gt;Styling Navigation with Boostrap&lt;/h3&gt;
+&lt;h3 id=&quot;styling-navigation-with-boostrap&quot;&gt;Styling Navigation with Boostrap&lt;/h3&gt;
 
-&lt;p&gt;Let&amp;#39;s make our navigation prettier. Go to the app/views/layouts and add this code right after body.&lt;/p&gt;
+&lt;p&gt;Let’s make our navigation prettier. Go to the app/views/layouts and add this code right after body.&lt;/p&gt;
 
-&lt;h4&gt;app/views/layouts/application.html.slim&lt;/h4&gt;
+&lt;h4 id=&quot;appviewslayoutsapplicationhtmlslim&quot;&gt;app/views/layouts/application.html.slim&lt;/h4&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;header.navbar
   .navbar-inner
@@ -1196,45 +1264,43 @@ pages&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;To work we need to import bootstrap from our extended css file. Create file &lt;strong&gt;main.css.scss&lt;/strong&gt; in &lt;strong&gt;app/assets/stylesheets&lt;/strong&gt; directory.&lt;/p&gt;
 
-&lt;h3&gt;What is scss&lt;/h3&gt;
-
+&lt;h3 id=&quot;what-is-scss&quot;&gt;What is scss&lt;/h3&gt;
 &lt;p&gt;Scss is improved CSS, it allow us to use variables, and removes some repetitions in our commands. If you want to know more about Sass I recommend you
 &lt;a href=&quot;http://www.amazon.com/Pragmatic-Guide-Sass-Hampton-Catlin/dp/1934356840&quot;&gt;pragmatic guide to sass&lt;/a&gt; book&lt;/p&gt;
 
 &lt;p&gt;Add this code to &lt;strong&gt;main.css.scss&lt;/strong&gt;&lt;/p&gt;
 
-&lt;h4&gt;app/assets/stylesheets/main.css.scss&lt;/h4&gt;
+&lt;h4 id=&quot;appassetsstylesheetsmaincssscss&quot;&gt;app/assets/stylesheets/main.css.scss&lt;/h4&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;css&quot;&gt;&lt;span class=&quot;k&quot;&gt;@import&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;bootstrap&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;So we have bootstrap imported,let&amp;#39;s look at the home page:&lt;/p&gt;
+&lt;p&gt;So we have bootstrap imported,let’s look at the home page:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/navigation.png&quot; alt=&quot;bootstrap navigation&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/navigation.png&quot; alt=&quot;bootstrap navigation&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;So we&amp;#39;ve applied some styling let&amp;#39;s move on showing list of tasks&lt;/p&gt;
+&lt;p&gt;So we’ve applied some styling let’s move on showing list of tasks&lt;/p&gt;
 
-&lt;h2&gt;Showing list of all tasks&lt;/h2&gt;
+&lt;h2 id=&quot;showing-list-of-all-tasks&quot;&gt;Showing list of all tasks&lt;/h2&gt;
 
 &lt;p&gt;To manipulate tasks we need to create a new controller:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rails generate controller Tasks&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;That&amp;#39;s fine, but we need to record tasks do database. Writing all sql code would be tedious, fortunately there is &lt;strong&gt;Active Record&lt;/strong&gt; to help.&lt;/p&gt;
+&lt;p&gt;That’s fine, but we need to record tasks do database. Writing all sql code would be tedious, fortunately there is &lt;strong&gt;Active Record&lt;/strong&gt; to help.&lt;/p&gt;
 
-&lt;h3&gt;What is Active Record&lt;/h3&gt;
-
-&lt;p&gt;Active Record is Object-Relation-Mapping Software, that means that maps row in database to Ruby object. You don&amp;#39;t have to write sql, you can use Ruby. If you
+&lt;h3 id=&quot;what-is-active-record&quot;&gt;What is Active Record&lt;/h3&gt;
+&lt;p&gt;Active Record is Object-Relation-Mapping Software, that means that maps row in database to Ruby object. You don’t have to write sql, you can use Ruby. If you
 want to know more about Active Record you can try &lt;a href=&quot;http://guides.rubyonrails.org/active_record_basics.html&quot;&gt;this site&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3&gt;Creating Models&lt;/h3&gt;
+&lt;h3 id=&quot;creating-models&quot;&gt;Creating Models&lt;/h3&gt;
 
 &lt;p&gt;We need to create models to add records to database.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rails generate model Task name:string&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Our model isn&amp;#39;t already in database, we need to move our migration. Go to db/migrate folder. You should see migration &lt;strong&gt;create_tasks.rb&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;Our model isn’t already in database, we need to move our migration. Go to db/migrate folder. You should see migration &lt;strong&gt;create_tasks.rb&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/migration_file.png&quot; alt=&quot;rails migration&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/migration_file.png&quot; alt=&quot;rails migration&quot; /&gt;&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rake db:migrate&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
@@ -1242,19 +1308,19 @@ want to know more about Active Record you can try &lt;a href=&quot;http://guides
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rake db:test:prepare&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Let&amp;#39;s go to rails console and create some tasks. &lt;/p&gt;
+&lt;p&gt;Let’s go to rails console and create some tasks. &lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rails console&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/creating_task.png&quot; alt=&quot;creating task in console&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/creating_task.png&quot; alt=&quot;creating task in console&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;You saw that we&amp;#39;ve created task with name &lt;strong&gt;Pay a bill&lt;/strong&gt;. That&amp;#39;s fine it works in console, but to view it in browser we need to add some code to our controllers and views.&lt;/p&gt;
+&lt;p&gt;You saw that we’ve created task with name &lt;strong&gt;Pay a bill&lt;/strong&gt;. That’s fine it works in console, but to view it in browser we need to add some code to our controllers and views.&lt;/p&gt;
 
-&lt;p&gt;First we&amp;#39;ll generate list of all tasks. We want to generate lists of tasks on
-home page, so we&amp;#39;ll use static&lt;em&gt;pages&lt;/em&gt;controller, otherwise we would use tasks
-route with tasks controller. Go to &lt;strong&gt;app/controllers/static&lt;em&gt;pages&lt;/em&gt;controller.rb&lt;/strong&gt; and add this code.&lt;/p&gt;
+&lt;p&gt;First we’ll generate list of all tasks. We want to generate lists of tasks on
+home page, so we’ll use static_pages_controller, otherwise we would use tasks
+route with tasks controller. Go to &lt;strong&gt;app/controllers/static_pages_controller.rb&lt;/strong&gt; and add this code.&lt;/p&gt;
 
-&lt;h4&gt;app/controllers/static&lt;em&gt;pages&lt;/em&gt;controller.rb&lt;/h4&gt;
+&lt;h4 id=&quot;appcontrollersstaticpagescontrollerrb&quot;&gt;app/controllers/static_pages_controller.rb&lt;/h4&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;home&lt;/span&gt;
   &lt;span class=&quot;vi&quot;&gt;@tasks&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Task&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;all&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
@@ -1264,27 +1330,26 @@ route with tasks controller. Go to &lt;strong&gt;app/controllers/static&lt;em&gt
 &lt;p&gt;We want to show all tasks on home page, open up
 &lt;strong&gt;app/views/static_pages/home.html.slim&lt;/strong&gt; and add following code:&lt;/p&gt;
 
-&lt;h4&gt;app/views/static_pages/home.html.slim&lt;/h4&gt;
+&lt;h4 id=&quot;appviewsstaticpageshomehtmlslim&quot;&gt;app/views/static_pages/home.html.slim&lt;/h4&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;ul#tasks
   - @tasks.each do |task|
     li = task.name&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
- 
 
 &lt;p&gt;In this code we connect view with static_pages controller and with each method
 we loop through all the tasks and add their names to unordered list.&lt;/p&gt;
 
 &lt;p&gt;Go to checkout change in browser. You should see list with our recently created tasks.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/tasks_list.png&quot; alt=&quot;task-list&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/tasks_list.png&quot; alt=&quot;task-list&quot; /&gt;&lt;/p&gt;
 
-&lt;h2&gt;Adding Tasks&lt;/h2&gt;
+&lt;h2 id=&quot;adding-tasks&quot;&gt;Adding Tasks&lt;/h2&gt;
 
 &lt;p&gt;It works, with some problems. Creating task from rails console would be really boring. We need to create task form to do it for us.&lt;/p&gt;
 
 &lt;p&gt;First we write up some tests. Create new file &lt;strong&gt;tasks.feature&lt;/strong&gt;&lt;/p&gt;
 
-&lt;h4&gt;features/tasks.feature&lt;/h4&gt;
+&lt;h4 id=&quot;featurestasksfeature&quot;&gt;features/tasks.feature&lt;/h4&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;gherkin&quot;&gt;&lt;span class=&quot;k&quot;&gt;Feature:&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt; Task Manipulation&lt;/span&gt;
 &lt;span class=&quot;nf&quot;&gt;  In order to use my todo list app I want to add, remove and complete my tasks.&lt;/span&gt;
@@ -1294,7 +1359,7 @@ we loop through all the tasks and add their names to unordered list.&lt;/p&gt;
 
 &lt;p&gt;Now write some step definitions.&lt;/p&gt;
 
-&lt;h4&gt;features/step&lt;em&gt;definitions/tasks&lt;/em&gt;steps.rb&lt;/h4&gt;
+&lt;h4 id=&quot;featuresstepdefinitionstasksstepsrb&quot;&gt;features/step_definitions/tasks_steps.rb&lt;/h4&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;When&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^I add a new task$/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;visit&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;root_path&lt;/span&gt;
@@ -1302,23 +1367,23 @@ we loop through all the tasks and add their names to unordered list.&lt;/p&gt;
   &lt;span class=&quot;n&quot;&gt;expect&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;click_button&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Add task&amp;quot;&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;change&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Task&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;by&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;We used capybara methods to fill in form for task. fill&lt;em&gt;in method fills text field **task&lt;/em&gt;name** and click button with value &lt;strong&gt;Add task&lt;/strong&gt;, then it count
+&lt;p&gt;We used capybara methods to fill in form for task. fill_in method fills text field &lt;strong&gt;task_name&lt;/strong&gt; and click button with value &lt;strong&gt;Add task&lt;/strong&gt;, then it count
 number of tasks and if one more tasks has been it will pass.&lt;/p&gt;
 
 &lt;p&gt;Try it now. Our tests should fail.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/failing_form.png&quot; alt=&quot;failing form&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/failing_form.png&quot; alt=&quot;failing form&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;We need to add routes for tasks. To save the time we use resources to generate
 all the routes for tasks.&lt;/p&gt;
 
-&lt;h4&gt;config/routes.rb&lt;/h4&gt;
+&lt;h4 id=&quot;configroutesrb&quot;&gt;config/routes.rb&lt;/h4&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;resources&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:tasks&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Let&amp;#39;s try to create our form.&lt;/p&gt;
+&lt;p&gt;Let’s try to create our form.&lt;/p&gt;
 
-&lt;h4&gt;app/views/static_pages/home.html.slim&lt;/h4&gt;
+&lt;h4 id=&quot;appviewsstaticpageshomehtmlslim-1&quot;&gt;app/views/static_pages/home.html.slim&lt;/h4&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;= form_for :task, url: tasks_path do |f|
   = f.label :name
@@ -1327,15 +1392,15 @@ all the routes for tasks.&lt;/p&gt;
 
 &lt;p&gt;Maybe you wonder what &lt;strong&gt;form_for&lt;/strong&gt; method does. Take look at this at the browser.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/tasks_form.png&quot; alt=&quot;tasks form&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/tasks_form.png&quot; alt=&quot;tasks form&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;If you look at it with Firebug, Chrome Developer Tools or something like that,
 you should see that &lt;strong&gt;form_for&lt;/strong&gt; method will create html code as you see in the
 picture.&lt;/p&gt;
 
-&lt;p&gt;Form is created but it doesn&amp;#39;t work because we didn&amp;#39;t add controller.&lt;/p&gt;
+&lt;p&gt;Form is created but it doesn’t work because we didn’t add controller.&lt;/p&gt;
 
-&lt;h4&gt;app/controllers/tasks_controller.rb&lt;/h4&gt;
+&lt;h4 id=&quot;appcontrollerstaskscontrollerrb&quot;&gt;app/controllers/tasks_controller.rb&lt;/h4&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;create&lt;/span&gt;
  &lt;span class=&quot;vi&quot;&gt;@task&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Task&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;task_params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
@@ -1347,21 +1412,20 @@ picture.&lt;/p&gt;
 
 &lt;p&gt;Add this code to bottom of the &lt;strong&gt;tasks_controller&lt;/strong&gt;&lt;/p&gt;
 
-&lt;h4&gt;app/controllers/tasks_controller.rb&lt;/h4&gt;
+&lt;h4 id=&quot;appcontrollerstaskscontrollerrb-1&quot;&gt;app/controllers/tasks_controller.rb&lt;/h4&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;kp&quot;&gt;private&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;task_params&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:task&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;permit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
     &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-    
 
-&lt;p&gt;We&amp;#39;ve completed our test let&amp;#39;s move on second. We need to add Task added
+&lt;p&gt;We’ve completed our test let’s move on second. We need to add Task added
 Message. To display success or error messages with controller we will use flash
 hash.&lt;/p&gt;
 
-&lt;p&gt;Let&amp;#39;s write test first.&lt;/p&gt;
+&lt;p&gt;Let’s write test first.&lt;/p&gt;
 
-&lt;h4&gt;features/step&lt;em&gt;definitions/tasks&lt;/em&gt;steps.rb&lt;/h4&gt;
+&lt;h4 id=&quot;featuresstepdefinitionstasksstepsrb-1&quot;&gt;features/step_definitions/tasks_steps.rb&lt;/h4&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;gherkin&quot;&gt;&lt;span class=&quot;k&quot;&gt;Then &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;/^I should see task added message$/ do&lt;/span&gt;
 &lt;span class=&quot;nf&quot;&gt;  expect(page).to have_content &amp;quot;&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;Task added&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;&amp;quot;&lt;/span&gt;
@@ -1369,32 +1433,30 @@ hash.&lt;/p&gt;
 
 &lt;p&gt;Our test should fail. To work we need to add flash notice to our controller and add it to layout.&lt;/p&gt;
 
-&lt;h4&gt;app/controllers/tasks_controller.rb&lt;/h4&gt;
+&lt;h4 id=&quot;appcontrollerstaskscontrollerrb-2&quot;&gt;app/controllers/tasks_controller.rb&lt;/h4&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;flash&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:notice&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Task added&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h4&gt;application.html.slim&lt;/h4&gt;
+&lt;h4 id=&quot;applicationhtmlslim&quot;&gt;application.html.slim&lt;/h4&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;- if notice
   = notice
 - if alert
   = alert&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-  
 
 &lt;p&gt;Try to run test now you should see passing tests. If you go to web browser you should see task added message at the top of the page&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/task_added.png&quot; alt=&quot;task added&quot;&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/task_added.png&quot; alt=&quot;task added&quot; /&gt;&lt;/p&gt;
 
-&lt;h2&gt;Removing Tasks&lt;/h2&gt;
+&lt;h2 id=&quot;removing-tasks&quot;&gt;Removing Tasks&lt;/h2&gt;
+&lt;p&gt;If we’ll complete our tasks we should remove them from tasks list. First we’ll write some tests&lt;/p&gt;
 
-&lt;p&gt;If we&amp;#39;ll complete our tasks we should remove them from tasks list. First we&amp;#39;ll write some tests&lt;/p&gt;
-
-&lt;h4&gt;features/tasks.feature&lt;/h4&gt;
+&lt;h4 id=&quot;featurestasksfeature-1&quot;&gt;features/tasks.feature&lt;/h4&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;gherkin&quot;&gt;&lt;span class=&quot;k&quot;&gt;When &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;I delete task&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;Then &lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;I should see task deleted message&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h4&gt;features/step&lt;em&gt;definitions/tasks&lt;/em&gt;steps.rb&lt;/h4&gt;
+&lt;h4 id=&quot;featuresstepdefinitionstasksstepsrb-2&quot;&gt;features/step_definitions/tasks_steps.rb&lt;/h4&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;When&lt;/span&gt; &lt;span class=&quot;sr&quot;&gt;/^I delete task$/&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;visit&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;root_path&lt;/span&gt;
@@ -1412,20 +1474,19 @@ hash.&lt;/p&gt;
   &lt;span class=&quot;vi&quot;&gt;@task&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;destroy&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;redirect_to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;root_path&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;flash&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:alert&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Task deleted&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
- 
 
 &lt;p&gt;This code will find Task by id and saves it to variable and then it will use
 Active Record destroy method to remove it.&lt;/p&gt;
 
 &lt;p&gt;Add this code to &lt;strong&gt;home.html.slim&lt;/strong&gt;&lt;/p&gt;
 
-&lt;h4&gt;app/views/static_pages/home.html.slim&lt;/h4&gt;
+&lt;h4 id=&quot;appviewsstaticpageshomehtmlslim-2&quot;&gt;app/views/static_pages/home.html.slim&lt;/h4&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;= link_to &amp;#39;Delete task&amp;#39;, task, method: :delete&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;If you test it right now. You should see passing tests.&lt;/p&gt;
 
-&lt;h2&gt;Completing Tasks&lt;/h2&gt;
+&lt;h2 id=&quot;completing-tasks&quot;&gt;Completing Tasks&lt;/h2&gt;
 
 &lt;p&gt;We want to complete tasks and display it as completed. To do it 
 we need to add boolean completed to our tasks table.&lt;/p&gt;
@@ -1433,9 +1494,9 @@ we need to add boolean completed to our tasks table.&lt;/p&gt;
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;rails generate migration AddCompletedToTask&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;We need to edit our migration manually. Open up
-&lt;strong&gt;db/migrate/add&lt;em&gt;completed&lt;/em&gt;to_task.rb&lt;/strong&gt; and add some content:&lt;/p&gt;
+&lt;strong&gt;db/migrate/add_completed_to_task.rb&lt;/strong&gt; and add some content:&lt;/p&gt;
 
-&lt;h4&gt;db/migrate/add&lt;em&gt;completed&lt;/em&gt;to_task.rb&lt;/h4&gt;
+&lt;h4 id=&quot;dbmigrateaddcompletedtotaskrb&quot;&gt;db/migrate/add_completed_to_task.rb&lt;/h4&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;change&lt;/span&gt;
   &lt;span class=&quot;n&quot;&gt;add_column&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:tasks&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:completed&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:boolean&lt;/span&gt;
@@ -1443,13 +1504,13 @@ we need to add boolean completed to our tasks table.&lt;/p&gt;
 
 &lt;p&gt;We need to add new route.&lt;/p&gt;
 
-&lt;h4&gt;config/routes.rb&lt;/h4&gt;
+&lt;h4 id=&quot;configroutesrb-1&quot;&gt;config/routes.rb&lt;/h4&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;match&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;tasks/complete&amp;#39;&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;tasks#complete&amp;#39;&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:via&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;post&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;p&gt;And view and controller&lt;/p&gt;
 
-&lt;h4&gt;app/views/static_pages/home.html.slim&lt;/h4&gt;
+&lt;h4 id=&quot;appviewsstaticpageshomehtmlslim-3&quot;&gt;app/views/static_pages/home.html.slim&lt;/h4&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;= form_tag(&amp;quot;/tasks/complete&amp;quot;, :method =&amp;gt; &amp;quot;post&amp;quot;) do
   ul#tasks
@@ -1475,7 +1536,7 @@ we need to add boolean completed to our tasks table.&lt;/p&gt;
 
 &lt;p&gt;We checkout if task has attribute &lt;strong&gt;completed&lt;/strong&gt; set to true and if it does we use strike and little css styling.&lt;/p&gt;
 
-&lt;h4&gt;app/controllers/tasks_controller.rb&lt;/h4&gt;
+&lt;h4 id=&quot;appcontrollerstaskscontrollerrb-3&quot;&gt;app/controllers/tasks_controller.rb&lt;/h4&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;complete&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:tasks_checkbox&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;check&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
@@ -1486,101 +1547,15 @@ we need to add boolean completed to our tasks table.&lt;/p&gt;
     &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
     &lt;span class=&quot;n&quot;&gt;redirect_to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;root_path&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
- 
 
-&lt;h2&gt;What&amp;#39;s next&lt;/h2&gt;
+&lt;h2 id=&quot;whats-next&quot;&gt;What’s next&lt;/h2&gt;
 
-&lt;p&gt;In next tutorial we&amp;#39;ll look at user authentication.&lt;/p&gt;
+&lt;p&gt;In next tutorial we’ll look at user authentication.&lt;/p&gt;
+
 </description>
 				<pubDate>Fri, 04 Apr 2014 00:00:00 +0200</pubDate>
 				<link>http://masteruby.github.io/weekly-rails/2014/04/04/how-to-create-todo-list-app-in-rails-adding-removing-completing-tasks.html</link>
 				<guid isPermaLink="true">http://masteruby.github.io/weekly-rails/2014/04/04/how-to-create-todo-list-app-in-rails-adding-removing-completing-tasks.html</guid>
-			</item>
-		
-			<item>
-				<title>How to install Ruby and Rails for your operating system</title>
-				<description>&lt;p&gt;In this post I want to show you how to install Ruby and ROR for your operating system.&lt;/p&gt;
-
-&lt;h2&gt;How to install Ruby and Rails on Windows&lt;/h2&gt;
-
-&lt;h3&gt;Step 1: Get rails installer&lt;/h3&gt;
-
-&lt;p&gt;Get installer on &lt;a href=&quot;http://www.railsinstaller.org/en&quot;&gt;rails installer site&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/installer.png&quot; alt=&quot;installing rails on windows step 1&quot;&gt;&lt;/p&gt;
-
-&lt;h3&gt;Step 2: Run rails installer&lt;/h3&gt;
-
-&lt;p&gt;Go to folder where you&amp;#39;ve downloaded installer and run it:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/rails_installer_setup.png&quot; alt=&quot;installing rails on windows step 2&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;It will install Ruby with Rails and all dependencies you will use in
- developing Rails application&lt;/p&gt;
-
-&lt;h3&gt;Step 3: Running installer in Command prompt&lt;/h3&gt;
-
-&lt;p&gt;Try checking succesfull installation.  Go to the Start Menu, select all
- programs and choose &lt;strong&gt;Rails Installer&lt;/strong&gt; and then &lt;strong&gt;Command Prompt with Ruby
- and Rails&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/running.png&quot; alt=&quot;how to install ruby and rails on windows step 3&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;You should see window with your Windows Version and actual directory path. Let&amp;#39;s check it out if Ruby is properly installed. Type this into command prompt:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ruby -v
- &lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rails -v&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;You should see something like this:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/checking.png&quot; alt=&quot;ruby-on-rails-installation&quot;&gt;&lt;/p&gt;
-
-&lt;h2&gt;How to install Ruby and Rails on Mac OS X&lt;/h2&gt;
-
-&lt;p&gt;Use either rails installer or go to &lt;a href=&quot;http://pragmaticstudio.com/blog/2010/9/23/install-rails-ruby-mac&quot;&gt;this website&lt;/a&gt; for
-installation instructions&lt;/p&gt;
-
-&lt;h2&gt;How to install Ruby and Rails on Linux&lt;/h2&gt;
-
-&lt;h3&gt;Step 1: Install RVM&lt;/h3&gt;
-
-&lt;p&gt;RVM(Ruby Version Manager) is a simple tool for easy installation of ruby. First you have to install curl.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;sudo apt-get install curl&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Then install rvm:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/how_to_install_rvm.png&quot; alt=&quot;how to install ruby and rails on linux step 1&quot;&gt;&lt;/p&gt;
-
-&lt;h3&gt;Step 2: Installing ruby&lt;/h3&gt;
-
-&lt;p&gt;Go and install ruby with RVM:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/ruby_installation.png&quot; alt=&quot;Installing Ruby and Rails on Linux step 3&quot;&gt;&lt;/p&gt;
-
-&lt;h3&gt;Step 3: Installing Rails&lt;/h3&gt;
-
-&lt;p&gt;For installing Ruby on Rails you&amp;#39;ll use Rubygems.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/how_to_install_rails.png&quot; alt=&quot;how to install ruby and rails on linux step 3&quot;&gt;&lt;/p&gt;
-
-&lt;p&gt;Ok let&amp;#39;s check out succesfull installation with terminal:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;rails -v
-&lt;span class=&quot;nv&quot;&gt;$ &lt;/span&gt;ruby -v&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;h2&gt;What&amp;#39;s next&lt;/h2&gt;
-
-&lt;p&gt;That&amp;#39;s all for now. If you want to know more about developing Rails
-applications I recommend you &lt;a href=&quot;http://guides.rubyonrails.org/getting_started.html&quot;&gt;ruby on rails
-guide&lt;/a&gt;. I wrote post about
-&lt;a href=&quot;http://masteruby.github.io/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.html&quot;&gt;how to create todo list app in
-rails&lt;/a&gt;,
-so if you want you can check it out.&lt;/p&gt;
-</description>
-				<pubDate>Fri, 28 Mar 2014 00:00:00 +0100</pubDate>
-				<link>http://masteruby.github.io/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html</link>
-				<guid isPermaLink="true">http://masteruby.github.io/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html</guid>
 			</item>
 		
 	</channel>

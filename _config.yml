@@ -1,6 +1,7 @@
 name: Masteruby
-markdown: redcarpet
-pygments: true
+markdown: kramdown
+kramdown:
+  use_coderay: true
 comments: true
 description: Masteruby is ruby tutorials website
 url: http://masteruby.github.io

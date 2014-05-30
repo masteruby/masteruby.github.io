@@ -70,70 +70,75 @@
 
 <div class="post">
 <p>In the following series of posts we gonna create todo list app in rails.
-In this tutorial we&#39;ll create basic structure of our app. In first part of
+In this tutorial we’ll create basic structure of our app. In first part of
 tutorial you will learn:</p>
 
 <ul>
-<li>How to install <strong>Rails</strong></li>
-<li>How to choose text editor for your operating system</li>
-<li>How to use <strong>Rails</strong> in command line </li>
-<li>How to use <strong>Bundler</strong> to install gems</li>
-<li>How to use <strong>Cucumber</strong> with <strong>Capybara</strong> to test our pages</li>
-<li>How to create our static_pages(home,about,contact)</li>
+  <li>How to install <strong>Rails</strong></li>
+  <li>How to choose text editor for your operating system</li>
+  <li>How to use <strong>Rails</strong> in command line </li>
+  <li>How to use <strong>Bundler</strong> to install gems</li>
+  <li>How to use <strong>Cucumber</strong> with <strong>Capybara</strong> to test our pages</li>
+  <li>How to create our static_pages(home,about,contact)</li>
 </ul>
 
-<h2>1 What do you need</h2>
+<h2 id="what-do-you-need">1 What do you need</h2>
 
 <ul>
-<li><p>You need to have some basic knowledge of HTML, CSS. If you haven&#39;t learn them  yet go to <a href="http://www.codecademy.com/tracks/web">web tutorial on codecademy</a></p></li>
-<li><p>You need to have basics in Ruby. If you haven&#39;t I wrote post about <a href="http://masteruby.github.io/learning-resources/2014/03/28/learn-ruby-with-these-resources.html">learning resources</a> for ruby</p></li>
-<li><p>You need to have ruby and ruby on rails installed. I will explain this in next section</p></li>
+  <li>
+    <p>You need to have some basic knowledge of HTML, CSS. If you haven’t learn them  yet go to <a href="http://www.codecademy.com/tracks/web">web tutorial on codecademy</a></p>
+  </li>
+  <li>
+    <p>You need to have basics in Ruby. If you haven’t I wrote post about <a href="http://masteruby.github.io/learning-resources/2014/03/28/learn-ruby-with-these-resources.html">learning resources</a> for ruby</p>
+  </li>
+  <li>
+    <p>You need to have ruby and ruby on rails installed. I will explain this in next section</p>
+  </li>
 </ul>
 
-<h2>2 How to install Ruby</h2>
-
+<h2 id="how-to-install-ruby">2 How to install Ruby</h2>
 <p>In <a href="http://masteruby.github.io/learning-resources/2015/03/28/how-to-install-ruby.html">this post</a>
-I&#39;ve included installation instructions for Ruby and Rails</p>
+I’ve included installation instructions for Ruby and Rails</p>
 
-<h2>3 Choosing your text editor</h2>
+<h2 id="choosing-your-text-editor">3 Choosing your text editor</h2>
 
 <p>You write all your ruby programs using text editor.</p>
 
-<h3>3.1 <a href="http://notepad-plus-plus.org/download/v6.5.3.html">Notepad++</a></h3>
+<h3 id="notepadhttpnotepad-plus-plusorgdownloadv653html">3.1 <a href="http://notepad-plus-plus.org/download/v6.5.3.html">Notepad++</a></h3>
 
-<p>For Windows  I recommend you this editor. It&#39;s free and it includes syntax highlighting and auto completion for ruby. </p>
+<p>For Windows  I recommend you this editor. It’s free and it includes syntax highlighting and auto completion for ruby. </p>
 
-<h3>3.2 <a href="http://macromates.com">TextMate</a></h3>
+<h3 id="textmatehttpmacromatescom">3.2 <a href="http://macromates.com">TextMate</a></h3>
 
 <p>On Mac you can use TextMate. You can download it and install for free.</p>
 
-<h3>3.3 Gedit</h3>
+<h3 id="gedit">3.3 Gedit</h3>
 
 <p>On Linux you can use gedit.</p>
 
-<h2>4 Creating basic structure of the app</h2>
+<h2 id="creating-basic-structure-of-the-app">4 Creating basic structure of the app</h2>
 
-<p>Ok so you&#39;ve got your tools in order, so we can start to  create application. Open up terminal window or command prompt if you&#39;re on Windows and enter following code:</p>
+<p>Ok so you’ve got your tools in order, so we can start to  create application. Open up terminal window or command prompt if you’re on Windows and enter following code:</p>
 
 <div class="highlight"><pre><code class="sh"><span class="nv">$ </span>rails new todo --skip-test-unit</code></pre></div>
 
-<p>This will create rails application named todo. It takes a while. Ok let&#39;s check out some folders that we&#39;re created.</p>
+<p>This will create rails application named todo. It takes a while. Ok let’s check out some folders that we’re created.</p>
 
-<h4>Gemfile</h4>
+<h4 id="gemfile">Gemfile</h4>
 
-<p>That&#39;s the file that you will use to install all dependencies what you need
- for your applications. They&#39;re called gems. Just add name of gem to your
+<p>That’s the file that you will use to install all dependencies what you need
+ for your applications. They’re called gems. Just add name of gem to your
  Gemfile and let Bundler to take care of installation.</p>
 
-<h4>app/views</h4>
+<h4 id="appviews">app/views</h4>
 
 <p>In this folder you place your html templates.</p>
 
-<h4>app/assets</h4>
+<h4 id="appassets">app/assets</h4>
 
 <p>Images, Javascript and CSS files belongs here.</p>
 
-<h3>4.1 How to use Bundler</h3>
+<h3 id="how-to-use-bundler">4.1 How to use Bundler</h3>
 
 <p>After creating rails application you should use Bundler to use all dependencies
 what you need. First add name of the gem to your Gemfile, then open up terminal
@@ -141,7 +146,7 @@ and add following command:</p>
 
 <div class="highlight"><pre><code class="sh"><span class="nv">$ </span>bundle install</code></pre></div>
 
-<p>Let&#39;s add some gems to your Gemfile. Open up your Gemfile and add following
+<p>Let’s add some gems to your Gemfile. Open up your Gemfile and add following
 gems:</p>
 
 <div class="highlight"><pre><code class="ruby"><span class="n">gem</span> <span class="s1">&#39;slim-rails&#39;</span>
@@ -155,7 +160,7 @@ gems:</p>
 
 <div class="highlight"><pre><code class="sh"><span class="nv">$ </span>bundle install</code></pre></div>
 
-<h3>4.2 Starting our application</h3>
+<h3 id="starting-our-application">4.2 Starting our application</h3>
 
 <p>To run your application, type this into command line:</p>
 
@@ -163,32 +168,30 @@ gems:</p>
 
 <p>Go to web browser and type localhost:3000. Your output screen should look like this:</p>
 
-<p><img src="/images/rails-opening-screen.png" alt="rails-opening-screen"></p>
+<p><img src="/images/rails-opening-screen.png" alt="rails-opening-screen" /></p>
 
-<h2>5 Creating Static Pages</h2>
+<h2 id="creating-static-pages">5 Creating Static Pages</h2>
 
-<p>We have our web server running let&#39;s build some pages.</p>
+<p>We have our web server running let’s build some pages.</p>
 
-<h3>5.1 Creating controllers</h3>
+<h3 id="creating-controllers">5.1 Creating controllers</h3>
 
 <div class="highlight"><pre><code class="sh"><span class="nv">$ </span>rails generate controller StaticPages home <span class="nb">help </span>about --no-test-framework</code></pre></div>
 
 <p>If you open your views folder, you should see that you have new folder named
-<strong>static_pages</strong> with some files in it. Go to the <strong>config/routes.rb</strong>, you should see path of our pages that we&#39;re created. Type for example, localhost:3000/static_pages into your web browser.</p>
+<strong>static_pages</strong> with some files in it. Go to the <strong>config/routes.rb</strong>, you should see path of our pages that we’re created. Type for example, localhost:3000/static_pages into your web browser.</p>
 
-<p><img src="/images/home.png" alt="home"></p>
+<p><img src="/images/home.png" alt="home" /></p>
 
 <p>We created StaticPages controller and we can populate our files. Testing every
 change in a browser would be tedious. So we gonna need Cucumber and Capybara to
 do it for us.</p>
 
-<h3>5.2 Cucumber</h3>
-
+<h3 id="cucumber">5.2 Cucumber</h3>
 <p>Cucumber lets software developers and shareholders to use simple plain language
 to describe features. If you want to know more about Cucumber, try
-<a href="http://www.amazon.com/The-Cucumber-Book-Behaviour-Driven-Development/dp/1934356808">CucumberBook</a></p>
-
-<h4>How Cucumber works</h4>
+<a href="http://www.amazon.com/The-Cucumber-Book-Behaviour-Driven-Development/dp/1934356808">CucumberBook</a>
+#### How Cucumber works</p>
 
 <p>Cucumber works in features which are written in plain text and step definitions which are written in regular ruby code. If you go to your app folder, you should see that folder named features  was created.  </p>
 
@@ -199,7 +202,7 @@ to describe features. If you want to know more about Cucumber, try
 <p>We need to test all our static pages. Open up folder features in your main
  directory and add file <strong>static_pages.feature</strong> into your features directory.</p>
 
-<h4>static_pages.feature</h4>
+<h4 id="staticpagesfeature">static_pages.feature</h4>
 
 <div class="highlight"><pre><code class="gherkin"><span class="k">Feature:</span><span class="nf"> Static Pages content</span>
 
@@ -219,20 +222,20 @@ to describe features. If you want to know more about Cucumber, try
 <p>This is how it works. At first line you define your feature, in our example
  StaticPages content. Then you define your steps. Steps always begin with
  keywords: Given,When,Then,And and continue with regular expression. It can be
- any text. Don&#39;t forget to surround your text in regular expression like this: <strong>/^some text$/</strong></p>
+ any text. Don’t forget to surround your text in regular expression like this: <strong>/^some text$/</strong></p>
 
-<p>We have our feature defined, let&#39;s test it with Cucumber</p>
+<p>We have our feature defined, let’s test it with Cucumber</p>
 
 <div class="highlight"><pre><code class="sh"><span class="nv">$ </span>cucumber</code></pre></div>
 
 <p>You should see something like this:</p>
 
-<p><img src="/images/static-pages-failing-steps.png" alt="failing steps"></p>
+<p><img src="/images/static-pages-failing-steps.png" alt="failing steps" /></p>
 
-<p>Ok we&#39;ve saw undefined scenarios and steps let&#39;s actually implement it. Open
- up folder step-definitions and create file <strong>static<em>pages</em>steps.rb</strong></p>
+<p>Ok we’ve saw undefined scenarios and steps let’s actually implement it. Open
+ up folder step-definitions and create file <strong>static_pages_steps.rb</strong></p>
 
-<h4>static<em>pages</em>steps.rb</h4>
+<h4 id="staticpagesstepsrb">static_pages_steps.rb</h4>
 
 <div class="highlight"><pre><code class="ruby"><span class="no">When</span> <span class="sr">/^I visit Home path$/</span> <span class="k">do</span> 
   <span class="n">visit</span> <span class="s1">&#39;static_pages/home&#39;</span>
@@ -241,7 +244,7 @@ to describe features. If you want to know more about Cucumber, try
 <p>In first line we match name of our step with name in the feature file.
 Then we use capybara to visit home path in the browser. Run your test with cucumber. You should see one passing test.</p>
 
-<p>Now we need to test content of our home page. Add this into features/step<em>definitions/static</em>pages_steps.rb:</p>
+<p>Now we need to test content of our home page. Add this into features/step_definitions/static_pages_steps.rb:</p>
 
 <div class="highlight"><pre><code class="ruby"><span class="no">Then</span> <span class="sr">/^I should see following content: Todo$/</span> <span class="k">do</span>
   <span class="n">expect</span><span class="p">(</span><span class="n">page</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_content</span><span class="p">(</span><span class="s2">&quot;Todo&quot;</span><span class="p">)</span>
@@ -250,13 +253,13 @@ Then we use capybara to visit home path in the browser. Run your test with cucum
 <p>In first line we match second step with feature file.
 On the second line we use <strong>Rspec Expectations</strong> to test content of our home page.</p>
 
-<p>Run cucumber again. You should see failing tests. Of course that test is falling, we don&#39;t have content Todo in our templates.</p>
+<p>Run cucumber again. You should see failing tests. Of course that test is falling, we don’t have content Todo in our templates.</p>
 
 <p>Open up folder app/views/static_pages and edit file named <strong>home.html.slim</strong>.</p>
 
-<h3>5.3 Why to use Slim</h3>
+<h3 id="why-to-use-slim">5.3 Why to use Slim</h3>
 
-<p>Maybe you wonder why we&#39;re using files with slim ending. Slim is a template
+<p>Maybe you wonder why we’re using files with slim ending. Slim is a template
 language that strips all unnecessary elements as opening and closing tags. For example this is a code in html: </p>
 
 <div class="highlight"><pre><code class="html"><span class="nt">&lt;html&gt;</span>
@@ -279,17 +282,17 @@ language that strips all unnecessary elements as opening and closing tags. For e
       p My paragraph</code></pre></div>
 
 <p>You see that Slim code is shorter and easier to read as Html code. 
-  Let&#39;s return to our file. Replace content of <strong>home.html.slim</strong> with following
+  Let’s return to our file. Replace content of <strong>home.html.slim</strong> with following
   content:</p>
 
-<h4>home.html.slim</h4>
+<h4 id="homehtmlslim">home.html.slim</h4>
 
 <div class="highlight"><pre><code class="html">h1 Todo</code></pre></div>
 
 <p>You should see that our test is now passing. Implement this to remaining steps
 in our feature file.</p>
 
-<h4>static<em>pages</em>steps.rb(excerpt)</h4>
+<h4 id="staticpagesstepsrbexcerpt">static_pages_steps.rb(excerpt)</h4>
 
 <div class="highlight"><pre><code class="ruby"><span class="no">When</span> <span class="sr">/^I visit About path$/</span> <span class="k">do</span>
   <span class="n">visit</span> <span class="s1">&#39;static_pages/about&#39;</span>
@@ -307,18 +310,18 @@ in our feature file.</p>
   <span class="n">expect</span><span class="p">(</span><span class="n">page</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_content</span><span class="p">(</span><span class="s2">&quot;Help&quot;</span><span class="p">)</span>
 <span class="k">end</span></code></pre></div>
 
-<h4>about.html.slim</h4>
+<h4 id="abouthtmlslim">about.html.slim</h4>
 
 <div class="highlight"><pre><code class="html">h1 About</code></pre></div>
 
-<h4>help.html.slim</h4>
+<h4 id="helphtmlslim">help.html.slim</h4>
 
 <div class="highlight"><pre><code class="html">h1 Help</code></pre></div>
 
 <p>All our tests are now passing, next step will be implement title tests. Open up
  your <strong>static_pages.feature</strong> file and append following line:</p>
 
-<h4>static_pages.feature</h4>
+<h4 id="staticpagesfeature-1">static_pages.feature</h4>
 
 <div class="highlight"><pre><code class="gherkin"><span class="k">And </span><span class="nf">I should see following title: </span><span class="nv">&lt;Title&gt;</span><span class="nf"></span>
 
@@ -328,9 +331,9 @@ in our feature file.</p>
 <span class="k">   |</span><span class="nv"> About</span><span class="k">    |</span><span class="nv"> About</span><span class="k">   |</span><span class="nv"> **About</span><span class="k"> |</span><span class="nv">**</span><span class="k"></span>
 <span class="k">   |</span><span class="nv"> Help</span><span class="k">     |</span><span class="nv"> Help</span><span class="k">    |</span><span class="nv"> **Help</span><span class="k">  |</span><span class="nv">**</span></code></pre></div>
 
-<p>Let&#39;s implement our test. Add these lines to our steps file.</p>
+<p>Let’s implement our test. Add these lines to our steps file.</p>
 
-<h4>static<em>pages</em>steps.rb</h4>
+<h4 id="staticpagesstepsrb-1">static_pages_steps.rb</h4>
 
 <div class="highlight"><pre><code class="ruby"><span class="no">And</span> <span class="sr">/^I should see following title: Todo$/</span> <span class="k">do</span>
   <span class="n">expect</span><span class="p">(</span><span class="n">page</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_title</span><span class="p">(</span><span class="s2">&quot;Todo&quot;</span><span class="p">)</span>
@@ -344,34 +347,33 @@ in our feature file.</p>
   <span class="n">expect</span><span class="p">(</span><span class="n">page</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_title</span><span class="p">(</span><span class="s2">&quot;Help&quot;</span><span class="p">)</span>
 <span class="k">end</span></code></pre></div>
 
-<p>Let&#39;s fix failing tests. We need to change our title in our templates.</p>
+<p>Let’s fix failing tests. We need to change our title in our templates.</p>
 
-<h4>home.html.slim</h4>
+<h4 id="homehtmlslim-1">home.html.slim</h4>
 
 <div class="highlight"><pre><code class="html">html
   head
     title Todo</code></pre></div>
 
-<h4>about.html.slim</h4>
+<h4 id="abouthtmlslim-1">about.html.slim</h4>
 
 <div class="highlight"><pre><code class="html">html
   head
     title About</code></pre></div>
 
-<h4>help.html.slim</h4>
+<h4 id="helphtmlslim-1">help.html.slim</h4>
 
 <div class="highlight"><pre><code class="html">html
   head
     title Help</code></pre></div>
 
-<p>Let&#39;s run cucumber again. You should see that&#39;s all our steps are now passing. We are done.</p>
+<p>Let’s run cucumber again. You should see that’s all our steps are now passing. We are done.</p>
 
-<h2>6 What to improve</h2>
+<h2 id="what-to-improve">6 What to improve</h2>
 
-<h3>6.1 Watching step changes with Guard</h3>
-
-<p>There&#39;s lot a place to improve. For example running cucumber every time for
-every change in terminal it&#39;s disgusting. Let&#39;s change it. We can use <strong>Guard</strong>
+<h3 id="watching-step-changes-with-guard">6.1 Watching step changes with Guard</h3>
+<p>There’s lot a place to improve. For example running cucumber every time for
+every change in terminal it’s disgusting. Let’s change it. We can use <strong>Guard</strong>
 to watch every change in our features folder. Add Guard to your Gemfile.</p>
 
 <div class="highlight"><pre><code class="ruby"><span class="n">gem</span> <span class="s1">&#39;guard-cucumber&#39;</span></code></pre></div>
@@ -380,30 +382,30 @@ to watch every change in our features folder. Add Guard to your Gemfile.</p>
 
 <div class="highlight"><pre><code class="sh"><span class="nv">$ </span>bundle install</code></pre></div>
 
-<p>Let&#39;s add Guard to Cucumber.</p>
+<p>Let’s add Guard to Cucumber.</p>
 
 <div class="highlight"><pre><code class="sh"><span class="nv">$ </span>guard init cucumber</code></pre></div>
 
-<p>If you open your app&#39;s folder you should see that file named <strong>Guardfile</strong> was
+<p>If you open your app’s folder you should see that file named <strong>Guardfile</strong> was
 created.</p>
 
-<p>Let&#39;s run Guard to run our features automatically.</p>
+<p>Let’s run Guard to run our features automatically.</p>
 
 <div class="highlight"><pre><code class="sh"><span class="nv">$ </span>guard</code></pre></div>
 
 <p>All features are running automatically by now.</p>
 
-<h3>6.2 Eliminate duplication in title</h3>
+<h3 id="eliminate-duplication-in-title">6.2 Eliminate duplication in title</h3>
 
 <p>Take a look at files in views folder.
-You saw that we&#39;ve writed title tag three times. That&#39;s terrible, let&#39;s do
+You saw that we’ve writed title tag three times. That’s terrible, let’s do
 something about that. First rename file in <strong>app/views/layouts</strong> directory.</p>
 
 <div class="highlight"><pre><code class="sh">mv application.html.erb application.html.slim</code></pre></div>
 
 <p>Delete all content and replace it with following:</p>
 
-<h4>app/views/layouts/application.html.slim</h4>
+<h4 id="appviewslayoutsapplicationhtmlslim">app/views/layouts/application.html.slim</h4>
 
 <div class="highlight"><pre><code class="html">doctype html
 html
@@ -415,17 +417,17 @@ html
   body
     = yield</code></pre></div>
 
-<h4>app/views/static_pages/about.html.slim</h4>
+<h4 id="appviewsstaticpagesabouthtmlslim">app/views/static_pages/about.html.slim</h4>
 
 <div class="highlight"><pre><code class="html">- provide(:title, &#39;About&#39;)
 h1 About</code></pre></div>
 
-<h4>app/views/static_pages/help.html.slim</h4>
+<h4 id="appviewsstaticpageshelphtmlslim">app/views/static_pages/help.html.slim</h4>
 
 <div class="highlight"><pre><code class="html">- provide(:title, &#39;Help&#39;)
 h1 Help</code></pre></div>
 
-<h3>6.3 Linking our pages and updating routes</h3>
+<h3 id="linking-our-pages-and-updating-routes">6.3 Linking our pages and updating routes</h3>
 
 <p>Typing long adresses like <strong>static_pages/home</strong> is very disgusting, if we
 instead use shorter address, it wouldbe much better.</p>
@@ -436,9 +438,9 @@ instead use shorter address, it wouldbe much better.</p>
 <span class="nf">match &quot;</span><span class="s">/help</span><span class="nf">&quot;, to: &quot;</span><span class="s">static_pages#help</span><span class="nf">&quot;, via: &#39;get&#39;</span>
 <span class="nf">match &quot;</span><span class="s">/about</span><span class="nf">&quot;, to: &quot;</span><span class="s">static_pages#about</span><span class="nf">&quot;, via: &#39;get&#39;</span></code></pre></div>
 
-<p>And change tests in <strong>features/step<em>definitions/static</em>pages_steps.rb</strong> like this:</p>
+<p>And change tests in <strong>features/step_definitions/static_pages_steps.rb</strong> like this:</p>
 
-<p><strong>features/step<em>definitions/static</em>pages_steps.rb</strong></p>
+<p><strong>features/step_definitions/static_pages_steps.rb</strong></p>
 
 <div class="highlight"><pre><code class="ruby"><span class="no">When</span> <span class="sr">/^I visit Home path$/</span> <span class="k">do</span>
   <span class="n">visit</span> <span class="s1">&#39;/&#39;</span>
@@ -452,23 +454,23 @@ instead use shorter address, it wouldbe much better.</p>
   <span class="n">visit</span> <span class="s1">&#39;/help&#39;</span>
 <span class="k">end</span></code></pre></div>
 
-<p>Let&#39;s take a look at code we&#39;ve just wrote.</p>
+<p>Let’s take a look at code we’ve just wrote.</p>
 
 <div class="highlight"><pre><code class="sh">root <span class="s2">&quot;static_pages#home&quot;</span></code></pre></div>
 
-<p>This code creates root path for our pages. In this time it&#39;s
-<strong>static_pages#home</strong>. So you don&#39;t have to write your path to web browser.
+<p>This code creates root path for our pages. In this time it’s
+<strong>static_pages#home</strong>. So you don’t have to write your path to web browser.
 Start rails server. You should something like this:</p>
 
-<p><img src="/images/root_path.png" alt="how-to-create-root-path-in-rails"></p>
+<p><img src="/images/root_path.png" alt="how-to-create-root-path-in-rails" /></p>
 
-<p>That&#39;s good but your visitors don&#39;t have time to write short path like
+<p>That’s good but your visitors don’t have time to write short path like
 <strong>/help</strong> to your webrowser. You haveto include links on your root page.</p>
 
 <p>Add this code for adding links to your
 <strong>app/views/static_pages/layouts/application.html</strong> file after the body tag.</p>
 
-<h4>application.html.slim</h4>
+<h4 id="applicationhtmlslim">application.html.slim</h4>
 
 <div class="highlight"><pre><code class="sh">nav
   ul
@@ -478,9 +480,10 @@ Start rails server. You should something like this:</p>
 
 <p>You should see links on your home page.</p>
 
-<p><img src="/images/linked-pages.png" alt="linked pages"></p>
+<p><img src="/images/linked-pages.png" alt="linked pages" /></p>
 
-<p>We&#39;re done here. In next tutorial we&#39;ll do some styling to our app</p>
+<p>We’re done here. In next tutorial we’ll do some styling to our app</p>
+
 
 
 
@@ -509,7 +512,12 @@ Start rails server. You should something like this:</p>
 <ul class="posts">
   
 
-  <li><span>27 May 2014</span> &raquo; <a href="/2014/05/27/link.html#disqus_thread">Link</a></li>
+  <li><span>30 May 2014</span> &raquo; <a href="/2014/05/30/link.html#disqus_thread">Link</a></li>
+  
+  
+  
+
+  <li><span>30 May 2014</span> &raquo; <a href="/learning-resources/2014/05/30/ruby-news-websites.html#disqus_thread">7 Websites to Get Latest News About Ruby</a></li>
   
   
   
@@ -552,11 +560,6 @@ Start rails server. You should something like this:</p>
   <li><span>04 Apr 2014</span> &raquo; <a href="/weekly-rails/2014/04/04/how-to-create-todo-list-app-in-rails-adding-removing-completing-tasks.html#disqus_thread">How to create todo list app in rails, adding, removing and deleting tasks</a></li>
   
   
-  
-
-  <li><span>28 Mar 2014</span> &raquo; <a href="/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html#disqus_thread">How to install Ruby and Rails for your operating system</a></li>
-  
-  
    
   
 
@@ -590,10 +593,17 @@ Start rails server. You should something like this:</p>
   <h1>Recent posts</h1>
 
 <li>
-  <span>27 May 2014</span> &raquo;
+  <span>30 May 2014</span> &raquo;
 
-  <a href="/2014/05/27/link.html">
+  <a href="/2014/05/30/link.html">
     Link</a>
+</li>
+
+<li>
+  <span>30 May 2014</span> &raquo;
+
+  <a href="/learning-resources/2014/05/30/ruby-news-websites.html">
+    7 Websites to Get Latest News About Ruby</a>
 </li>
 
 <li>
