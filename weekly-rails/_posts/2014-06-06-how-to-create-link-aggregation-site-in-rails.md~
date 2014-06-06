@@ -1,6 +1,6 @@
 ---
 layout: post
-title: How to create link aggregation site in Rails &#58; Adding, editing, deleting links
+title: How to create link aggregation site in Rails&#58; Adding, editing, deleting links
 ---
 
 
@@ -73,13 +73,14 @@ And put navigation menu in **layouts/header.html.slim**
 
 {% highlight html %}
 header.navbar
-	ul.links
-		li = link_to "Mlink", '#'
+  ul.links
+    li = link_to "Mlink, '#'
     li = link_to "Home", '#'
     li = link_to "Submit", '#'
   ul.auth
     li = link_to "Login", '#'
     li = link_to "Signup", '#'
+
 {% endhighlight %}
 
 Let's add some styling for our navigation. Create file **main.css.scss**
@@ -89,20 +90,20 @@ Let's add some styling for our navigation. Create file **main.css.scss**
 {% highlight css %}
 
 .navbar {
-	background-color: rgb(120, 163, 0);
+  background-color: rgb(120, 163, 0);
   width: 100%;
   overflow: hidden;
-	
-	ul {
-		list-style: none;
+
+  ul {
+    list-style: none;
     
     li {
-			display:inline;
+      display:inline;
       padding: 0.8em;
       
       a {
-      	text-decoration: none;
-				color: white;
+        text-decoration: none;
+        color: white;
       } 
     }
   }
@@ -129,15 +130,15 @@ Let's design content our webpage. We want to show links that users submitted on 
 #### app/views/home/home.html.slim
 {% highlight html %}
 section#content  
-	ol#links-list	
-		li	
-			span.link	
-				= link_to "Geeklist", '#'	
+  ol#links-list	
+    li
+      span.link	
+        = link_to "Geeklist", '#'	
       span.details  
-				p	
-					| posted by	
-					= link_to "ed_wood", '#'	
-					| 20 minutes ago	
+        p
+          | posted by	
+          = link_to "ed_wood", '#'	
+          | 20 minutes ago	
 
 {% endhighlight %}
 
@@ -148,15 +149,15 @@ And styling to **main.css.scss**
 
 {% highlight css %}
 #wrapper {
-	background-color: rgb(223, 223, 224);
+  background-color: rgb(223, 223, 224);
   }
 
 .details a {
-	padding: 0.6em;
+  padding: 0.6em;
 }
 
 #links-list li {
-	padding: 0.8em;
+  padding: 0.8em;
   a {
     color: rgb(120, 163, 0);
   }
@@ -206,17 +207,17 @@ Now we have to add authentication links to our homepage. Add this code to **_hea
 #### app/views/layouts/_header.html.slim
 {% highlight html %}
 header.navbar
-	ul.links
-  	li = link_to "Mlink", '#'
-  	li = link_to "Home", root_path
-		li = link_to "Submit", '#'
-	ul.auth
-		- if user_signed_in?
-			li = link_to 'Edit profile', edit_user_registration_path
-			li = link_to 'Logout', destroy_user_session_path
-		- else
-			li = link_to 'Login', new_user_session_path
-			li = link_to 'Signup', new_user_registration_path
+  ul.links
+    li = link_to "Mlink", '#'
+    li = link_to "Home", root_path
+    li = link_to "Submit", '#'
+  ul.auth
+    - if user_signed_in?
+      li = link_to 'Edit profile', edit_user_registration_path
+      li = link_to 'Logout', destroy_user_session_path
+    - else
+      li = link_to 'Login', new_user_session_path
+      li = link_to 'Signup', new_user_registration_path
 {% endhighlight %}  
 
 Restart your rails server and after you click on Signup link you should see this form:
@@ -298,13 +299,11 @@ Let's create form for submitting our links. We'll put form in a partial **_form.
 #### app/views/links/_form.html.slim
 
 {% highlight html %}
-
 = simple_form_for @link do |f|
-	= f.input :title
+  = f.input :title
   = f.input :url
   = f.button :submit
-  
- {% endhighlight %}
+{% endhighlight %}
 
  
 
@@ -323,16 +322,16 @@ Just add little styling to your forms
 {% highlight css %}
 
 .simple_form {
-	div.input {
-		margin-bottom: 30px;
-		clear: both;
-	}
+  div.input {
+    margin-bottom: 30px;
+    clear: both;
+  }
   label {
-		float: left;
-		width: 200px;
-		text-align: right;
-		margin: 2px 10px;
-	}
+    float: left;
+    width: 200px;
+    text-align: right;
+    margin: 2px 10px;
+  }
 }
 {% endhighlight %}
 
@@ -358,19 +357,20 @@ validates :url, presence: true
 
 {% highlight ruby %}
 def create
-	@user = current_user
+  @user = current_user
   @link = @user.links.new(link_params)
   if @link.save
-		redirect_to root_path
-	else
-		render 'new'
+    redirect_to root_path
+  else
+    render 'new'
   end
 end
 
   private
-		def link_params
+    def link_params
       params.require(:link).permit(:title, :url)
     end
+end    
 {% endhighlight %}
 
 
@@ -380,22 +380,22 @@ We want to our links to show on home page so add this code to home controller.
 {% highlight ruby %}
 
 def home
-	@links = Link.all
+  @links = Link.all
 {% endhighlight %}
 
 And add some code to **home.html.slim**
 
 {% highlight html %}
 section#content
-	ol#links-list
-  	- @links.each do |link|
-			li
-				span.link
-					= link_to link.title, link.url
-				span.details
+  ol#links-list
+    - @links.each do |link|
+      li
+        span.link
+          = link_to link.title, link.url
+        span.details
           - if link.user == current_user
-						= link_to 'edit', edit_link_path(link)
-						= link_to "delete", link_path(link), method: :delete
+            = link_to 'edit', edit_link_path(link)
+            = link_to "delete", link_path(link), method: :delete
 {% endhighlight %}
 
 
@@ -407,17 +407,17 @@ We want to user to edit his links that he submitted, so we'll add update action 
 #### app/controllers/links_controller.rb
 {% highlight ruby %}
 def edit
-	@link = Link.find(params[:id])
+  @link = Link.find(params[:id])
 end
 
 def update
-	@link = Link.find(params[:id])
+  @link = Link.find(params[:id])
   
   if @link.update(link_params)
-		redirect_to root_path
-	else
-		render 'edit'
-	end 
+    redirect_to root_path
+  else
+    render 'edit'
+  end 
 end 
 {% endhighlight %}
 
@@ -431,9 +431,9 @@ To delete links add destroy action to **links_controller**
 def destroy
   @link = Link.find(params[:id])
   if @link.user == current_user
-  	@link.destroy
-   redirect_to root_path
-end
+    @link.destroy
+    redirect_to root_path
+  end
 end
 {% endhighlight %}
 
@@ -456,21 +456,21 @@ Add this code to **home.html.slim**
 {% highlight html %}
 
 section#content
-	ol#links-list
-		- @links.each do |link|
-			li
-				span.link
-		  		= link_to link.title, link.url
-				span.details
-					- if link.user == current_user
-						= link_to "edit", edit_link_path(link)
-						= link_to "delete", link_path(link), method: :delete
+  ol#links-list
+    - @links.each do |link|
+      li
+        span.link
+          = link_to link.title, link.url
+        span.details
+          - if link.user == current_user
+            = link_to "edit", edit_link_path(link)
+            = link_to "delete", link_path(link), method: :delete
 
-					p
-						|
-							posted by
-						= link_to link.user.username
-						= time_ago_in_words(link.created_at)
+          p
+            |
+            posted by
+            = link_to link.user.username
+            = time_ago_in_words(link.created_at)
 
 {% endhighlight %}
 
