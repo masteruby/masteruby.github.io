@@ -73,8 +73,10 @@
         <lastmod>2014-05-30T19:01:00+02:00</lastmod>
     </url>
     <url>
-        <loc>http://masteruby.github.io/2014/05/30/link.html</loc>
-        <lastmod>2014-05-30T09:55:31+02:00</lastmod>
+        <loc>
+            http://masteruby.github.io/weekly-rails/2014/06/06/how-to-create-link-aggregation-site-in-rails.html
+        </loc>
+        <lastmod>2014-06-06T12:40:35+02:00</lastmod>
     </url>
     <url>
         <loc>http://masteruby.github.io/automate-this-with-ruby.html</loc>
@@ -82,7 +84,7 @@
     </url>
     <url>
         <loc>http://masteruby.github.io/</loc>
-        <lastmod>2014-05-30T19:01:00+02:00</lastmod>
+        <lastmod>2014-06-06T12:40:35+02:00</lastmod>
     </url>
     <url>
         <loc>http://masteruby.github.io/learning-resources.html</loc>

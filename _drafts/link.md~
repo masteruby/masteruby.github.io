@@ -1,0 +1,340 @@
+---
+layout: post
+---
+
+## How to create link aggregation site
+
+In this post we'll create link aggregation that look like **Hacker News**.
+
+Here's how it'll be look like:
+
+![link aggregation site](/images/)
+
+In this tutorial we'll cover:
+
+* Design our page with HTML, CSS
+* [Creating authentication with Devise](#Creating authentication with Devise)
+* How to create, edit and delete links
+* How to show link user and time whenpost was submitted.
+
+## Design our page
+
+First we create our app
+
+{% highlight sh %}
+rails new mlink
+{% endhighlight %}
+
+We'll start with designing how our page will be look like.
+
+Add slim or haml gem to your Gemfile.
+
+#### Gemfile
+{% highlight ruby %}
+gem 'slim-rails'
+{% endhighlight %}
+
+### Creating navigation
+
+We'll start with basic navigation, wewant to show things related to links on left side and authentication on right side. Create controller named home
+
+{% highlight sh %}
+rails generate controller home home
+{% endhighlight %}
+
+
+
+Now add root path to that folder.
+
+#### config/routes.rb
+
+{% highlight ruby %}
+root 'home#home'
+{% endhighlight %}
+
+Replace application.html.slim with following slim file:
+
+## app/views/layouts/application.html.slim
+
+{% highlight html %}
+doctype html
+html
+  head
+    title Links
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+    = csrf_meta_tags
+  body
+    div#wrapper
+      = render 'layouts/header'
+      = yield
+
+{% endhighlight %}
+
+And put navigation menu in **layouts/header.html.slim**
+
+## app/views/layouts/_header.html.slim
+
+{% highlight html %}
+header.navbar
+	ul.links
+		li = link_to "Mlink", '#'
+    li = link_to "Home", '#'
+    li = link_to "Submit", '#'
+  ul.auth
+    li = link_to "Login", '#'
+    li = link_to "Signup", '#'
+{% endhighlight %}
+
+Let's add some styling for our navigation. Create file **main.css.scss**
+
+## app/assets/stylesheets/main.css.scss
+
+{% highlight css %}
+
+.navbar {
+	background-color: rgb(120, 163, 0);
+  width: 100%;
+  overflow: hidden;
+	
+	ul {
+		list-style: none;
+    
+    li {
+			display:inline;
+      padding: 0.8em;
+      
+      a {
+      	text-decoration: none;
+				color: white;
+      } 
+    }
+  }
+}
+
+.links {
+  float: left;
+}
+
+.auth {
+  float: right;
+}  
+{% endhighlight %}
+
+We'll end up with menu like this:
+![horizontal navigation](/images/header.png)
+
+## Design link bar
+
+Let's go to create our main content.
+
+
+
+## app/views/home/home.html.slim
+{% highlight html %}
+  section#content
+		ol#links-list
+			li
+				span.link
+					= link_to "Geeklist", '#'
+        span.details
+					p
+						| posted by
+						= link_to "ed_wood", '#'
+						| 20 minutes ago
+
+{% endhighlight %}
+
+{% highlight css %}
+#wrapper {
+	background-color: rgb(223, 223, 224);
+  }
+
+.details a {
+	padding: 0.6em;
+}
+
+#links-list li {
+	padding: 0.8em;
+  a {
+    color: rgb(120, 163, 0);
+  }
+}
+
+{% endhighlight %}
+
+Your homepage should look like this:
+
+![links](/images/links.png)
+
+We've just designed our home page we move to creating authentication.
+
+## Creating Authentication with Devise
+
+For authentication we'll use devise authentication system.
+
+Add Devise gem to your Gemfile
+
+{% highlight ruby %}
+gem 'devise'
+{% endhighlight %}
+
+And install it.
+
+{% highlight ruby %}
+bundle install
+{% endhighlight %}
+
+Run following command to setup Devise
+
+{% highlight sh %}
+rails generate devise:install
+{% endhighlight %}
+
+We'll add authentication error messages.
+
+## app/views/layouts/application.html.slim
+
+{% highlight html %}
+- if notice
+	p
+- if alert
+	p class="alert alert"
+{% endhighlight %}
+
+Setup user model
+
+{% highlight sh %}
+rails generate devise user
+rake db:migrate
+{% endhighlight %}
+
+Go to signup page, you should see that our authentication is now working, go and create 
+some user.
+
+Now we add some to our home page. Go to **app/views/layouts/_header.html.slim** and following:
+
+## app/views/layouts/_header.html.slim
+{% highlight html %}
+- if user_signed_in?
+	= link_to 'Edit profile', edit_user_registration_path
+	= link_to 'Logout', destroy_user_session_path method: :delete
+- else
+	= link_to "Sign up", new_user_registration_path
+  = link_to "Login", new_user_session_path
+
+{% endhighlight %}  
+
+If you add route **localhost:3000/users/sign_up** you should see this form:
+
+![signup form in devise](/images/sign_up.png)
+
+## Creating, editing, deleting links
+
+We need to generate new controller and new model.
+
+{% highlight sh %}
+rails generate controller links
+{% endhighlight %}
+
+{% highlight sh %}
+rails generate model Link title:string url:string user:references
+{% endhighlight %}
+
+Here we've created link attributes. Every link has title and url, and of course user id.
+
+Add path do **config/routes.rb**
+
+{% highlight ruby %}
+resources :links
+{% endhighlight %}
+
+Now we can add path to controller. We'll add create, update and destroy.
+
+{% highlight ruby %}
+def new
+end
+
+def create
+end
+
+def update
+end
+
+def destroy
+end
+{% endhighlight %}
+
+Let's create form for our links, to simplify it add **simple_form** gem to your Gemfile.
+
+{% highlight sh %}
+rails generate simple_form:install
+{% endhighlight %}
+
+### Creating links
+
+Now we'll create form for creating links
+
+{% highlight html %}
+= simple_form_for :link, :links_path do |f|
+	= f.input :title
+  = f.input :url
+  = f.button :submit
+{% endhighlight %}
+
+We'll first add links to user:
+
+#### app/models/user.rb
+
+{% highlight ruby %}
+has_many :links
+{% endhighlight %}
+
+#### app/controllers/links_controller.rb
+
+{% highlight ruby %}
+def create
+	@user = current_user
+  @link = @user.links.create(link_params)
+end
+
+  private
+		def link_params
+      params.require(:link).permit(:title, :url)
+    end
+{% endhighlight %}
+
+We want to our links to show on home page so add this code to home controller.
+
+{% highlight ruby %}
+
+def home
+	@links = Link.all
+{% endhighlight %}
+
+
+
+
+### Editing links
+
+{% highlight ruby %}
+def update
+  @link = Link.find(params[:id])
+  if @link.user == current_user
+   @link.update.attributes(link_params)
+   redirect_to root_path
+  end
+ end
+{% endhighlight %}
+
+#### Deleting links
+
+{% highlight ruby %}
+def destroy
+  @link = Link.find(params[:id])
+  if @link.user == current_user
+  	@link.destroy
+   redirect_to root_path
+end
+end
+{% endhighlight %}

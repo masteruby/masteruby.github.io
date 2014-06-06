@@ -7,33 +7,29 @@
 		<atom:link href="http://masteruby.github.io/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
-				<title>Link</title>
-				<description>&lt;h2 id=&quot;how-to-create-link-aggregation-site&quot;&gt;How to create link aggregation site&lt;/h2&gt;
-
-&lt;p&gt;In this post we’ll create link aggregation that look like &lt;strong&gt;Hacker News&lt;/strong&gt;.&lt;/p&gt;
+				<title>How to create link aggregation site in Rails&amp;#58; Adding, editing, deleting links</title>
+				<description>&lt;p&gt;In this post we’ll create link aggregation that look like &lt;strong&gt;Hacker News&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;p&gt;Here’s how it’ll be look like:&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/&quot; alt=&quot;link aggregation site&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/link_aggregation_site.png&quot; alt=&quot;link aggregation site&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;In this tutorial we’ll cover:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Design our page with HTML, CSS&lt;/li&gt;
-  &lt;li&gt;Creating authentication with Devise&lt;/li&gt;
-  &lt;li&gt;How to create, edit and delete links&lt;/li&gt;
-  &lt;li&gt;How to show link user and time whenpost was submitted.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#design&quot;&gt;Design our page with HTML, CSS&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#devise&quot;&gt;Creating authentication with Devise&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#links&quot;&gt;How to create, edit and delete links&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#user&quot;&gt;How to show link user and time when post was submitted.&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;design-our-page&quot;&gt;Design our page&lt;/h2&gt;
+&lt;h2 id=&quot;a-namedesigndesign-our-pagea&quot;&gt;&lt;a name=&quot;design&quot;&gt;Design our page&lt;/a&gt;&lt;/h2&gt;
 
-&lt;p&gt;First we creat our app&lt;/p&gt;
+&lt;p&gt;Before we start to add real code, we’ll start with html and css. First create application named &lt;strong&gt;mlink&lt;/strong&gt;.&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;rails new mlink&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;We’ll start with designing how our page will be look like.&lt;/p&gt;
-
-&lt;p&gt;Add slim or haml gem to your Gemfile.&lt;/p&gt;
+&lt;p&gt;We’ll start with designing how our page will be look like. Add slim gem to your Gemfile&lt;/p&gt;
 
 &lt;h4 id=&quot;gemfile&quot;&gt;Gemfile&lt;/h4&gt;
 
@@ -43,41 +39,371 @@
 
 &lt;p&gt;We’ll start with basic navigation, wewant to show things related to links on left side and authentication on right side. Create controller named home&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;rails generate controller home&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;rails generate controller home home&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Create &lt;strong&gt;home.html.slim&lt;/strong&gt; in app/views/home:&lt;/p&gt;
+&lt;p&gt;Now add root path to that folder.&lt;/p&gt;
+
+&lt;h4 id=&quot;configroutesrb&quot;&gt;config/routes.rb&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;root&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;home#home&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Replace application.html.slim with following slim file:&lt;/p&gt;
+
+&lt;h4 id=&quot;appviewslayoutsapplicationhtmlslim&quot;&gt;app/views/layouts/application.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;doctype html
+html
+  head
+    title Mlink
+    = stylesheet_link_tag    &amp;quot;application&amp;quot;, media: &amp;quot;all&amp;quot;, &amp;quot;data-turbolinks-track&amp;quot; =&amp;gt; true
+    = javascript_include_tag &amp;quot;application&amp;quot;, &amp;quot;data-turbolinks-track&amp;quot; =&amp;gt; true
+    = csrf_meta_tags
+  body
+    div#wrapper
+      = render &amp;#39;layouts/header&amp;#39;
+      = yield&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And put navigation menu in &lt;strong&gt;layouts/header.html.slim&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;appviewslayoutsheaderhtmlslim&quot;&gt;app/views/layouts/_header.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;header.navbar
+	ul.links
+		li = link_to &amp;quot;Mlink&amp;quot;, &amp;#39;#&amp;#39;
+    li = link_to &amp;quot;Home&amp;quot;, &amp;#39;#&amp;#39;
+    li = link_to &amp;quot;Submit&amp;quot;, &amp;#39;#&amp;#39;
+  ul.auth
+    li = link_to &amp;quot;Login&amp;quot;, &amp;#39;#&amp;#39;
+    li = link_to &amp;quot;Signup&amp;quot;, &amp;#39;#&amp;#39;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Let’s add some styling for our navigation. Create file &lt;strong&gt;main.css.scss&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;appassetsstylesheetsmaincssscss&quot;&gt;app/assets/stylesheets/main.css.scss&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.navbar&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;background-color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;rgb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;120&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;163&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;overflow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;hidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+	
+	&lt;span class=&quot;n&quot;&gt;ul&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;list-style&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;none&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    
+    &lt;span class=&quot;n&quot;&gt;li&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;k&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;inline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.8em&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      
+      &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;
+      	&lt;span class=&quot;k&quot;&gt;text-decoration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;none&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+				&lt;span class=&quot;k&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;white&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; 
+    &lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nc&quot;&gt;.links&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nc&quot;&gt;.auth&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Ok let’s run rails server to see whatwe’ve created.
+We’ll end up with menu like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/header.png&quot; alt=&quot;horizontal navigation&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;design-main-content-of-page&quot;&gt;Design main content of page&lt;/h3&gt;
+
+&lt;p&gt;Let’s design content our webpage. We want to show links that users submitted on homepage, so add this to file &lt;strong&gt;home.html.slim&lt;/strong&gt;&lt;/p&gt;
 
 &lt;h4 id=&quot;appviewshomehomehtmlslim&quot;&gt;app/views/home/home.html.slim&lt;/h4&gt;
 
-&lt;p&gt;```html
-#wrapper
-  header.navbar&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;section#content  
+	ol#links-list	
+		li	
+			span.link	
+				= link_to &amp;quot;Geeklist&amp;quot;, &amp;#39;#&amp;#39;	
+      span.details  
+				p	
+					| posted by	
+					= link_to &amp;quot;ed_wood&amp;quot;, &amp;#39;#&amp;#39;	
+					| 20 minutes ago&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;pre&gt;&lt;code&gt;ul.links 
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;And styling to &lt;strong&gt;main.css.scss&lt;/strong&gt;&lt;/p&gt;
 
- 	li = link_to “Mlink”, ‘#’
-&lt;pre&gt;&lt;code&gt;li = link_to &quot;Home&quot;, &#39;#&#39;
-li = link_to &quot;Submit&quot;, &#39;#&#39;
-ul.auth ```
-	li = link_to &quot;Login&quot;, &#39;#&#39;
-li = link_to &quot;Signup&quot;, &#39;#&#39;
-section#content
-	ol#link
-		li
-			span.link
-				= link_to &quot;Geeklist - social network for geeks&quot;, &#39;#&#39;
- 				span.details
-				p
- 						| posted by
-					= link_to &quot;ed wood&quot;, &#39;#&#39;
-					| 20 minutes ago
-&lt;/code&gt;&lt;/pre&gt;
+&lt;h4 id=&quot;appassetsstylesheetsmaincssscss-1&quot;&gt;app/assets/stylesheets/main.css.scss&lt;/h4&gt;
 
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;css&quot;&gt;&lt;span class=&quot;nf&quot;&gt;#wrapper&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;background-color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;rgb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;223&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;223&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;224&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nc&quot;&gt;.details&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.6em&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nf&quot;&gt;#links-list&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;li&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.8em&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;rgb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;120&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;163&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;So we’ve just added how links will be look like.&lt;/p&gt;
+
+&lt;p&gt;Your homepage should look like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/links.png&quot; alt=&quot;links&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We’ve just designed our home page let’s move to creating authentication.&lt;/p&gt;
+
+&lt;h2 id=&quot;a-namedevisecreating-authentication-with-devisea&quot;&gt;&lt;a name=&quot;devise&quot;&gt;Creating Authentication with Devise&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;For authentication we’ll use devise authentication system.&lt;/p&gt;
+
+&lt;p&gt;Add Devise gem to your Gemfile&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;devise&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And install it.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;bundle&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;install&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Run following command to setup Devise&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;rails generate devise:install&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;To work, we need to add model &lt;strong&gt;devise user&lt;/strong&gt; to database.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;rails generate devise user
+rake db:migrate&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now we have to add authentication links to our homepage. Add this code to &lt;strong&gt;_header.html.slim&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;appviewslayoutsheaderhtmlslim-1&quot;&gt;app/views/layouts/_header.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;header.navbar
+	ul.links
+  	li = link_to &amp;quot;Mlink&amp;quot;, &amp;#39;#&amp;#39;
+  	li = link_to &amp;quot;Home&amp;quot;, root_path
+		li = link_to &amp;quot;Submit&amp;quot;, &amp;#39;#&amp;#39;
+	ul.auth
+		- if user_signed_in?
+			li = link_to &amp;#39;Edit profile&amp;#39;, edit_user_registration_path
+			li = link_to &amp;#39;Logout&amp;#39;, destroy_user_session_path
+		- else
+			li = link_to &amp;#39;Login&amp;#39;, new_user_session_path
+			li = link_to &amp;#39;Signup&amp;#39;, new_user_registration_path&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Restart your rails server and after you click on Signup link you should see this form:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/sign_up.png&quot; alt=&quot;signup form in devise&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;a-namelinkscreating-editing-deleting-linksa&quot;&gt;&lt;a name=&quot;links&quot;&gt;Creating, editing, deleting links&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;We’ve just added authentication. We need to create controller named &lt;strong&gt;links&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;rails generate controller links&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;rails generate model Link title:string url:string user:references
+rake db:migrate&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Here we’ve created link attributes. Every link has title and url, and of course user id related to link url.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;rake db:migrate&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Add path do &lt;strong&gt;config/routes.rb&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;resources&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:links&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now we can add path to controller. We’ll add create, update and destroy.&lt;/p&gt;
+
+&lt;h4 id=&quot;appcontrollerslinkscontrollerrb&quot;&gt;app/controllers/links_controller.rb&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;new&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;create&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;update&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;destroy&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;creating-links&quot;&gt;Creating links&lt;/h3&gt;
+
+&lt;p&gt;Now we’ll create form for creating links. Add &lt;strong&gt;/links/new&lt;/strong&gt; path to &lt;strong&gt;_header.html.slim&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;- if user_signed_in
+  li = link_to &amp;quot;Submit&amp;quot;, &amp;#39;links/new&amp;#39;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We have added user_signed which is helper that Devise provides to check if user has signed_in and if he has signed in we’ll show him link to submit form.&lt;/p&gt;
+
+&lt;p&gt;Let’s create form for our links, to simplify it add &lt;strong&gt;simple_form&lt;/strong&gt; gem to your Gemfile.&lt;/p&gt;
+
+&lt;h4 id=&quot;gemfile-1&quot;&gt;Gemfile&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;simple_form&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And configure it.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;rails generate simple_form:install&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Let’s create form for submitting our links. We’ll put form in a partial &lt;strong&gt;_form.html.slim&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;appviewslinksformhtmlslim&quot;&gt;app/views/links/_form.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;= simple_form_for @link do |f|
+	= f.input :title
+  = f.input :url
+  = f.button :submit&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;appviewslinksnewhtmlslim&quot;&gt;app/views/links/new.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;h1 Submit a Link
+
+= render &amp;#39;form&amp;#39;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Just add little styling to your forms&lt;/p&gt;
+
+&lt;h4 id=&quot;appassetsstylesheetsformscssscss&quot;&gt;app/assets/stylesheets/forms.css.scss&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.simple_form&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;n&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;input&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;margin-bottom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;30px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;clear&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;both&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;label&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;200px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;text-align&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2px&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We need to connect user model with link model&lt;/p&gt;
+
+&lt;h4 id=&quot;appmodelsuserrb&quot;&gt;app/models/user.rb&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;has_many&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:links&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And we validate in our model that our links form can’t be blank.&lt;/p&gt;
+
+&lt;h4 id=&quot;appmodelslinkrb&quot;&gt;app/models/link.rb&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;belongs_to&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:user&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;validates&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;presence&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;validates&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;presence&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;appcontrollerslinkscontrollerrb-1&quot;&gt;app/controllers/links_controller.rb&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;create&lt;/span&gt;
+	&lt;span class=&quot;vi&quot;&gt;@user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;current_user&lt;/span&gt;
+  &lt;span class=&quot;vi&quot;&gt;@link&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;links&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;link_params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@link&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;save&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;redirect_to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;root_path&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;render&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;new&amp;#39;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+  &lt;span class=&quot;kp&quot;&gt;private&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;link_params&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:link&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;permit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We want to our links to show on home page so add this code to home controller.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;home&lt;/span&gt;
+	&lt;span class=&quot;vi&quot;&gt;@links&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Link&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;all&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And add some code to &lt;strong&gt;home.html.slim&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;section#content
+	ol#links-list
+  	- @links.each do |link|
+			li
+				span.link
+					= link_to link.title, link.url
+				span.details
+          - if link.user == current_user
+						= link_to &amp;#39;edit&amp;#39;, edit_link_path(link)
+						= link_to &amp;quot;delete&amp;quot;, link_path(link), method: :delete&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;editing-links&quot;&gt;Editing links&lt;/h3&gt;
+
+&lt;p&gt;We want to user to edit his links that he submitted, so we’ll add update action to &lt;strong&gt;links_controller&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;appcontrollerslinkscontrollerrb-2&quot;&gt;app/controllers/links_controller.rb&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;edit&lt;/span&gt;
+	&lt;span class=&quot;vi&quot;&gt;@link&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Link&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;update&lt;/span&gt;
+	&lt;span class=&quot;vi&quot;&gt;@link&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Link&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@link&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;update&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;link_params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;redirect_to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;root_path&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;render&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;edit&amp;#39;&lt;/span&gt;
+	&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt; 
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Here we’ve find link by it’s id and check out if link was submitted by current signed user, if it was we allow updating it.&lt;/p&gt;
+
+&lt;h3 id=&quot;deleting-links&quot;&gt;Deleting links&lt;/h3&gt;
+
+&lt;p&gt;To delete links add destroy action to &lt;strong&gt;links_controller&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;destroy&lt;/span&gt;
+  &lt;span class=&quot;vi&quot;&gt;@link&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Link&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@link&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;current_user&lt;/span&gt;
+  	&lt;span class=&quot;vi&quot;&gt;@link&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;destroy&lt;/span&gt;
+   &lt;span class=&quot;n&quot;&gt;redirect_to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;root_path&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;a-nameusershowing-links-user-and-when-it-was-submitteda&quot;&gt;&lt;a name=&quot;user&quot;&gt;Showing link’s user and when it was submitted.&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;We want to show which user submittted link and time when it was posted.&lt;/p&gt;
+
+&lt;p&gt;Right now we’re using user’s email to login, but we want to show username with link. We need to edit Devise to fix that.&lt;/p&gt;
+
+&lt;h3 id=&quot;adding-username-to-authentication-in-devise&quot;&gt;Adding username to authentication in Devise&lt;/h3&gt;
+
+&lt;p&gt;To add username to Devise based authentication follow instruction on &lt;a href=&quot;https://github.com/plataformatec/devise/wiki/How-To:-Allow-users-to-sign-in-using-their-username-or-email-address&quot;&gt;devise wiki&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;If you followed instruction on Devise wiki, you can add link’s user and time when it was submitted.&lt;/p&gt;
+
+&lt;p&gt;Add this code to &lt;strong&gt;home.html.slim&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;appviewshomehomehtmlslim-1&quot;&gt;app/views/home/home.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;section#content
+	ol#links-list
+		- @links.each do |link|
+			li
+				span.link
+		  		= link_to link.title, link.url
+				span.details
+					- if link.user == current_user
+						= link_to &amp;quot;edit&amp;quot;, edit_link_path(link)
+						= link_to &amp;quot;delete&amp;quot;, link_path(link), method: :delete
+
+					p
+						|
+							posted by
+						= link_to link.user.username
+						= time_ago_in_words(link.created_at)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;So that’s all for now. Next time we’ll add some comments to our links aggregation site.&lt;/p&gt;
 </description>
-				<pubDate>Fri, 30 May 2014 09:55:31 +0200</pubDate>
-				<link>http://masteruby.github.io/2014/05/30/link.html</link>
-				<guid isPermaLink="true">http://masteruby.github.io/2014/05/30/link.html</guid>
+				<pubDate>Fri, 06 Jun 2014 00:00:00 +0200</pubDate>
+				<link>http://masteruby.github.io/weekly-rails/2014/06/06/how-to-create-link-aggregation-site-in-rails.html</link>
+				<guid isPermaLink="true">http://masteruby.github.io/weekly-rails/2014/06/06/how-to-create-link-aggregation-site-in-rails.html</guid>
 			</item>
 		
 			<item>

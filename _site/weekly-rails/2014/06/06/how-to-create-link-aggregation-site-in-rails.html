@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>How to create link aggregation site in Rails&#58; Adding, editing, deleting links </title>
+    	<!-- Bootstrap CSS -->
+    <meta name="google-site-verification" content="UFFQXW8FdLgKuB_vYYy8LTw5aonnBmAHdUhUopMxero" />
+    <meta description="Masteruby is tutorials web site about learning ruby">
+    <meta name="robots" content="all">
+       
+    <meta name="viewport" content="width=device-width">
+  
+
+        <!-- syntax highlighting CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+          
+        <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="alternate" type="application/rss+xml" title="Masteruby" href="http://masteruby.github.io/feed.xml">
+    
+	<!-- Bootstrap CSS -->
+  <meta name="google-site-verification" content="UFFQXW8FdLgKuB_vYYy8LTw5aonnBmAHdUhUopMxero" />
+  </head>
+  
+  <body>
+    <div class="site">
+      <header class="navbar">
+        
+        <nav>
+          <ul>
+						<li id="logo"><a href="/">Masteruby</a>
+						<li><a href="/">Start here</a>
+          <li><a href="/weekly-rails.html">Rails</a></li>
+          <li><a href="/shoes.html">Shoes</a></li>
+          <li><a href="/learning-resources.html">Learning Resources</a></li>
+          <li><a href="/productivity-booster.html">Productivity
+              Boosters</a></li>
+        </ul>
+      </nav>
+
+          
+      </header>
+      
+      
+      
+      <section id="posts">
+        <!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+  <a class="addthis_button_rss_follow"
+    addthis:userid="http://masteruby.github.io/feed.xml"></a>
+<a class="addthis_button_facebook"></a>
+<a class="addthis_button_twitter"></a>
+<a class="addthis_button_pinterest_share"></a>
+<a class="addthis_button_google_plusone_share"></a>
+<a class="addthis_button_reddit"></a>
+<a class="addthis_button_hackernews"></a>
+<a class="addthis_button_stumbleupon"></a>
+<a class="addthis_button_delicious"></a>
+<a class="addthis_button_dzone"></a>
+<a class="addthis_button_blinklist"></a>
+<a class="addthis_button_tumblr"></a>
+<a class="addthis_button_compact"></a><a class="addthis_counter addthis_bubble_style"></a>
+</div>
+
+<h2>How to create link aggregation site in Rails&#58; Adding, editing, deleting links</h2>
+<p class="meta">06 Jun 2014</p>
+
+<h4>Posted by Milos Dolobac</h4>
+
+<div class="post">
+<p>In this post we’ll create link aggregation that look like <strong>Hacker News</strong>.</p>
+
+<p>Here’s how it’ll be look like:</p>
+
+<p><img src="/images/link_aggregation_site.png" alt="link aggregation site" /></p>
+
+<p>In this tutorial we’ll cover:</p>
+
+<ul>
+  <li><a href="#design">Design our page with HTML, CSS</a></li>
+  <li><a href="#devise">Creating authentication with Devise</a></li>
+  <li><a href="#links">How to create, edit and delete links</a></li>
+  <li><a href="#user">How to show link user and time when post was submitted.</a></li>
+</ul>
+
+<h2 id="a-namedesigndesign-our-pagea"><a name="design">Design our page</a></h2>
+
+<p>Before we start to add real code, we’ll start with html and css. First create application named <strong>mlink</strong>.</p>
+
+<div class="highlight"><pre><code class="sh">rails new mlink</code></pre></div>
+
+<p>We’ll start with designing how our page will be look like. Add slim gem to your Gemfile</p>
+
+<h4 id="gemfile">Gemfile</h4>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">gem</span> <span class="s1">&#39;slim-rails&#39;</span></code></pre></div>
+
+<h3 id="creating-navigation">Creating navigation</h3>
+
+<p>We’ll start with basic navigation, wewant to show things related to links on left side and authentication on right side. Create controller named home</p>
+
+<div class="highlight"><pre><code class="sh">rails generate controller home home</code></pre></div>
+
+<p>Now add root path to that folder.</p>
+
+<h4 id="configroutesrb">config/routes.rb</h4>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">root</span> <span class="s1">&#39;home#home&#39;</span></code></pre></div>
+
+<p>Replace application.html.slim with following slim file:</p>
+
+<h4 id="appviewslayoutsapplicationhtmlslim">app/views/layouts/application.html.slim</h4>
+
+<div class="highlight"><pre><code class="html">doctype html
+html
+  head
+    title Mlink
+    = stylesheet_link_tag    &quot;application&quot;, media: &quot;all&quot;, &quot;data-turbolinks-track&quot; =&gt; true
+    = javascript_include_tag &quot;application&quot;, &quot;data-turbolinks-track&quot; =&gt; true
+    = csrf_meta_tags
+  body
+    div#wrapper
+      = render &#39;layouts/header&#39;
+      = yield</code></pre></div>
+
+<p>And put navigation menu in <strong>layouts/header.html.slim</strong></p>
+
+<h4 id="appviewslayoutsheaderhtmlslim">app/views/layouts/_header.html.slim</h4>
+
+<div class="highlight"><pre><code class="html">header.navbar
+	ul.links
+		li = link_to &quot;Mlink&quot;, &#39;#&#39;
+    li = link_to &quot;Home&quot;, &#39;#&#39;
+    li = link_to &quot;Submit&quot;, &#39;#&#39;
+  ul.auth
+    li = link_to &quot;Login&quot;, &#39;#&#39;
+    li = link_to &quot;Signup&quot;, &#39;#&#39;</code></pre></div>
+
+<p>Let’s add some styling for our navigation. Create file <strong>main.css.scss</strong></p>
+
+<h4 id="appassetsstylesheetsmaincssscss">app/assets/stylesheets/main.css.scss</h4>
+
+<div class="highlight"><pre><code class="css"><span class="nc">.navbar</span> <span class="p">{</span>
+	<span class="k">background-color</span><span class="o">:</span> <span class="k">rgb</span><span class="p">(</span><span class="m">120</span><span class="o">,</span> <span class="m">163</span><span class="o">,</span> <span class="m">0</span><span class="p">);</span>
+  <span class="k">width</span><span class="o">:</span> <span class="m">100</span><span class="o">%</span><span class="p">;</span>
+  <span class="k">overflow</span><span class="o">:</span> <span class="k">hidden</span><span class="p">;</span>
+	
+	<span class="n">ul</span> <span class="err">{</span>
+		<span class="k">list-style</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
+    
+    <span class="n">li</span> <span class="err">{</span>
+			<span class="k">display</span><span class="o">:</span><span class="k">inline</span><span class="p">;</span>
+      <span class="k">padding</span><span class="o">:</span> <span class="m">0.8em</span><span class="p">;</span>
+      
+      <span class="n">a</span> <span class="err">{</span>
+      	<span class="k">text-decoration</span><span class="o">:</span> <span class="k">none</span><span class="p">;</span>
+				<span class="k">color</span><span class="o">:</span> <span class="nb">white</span><span class="p">;</span>
+      <span class="p">}</span> 
+    <span class="err">}</span>
+  <span class="err">}</span>
+<span class="err">}</span>
+
+<span class="nc">.links</span> <span class="p">{</span>
+  <span class="k">float</span><span class="o">:</span> <span class="k">left</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nc">.auth</span> <span class="p">{</span>
+  <span class="k">float</span><span class="o">:</span> <span class="k">right</span><span class="p">;</span>
+<span class="p">}</span></code></pre></div>
+
+<p>Ok let’s run rails server to see whatwe’ve created.
+We’ll end up with menu like this:</p>
+
+<p><img src="/images/header.png" alt="horizontal navigation" /></p>
+
+<h3 id="design-main-content-of-page">Design main content of page</h3>
+
+<p>Let’s design content our webpage. We want to show links that users submitted on homepage, so add this to file <strong>home.html.slim</strong></p>
+
+<h4 id="appviewshomehomehtmlslim">app/views/home/home.html.slim</h4>
+
+<div class="highlight"><pre><code class="html">section#content  
+	ol#links-list	
+		li	
+			span.link	
+				= link_to &quot;Geeklist&quot;, &#39;#&#39;	
+      span.details  
+				p	
+					| posted by	
+					= link_to &quot;ed_wood&quot;, &#39;#&#39;	
+					| 20 minutes ago</code></pre></div>
+
+<p>And styling to <strong>main.css.scss</strong></p>
+
+<h4 id="appassetsstylesheetsmaincssscss-1">app/assets/stylesheets/main.css.scss</h4>
+
+<div class="highlight"><pre><code class="css"><span class="nf">#wrapper</span> <span class="p">{</span>
+	<span class="k">background-color</span><span class="o">:</span> <span class="k">rgb</span><span class="p">(</span><span class="m">223</span><span class="o">,</span> <span class="m">223</span><span class="o">,</span> <span class="m">224</span><span class="p">);</span>
+  <span class="p">}</span>
+
+<span class="nc">.details</span> <span class="nt">a</span> <span class="p">{</span>
+	<span class="k">padding</span><span class="o">:</span> <span class="m">0.6em</span><span class="p">;</span>
+<span class="p">}</span>
+
+<span class="nf">#links-list</span> <span class="nt">li</span> <span class="p">{</span>
+	<span class="k">padding</span><span class="o">:</span> <span class="m">0.8em</span><span class="p">;</span>
+  <span class="n">a</span> <span class="err">{</span>
+    <span class="k">color</span><span class="o">:</span> <span class="k">rgb</span><span class="p">(</span><span class="m">120</span><span class="o">,</span> <span class="m">163</span><span class="o">,</span> <span class="m">0</span><span class="p">);</span>
+  <span class="p">}</span>
+<span class="err">}</span></code></pre></div>
+
+<p>So we’ve just added how links will be look like.</p>
+
+<p>Your homepage should look like this:</p>
+
+<p><img src="/images/links.png" alt="links" /></p>
+
+<p>We’ve just designed our home page let’s move to creating authentication.</p>
+
+<h2 id="a-namedevisecreating-authentication-with-devisea"><a name="devise">Creating Authentication with Devise</a></h2>
+
+<p>For authentication we’ll use devise authentication system.</p>
+
+<p>Add Devise gem to your Gemfile</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">gem</span> <span class="s1">&#39;devise&#39;</span></code></pre></div>
+
+<p>And install it.</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">bundle</span> <span class="n">install</span></code></pre></div>
+
+<p>Run following command to setup Devise</p>
+
+<div class="highlight"><pre><code class="sh">rails generate devise:install</code></pre></div>
+
+<p>To work, we need to add model <strong>devise user</strong> to database.</p>
+
+<div class="highlight"><pre><code class="sh">rails generate devise user
+rake db:migrate</code></pre></div>
+
+<p>Now we have to add authentication links to our homepage. Add this code to <strong>_header.html.slim</strong></p>
+
+<h4 id="appviewslayoutsheaderhtmlslim-1">app/views/layouts/_header.html.slim</h4>
+
+<div class="highlight"><pre><code class="html">header.navbar
+	ul.links
+  	li = link_to &quot;Mlink&quot;, &#39;#&#39;
+  	li = link_to &quot;Home&quot;, root_path
+		li = link_to &quot;Submit&quot;, &#39;#&#39;
+	ul.auth
+		- if user_signed_in?
+			li = link_to &#39;Edit profile&#39;, edit_user_registration_path
+			li = link_to &#39;Logout&#39;, destroy_user_session_path
+		- else
+			li = link_to &#39;Login&#39;, new_user_session_path
+			li = link_to &#39;Signup&#39;, new_user_registration_path</code></pre></div>
+
+<p>Restart your rails server and after you click on Signup link you should see this form:</p>
+
+<p><img src="/images/sign_up.png" alt="signup form in devise" /></p>
+
+<h2 id="a-namelinkscreating-editing-deleting-linksa"><a name="links">Creating, editing, deleting links</a></h2>
+
+<p>We’ve just added authentication. We need to create controller named <strong>links</strong></p>
+
+<div class="highlight"><pre><code class="sh">rails generate controller links</code></pre></div>
+
+<div class="highlight"><pre><code class="sh">rails generate model Link title:string url:string user:references
+rake db:migrate</code></pre></div>
+
+<p>Here we’ve created link attributes. Every link has title and url, and of course user id related to link url.</p>
+
+<div class="highlight"><pre><code class="sh">rake db:migrate</code></pre></div>
+
+<p>Add path do <strong>config/routes.rb</strong></p>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">resources</span> <span class="ss">:links</span></code></pre></div>
+
+<p>Now we can add path to controller. We’ll add create, update and destroy.</p>
+
+<h4 id="appcontrollerslinkscontrollerrb">app/controllers/links_controller.rb</h4>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">def</span> <span class="nf">new</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">create</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">update</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">destroy</span>
+<span class="k">end</span></code></pre></div>
+
+<h3 id="creating-links">Creating links</h3>
+
+<p>Now we’ll create form for creating links. Add <strong>/links/new</strong> path to <strong>_header.html.slim</strong></p>
+
+<div class="highlight"><pre><code class="html">- if user_signed_in
+  li = link_to &quot;Submit&quot;, &#39;links/new&#39;</code></pre></div>
+
+<p>We have added user_signed which is helper that Devise provides to check if user has signed_in and if he has signed in we’ll show him link to submit form.</p>
+
+<p>Let’s create form for our links, to simplify it add <strong>simple_form</strong> gem to your Gemfile.</p>
+
+<h4 id="gemfile-1">Gemfile</h4>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">gem</span> <span class="s1">&#39;simple_form&#39;</span></code></pre></div>
+
+<p>And configure it.</p>
+
+<div class="highlight"><pre><code class="sh">rails generate simple_form:install</code></pre></div>
+
+<p>Let’s create form for submitting our links. We’ll put form in a partial <strong>_form.html.slim</strong></p>
+
+<h4 id="appviewslinksformhtmlslim">app/views/links/_form.html.slim</h4>
+
+<div class="highlight"><pre><code class="html">= simple_form_for @link do |f|
+	= f.input :title
+  = f.input :url
+  = f.button :submit</code></pre></div>
+
+<h4 id="appviewslinksnewhtmlslim">app/views/links/new.html.slim</h4>
+
+<div class="highlight"><pre><code class="html">h1 Submit a Link
+
+= render &#39;form&#39;</code></pre></div>
+
+<p>Just add little styling to your forms</p>
+
+<h4 id="appassetsstylesheetsformscssscss">app/assets/stylesheets/forms.css.scss</h4>
+
+<div class="highlight"><pre><code class="css"><span class="nc">.simple_form</span> <span class="p">{</span>
+	<span class="n">div</span><span class="o">.</span><span class="n">input</span> <span class="err">{</span>
+		<span class="k">margin-bottom</span><span class="o">:</span> <span class="m">30px</span><span class="p">;</span>
+		<span class="k">clear</span><span class="o">:</span> <span class="k">both</span><span class="p">;</span>
+	<span class="p">}</span>
+  <span class="nt">label</span> <span class="p">{</span>
+		<span class="k">float</span><span class="o">:</span> <span class="k">left</span><span class="p">;</span>
+		<span class="k">width</span><span class="o">:</span> <span class="m">200px</span><span class="p">;</span>
+		<span class="k">text-align</span><span class="o">:</span> <span class="k">right</span><span class="p">;</span>
+		<span class="k">margin</span><span class="o">:</span> <span class="m">2px</span> <span class="m">10px</span><span class="p">;</span>
+	<span class="p">}</span>
+<span class="err">}</span></code></pre></div>
+
+<p>We need to connect user model with link model</p>
+
+<h4 id="appmodelsuserrb">app/models/user.rb</h4>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">has_many</span> <span class="ss">:links</span></code></pre></div>
+
+<p>And we validate in our model that our links form can’t be blank.</p>
+
+<h4 id="appmodelslinkrb">app/models/link.rb</h4>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">belongs_to</span> <span class="ss">:user</span>
+<span class="n">validates</span> <span class="ss">:title</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span>
+<span class="n">validates</span> <span class="ss">:url</span><span class="p">,</span> <span class="ss">presence</span><span class="p">:</span> <span class="kp">true</span></code></pre></div>
+
+<h4 id="appcontrollerslinkscontrollerrb-1">app/controllers/links_controller.rb</h4>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">def</span> <span class="nf">create</span>
+	<span class="vi">@user</span> <span class="o">=</span> <span class="n">current_user</span>
+  <span class="vi">@link</span> <span class="o">=</span> <span class="vi">@user</span><span class="o">.</span><span class="n">links</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="n">link_params</span><span class="p">)</span>
+  <span class="k">if</span> <span class="vi">@link</span><span class="o">.</span><span class="n">save</span>
+		<span class="n">redirect_to</span> <span class="n">root_path</span>
+	<span class="k">else</span>
+		<span class="n">render</span> <span class="s1">&#39;new&#39;</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+
+  <span class="kp">private</span>
+		<span class="k">def</span> <span class="nf">link_params</span>
+      <span class="n">params</span><span class="o">.</span><span class="n">require</span><span class="p">(</span><span class="ss">:link</span><span class="p">)</span><span class="o">.</span><span class="n">permit</span><span class="p">(</span><span class="ss">:title</span><span class="p">,</span> <span class="ss">:url</span><span class="p">)</span>
+    <span class="k">end</span></code></pre></div>
+
+<p>We want to our links to show on home page so add this code to home controller.</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">def</span> <span class="nf">home</span>
+	<span class="vi">@links</span> <span class="o">=</span> <span class="no">Link</span><span class="o">.</span><span class="n">all</span></code></pre></div>
+
+<p>And add some code to <strong>home.html.slim</strong></p>
+
+<div class="highlight"><pre><code class="html">section#content
+	ol#links-list
+  	- @links.each do |link|
+			li
+				span.link
+					= link_to link.title, link.url
+				span.details
+          - if link.user == current_user
+						= link_to &#39;edit&#39;, edit_link_path(link)
+						= link_to &quot;delete&quot;, link_path(link), method: :delete</code></pre></div>
+
+<h3 id="editing-links">Editing links</h3>
+
+<p>We want to user to edit his links that he submitted, so we’ll add update action to <strong>links_controller</strong></p>
+
+<h4 id="appcontrollerslinkscontrollerrb-2">app/controllers/links_controller.rb</h4>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">def</span> <span class="nf">edit</span>
+	<span class="vi">@link</span> <span class="o">=</span> <span class="no">Link</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">update</span>
+	<span class="vi">@link</span> <span class="o">=</span> <span class="no">Link</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+  
+  <span class="k">if</span> <span class="vi">@link</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">link_params</span><span class="p">)</span>
+		<span class="n">redirect_to</span> <span class="n">root_path</span>
+	<span class="k">else</span>
+		<span class="n">render</span> <span class="s1">&#39;edit&#39;</span>
+	<span class="k">end</span> 
+<span class="k">end</span></code></pre></div>
+
+<p>Here we’ve find link by it’s id and check out if link was submitted by current signed user, if it was we allow updating it.</p>
+
+<h3 id="deleting-links">Deleting links</h3>
+
+<p>To delete links add destroy action to <strong>links_controller</strong></p>
+
+<div class="highlight"><pre><code class="ruby"><span class="k">def</span> <span class="nf">destroy</span>
+  <span class="vi">@link</span> <span class="o">=</span> <span class="no">Link</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+  <span class="k">if</span> <span class="vi">@link</span><span class="o">.</span><span class="n">user</span> <span class="o">==</span> <span class="n">current_user</span>
+  	<span class="vi">@link</span><span class="o">.</span><span class="n">destroy</span>
+   <span class="n">redirect_to</span> <span class="n">root_path</span>
+<span class="k">end</span>
+<span class="k">end</span></code></pre></div>
+
+<h2 id="a-nameusershowing-links-user-and-when-it-was-submitteda"><a name="user">Showing link’s user and when it was submitted.</a></h2>
+
+<p>We want to show which user submittted link and time when it was posted.</p>
+
+<p>Right now we’re using user’s email to login, but we want to show username with link. We need to edit Devise to fix that.</p>
+
+<h3 id="adding-username-to-authentication-in-devise">Adding username to authentication in Devise</h3>
+
+<p>To add username to Devise based authentication follow instruction on <a href="https://github.com/plataformatec/devise/wiki/How-To:-Allow-users-to-sign-in-using-their-username-or-email-address">devise wiki</a></p>
+
+<p>If you followed instruction on Devise wiki, you can add link’s user and time when it was submitted.</p>
+
+<p>Add this code to <strong>home.html.slim</strong></p>
+
+<h4 id="appviewshomehomehtmlslim-1">app/views/home/home.html.slim</h4>
+
+<div class="highlight"><pre><code class="html">section#content
+	ol#links-list
+		- @links.each do |link|
+			li
+				span.link
+		  		= link_to link.title, link.url
+				span.details
+					- if link.user == current_user
+						= link_to &quot;edit&quot;, edit_link_path(link)
+						= link_to &quot;delete&quot;, link_path(link), method: :delete
+
+					p
+						|
+							posted by
+						= link_to link.user.username
+						= time_ago_in_words(link.created_at)</code></pre></div>
+
+<p>So that’s all for now. Next time we’ll add some comments to our links aggregation site.</p>
+
+
+
+
+</div>
+
+
+        
+        <div id="disqus_thread" name="disqus_thread"></div>
+          <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'mdolobac'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+          </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+
+
+<ul class="posts">
+  
+
+  <li><span>30 May 2014</span> &raquo; <a href="/learning-resources/2014/05/30/ruby-news-websites.html#disqus_thread">7 Websites to Get Latest News About Ruby</a></li>
+  
+  
+  
+
+  <li><span>02 May 2014</span> &raquo; <a href="/productivity-booster/2014/05/02/vim-plugins-for-ruby.html#disqus_thread">Vim for Rubyist&#58; 10 useful vim plugins for Ruby</a></li>
+  
+  
+  
+
+  <li><span>24 Apr 2014</span> &raquo; <a href="/2014/04/24/rails.html#disqus_thread">6 Books for learning or advancing your rails knowledge</a></li>
+  
+  
+  
+
+  <li><span>24 Apr 2014</span> &raquo; <a href="/learning-resources/2014/04/24/books-for-learning-rails.html#disqus_thread">6 Books for learning or advancing your rails knowledge</a></li>
+  
+  
+  
+
+  <li><span>17 Apr 2014</span> &raquo; <a href="/2014/04/17/calculator.html#disqus_thread">How to create simple calculator in Shoes</a></li>
+  
+  
+  
+
+  <li><span>17 Apr 2014</span> &raquo; <a href="/shoes/2014/04/17/how-to-create-simple-calculator-in-shoes.html#disqus_thread">How to create simple calculator in Ruby Shoes</a></li>
+  
+  
+  
+
+  <li><span>09 Apr 2014</span> &raquo; <a href="/learning-resources/2014/04/09/learn-ruby-on-rails-book-review.html#disqus_thread">Learn Ruby on Rails book review</a></li>
+  
+  
+  
+
+  <li><span>05 Apr 2014</span> &raquo; <a href="/2014/04/05/why_tmux.html#disqus_thread">Why to use tmux</a></li>
+  
+  
+  
+
+  <li><span>04 Apr 2014</span> &raquo; <a href="/weekly-rails/2014/04/04/how-to-create-todo-list-app-in-rails-adding-removing-completing-tasks.html#disqus_thread">How to create todo list app in rails, adding, removing and deleting tasks</a></li>
+  
+  
+  
+
+  <li><span>28 Mar 2014</span> &raquo; <a href="/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html#disqus_thread">How to install Ruby and Rails for your operating system</a></li>
+  
+  
+   
+  
+
+</ul>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'mdolobac'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+      var s = document.createElement('script'); s.async = true;
+      s.type = 'text/javascript';
+      s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+      (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+    
+    <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-534eba9022761f4e"></script>
+<!-- AddThis Button END -->
+    
+ 
+
+
+              
+
+      </section> 
+
+      <section id="sidebar">
+        <ul class="posts">
+  <h1>Recent posts</h1>
+
+<li>
+  <span>06 Jun 2014</span> &raquo;
+
+  <a href="/weekly-rails/2014/06/06/how-to-create-link-aggregation-site-in-rails.html">
+    How to create link aggregation site in Rails&#58; Adding, editing, deleting links</a>
+</li>
+
+<li>
+  <span>30 May 2014</span> &raquo;
+
+  <a href="/learning-resources/2014/05/30/ruby-news-websites.html">
+    7 Websites to Get Latest News About Ruby</a>
+</li>
+
+<li>
+  <span>02 May 2014</span> &raquo;
+
+  <a href="/productivity-booster/2014/05/02/vim-plugins-for-ruby.html">
+    Vim for Rubyist&#58; 10 useful vim plugins for Ruby</a>
+</li>
+
+<li>
+  <span>24 Apr 2014</span> &raquo;
+
+  <a href="/2014/04/24/rails.html">
+    6 Books for learning or advancing your rails knowledge</a>
+</li>
+
+<li>
+  <span>24 Apr 2014</span> &raquo;
+
+  <a href="/learning-resources/2014/04/24/books-for-learning-rails.html">
+    6 Books for learning or advancing your rails knowledge</a>
+</li>
+
+<li>
+  <span>17 Apr 2014</span> &raquo;
+
+  <a href="/2014/04/17/calculator.html">
+    How to create simple calculator in Shoes</a>
+</li>
+
+<li>
+  <span>17 Apr 2014</span> &raquo;
+
+  <a href="/shoes/2014/04/17/how-to-create-simple-calculator-in-shoes.html">
+    How to create simple calculator in Ruby Shoes</a>
+</li>
+
+<li>
+  <span>09 Apr 2014</span> &raquo;
+
+  <a href="/learning-resources/2014/04/09/learn-ruby-on-rails-book-review.html">
+    Learn Ruby on Rails book review</a>
+</li>
+
+<li>
+  <span>05 Apr 2014</span> &raquo;
+
+  <a href="/2014/04/05/why_tmux.html">
+    Why to use tmux</a>
+</li>
+
+<li>
+  <span>04 Apr 2014</span> &raquo;
+
+  <a href="/weekly-rails/2014/04/04/how-to-create-todo-list-app-in-rails-adding-removing-completing-tasks.html">
+    How to create todo list app in rails, adding, removing and deleting tasks</a>
+</li>
+
+<li>
+  <span>28 Mar 2014</span> &raquo;
+
+  <a href="/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html">
+    How to install Ruby and Rails for your operating system</a>
+</li>
+
+<li>
+  <span>28 Mar 2014</span> &raquo;
+
+  <a href="/learning-resources/2014/03/28/learn-ruby-with-these-resources.html">
+    Top 8 Learning resources for ruby beginner</a>
+</li>
+
+<li>
+  <span>26 Mar 2014</span> &raquo;
+
+  <a href="/productivity-booster/2014/03/26/top-ten-commands-in-terminal-you-will-use-everyday.html">
+    Top 10 commands in terminal you will use everyday</a>
+</li>
+
+<li>
+  <span>22 Mar 2014</span> &raquo;
+
+  <a href="/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.html">
+    How to create todo list app in rails static pages</a>
+</li>
+
+</ul>
+
+
+
+
+
+
+
+      </section>  
+      
+      <footer id="page_footer">
+        <div class="contact"> 
+
+          <a href="https://github.com/MilosDolobac"><img src="/images/github.jpeg" class="contact"></a> 
+          <a href="https://twitter.com/dolobacmilos"><img
+            src="/images/twitter.jpeg" class="contact"></a>
+        
+          <a href="http://sk.linkedin.com/pub/milos-dolobac/59/b4a/538"><img
+            src="/images/linked_in.jpeg" class="contact"></a>
+
+        </div>
+      </footer>
+    </div>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-49278618-1', 'masteruby.github.io');
+  ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+  window.onbeforeunload = function (e) {
+    e = e || window.event;
+    if (e) {
+      _gaq.push(['_trackPageview', '/bounce']);
+    }
+    return _gaq.push(['_trackPageview', '/bounce']);
+  };
+</script>
+
+
+
+  </body>
+</html>    
