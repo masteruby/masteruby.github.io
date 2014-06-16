@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>How to create post-it notes app in Ruby Shoes </title>
+    	<!-- Bootstrap CSS -->
+    <meta name="google-site-verification" content="UFFQXW8FdLgKuB_vYYy8LTw5aonnBmAHdUhUopMxero" />
+    <meta description="Masteruby is tutorials web site about learning ruby">
+    <meta name="robots" content="all">
+       
+    <meta name="viewport" content="width=device-width">
+  
+
+        <!-- syntax highlighting CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+          
+        <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="alternate" type="application/rss+xml" title="Masteruby" href="http://masteruby.github.io/feed.xml">
+    
+	<!-- Bootstrap CSS -->
+  <meta name="google-site-verification" content="UFFQXW8FdLgKuB_vYYy8LTw5aonnBmAHdUhUopMxero" />
+  </head>
+  
+  <body>
+    <div class="site">
+      <header class="navbar">
+        
+        <nav>
+          <ul>
+						<li id="logo"><a href="/">Masteruby</a>
+						<li><a href="/">Start here</a>
+          <li><a href="/weekly-rails.html">Rails</a></li>
+          <li><a href="/shoes.html">Shoes</a></li>
+          <li><a href="/learning-resources.html">Learning Resources</a></li>
+          <li><a href="/productivity-booster.html">Productivity
+              Boosters</a></li>
+        </ul>
+      </nav>
+
+          
+      </header>
+      
+      
+      
+      <section id="posts">
+        <!-- AddThis Button BEGIN -->
+<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+  <a class="addthis_button_rss_follow"
+    addthis:userid="http://masteruby.github.io/feed.xml"></a>
+<a class="addthis_button_facebook"></a>
+<a class="addthis_button_twitter"></a>
+<a class="addthis_button_pinterest_share"></a>
+<a class="addthis_button_google_plusone_share"></a>
+<a class="addthis_button_reddit"></a>
+<a class="addthis_button_hackernews"></a>
+<a class="addthis_button_stumbleupon"></a>
+<a class="addthis_button_delicious"></a>
+<a class="addthis_button_dzone"></a>
+<a class="addthis_button_blinklist"></a>
+<a class="addthis_button_tumblr"></a>
+<a class="addthis_button_compact"></a><a class="addthis_counter addthis_bubble_style"></a>
+</div>
+
+<h2>How to create post-it notes app in Ruby Shoes</h2>
+<p class="meta">16 Jun 2014</p>
+
+<h4>Posted by Milos Dolobac</h4>
+
+<div class="post">
+<p>In this post I want to show you how to create post-it notes app something like Tomboy Notes in Linux.</p>
+
+<p>Final product will be look like this:</p>
+
+<p><img class="shoes" src="/images/post-it-notes-app.png" alt="how to create post-it notes app in ruby" /></p>
+
+<h2 id="design-app">Design app</h2>
+
+<p>First thing we’ll do is to design our app.
+At the top of page we’ll have three buttons, new, open, and save, so let’s design it.</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;green_shoes&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;yaml/store&#39;</span>
+
+<span class="no">Shoes</span><span class="o">.</span><span class="n">app</span> <span class="ss">:title</span> <span class="o">=&gt;</span> <span class="s2">&quot;Post-it notes app&quot;</span> <span class="k">do</span>
+  <span class="n">flow</span> <span class="k">do</span>
+    <span class="n">button</span> <span class="s2">&quot;New&quot;</span> <span class="k">do</span>
+    <span class="k">end</span>
+    <span class="n">button</span> <span class="s2">&quot;Open&quot;</span> <span class="k">do</span>
+    <span class="k">end</span>
+    <span class="n">button</span> <span class="s2">&quot;Save&quot;</span> <span class="k">do</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></div>
+
+<p>You certainly noticed that I’ve added line <strong>require yaml/store</strong> in top of the app. We’ll use it later.</p>
+
+<p>If you run your Shoes app right now, you should see our buttons.</p>
+
+<p><img class="shoes" src="/images/pna_buttons.png" alt="how to add buttons in shoes" /></p>
+
+<p>Our app should have field for adding notes.</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">flow</span> <span class="k">do</span>
+  <span class="vi">@title</span> <span class="o">=</span> <span class="n">edit_line</span> <span class="s2">&quot;New note&quot;</span><span class="p">,</span> <span class="ss">margin</span><span class="p">:</span> <span class="o">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="o">]</span>
+  <span class="vi">@para</span> <span class="o">=</span> <span class="n">edit_box</span> <span class="s2">&quot;Describe your note here&quot;</span></code></pre></div>
+
+<p>We’ve created two text fields, title has only one line so we’ve used edit_line and para has multiple lines so we’ve used edit_box.</p>
+
+<p>We’ve also added some space between text field with margin(left, top, right, bottom)</p>
+
+<p>If you look at it, you should see something like this:</p>
+
+<p><img class="shoes" src="/images/pna_text_field.png" alt="how to create text field in shoes" /></p>
+
+<p>Here’s how our app look right now:</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;green_shoes&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;yaml/store&#39;</span>
+
+<span class="no">Shoes</span><span class="o">.</span><span class="n">app</span> <span class="ss">title</span><span class="p">:</span> <span class="s2">&quot;Post-it notes app&quot;</span> <span class="k">do</span>
+  <span class="n">flow</span> <span class="k">do</span>
+    <span class="n">button</span> <span class="s2">&quot;New&quot;</span> <span class="k">do</span>
+    <span class="k">end</span>
+    <span class="n">button</span> <span class="s2">&quot;Open&quot;</span> <span class="k">do</span>
+    <span class="k">end</span>
+    <span class="n">button</span> <span class="s2">&quot;Save&quot;</span> <span class="k">do</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+  <span class="n">flow</span> <span class="k">do</span>
+    <span class="vi">@title</span> <span class="o">=</span> <span class="n">edit_line</span> <span class="s2">&quot;New note&quot;</span><span class="p">,</span> <span class="ss">margin</span><span class="p">:</span> <span class="o">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="o">]</span>
+    <span class="vi">@para</span> <span class="o">=</span> <span class="n">edit_box</span> <span class="s2">&quot;Describe your note here&quot;</span>
+   
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></div>
+
+<h2 id="adding-functionality-to-buttons">Adding functionality to buttons</h2>
+
+<p>For manipulation with our notes we’ll use YAML::Store. First thing we need to do is to create configuration file, where we store default values for our notes. Create <strong>config.yml</strong> file like this:</p>
+
+<div class="highlight"><pre><code class="yaml"><span class="l-Scalar-Plain">title</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">New note</span>
+<span class="l-Scalar-Plain">para</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Describe your note here</span></code></pre></div>
+
+<p>Here’s our default values. Let’s connect our button with that yaml file.</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">button</span> <span class="s2">&quot;New&quot;</span> <span class="k">do</span>
+  <span class="n">store</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">::</span><span class="no">Store</span><span class="o">.</span><span class="n">new</span> <span class="s2">&quot;config.yml&quot;</span>
+  <span class="n">store</span><span class="o">.</span><span class="n">transaction</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span> <span class="k">do</span>
+    <span class="vi">@title</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">store</span><span class="o">[</span><span class="s1">&#39;title&#39;</span><span class="o">]</span>
+    <span class="vi">@para</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">store</span><span class="o">[</span><span class="s1">&#39;para&#39;</span><span class="o">]</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></div>
+
+<p>Take look at the code we’ve just wrote.</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">store</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">::</span><span class="no">Store</span><span class="o">.</span><span class="n">new</span> <span class="s2">&quot;config.yml&quot;</span></code></pre></div>
+
+<p>Here we’ve set structure for reading our <strong>config.yml</strong> file.</p>
+
+<div class="highlight"><pre><code class="html">store.transaction(true) do</code></pre></div>
+
+<p>Here we’ve start read only transaction.</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="vi">@title</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">store</span><span class="o">[</span><span class="s1">&#39;title&#39;</span><span class="o">]</span>
+<span class="vi">@para</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">store</span><span class="o">[</span><span class="s1">&#39;para&#39;</span><span class="o">]</span></code></pre></div>
+
+<p>Here we’ve set values of title and para to values in Hash of our config file.</p>
+
+<p>Type something else to your text field. Now press new button. You should see that text was changed to default.</p>
+
+<p>Let’s go create open button:</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">button</span> <span class="s2">&quot;Open&quot;</span> <span class="k">do</span>
+  <span class="n">file</span> <span class="o">=</span> <span class="n">ask_open_file</span>
+  <span class="n">store</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">::</span><span class="no">Store</span><span class="o">.</span><span class="n">new</span> <span class="n">file</span>
+  <span class="n">store</span><span class="o">.</span><span class="n">transaction</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span> <span class="k">do</span>
+    <span class="vi">@title</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">store</span><span class="o">[</span><span class="s1">&#39;title&#39;</span><span class="o">]</span>
+    <span class="vi">@para</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">store</span><span class="o">[</span><span class="s1">&#39;para&#39;</span><span class="o">]</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></div>
+
+<p>It works like in previous example, but this time we want to choose file, we want to read.If you press open button. You should see file picker:</p>
+
+<p><img src="/images/open-file-in-shoes.png" alt="how to open file in shoes" /></p>
+
+<p>You can create another yaml file and test it. Values of yaml file should replaces values in text field.</p>
+
+<p>Ok so this works right now, but we want to save values from Shoes to yaml for later use. We’ll use YAML::Store for this, but this time we’ll use different code.</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">button</span> <span class="s2">&quot;Save&quot;</span> <span class="k">do</span>
+  
+  <span class="n">file</span> <span class="o">=</span> <span class="n">ask_save_file</span>
+  
+  <span class="n">store</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">::</span><span class="no">Store</span><span class="o">.</span><span class="n">new</span> <span class="n">file</span>
+  
+  <span class="n">store</span><span class="o">.</span><span class="n">transaction</span> <span class="k">do</span>
+    <span class="n">store</span><span class="o">[</span><span class="s2">&quot;title&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="vi">@title</span><span class="o">.</span><span class="n">text</span>
+    <span class="n">store</span><span class="o">[</span><span class="s2">&quot;para&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="vi">@para</span><span class="o">.</span><span class="n">text</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></div>
+
+<p>So take look at the code that we’ve just done. </p>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">file</span> <span class="o">=</span> <span class="n">ask_save_file</span></code></pre></div>
+
+<p>So we’re created menu that shows you dialog to write name of the file and save it.</p>
+
+<p><img src="/images/saving-file-in-shoes.png" alt="saving file in shoes" /> </p>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">store</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">::</span><span class="no">Store</span><span class="o">.</span><span class="n">new</span> <span class="n">file</span></code></pre></div>
+
+<p>Here we used location of previously selected file to store our values.</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="n">store</span><span class="o">.</span><span class="n">transaction</span> <span class="k">do</span>
+  <span class="n">store</span><span class="o">[</span><span class="s2">&quot;title&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="vi">@title</span><span class="o">.</span><span class="n">text</span>
+  <span class="n">store</span><span class="o">[</span><span class="s2">&quot;para&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="vi">@para</span><span class="o">.</span><span class="n">text</span></code></pre></div>
+
+<p>Last time we extracted values from yaml file, this time we reverse this process and saves values what we type to text field.</p>
+
+<p>So take look at file we created now. It should look like this:</p>
+
+<div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;green_shoes&#39;</span>
+<span class="nb">require</span> <span class="s1">&#39;yaml/store&#39;</span>
+
+<span class="no">Shoes</span><span class="o">.</span><span class="n">app</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">200</span> <span class="k">do</span>
+  <span class="n">flow</span> <span class="k">do</span>
+    <span class="n">button</span> <span class="s2">&quot;New&quot;</span> <span class="k">do</span>
+      <span class="n">store</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">::</span><span class="no">Store</span><span class="o">.</span><span class="n">new</span> <span class="s2">&quot;config.yml&quot;</span>
+      <span class="n">store</span><span class="o">.</span><span class="n">transaction</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span> <span class="k">do</span>
+        <span class="vi">@title</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">store</span><span class="o">[</span><span class="s1">&#39;title&#39;</span><span class="o">]</span>
+        <span class="vi">@para</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">store</span><span class="o">[</span><span class="s1">&#39;para&#39;</span><span class="o">]</span>
+      <span class="k">end</span>
+    <span class="k">end</span>  
+
+    
+    <span class="n">button</span> <span class="s2">&quot;Open&quot;</span> <span class="k">do</span>
+      <span class="n">file</span> <span class="o">=</span> <span class="n">ask_open_file</span>
+      <span class="n">store</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">::</span><span class="no">Store</span><span class="o">.</span><span class="n">new</span> <span class="n">file</span>
+      <span class="n">store</span><span class="o">.</span><span class="n">transaction</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span> <span class="k">do</span>
+        <span class="vi">@title</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">store</span><span class="o">[</span><span class="s1">&#39;title&#39;</span><span class="o">]</span>
+        <span class="vi">@para</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">store</span><span class="o">[</span><span class="s1">&#39;para&#39;</span><span class="o">]</span>
+      <span class="k">end</span>
+    <span class="k">end</span>  
+    
+    <span class="n">button</span> <span class="s2">&quot;Save&quot;</span> <span class="k">do</span>
+      <span class="n">file</span> <span class="o">=</span> <span class="n">ask_save_file</span>
+      <span class="n">store</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">::</span><span class="no">Store</span><span class="o">.</span><span class="n">new</span> <span class="n">file</span>
+      <span class="n">store</span><span class="o">.</span><span class="n">transaction</span> <span class="k">do</span>
+        <span class="n">store</span><span class="o">[</span><span class="s2">&quot;title&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="vi">@title</span><span class="o">.</span><span class="n">text</span>
+        <span class="n">store</span><span class="o">[</span><span class="s2">&quot;para&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="vi">@para</span><span class="o">.</span><span class="n">text</span>
+      <span class="k">end</span>
+    <span class="k">end</span>    
+  <span class="k">end</span>
+  
+  <span class="n">flow</span> <span class="k">do</span>
+    <span class="vi">@title</span> <span class="o">=</span> <span class="n">edit_line</span> <span class="s2">&quot;New note&quot;</span><span class="p">,</span> <span class="ss">margin</span><span class="p">:</span> <span class="o">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="o">]</span>
+    <span class="vi">@para</span> <span class="o">=</span> <span class="n">edit_box</span> <span class="s2">&quot;Describe your note here&quot;</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></div>
+
+<p>That’s all for now, if you like my post please share it on your favorite social network by clicking on the buttons on the top.</p>
+
+
+
+
+
+</div>
+
+
+        
+        <div id="disqus_thread" name="disqus_thread"></div>
+          <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'mdolobac'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+          </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+
+
+<ul class="posts">
+  
+
+  <li><span>06 Jun 2014</span> &raquo; <a href="/weekly-rails/2014/06/06/how-to-create-link-aggregation-site-in-rails.html#disqus_thread">How to create link aggregation site in Rails&#58; Adding, editing, deleting links</a></li>
+  
+  
+  
+
+  <li><span>30 May 2014</span> &raquo; <a href="/learning-resources/2014/05/30/ruby-news-websites.html#disqus_thread">7 Websites to Get Latest News About Ruby</a></li>
+  
+  
+  
+
+  <li><span>02 May 2014</span> &raquo; <a href="/productivity-booster/2014/05/02/vim-plugins-for-ruby.html#disqus_thread">Vim for Rubyist&#58; 10 useful vim plugins for Ruby</a></li>
+  
+  
+  
+
+  <li><span>24 Apr 2014</span> &raquo; <a href="/learning-resources/2014/04/24/books-for-learning-rails.html#disqus_thread">6 Books for learning or advancing your rails knowledge</a></li>
+  
+  
+  
+
+  <li><span>17 Apr 2014</span> &raquo; <a href="/shoes/2014/04/17/how-to-create-simple-calculator-in-shoes.html#disqus_thread">How to create simple calculator in Ruby Shoes</a></li>
+  
+  
+  
+
+  <li><span>09 Apr 2014</span> &raquo; <a href="/learning-resources/2014/04/09/learn-ruby-on-rails-book-review.html#disqus_thread">Learn Ruby on Rails book review</a></li>
+  
+  
+  
+
+  <li><span>04 Apr 2014</span> &raquo; <a href="/weekly-rails/2014/04/04/how-to-create-todo-list-app-in-rails-adding-removing-completing-tasks.html#disqus_thread">How to create todo list app in rails, adding, removing and deleting tasks</a></li>
+  
+  
+  
+
+  <li><span>28 Mar 2014</span> &raquo; <a href="/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html#disqus_thread">How to install Ruby and Rails for your operating system</a></li>
+  
+  
+  
+
+  <li><span>28 Mar 2014</span> &raquo; <a href="/learning-resources/2014/03/28/learn-ruby-with-these-resources.html#disqus_thread">Top 8 Learning resources for ruby beginner</a></li>
+  
+  
+  
+
+  <li><span>26 Mar 2014</span> &raquo; <a href="/productivity-booster/2014/03/26/top-ten-commands-in-terminal-you-will-use-everyday.html#disqus_thread">Top 10 commands in terminal you will use everyday</a></li>
+  
+  
+   
+  
+
+</ul>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'mdolobac'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+      var s = document.createElement('script'); s.async = true;
+      s.type = 'text/javascript';
+      s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+      (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+    
+    <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-534eba9022761f4e"></script>
+<!-- AddThis Button END -->
+    
+ 
+
+
+              
+
+      </section> 
+
+      <section id="sidebar">
+        <ul class="posts">
+  <h1>Recent posts</h1>
+
+<li>
+  <span>16 Jun 2014</span> &raquo;
+
+  <a href="/shoes/2014/06/16/how-to-create-notes-app-in-ruby-shoes.html">
+    How to create post-it notes app in Ruby Shoes</a>
+</li>
+
+<li>
+  <span>06 Jun 2014</span> &raquo;
+
+  <a href="/weekly-rails/2014/06/06/how-to-create-link-aggregation-site-in-rails.html">
+    How to create link aggregation site in Rails&#58; Adding, editing, deleting links</a>
+</li>
+
+<li>
+  <span>30 May 2014</span> &raquo;
+
+  <a href="/learning-resources/2014/05/30/ruby-news-websites.html">
+    7 Websites to Get Latest News About Ruby</a>
+</li>
+
+<li>
+  <span>02 May 2014</span> &raquo;
+
+  <a href="/productivity-booster/2014/05/02/vim-plugins-for-ruby.html">
+    Vim for Rubyist&#58; 10 useful vim plugins for Ruby</a>
+</li>
+
+<li>
+  <span>24 Apr 2014</span> &raquo;
+
+  <a href="/learning-resources/2014/04/24/books-for-learning-rails.html">
+    6 Books for learning or advancing your rails knowledge</a>
+</li>
+
+<li>
+  <span>17 Apr 2014</span> &raquo;
+
+  <a href="/shoes/2014/04/17/how-to-create-simple-calculator-in-shoes.html">
+    How to create simple calculator in Ruby Shoes</a>
+</li>
+
+<li>
+  <span>09 Apr 2014</span> &raquo;
+
+  <a href="/learning-resources/2014/04/09/learn-ruby-on-rails-book-review.html">
+    Learn Ruby on Rails book review</a>
+</li>
+
+<li>
+  <span>04 Apr 2014</span> &raquo;
+
+  <a href="/weekly-rails/2014/04/04/how-to-create-todo-list-app-in-rails-adding-removing-completing-tasks.html">
+    How to create todo list app in rails, adding, removing and deleting tasks</a>
+</li>
+
+<li>
+  <span>28 Mar 2014</span> &raquo;
+
+  <a href="/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html">
+    How to install Ruby and Rails for your operating system</a>
+</li>
+
+<li>
+  <span>28 Mar 2014</span> &raquo;
+
+  <a href="/learning-resources/2014/03/28/learn-ruby-with-these-resources.html">
+    Top 8 Learning resources for ruby beginner</a>
+</li>
+
+<li>
+  <span>26 Mar 2014</span> &raquo;
+
+  <a href="/productivity-booster/2014/03/26/top-ten-commands-in-terminal-you-will-use-everyday.html">
+    Top 10 commands in terminal you will use everyday</a>
+</li>
+
+<li>
+  <span>22 Mar 2014</span> &raquo;
+
+  <a href="/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.html">
+    How to create todo list app in rails static pages</a>
+</li>
+
+</ul>
+
+
+
+
+
+
+
+      </section>  
+      
+      <footer id="page_footer">
+        <div class="contact"> 
+
+          <a href="https://github.com/MilosDolobac"><img src="/images/github.jpeg" class="contact"></a> 
+          <a href="https://twitter.com/dolobacmilos"><img
+            src="/images/twitter.jpeg" class="contact"></a>
+        
+          <a href="http://sk.linkedin.com/pub/milos-dolobac/59/b4a/538"><img
+            src="/images/linked_in.jpeg" class="contact"></a>
+
+        </div>
+      </footer>
+    </div>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-49278618-1', 'masteruby.github.io');
+  ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+  window.onbeforeunload = function (e) {
+    e = e || window.event;
+    if (e) {
+      _gaq.push(['_trackPageview', '/bounce']);
+    }
+    return _gaq.push(['_trackPageview', '/bounce']);
+  };
+</script>
+
+
+
+  </body>
+</html>    

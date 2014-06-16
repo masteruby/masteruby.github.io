@@ -1,0 +1,234 @@
+---
+layout: post
+---
+
+In this post I want to show you how to create post-it notes app something like Tomboy Notes in Linux.
+
+Final product will be look like this:
+
+<img class="shoes" src="/images/post-it-notes-app.png" alt="how to create post-it notes app in ruby">
+
+## Design app
+
+First we'll do is to design our app.
+At the top of page we'll have three buttons, new, open, and save, so let's design it.
+
+{% highlight ruby %}
+
+require 'green_shoes'
+require 'yaml/store'
+
+Shoes.app :title => "Post-it notes app" do
+  flow do
+    button "New" do
+    end
+    button "Open" do
+    end
+    button "Save" do
+    end
+  end
+end
+
+	{% endhighlight %}
+
+You certainly noticed that I've added line **require yaml/store** in top of the app. We'll use it later.
+
+If you run your Shoes app right now, you should see our buttons.
+
+<img class="shoes" src="/images/pna_buttons.png" alt="how to add buttons in shoes">
+
+So here we go, our app should have field for adding notes.
+
+Let's create another flow 
+
+{% highlight ruby %}
+flow do
+  @title = edit_line "New note", margin: [0, 5, 0, 5]
+  @para = edit_box "Describe your note here"
+{% endhighlight %}
+
+We've created two text fields, title has only one line so we've used edit_line and para has multiple lines so we've used edit_box. We've also added some space between text field with margin(left, top, right, bottom)
+
+If you look at it, you should see something like this:
+
+<img class="shoes" src="/images/pna_text_field.png" alt="how to create text field in shoes">
+
+{% highlight ruby %}
+require 'green_shoes'
+require 'yaml/store'
+
+Shoes.app title: "Post-it notes app" do
+  flow do
+    button "New" do
+    end
+    button "Open" do
+    end
+    button "Save" do
+    end
+  end
+  flow do
+    @title = edit_line "New note"
+    @para = edit_box "Describe your note here", margin: [0, 5, 0, 5]
+   
+  end
+end
+{% endhighlight %}
+
+
+
+
+## Adding functionality to buttons
+
+So to manupilating with our notes we'll use YAML::Store. First thing we need to do is to create configuration file, where we store default values for our notes. Create **config.yml** file like this:
+
+{% highlight yaml %}
+title: New note
+para: Describe your note here
+{% endhighlight %}
+
+Here's our default values. Let's connect our button with that yaml file.
+
+
+{% highlight ruby %}
+button "New" do
+  store = YAML::Store.new "config.yml"
+  store.transaction(true) do
+    @title.text = store['title']
+    @para.text = store['para']
+  end
+end 
+
+{% endhighlight %}
+
+Take look at the code we've just wrote.
+
+{% highlight ruby %}
+store = YAML::Store.new "config.yml"
+{% endhighlight %}
+
+Here we've set structure for reading our **config.yml** file.
+
+{% highlight html %}
+store.transaction(true) do
+{% endhighlight %}
+
+Here we've start read only transaction.
+
+{% highlight ruby %}
+@title.text = store['title']
+@para.text = store['para']
+{% endhighlight %}
+
+Here we've set values of title and para to values in Hash of our config file.
+
+Type something else to your text field. Now press new button. You should see that text was changed to default.
+
+Let's go on open button.
+
+{% highlight ruby %}
+button "Open" do
+  file = ask_open_file
+  store = YAML::Store.new file
+  store.transaction(true) do
+    @title.text = store['title']
+    @para.text = store['para']
+end    
+{% endhighlight %}
+
+It's works like previous, but this we want to choose file we want to read.If you press open button. You should see file picker:
+
+![how to open file in shoes](/images/open-file-in-shoes.png)
+
+You can create another yaml file and test it. Values of yaml file should replaces values in text field.
+
+Ok so this works right now, but we want to save values of. We'll use YAML::Store for this, but this time we'll use different code.
+
+{% highlight ruby %}
+button "Save" do
+  
+  file = ask_save_file
+  
+  store = YAML::Store.new file
+  
+  store.transaction do
+    store["title"] = @title.text
+    store["para"] = @para.text
+  end
+end
+
+{% endhighlight %}
+
+So take look at the code that we've just done. 
+
+{% highlight ruby %}
+file = ask_save_file
+{% endhighlight %}
+
+So we're created menu that shows you dialog to write name of the file and save it.
+
+![saving file in shoes](/images/saving-file-in-shoes.png) 
+
+{% highlight ruby %}
+store = YAML::Store.new file
+{% endhighlight %}
+
+Here we used location of previously selected file to store our values.
+
+{% highlight ruby %}
+store.transaction do
+  store["title"] = @title.text
+  store["para"] = @para.text
+{% endhighlight %}
+
+Last time we extracted values from yaml file, this time we reverse this process and saves values what we type to text field.
+
+So take look at file we created now. It should look like this:
+
+{% highlight ruby %}
+require 'green_shoes'
+require 'yaml/store'
+
+Shoes.app height: 200, width: 200 do
+  flow do
+    button "New" do
+    store = YAML::Store.new "config.yml"
+    store.transaction(true) do
+      @title.text = store['title']
+      @para.text = store['para']
+    end
+    
+    button "Open" do
+      file = ask_open_file
+      store = YAML::Store.new file
+      store.transaction(true) do
+        @title.text = store['title']
+      @para.text = store['para']
+    end
+    
+    button "Save" do
+  
+      file = ask_save_file
+  
+      store = YAML::Store.new file
+  
+      store.transaction do
+        store["title"] = @title.text
+        store["para"] = @para.text
+      end
+    end    
+  end
+  
+  flow do
+    @title = edit_line "New note"
+    @para = edit_box "Describe your note here", margin: [0, 5, 0, 5]
+  end
+end
+
+
+   
+
+
+
+
+
+
