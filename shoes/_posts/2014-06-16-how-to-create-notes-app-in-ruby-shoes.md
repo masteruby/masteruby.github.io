@@ -60,7 +60,7 @@ Here's how our app look right now:
 require 'green_shoes'
 require 'yaml/store'
 
-Shoes.app height: 200, width: 200, title: "Post-it notes app",  do
+Shoes.app height: 200, width: 200, title: "Post-it notes app" do
   flow do
     button "New" do
     end
