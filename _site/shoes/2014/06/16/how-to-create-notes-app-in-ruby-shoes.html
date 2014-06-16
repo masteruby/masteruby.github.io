@@ -83,7 +83,7 @@ At the top of page we’ll have three buttons, new, open, and save, so let’s d
 <div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;green_shoes&#39;</span>
 <span class="nb">require</span> <span class="s1">&#39;yaml/store&#39;</span>
 
-<span class="no">Shoes</span><span class="o">.</span><span class="n">app</span> <span class="ss">:title</span> <span class="o">=&gt;</span> <span class="s2">&quot;Post-it notes app&quot;</span> <span class="k">do</span>
+<span class="no">Shoes</span><span class="o">.</span><span class="n">app</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">title</span><span class="p">:</span> <span class="s2">&quot;Post-it notes app&quot;</span> <span class="k">do</span>
   <span class="n">flow</span> <span class="k">do</span>
     <span class="n">button</span> <span class="s2">&quot;New&quot;</span> <span class="k">do</span>
     <span class="k">end</span>
@@ -223,7 +223,7 @@ At the top of page we’ll have three buttons, new, open, and save, so let’s d
 <div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;green_shoes&#39;</span>
 <span class="nb">require</span> <span class="s1">&#39;yaml/store&#39;</span>
 
-<span class="no">Shoes</span><span class="o">.</span><span class="n">app</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">200</span> <span class="k">do</span>
+<span class="no">Shoes</span><span class="o">.</span><span class="n">app</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">title</span><span class="p">:</span> <span class="s2">&quot;Post-it notes app&quot;</span> <span class="k">do</span>
   <span class="n">flow</span> <span class="k">do</span>
     <span class="n">button</span> <span class="s2">&quot;New&quot;</span> <span class="k">do</span>
       <span class="n">store</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">::</span><span class="no">Store</span><span class="o">.</span><span class="n">new</span> <span class="s2">&quot;config.yml&quot;</span>
@@ -289,6 +289,11 @@ At the top of page we’ll have three buttons, new, open, and save, so let’s d
 <ul class="posts">
   
 
+  <li><span>16 Jun 2014</span> &raquo; <a href="/2014/06/16/post-it.html#disqus_thread">Post It</a></li>
+  
+  
+  
+
   <li><span>06 Jun 2014</span> &raquo; <a href="/weekly-rails/2014/06/06/how-to-create-link-aggregation-site-in-rails.html#disqus_thread">How to create link aggregation site in Rails&#58; Adding, editing, deleting links</a></li>
   
   
@@ -304,7 +309,17 @@ At the top of page we’ll have three buttons, new, open, and save, so let’s d
   
   
 
+  <li><span>24 Apr 2014</span> &raquo; <a href="/2014/04/24/rails.html#disqus_thread">6 Books for learning or advancing your rails knowledge</a></li>
+  
+  
+  
+
   <li><span>24 Apr 2014</span> &raquo; <a href="/learning-resources/2014/04/24/books-for-learning-rails.html#disqus_thread">6 Books for learning or advancing your rails knowledge</a></li>
+  
+  
+  
+
+  <li><span>17 Apr 2014</span> &raquo; <a href="/2014/04/17/calculator.html#disqus_thread">How to create simple calculator in Shoes</a></li>
   
   
   
@@ -319,22 +334,7 @@ At the top of page we’ll have three buttons, new, open, and save, so let’s d
   
   
 
-  <li><span>04 Apr 2014</span> &raquo; <a href="/weekly-rails/2014/04/04/how-to-create-todo-list-app-in-rails-adding-removing-completing-tasks.html#disqus_thread">How to create todo list app in rails, adding, removing and deleting tasks</a></li>
-  
-  
-  
-
-  <li><span>28 Mar 2014</span> &raquo; <a href="/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html#disqus_thread">How to install Ruby and Rails for your operating system</a></li>
-  
-  
-  
-
-  <li><span>28 Mar 2014</span> &raquo; <a href="/learning-resources/2014/03/28/learn-ruby-with-these-resources.html#disqus_thread">Top 8 Learning resources for ruby beginner</a></li>
-  
-  
-  
-
-  <li><span>26 Mar 2014</span> &raquo; <a href="/productivity-booster/2014/03/26/top-ten-commands-in-terminal-you-will-use-everyday.html#disqus_thread">Top 10 commands in terminal you will use everyday</a></li>
+  <li><span>05 Apr 2014</span> &raquo; <a href="/2014/04/05/why_tmux.html#disqus_thread">Why to use tmux</a></li>
   
   
    
@@ -372,6 +372,13 @@ At the top of page we’ll have three buttons, new, open, and save, so let’s d
 <li>
   <span>16 Jun 2014</span> &raquo;
 
+  <a href="/2014/06/16/post-it.html">
+    Post It</a>
+</li>
+
+<li>
+  <span>16 Jun 2014</span> &raquo;
+
   <a href="/shoes/2014/06/16/how-to-create-notes-app-in-ruby-shoes.html">
     How to create post-it notes app in Ruby Shoes</a>
 </li>
@@ -400,8 +407,22 @@ At the top of page we’ll have three buttons, new, open, and save, so let’s d
 <li>
   <span>24 Apr 2014</span> &raquo;
 
+  <a href="/2014/04/24/rails.html">
+    6 Books for learning or advancing your rails knowledge</a>
+</li>
+
+<li>
+  <span>24 Apr 2014</span> &raquo;
+
   <a href="/learning-resources/2014/04/24/books-for-learning-rails.html">
     6 Books for learning or advancing your rails knowledge</a>
+</li>
+
+<li>
+  <span>17 Apr 2014</span> &raquo;
+
+  <a href="/2014/04/17/calculator.html">
+    How to create simple calculator in Shoes</a>
 </li>
 
 <li>
@@ -416,6 +437,13 @@ At the top of page we’ll have three buttons, new, open, and save, so let’s d
 
   <a href="/learning-resources/2014/04/09/learn-ruby-on-rails-book-review.html">
     Learn Ruby on Rails book review</a>
+</li>
+
+<li>
+  <span>05 Apr 2014</span> &raquo;
+
+  <a href="/2014/04/05/why_tmux.html">
+    Why to use tmux</a>
 </li>
 
 <li>

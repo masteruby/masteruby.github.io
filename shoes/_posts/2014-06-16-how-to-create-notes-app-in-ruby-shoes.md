@@ -19,7 +19,7 @@ At the top of page we'll have three buttons, new, open, and save, so let's desig
 require 'green_shoes'
 require 'yaml/store'
 
-Shoes.app :title => "Post-it notes app" do
+Shoes.app height: 200, width: 200, title: "Post-it notes app" do
   flow do
     button "New" do
     end
@@ -190,7 +190,7 @@ So take look at file we created now. It should look like this:
 require 'green_shoes'
 require 'yaml/store'
 
-Shoes.app height: 200, width: 200 do
+Shoes.app height: 200, width: 200, title: "Post-it notes app" do
   flow do
     button "New" do
       store = YAML::Store.new "config.yml"
