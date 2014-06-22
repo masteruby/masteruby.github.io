@@ -11,7 +11,7 @@ Ruby Weekly is a email newsletter curated by Peter Cooper. If you subscribe you 
 
 ## 2. [Ruby Daily](http://rubydaily.org/)
 
-Ruby Daily is a link aggregation website by Nick Kugaevsky. It covers wide range of Ruby related subjects for example: Sinatra, Ruby on Rails, Heroku, RVM, TDD and more.
+Ruby Daily is a daily newspaper website about Ruby by Nick Kugaevsky. It covers wide range of Ruby related subjects for example: Sinatra, Ruby on Rails, Heroku, RVM, TDD and more.
 
 ## 3. [Alltop](http://ruby.alltop.com/)
 
@@ -28,11 +28,11 @@ Rubyflow is a link aggregation site for Ruby.
 
 ## 6. [Ruby5](http://ruby5.envylabs.com/)
 
-5 minutes series of podcasts about latest news in ruby world.
+5 minutes series of podcasts about latest news in Ruby world.
 
 ## 7. [Reddit](http://www.reddit.com/r/ruby/)
 
-I guess I don't have to introduce Reddit. You can also checkout rails section of Reddit.
+I guess I don't have to introduce Reddit. Reddit is a website, where users can submit text posts or links to specialized subreddits and other users can vote up or down. You can also checkout [rails](http://www.reddit.com/r/rails/) section of Reddit.
 
 
 Am I forgotten something? You can add your favorite news websites on [Listly](http://list.ly/list/LEy-ruby-news-websites) 

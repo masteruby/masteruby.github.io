@@ -626,7 +626,7 @@ rake db:migrate&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;ruby-dailyhttprubydailyorg&quot;&gt;2. &lt;a href=&quot;http://rubydaily.org/&quot;&gt;Ruby Daily&lt;/a&gt;&lt;/h2&gt;
 
-&lt;p&gt;Ruby Daily is a link aggregation website by Nick Kugaevsky. It covers wide range of Ruby related subjects for example: Sinatra, Ruby on Rails, Heroku, RVM, TDD and more.&lt;/p&gt;
+&lt;p&gt;Ruby Daily is a daily newspaper website about Ruby by Nick Kugaevsky. It covers wide range of Ruby related subjects for example: Sinatra, Ruby on Rails, Heroku, RVM, TDD and more.&lt;/p&gt;
 
 &lt;h2 id=&quot;alltophttprubyalltopcom&quot;&gt;3. &lt;a href=&quot;http://ruby.alltop.com/&quot;&gt;Alltop&lt;/a&gt;&lt;/h2&gt;
 
@@ -642,11 +642,11 @@ rake db:migrate&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;h2 id=&quot;ruby5httpruby5envylabscom&quot;&gt;6. &lt;a href=&quot;http://ruby5.envylabs.com/&quot;&gt;Ruby5&lt;/a&gt;&lt;/h2&gt;
 
-&lt;p&gt;5 minutes series of podcasts about latest news in ruby world.&lt;/p&gt;
+&lt;p&gt;5 minutes series of podcasts about latest news in Ruby world.&lt;/p&gt;
 
 &lt;h2 id=&quot;reddithttpwwwredditcomrruby&quot;&gt;7. &lt;a href=&quot;http://www.reddit.com/r/ruby/&quot;&gt;Reddit&lt;/a&gt;&lt;/h2&gt;
 
-&lt;p&gt;I guess I don’t have to introduce Reddit. You can also checkout rails section of Reddit.&lt;/p&gt;
+&lt;p&gt;I guess I don’t have to introduce Reddit. Reddit is a website, where users can submit text posts or links to specialized subreddits and other users can vote up or down. You can also checkout &lt;a href=&quot;http://www.reddit.com/r/rails/&quot;&gt;rails&lt;/a&gt; section of Reddit.&lt;/p&gt;
 
 &lt;p&gt;Am I forgotten something? You can add your favorite news websites on &lt;a href=&quot;http://list.ly/list/LEy-ruby-news-websites&quot;&gt;Listly&lt;/a&gt; &lt;/p&gt;
 </description>
