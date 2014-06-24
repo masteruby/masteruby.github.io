@@ -244,11 +244,40 @@ At the top of page we’ll have three buttons, new, open, and save, so let’s d
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;slim-rails&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
+&lt;p&gt;Slim is template language, that strips HTML from unecessary tags. &lt;/p&gt;
+
+&lt;p&gt;Here’s how look like code in HTML&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;My Webpage&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;My heading&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;My paragraph&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And this how look like code in Slim:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;html
+  head
+    title My Webpage
+  body
+    h1 My Heading
+    p My paragraph&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Simpler isn’t it? Slim strips HTML from all opening and closing tags. Slim uses two spaces indentation after every parent element. For example element &lt;strong&gt;html&lt;/strong&gt; has two children &lt;strong&gt;body&lt;/strong&gt; and &lt;strong&gt;head&lt;/strong&gt;. In Slim you can use Ruby part of Ruby code.&lt;/p&gt;
+
 &lt;h3 id=&quot;creating-navigation&quot;&gt;Creating navigation&lt;/h3&gt;
 
 &lt;p&gt;We’ll start with basic navigation, wewant to show things related to links on left side and authentication on right side. Create controller named home&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;rails generate controller home home&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If you look at &lt;strong&gt;app/views&lt;/strong&gt; folder you should see that we’ve just createdfolder with name &lt;strong&gt;home&lt;/strong&gt; and you should see file &lt;strong&gt;home.html.slim&lt;/strong&gt; inside it.&lt;/p&gt;
+
+&lt;p&gt;Try to run &lt;/p&gt;
 
 &lt;p&gt;Now add root path to that folder.&lt;/p&gt;
 

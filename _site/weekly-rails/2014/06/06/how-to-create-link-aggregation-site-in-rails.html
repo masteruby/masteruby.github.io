@@ -96,11 +96,40 @@
 
 <div class="highlight"><pre><code class="ruby"><span class="n">gem</span> <span class="s1">&#39;slim-rails&#39;</span></code></pre></div>
 
+<p>Slim is template language, that strips HTML from unecessary tags. </p>
+
+<p>Here’s how look like code in HTML</p>
+
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;html&gt;</span>
+  <span class="nt">&lt;head&gt;</span>
+    <span class="nt">&lt;title&gt;</span>My Webpage<span class="nt">&lt;/title&gt;</span>
+  <span class="nt">&lt;/head&gt;</span>
+  <span class="nt">&lt;body&gt;</span>
+    <span class="nt">&lt;h1&gt;</span>My heading<span class="nt">&lt;/h1&gt;</span>
+    <span class="nt">&lt;p&gt;</span>My paragraph<span class="nt">&lt;/p&gt;</span>
+  <span class="nt">&lt;/body&gt;</span>
+<span class="nt">&lt;/html&gt;</span></code></pre></div>
+
+<p>And this how look like code in Slim:</p>
+
+<div class="highlight"><pre><code class="html">html
+  head
+    title My Webpage
+  body
+    h1 My Heading
+    p My paragraph</code></pre></div>
+
+<p>Simpler isn’t it? Slim strips HTML from all opening and closing tags. Slim uses two spaces indentation after every parent element. For example element <strong>html</strong> has two children <strong>body</strong> and <strong>head</strong>. In Slim you can use Ruby part of Ruby code.</p>
+
 <h3 id="creating-navigation">Creating navigation</h3>
 
 <p>We’ll start with basic navigation, wewant to show things related to links on left side and authentication on right side. Create controller named home</p>
 
 <div class="highlight"><pre><code class="sh">rails generate controller home home</code></pre></div>
+
+<p>If you look at <strong>app/views</strong> folder you should see that we’ve just createdfolder with name <strong>home</strong> and you should see file <strong>home.html.slim</strong> inside it.</p>
+
+<p>Try to run </p>
 
 <p>Now add root path to that folder.</p>
 

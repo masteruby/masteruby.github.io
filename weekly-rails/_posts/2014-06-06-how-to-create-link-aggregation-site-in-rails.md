@@ -32,6 +32,37 @@ We'll start with designing how our page will be look like. Add slim gem to your 
 gem 'slim-rails'
 {% endhighlight %}
 
+Slim is template language, that strips HTML from unecessary tags. 
+
+Here's how look like code in HTML
+
+{% highlight html %}
+<html>
+  <head>
+    <title>My Webpage</title>
+  </head>
+  <body>
+    <h1>My heading</h1>
+    <p>My paragraph</p>
+  </body>
+</html>
+{% endhighlight %}
+
+And this how look like code in Slim:
+
+{% highlight html %}
+html
+  head
+    title My Webpage
+  body
+    h1 My Heading
+    p My paragraph
+{% endhighlight %}
+
+Simpler isn't it? Slim strips HTML from all opening and closing tags. Slim uses two spaces indentation after every parent element. For example element **html** has two children **body** and **head**. In Slim you can use Ruby part of Ruby code.
+    
+
+
 ### Creating navigation
 
 We'll start with basic navigation, wewant to show things related to links on left side and authentication on right side. Create controller named home
@@ -40,7 +71,15 @@ We'll start with basic navigation, wewant to show things related to links on lef
 rails generate controller home home
 {% endhighlight %}
 
-Now add root path to that folder.
+If you look at **app/views** folder you should see that we've just createdfolder with name **home** and you should see file **home.html.slim** inside it.
+
+Let's take a look at the code at the browser:
+
+{% highlight sh %}
+rails server
+{% endhighlight %} 
+
+It works, but typing whole path to address bar in browser can be really disgusting. Let's fix it.
 
 #### config/routes.rb
 
@@ -48,7 +87,11 @@ Now add root path to that folder.
 root 'home#home'
 {% endhighlight %}
 
-Replace application.html.slim with following slim file:
+Here we've changed root path. So if you look at this at the browser, you should see that we don't have to type address to addressbar anymore.
+
+## Creating navigation
+
+First thing we want to do is to create navigation, but we want to use it on every page so we need to modify our layout. If you have **application.html.erb** in your **layouts** folder replace it with following file:
 
 #### app/views/layouts/application.html.slim
 
@@ -67,7 +110,11 @@ html
 
 {% endhighlight %}
 
-And put navigation menu in **layouts/header.html.slim**
+If you scroll down to the code, you certainly noticed two methods, first is **render**. Render is used when you don't want to have all the code in one file and want to use it in other file. Method will look at the partial with name **_header.html.slim** in **layouts** folder.
+
+Another method is **yield**. Yield is used to include anything related to page right after to header.
+
+So now you know why to use partials, let's create partial **_header.html.slim**
 
 #### app/views/layouts/_header.html.slim
 
@@ -82,6 +129,28 @@ header.navbar
     li = link_to "Signup", '#'
 
 {% endhighlight %}
+
+Take look at the code that we've just done.
+
+{% highlight html %}
+header.navbar
+  ul.links
+{% endhighlight %}
+
+Slim use shortcuts for creating html elements. So here, you've used this:
+
+{% highlight html %}
+header.navbar
+{% endhighlight %}
+
+instead of:
+
+{% highlight html %}
+<header class="navbar">
+{% endhighlight %}
+
+You certainly noticed we've used **link_to**. Link_to is special rails method for links.
+
 
 Let's add some styling for our navigation. Create file **main.css.scss**
 
@@ -117,6 +186,8 @@ Let's add some styling for our navigation. Create file **main.css.scss**
   float: right;
 }  
 {% endhighlight %}
+
+Here we've added green background to our navigation, add some place between elements and 
 
 Ok let's run rails server to see whatwe've created.
 We'll end up with menu like this:
@@ -232,10 +303,14 @@ We've just added authentication. We need to create controller named **links**
 rails generate controller links
 {% endhighlight %}
 
+We need to add links values to database, so we need to generate this model.
+
 {% highlight sh %}
 rails generate model Link title:string url:string user:references
 rake db:migrate
 {% endhighlight %}
+
+Previous command will generate
 
 Here we've created link attributes. Every link has title and url, and of course user id related to link url.
 
@@ -243,11 +318,15 @@ Here we've created link attributes. Every link has title and url, and of course 
 rake db:migrate
 {% endhighlight %}
 
+
+
 Add path do **config/routes.rb**
 
 {% highlight ruby %}
 resources :links
 {% endhighlight %}
+
+**Resources** will create all path
 
 Now we can add path to controller. We'll add create, update and destroy.
 
@@ -305,6 +384,7 @@ Let's create form for submitting our links. We'll put form in a partial **_form.
   = f.button :submit
 {% endhighlight %}
 
+Simple form will generate basic html form.
  
 
 #### app/views/links/new.html.slim
