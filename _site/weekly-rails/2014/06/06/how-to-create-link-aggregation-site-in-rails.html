@@ -46,22 +46,7 @@
       
       <section id="posts">
         <!-- AddThis Button BEGIN -->
-<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
-  <a class="addthis_button_rss_follow"
-    addthis:userid="http://masteruby.github.io/feed.xml"></a>
-<a class="addthis_button_facebook"></a>
-<a class="addthis_button_twitter"></a>
-<a class="addthis_button_pinterest_share"></a>
-<a class="addthis_button_google_plusone_share"></a>
-<a class="addthis_button_reddit"></a>
-<a class="addthis_button_hackernews"></a>
-<a class="addthis_button_stumbleupon"></a>
-<a class="addthis_button_delicious"></a>
-<a class="addthis_button_dzone"></a>
-<a class="addthis_button_blinklist"></a>
-<a class="addthis_button_tumblr"></a>
-<a class="addthis_button_compact"></a><a class="addthis_counter addthis_bubble_style"></a>
-</div>
+
 
 <h2>How to create link aggregation site in Rails&#58; Adding, editing, deleting links</h2>
 <p class="meta">06 Jun 2014</p>
@@ -129,15 +114,21 @@
 
 <p>If you look at <strong>app/views</strong> folder you should see that we’ve just createdfolder with name <strong>home</strong> and you should see file <strong>home.html.slim</strong> inside it.</p>
 
-<p>Try to run </p>
+<p>Let’s take a look at the code at the browser:</p>
 
-<p>Now add root path to that folder.</p>
+<div class="highlight"><pre><code class="sh">rails server</code></pre></div>
+
+<p>It works, but typing whole path to address bar in browser can be really disgusting. Let’s fix it.</p>
 
 <h4 id="configroutesrb">config/routes.rb</h4>
 
 <div class="highlight"><pre><code class="ruby"><span class="n">root</span> <span class="s1">&#39;home#home&#39;</span></code></pre></div>
 
-<p>Replace application.html.slim with following slim file:</p>
+<p>Here we’ve changed root path. So if you look at this at the browser, you should see that we don’t have to type address to addressbar anymore.</p>
+
+<h2 id="creating-navigation-1">Creating navigation</h2>
+
+<p>First thing we want to do is to create navigation, but we want to use it on every page so we need to modify our layout. If you have <strong>application.html.erb</strong> in your <strong>layouts</strong> folder replace it with following file:</p>
 
 <h4 id="appviewslayoutsapplicationhtmlslim">app/views/layouts/application.html.slim</h4>
 
@@ -153,7 +144,11 @@ html
       = render &#39;layouts/header&#39;
       = yield</code></pre></div>
 
-<p>And put navigation menu in <strong>layouts/header.html.slim</strong></p>
+<p>If you scroll down to the code, you certainly noticed two methods, first is <strong>render</strong>. Render is used when you don’t want to have all the code in one file and want to use it in other file. Method will look at the partial with name <strong>_header.html.slim</strong> in <strong>layouts</strong> folder.</p>
+
+<p>Another method is <strong>yield</strong>. Yield is used to include anything related to page right after to header.</p>
+
+<p>So now you know why to use partials, let’s create partial <strong>_header.html.slim</strong></p>
 
 <h4 id="appviewslayoutsheaderhtmlslim">app/views/layouts/_header.html.slim</h4>
 
@@ -165,6 +160,21 @@ html
   ul.auth
     li = link_to &quot;Login&quot;, &#39;#&#39;
     li = link_to &quot;Signup&quot;, &#39;#&#39;</code></pre></div>
+
+<p>Take look at the code that we’ve just done.</p>
+
+<div class="highlight"><pre><code class="html">header.navbar
+  ul.links</code></pre></div>
+
+<p>Slim use shortcuts for creating html elements. So here, you’ve used this:</p>
+
+<div class="highlight"><pre><code class="html">header.navbar</code></pre></div>
+
+<p>instead of:</p>
+
+<div class="highlight"><pre><code class="html"><span class="nt">&lt;header</span> <span class="na">class=</span><span class="s">&quot;navbar&quot;</span><span class="nt">&gt;</span></code></pre></div>
+
+<p>You certainly noticed we’ve used <strong>link_to</strong>. Link_to is special rails method for links.</p>
 
 <p>Let’s add some styling for our navigation. Create file <strong>main.css.scss</strong></p>
 
@@ -197,6 +207,8 @@ html
 <span class="nc">.auth</span> <span class="p">{</span>
   <span class="k">float</span><span class="o">:</span> <span class="k">right</span><span class="p">;</span>
 <span class="p">}</span></code></pre></div>
+
+<p>Here we’ve added green background to our navigation, add some place between elements and </p>
 
 <p>Ok let’s run rails server to see whatwe’ve created.
 We’ll end up with menu like this:</p>
@@ -295,8 +307,12 @@ rake db:migrate</code></pre></div>
 
 <div class="highlight"><pre><code class="sh">rails generate controller links</code></pre></div>
 
+<p>We need to add links values to database, so we need to generate this model.</p>
+
 <div class="highlight"><pre><code class="sh">rails generate model Link title:string url:string user:references
 rake db:migrate</code></pre></div>
+
+<p>Previous command will generate</p>
 
 <p>Here we’ve created link attributes. Every link has title and url, and of course user id related to link url.</p>
 
@@ -305,6 +321,8 @@ rake db:migrate</code></pre></div>
 <p>Add path do <strong>config/routes.rb</strong></p>
 
 <div class="highlight"><pre><code class="ruby"><span class="n">resources</span> <span class="ss">:links</span></code></pre></div>
+
+<p><strong>Resources</strong> will create all path</p>
 
 <p>Now we can add path to controller. We’ll add create, update and destroy.</p>
 
@@ -349,6 +367,8 @@ rake db:migrate</code></pre></div>
   = f.input :title
   = f.input :url
   = f.button :submit</code></pre></div>
+
+<p>Simple form will generate basic html form.</p>
 
 <h4 id="appviewslinksnewhtmlslim">app/views/links/new.html.slim</h4>
 
@@ -519,6 +539,11 @@ rake db:migrate</code></pre></div>
 <ul class="posts">
   
 
+  <li><span>29 Jun 2014</span> &raquo; <a href="/2014/06/29/clock.html#disqus_thread">How to create digital clock in Ruby Shoes</a></li>
+  
+  
+  
+
   <li><span>16 Jun 2014</span> &raquo; <a href="/2014/06/16/post-it.html#disqus_thread">Post It</a></li>
   
   
@@ -562,11 +587,6 @@ rake db:migrate</code></pre></div>
   <li><span>09 Apr 2014</span> &raquo; <a href="/learning-resources/2014/04/09/learn-ruby-on-rails-book-review.html#disqus_thread">Learn Ruby on Rails book review</a></li>
   
   
-  
-
-  <li><span>05 Apr 2014</span> &raquo; <a href="/2014/04/05/why_tmux.html#disqus_thread">Why to use tmux</a></li>
-  
-  
    
   
 
@@ -598,6 +618,13 @@ rake db:migrate</code></pre></div>
       <section id="sidebar">
         <ul class="posts">
   <h1>Recent posts</h1>
+
+<li>
+  <span>29 Jun 2014</span> &raquo;
+
+  <a href="/2014/06/29/clock.html">
+    How to create digital clock in Ruby Shoes</a>
+</li>
 
 <li>
   <span>16 Jun 2014</span> &raquo;

@@ -7,6 +7,100 @@
 		<atom:link href="http://masteruby.github.io/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
+				<title>How to create digital clock in Ruby Shoes</title>
+				<description>&lt;p&gt;In this post I want to show how to create digital clock using Shoes.&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/clock.png&quot; alt=&quot;how to create clock in Ruby&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Clock is first in following series of tutorials about using Time library in Shoes. Next time we’ll look at stopwatch and timer.&lt;/p&gt;
+
+&lt;p&gt;You can find out example code on &lt;a href=&quot;https://github.com/MilosDolobac/green-shoes-apps&quot;&gt;github&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Here’s what we’ve in front of us.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;First we’ll add current time with Ruby Time library and append in to title element&lt;/li&gt;
+  &lt;li&gt;Then we’ll add automatic update to current time&lt;/li&gt;
+  &lt;li&gt;And we’ll add some styling to our clock&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;adding-current-time-to-our-app&quot;&gt;Adding current Time to our app.&lt;/h2&gt;
+
+&lt;p&gt;First thing we need to do is add current time. We’ll use Time library for this. Create ruby file &lt;strong&gt;clock.rb&lt;/strong&gt; and add this code:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;green_shoes&amp;#39;&lt;/span&gt;
+
+&lt;span class=&quot;no&quot;&gt;Shoes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;230&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@clock&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@clock&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strftime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;%H:%M:%S&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If you run our app right now, you should see something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/adding-time.png&quot; alt=&quot;adding current time in ruby&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Take look at the code we’ve just done.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;vi&quot;&gt;@clock&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We’ll store our clock in element title with name &lt;strong&gt;@clock&lt;/strong&gt;. We didn’t usetitle until now, so you need to know that difference between title and para is that para is 12px high and titleis 34px high. &lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;
+&lt;span class=&quot;vi&quot;&gt;@clock&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strftime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;%H:%M:%S&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;On a first line we’ve created instance of Ruby Time class. On second line we’ve converted only hours, minutes, and seconds to string for using in our title.&lt;/p&gt;
+
+&lt;h2 id=&quot;updating-clock&quot;&gt;Updating clock&lt;/h2&gt;
+
+&lt;p&gt;Our clock isn’t working well. We want to update clock after every change in time. Updating is very simple. Just add this code.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;green_shoes&amp;#39;&lt;/span&gt;
+
+&lt;span class=&quot;no&quot;&gt;Shoes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@clock&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;animate&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;
+      &lt;span class=&quot;vi&quot;&gt;@clock&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strftime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;%H:%M:%S&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Run your app now, it should update clock every second. &lt;/p&gt;
+
+&lt;h2 id=&quot;adding-some-style-to-clock&quot;&gt;Adding some style to clock&lt;/h2&gt;
+
+&lt;p&gt;Our clock isn’t looking very good. Let’s fix it, replace code with clock text with this:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;vi&quot;&gt;@clock&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strftime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;%H:%M:%S&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rgb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;255&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;black&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Take last look at the code we’ve just done:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;green_shoes&amp;#39;&lt;/span&gt;
+
+&lt;span class=&quot;no&quot;&gt;Shoes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;50&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;230&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@clock&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;#39;&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;animate&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;
+      &lt;span class=&quot;vi&quot;&gt;@clock&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;bg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;fg&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strftime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;%H:%M:%S&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;rgb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;255&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)),&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;black&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;So here we’ve set color of clock numbers to green and background to black.&lt;/p&gt;
+
+&lt;p&gt;Now we’re done. Have some ideas how to improve clock? Feel free to add changes to github.&lt;/p&gt;
+</description>
+				<pubDate>Sun, 29 Jun 2014 13:47:02 +0200</pubDate>
+				<link>http://masteruby.github.io/2014/06/29/clock.html</link>
+				<guid isPermaLink="true">http://masteruby.github.io/2014/06/29/clock.html</guid>
+			</item>
+		
+			<item>
 				<title>Post It</title>
 				<description>
 </description>
@@ -277,15 +371,21 @@ At the top of page we’ll have three buttons, new, open, and save, so let’s d
 
 &lt;p&gt;If you look at &lt;strong&gt;app/views&lt;/strong&gt; folder you should see that we’ve just createdfolder with name &lt;strong&gt;home&lt;/strong&gt; and you should see file &lt;strong&gt;home.html.slim&lt;/strong&gt; inside it.&lt;/p&gt;
 
-&lt;p&gt;Try to run &lt;/p&gt;
+&lt;p&gt;Let’s take a look at the code at the browser:&lt;/p&gt;
 
-&lt;p&gt;Now add root path to that folder.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;rails server&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;It works, but typing whole path to address bar in browser can be really disgusting. Let’s fix it.&lt;/p&gt;
 
 &lt;h4 id=&quot;configroutesrb&quot;&gt;config/routes.rb&lt;/h4&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;root&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;home#home&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Replace application.html.slim with following slim file:&lt;/p&gt;
+&lt;p&gt;Here we’ve changed root path. So if you look at this at the browser, you should see that we don’t have to type address to addressbar anymore.&lt;/p&gt;
+
+&lt;h2 id=&quot;creating-navigation-1&quot;&gt;Creating navigation&lt;/h2&gt;
+
+&lt;p&gt;First thing we want to do is to create navigation, but we want to use it on every page so we need to modify our layout. If you have &lt;strong&gt;application.html.erb&lt;/strong&gt; in your &lt;strong&gt;layouts&lt;/strong&gt; folder replace it with following file:&lt;/p&gt;
 
 &lt;h4 id=&quot;appviewslayoutsapplicationhtmlslim&quot;&gt;app/views/layouts/application.html.slim&lt;/h4&gt;
 
@@ -301,7 +401,11 @@ html
       = render &amp;#39;layouts/header&amp;#39;
       = yield&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;And put navigation menu in &lt;strong&gt;layouts/header.html.slim&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;If you scroll down to the code, you certainly noticed two methods, first is &lt;strong&gt;render&lt;/strong&gt;. Render is used when you don’t want to have all the code in one file and want to use it in other file. Method will look at the partial with name &lt;strong&gt;_header.html.slim&lt;/strong&gt; in &lt;strong&gt;layouts&lt;/strong&gt; folder.&lt;/p&gt;
+
+&lt;p&gt;Another method is &lt;strong&gt;yield&lt;/strong&gt;. Yield is used to include anything related to page right after to header.&lt;/p&gt;
+
+&lt;p&gt;So now you know why to use partials, let’s create partial &lt;strong&gt;_header.html.slim&lt;/strong&gt;&lt;/p&gt;
 
 &lt;h4 id=&quot;appviewslayoutsheaderhtmlslim&quot;&gt;app/views/layouts/_header.html.slim&lt;/h4&gt;
 
@@ -313,6 +417,21 @@ html
   ul.auth
     li = link_to &amp;quot;Login&amp;quot;, &amp;#39;#&amp;#39;
     li = link_to &amp;quot;Signup&amp;quot;, &amp;#39;#&amp;#39;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Take look at the code that we’ve just done.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;header.navbar
+  ul.links&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Slim use shortcuts for creating html elements. So here, you’ve used this:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;header.navbar&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;instead of:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;header&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;navbar&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You certainly noticed we’ve used &lt;strong&gt;link_to&lt;/strong&gt;. Link_to is special rails method for links.&lt;/p&gt;
 
 &lt;p&gt;Let’s add some styling for our navigation. Create file &lt;strong&gt;main.css.scss&lt;/strong&gt;&lt;/p&gt;
 
@@ -345,6 +464,8 @@ html
 &lt;span class=&quot;nc&quot;&gt;.auth&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
 &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Here we’ve added green background to our navigation, add some place between elements and &lt;/p&gt;
 
 &lt;p&gt;Ok let’s run rails server to see whatwe’ve created.
 We’ll end up with menu like this:&lt;/p&gt;
@@ -443,8 +564,12 @@ rake db:migrate&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;rails generate controller links&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
+&lt;p&gt;We need to add links values to database, so we need to generate this model.&lt;/p&gt;
+
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;sh&quot;&gt;rails generate model Link title:string url:string user:references
 rake db:migrate&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Previous command will generate&lt;/p&gt;
 
 &lt;p&gt;Here we’ve created link attributes. Every link has title and url, and of course user id related to link url.&lt;/p&gt;
 
@@ -453,6 +578,8 @@ rake db:migrate&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;p&gt;Add path do &lt;strong&gt;config/routes.rb&lt;/strong&gt;&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;resources&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:links&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Resources&lt;/strong&gt; will create all path&lt;/p&gt;
 
 &lt;p&gt;Now we can add path to controller. We’ll add create, update and destroy.&lt;/p&gt;
 
@@ -497,6 +624,8 @@ rake db:migrate&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
   = f.input :title
   = f.input :url
   = f.button :submit&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Simple form will generate basic html form.&lt;/p&gt;
 
 &lt;h4 id=&quot;appviewslinksnewhtmlslim&quot;&gt;app/views/links/new.html.slim&lt;/h4&gt;
 
@@ -1702,68 +1831,6 @@ previous number.&lt;/p&gt;
 				<pubDate>Thu, 17 Apr 2014 00:00:00 +0200</pubDate>
 				<link>http://masteruby.github.io/shoes/2014/04/17/how-to-create-simple-calculator-in-shoes.html</link>
 				<guid isPermaLink="true">http://masteruby.github.io/shoes/2014/04/17/how-to-create-simple-calculator-in-shoes.html</guid>
-			</item>
-		
-			<item>
-				<title>Learn Ruby on Rails book review</title>
-				<description>&lt;p&gt;Recently I received free copy of &lt;a href=&quot;http://learn-rails.com/learn-ruby-on-rails.html&quot;&gt;Learn Ruby on Rails&lt;/a&gt; book by Daniel Kehoe, so I’ve
-decided to write this review.&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://learn-rails.com/learn-ruby-on-rails.html&quot;&gt;&lt;img class=&quot;book&quot; src=&quot;/images/learn-rails-book-cover.jpg&quot; alt=&quot;learn ruby on rails&quot; /&gt;&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;who-is-this-book-for&quot;&gt;Who is this book for&lt;/h2&gt;
-
-&lt;p&gt;Book is aimed at begining rails developers. So if you have no experiences
-with Rails, that’s first book you should try. You will find out all example
-code on &lt;a href=&quot;https://github.com/RailsApps/learn-rails&quot;&gt;github repository&lt;/a&gt; and because book is part of subscription program
-you will get access to book updates, some other tutorials and another book
-about Bootstrap.&lt;/p&gt;
-
-&lt;h2 id=&quot;whats-in-this-book&quot;&gt;What’s in this book&lt;/h2&gt;
-
-&lt;p&gt;Book gives you step by step guide for creating rails application. In example application you will create mailing list with integration with MailChimp and Google Drive. It gives review of how developing applications in rails works.
-You will find out introduction to git, you’ll be explained to models, views
-and controllers and you’ll be introduced to some gems for easier development. &lt;/p&gt;
-
-&lt;h2 id=&quot;what-i-like-about-this-book&quot;&gt;What I like about this book&lt;/h2&gt;
-
-&lt;p&gt;What I like about this book is developer’s approach to creating rails applications.
-Maybe you’ll be surprised that in first chapters you will read about things
-like agile practices, creating github account, planning, managing your
-application. That’s interesting approach that I didn’t find in any other
-introductory rails book like Agile Web Development with Rails and Learn Web
-Development with Ruby on Rails by Michael Hartl. &lt;/p&gt;
-
-&lt;p&gt;I’ve also liked author’s approach to learning about views, controllers. He doesn’t use rails scaffold command, but he want from you to
-build your controllers, models and views from scratch. That’s a best way to
-learning about it. Author encourages you to play with your code and try
-something new.&lt;/p&gt;
-
-&lt;p&gt;Book is written in friendly plain language, so you don’t have to worry about
-that you don’t understand. After writing some code author gives you brief
-explanation what he’ve just done. &lt;/p&gt;
-
-&lt;p&gt;What I’ve found useful is long gem list for easier development. You’ll be
-introduced to useful gems like &lt;strong&gt;figaro&lt;/strong&gt;, &lt;strong&gt;rails_layout&lt;/strong&gt; for easier web
-development. &lt;/p&gt;
-
-&lt;h2 id=&quot;what-ive-been-missing&quot;&gt;What I’ve been missing&lt;/h2&gt;
-
-&lt;p&gt;What I’ve been missing is absence of test driven development, but as author
-explains, this is a prequel book you should read before Michael Hartl Tutorial. If you want to have additional resources about test driven development I recommend you either
-&lt;a href=&quot;http://www.amazon.com/The-Cucumber-Book-Behaviour-Driven-Development/dp/1934356808&quot;&gt;Cucumber&lt;/a&gt;
-and
-&lt;a href=&quot;http://www.amazon.com/RSpec-Book-Behaviour-Development-Cucumber/dp/1934356379/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1397032931&amp;amp;sr=1-1&amp;amp;keywords=rspec&quot;&gt;Rspec&lt;/a&gt; book, or online version of Michael Hartl book.&lt;/p&gt;
-
-&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
-
-&lt;p&gt;So if you’re absolutely new to Ruby on Rails development, Learn Rails Book is a
-must read for you.&lt;/p&gt;
-
-</description>
-				<pubDate>Wed, 09 Apr 2014 00:00:00 +0200</pubDate>
-				<link>http://masteruby.github.io/learning-resources/2014/04/09/learn-ruby-on-rails-book-review.html</link>
-				<guid isPermaLink="true">http://masteruby.github.io/learning-resources/2014/04/09/learn-ruby-on-rails-book-review.html</guid>
 			</item>
 		
 	</channel>
