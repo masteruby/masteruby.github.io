@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>Vim for Rubyist&#58; 10 useful vim plugins for Ruby </title>
+    <title>How to create stopwatch in Ruby Shoes </title>
     	<!-- Bootstrap CSS -->
     <meta name="google-site-verification" content="UFFQXW8FdLgKuB_vYYy8LTw5aonnBmAHdUhUopMxero" />
     <meta description="Masteruby is tutorials web site about learning ruby">
@@ -48,144 +48,88 @@
         <!-- AddThis Button BEGIN -->
 
 
-<h2>Vim for Rubyist&#58; 10 useful vim plugins for Ruby</h2>
-<p class="meta">02 May 2014</p>
+<h2>How to create stopwatch in Ruby Shoes</h2>
+<p class="meta">04 Jul 2014</p>
 
 <h4>Posted by Milos Dolobac</h4>
 
 <div class="post">
-<p>In this post I want to show some useful Vim plugins, that are true productivity boosters for every Ruby programmer. You can install them by either <a href="https://github.com/tpope/vim-pathogen">Pathogen</a> or <a href="https://github.com/gmarik/Vundle.vim">Vundle</a>.</p>
+<p>Last time we’ve created <a href="/shoes/2014/06/29/how-to-create-clock-in-ruby-shoes.html">digital clock</a> using Time Library. Today we’ll create stopwatch.</p>
 
-<h2 id="vim-railshttpsgithubcomtpopevim-rails">1. <a href="https://github.com/tpope/vim-rails">Vim-Rails</a></h2>
+<p>Here’s how final version will be look like:</p>
 
-<p>Vim-Rails plugin is must for every Rails Developer working in Vim. Here’s what I’ve found useful:</p>
+<p><img class="shoes" alt="how to createstopwatch in Ruby" src="/images/stopwatch.png" /></p>
 
-<h3 id="easy-navigation">Easy navigation</h3>
+<ul>
+  <li>First we’ll reset Time to zero</li>
+  <li>Then we’ll add buttons for startingand reseting our stopwatch.</li>
+</ul>
 
-<p>Want to find some file but don’t know its path? Try to use <strong>:find</strong> command:</p>
+<h2 id="adding-reseted-time">Adding reseted time</h2>
 
-<div class="highlight"><pre><code class="sh">:find schema.rb</code></pre></div>
+<p>First thing we need to do is to reset our time, because we want to start from zero.</p>
 
-<p>You can also move up in your Rails application by finding related files. For example, let’s assume you’re editing <strong>home.html.slim</strong>. Try to find related file</p>
+<div class="highlight"><pre><code class="ruby"><span class="no">Shoes</span><span class="o">.</span><span class="n">app</span> <span class="k">do</span>
+  <span class="vi">@stopwatch</span> <span class="o">=</span> <span class="n">title</span> <span class="s1">&#39;&#39;</span>
+  <span class="n">t</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+  <span class="vi">@stopwatch</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H:%M:%S&quot;</span><span class="p">)</span>
+<span class="k">end</span></code></pre></div>
 
-<div class="highlight"><pre><code class="sh">:R</code></pre></div>
+<p>Here’s how app looks right now:</p>
 
-<p>You should see that you’re in file <strong>static_pages_controller.rb</strong> and that you have cursor at method named home.</p>
+<p><img class="shoes" alt="how to reset time in ruby" src="/images/reset-time.png" /></p>
 
-<h3 id="great-editing">Great Editing</h3>
+<p>As in the last tutorial we’ll start with creating empty title element.</p>
 
-<p>Jumping from views to controllers to models can be really painful. Here’s where <strong>vim-rails</strong> plugin excels. For example let’s assume you have file named <strong>home.html.slim</strong> in your <strong>views</strong> directory. You can edit it with simple <strong>Eview</strong>:</p>
+<p>Last time we’ve used new instance of Time class to save current time. Here we want to reset current time to zero, so we’ve added zero in parentheses.</p>
 
-<div class="highlight"><pre><code class="sh">:Eview static_pages/home</code></pre></div>
+<p>And on last line we’ve converted time to string and add to our title.</p>
 
-<p>You see? You don’t have to
-set file extension or whole path, just add name of your controller and name of your view file.</p>
+<h2 id="adding-buttons-for-starting-and-reseting-stopwatch">Adding buttons for starting and reseting stopwatch</h2>
 
-<p>Similarily you can edit controller too:</p>
+<p>We want from our stopwatch to start when we press start button and stop when press stop button.</p>
 
-<div class="highlight"><pre><code class="vim"><span class="p">:</span>Econtroller static_pages</code></pre></div>
+<p>So first we’ll create start button.</p>
 
-<p>Here are commands for editing your layouts, stylesheets and models:</p>
+<p>Add this code:</p>
 
-<div class="highlight"><pre><code class="sh">:Elayout header
-:Emodel User
-:Estylesheet main</code></pre></div>
+<div class="highlight"><pre><code class="ruby"><span class="n">button</span> <span class="s2">&quot;Start&quot;</span> <span class="k">do</span>
+  <span class="n">animate</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">do</span>
+    <span class="n">t</span> <span class="o">+=</span> <span class="mi">1</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></div>
 
-<h3 id="generator-commands">Generator Commands</h3>
+<p>We want to add every second</p>
 
-<p>So you want to run migration, generate model or controller. Before vim-rails plugin you have to close your vim session and go back to terminal, not anymore. Here’s useful commands you should know. Let’s assume you’re building model named User, you can simply create model with :Rgenerate and destroy model with :Rdestroy.</p>
+<div class="highlight"><pre><code class="ruby"><span class="n">button</span> <span class="s2">&quot;Stop&quot;</span> <span class="k">do</span>
+  <span class="n">t</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+  <span class="vi">@stopwatch</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H:%M:%S&quot;</span><span class="p">)</span>
+<span class="k">end</span></code></pre></div>
 
-<div class="highlight"><pre><code class="sh">:Rgenerate model User
-:Rdestroy model User
-:Rserver</code></pre></div>
+<p>Here we’ve reset our time again to zero.</p>
 
-<p>To run rails server within background of Vim you will use Rserver command. 
-### Syntax highlighting</p>
+<p>Here’s the final code:</p>
 
-<p>Of course syntax highlighting is included too. Vim-rails has built syntax highlighting for special Active Record methods and all keywords that Rails has unique.</p>
+<div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;green_shoes&#39;</span>
 
-<p>That’s only small part of what plugin provides, to see list of all commands, go to <a href="https://raw.githubusercontent.com/tpope/vim-rails/master/doc/rails.txt">project documentation</a>. For example, it provides commands forrefactoring your code, it has built support for Rake and other.</p>
+<span class="no">Shoes</span><span class="o">.</span><span class="n">app</span> <span class="k">do</span>
+  <span class="vi">@stopwatch</span> <span class="o">=</span> <span class="n">title</span> <span class="s1">&#39;&#39;</span>
+  <span class="n">t</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">new</span>
+  <span class="vi">@stopwatch</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H:%M:%S&quot;</span><span class="p">)</span>
+  
+  <span class="n">button</span> <span class="s2">&quot;Start&quot;</span> <span class="k">do</span>
+    <span class="n">animate</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="k">do</span>
+    <span class="vi">@stopwatch</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H:%M:%S&quot;</span><span class="p">)</span>
+    <span class="k">end</span>
+  <span class="k">end</span>
+  
+  <span class="n">button</span> <span class="s2">&quot;Stop&quot;</span> <span class="k">do</span>
+    <span class="n">t</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">new</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+    <span class="vi">@stopwatch</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H:%M:%S&quot;</span><span class="p">)</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></div>
 
-<h2 id="nerdtreehttpsgithubcomscrooloosenerdtree">2. <a href="https://github.com/scrooloose/nerdtree">NerdTree</a></h2>
-
-<p>Navigation by vim-rails plugin can be great, but only when you know what you’re looking for. For other purposes, you can use <strong>NERDTree</strong> as file navigator. </p>
-
-<p>Type this into vim session to run NerdTree:</p>
-
-<div class="highlight"><pre><code class="sh">:NERDTree</code></pre></div>
-
-<p>You should see content of current working directory. NerdTree use vim navigation keys to move up and down to directory tree.</p>
-
-<p><img class="vim" src="/images/nerd_tree.png" alt="nerd tree" />&lt;/img&gt;</p>
-
-<p>Let’s assume you want to open up directory <strong>app</strong>. Navigate to app with Vim and press key <strong>o</strong>. You should see content of app directory:</p>
-
-<p><img class="vim" src="/images/nerd_tree_app.png" alt="nerd tree app" />&lt;/img&gt;</p>
-
-<h2 id="vim-fugitivehttpsgithubcomtpopevim-fugitive">3. <a href="https://github.com/tpope/vim-fugitive">Vim-fugitive</a></h2>
-
-<p>If you have your project tracked with Git, switching between terminal sessions can be really painful. Fugitive is absolutely greatly tool for using Git inside Vim.</p>
-
-<p>For example let’see what’s changed with git status</p>
-
-<div class="highlight"><pre><code class="sh">:Git status</code></pre></div>
-
-<p>Let’s add changes to repository</p>
-
-<div class="highlight"><pre><code class="sh">:Git add .</code></pre></div>
-
-<p>Let’s push it to origin master</p>
-
-<div class="highlight"><pre><code class="sh">:Git push origin master</code></pre></div>
-
-<h2 id="vim-rubyhttpsgithubcomvim-rubyvim-ruby">4. <a href="https://github.com/vim-ruby/vim-ruby">Vim-Ruby</a></h2>
-
-<p>Vim-Ruby provides useful things like easy navigation and syntax highlighting in ruby</p>
-
-<p>Here’s list of useful navigation methods in vim-ruby</p>
-
-<div class="highlight"><pre><code class="sh"><span class="c"># To edit start of next method definition</span>
-<span class="o">]</span>m
-<span class="c"># To go to end of next method definition</span>
-<span class="o">]</span>M
-<span class="c"># To start of previous method definition</span>
-<span class="o">[</span>m
-<span class="c"># To end of previous method definition</span>
-<span class="o">[</span>M</code></pre></div>
-
-<h2 id="vim-bundlerhttpsgithubcomtpopevim-bundler">5. <a href="https://github.com/tpope/vim-bundler">Vim-Bundler</a></h2>
-
-<p>You don’t have exit vim or attach another tmux session to install gems anymore. Just run :Bundle in command mode in Vim and gems will be installed:</p>
-
-<div class="highlight"><pre><code class="sh">:Bundle</code></pre></div>
-
-<p>To edit Gemfile you will use this command:</p>
-
-<div class="highlight"><pre><code class="sh">:Bopen</code></pre></div>
-
-<h2 id="vim-cucumberhttpsgithubcomtpopevim-cucumber">6. <a href="https://github.com/tpope/vim-cucumber">Vim-Cucumber</a></h2>
-
-<p>Vim-Cucumber plugin provides syntax highlighting and indentation for Cucumber.</p>
-
-<h2 id="vim-slimhttpsgithubcomslim-templatevim-slimvim-hamlhttpsgithubcomtpopevim-haml">7. <a href="https://github.com/slim-template/vim-slim">Vim-slim</a>/<a href="https://github.com/tpope/vim-haml">Vim-haml</a></h2>
-
-<p>Here’s the plugin that provides syntax highlighting for your favorite template language, it can be haml or slim.</p>
-
-<h2 id="vim-vroomhttpsgithubcomskalnikvim-vroom">8. <a href="https://github.com/skalnik/vim-vroom">Vim-Vroom</a></h2>
-
-<p>With Vroom you can run your tests inside Vim. Supports Rspec, Cucumber and MiniTest. You can run your tests with:</p>
-
-<div class="highlight"><pre><code class="sh">:VroomRunTestFile</code></pre></div>
-
-<h2 id="vim-endwisehttpsgithubcomtpopevim-endwise">9. <a href="https://github.com/tpope/vim-endwise">Vim-endwise</a></h2>
-
-<p>Here’s the useful plugin that adds end after if, do, def keywords.</p>
-
-<h2 id="supertabhttpsgithubcomervandewsupertab">10. <a href="https://github.com/ervandew/supertab">Supertab</a></h2>
-
-<p>Supertab is useful in situations when you have lot of repetiting words like <strong>def</strong>. It works that you press Tab and it completes word for you.</p>
-
-<p>If you like this post, share it with clicking on social network toolbar at the top of page. </p>
+<p>I hope that you like my article, if you like it share it with clicking on buttons on the left sidebar.</p>
 
 
 
@@ -215,11 +159,6 @@ set file extension or whole path, just add name of your controller and name of y
 <ul class="posts">
   
 
-  <li><span>04 Jul 2014</span> &raquo; <a href="/2014/07/04/stopwatch.html#disqus_thread">How to create stopwatch in Ruby Shoes</a></li>
-  
-  
-  
-
   <li><span>29 Jun 2014</span> &raquo; <a href="/shoes/2014/06/29/how-to-create-clock-in-ruby-shoes.html#disqus_thread">How to create digital clock in Ruby Shoes</a></li>
   
   
@@ -241,6 +180,11 @@ set file extension or whole path, just add name of your controller and name of y
   
 
   <li><span>30 May 2014</span> &raquo; <a href="/learning-resources/2014/05/30/ruby-news-websites.html#disqus_thread">7 Websites to Get Latest News About Ruby</a></li>
+  
+  
+  
+
+  <li><span>02 May 2014</span> &raquo; <a href="/productivity-booster/2014/05/02/vim-plugins-for-ruby.html#disqus_thread">Vim for Rubyist&#58; 10 useful vim plugins for Ruby</a></li>
   
   
   
