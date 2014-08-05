@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>How to Add Voting to Rails App </title>
+    	<!-- Bootstrap CSS -->
+    <meta name="google-site-verification" content="UFFQXW8FdLgKuB_vYYy8LTw5aonnBmAHdUhUopMxero" />
+    <meta description="Masteruby is tutorials web site about learning ruby">
+    <meta name="robots" content="all">
+       
+    <meta name="viewport" content="width=device-width">
+  
+
+        <!-- syntax highlighting CSS -->
+    <link rel="stylesheet" href="/css/syntax.css">
+          
+        <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/main.css">
+    <link rel="alternate" type="application/rss+xml" title="Masteruby" href="http://masteruby.github.io/feed.xml">
+    
+	<!-- Bootstrap CSS -->
+  <meta name="google-site-verification" content="UFFQXW8FdLgKuB_vYYy8LTw5aonnBmAHdUhUopMxero" />
+  </head>
+  
+  <body>
+    <div class="site">
+      <header class="navbar">
+        
+        <nav>
+          <ul>
+						<li id="logo"><a href="/">Masteruby</a>
+						<li><a href="/">Start here</a>
+          <li><a href="/weekly-rails.html">Rails</a></li>
+          <li><a href="/shoes.html">Shoes</a></li>
+          <li><a href="/learning-resources.html">Learning Resources</a></li>
+          <li><a href="/productivity-booster.html">Productivity
+              Boosters</a></li>
+        </ul>
+      </nav>
+
+          
+      </header>
+      
+      
+      
+      <section id="posts">
+        <!-- AddThis Button BEGIN -->
+
+
+<h2>How to Add Voting to Rails App</h2>
+<p class="meta">05 Aug 2014</p>
+
+<h4>Posted by Milos Dolobac</h4>
+
+<div class="post">
+<p>In this post I want to show to add upvotes and dowvotes using <strong>acts_as votable</strong> gem.</p>
+
+<h2 id="what-do-you-need">What do You Need</h2>
+
+<ul>
+  <li>Basic Authentication with current_user helper(Devise or something else)</li>
+  <li>One model with name <strong>Link</strong> and controller links</li>
+  <li>acts_as_votable gem installed</li>
+</ul>
+
+<h2 id="how-to-setup-actsasvotable">How to setup acts_as_votable</h2>
+
+<p>Add gem acts_as_votable to your Gemfile.</p>
+
+<h4 id="gemfile">Gemfile</h4>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="s1">&#39;acts_as_votable&#39;</span></code></pre></div>
+
+<p>And install it with bundle</p>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">bundle install</code></pre></div>
+
+<p>Now generate acts_as_votable migration</p>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">rails generate acts_as_votable:migration</code></pre></div>
+
+<p>And migrate to database</p>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">rake db:migrate</code></pre></div>
+
+<p>Now we’re done with preparation let’s add upvote action.</p>
+
+<h2 id="adding-upvotes">Adding upvotes</h2>
+
+<p>First thing we need to is to add acts_as_votable helper to our model.</p>
+
+<h4 id="appmodelslinkrb">app/models/link.rb</h4>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Link</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+  <span class="n">acts_as_votable</span>
+<span class="k">end</span></code></pre></div>
+
+<p>Helper will provide useful methods like this:</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">upvote_by</span> <span class="o">.</span><span class="n">.</span><span class="o">.</span><span class="n">.</span><span class="o">.</span> <span class="o">=&gt;</span> <span class="no">Add</span> <span class="n">upvote</span> <span class="n">by</span> <span class="n">current_user</span>
+<span class="n">get_dislikes</span><span class="o">.</span><span class="n">size</span> <span class="o">=&gt;</span> <span class="no">Count</span> <span class="n">all</span> <span class="n">downvotes</span>
+<span class="n">get_likes</span><span class="o">.</span><span class="n">size</span> <span class="o">=&gt;</span> <span class="no">Count</span> <span class="n">all</span> <span class="n">upvotes</span></code></pre></div>
+
+<p>You can checkout all methods at acts_as_votable documentation.</p>
+
+<p>So now when we know how acts_as_votable can helps us, let’s add upvoting to our controller.</p>
+
+<h4 id="appcontrollerslinkscontrollerrb">app/controllers/links_controller.rb</h4>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">upvote</span>
+  <span class="vi">@link</span> <span class="o">=</span> <span class="no">Link</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+  <span class="vi">@link</span><span class="o">.</span><span class="n">upvote_by</span> <span class="n">current_user</span>
+  <span class="n">redirect_to</span> <span class="n">links_path</span>
+<span class="k">end</span></code></pre></div>
+
+<h4 id="configroutesrb">config/routes.rb</h4>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">resources</span> <span class="ss">:links</span> <span class="k">do</span>
+  <span class="n">member</span> <span class="k">do</span>
+    <span class="n">put</span> <span class="s2">&quot;like&quot;</span><span class="p">,</span> <span class="ss">to</span><span class="p">:</span> <span class="s2">&quot;links#upvote&quot;</span>
+    <span class="n">put</span> <span class="s2">&quot;dislike&quot;</span><span class="p">,</span> <span class="ss">to</span><span class="p">:</span> <span class="s2">&quot;links#downvote&quot;</span></code></pre></div>
+
+<p>Here we’ve added two routes, one for upvoting and another for downvoting that will update current like and dislikes size in votes table. </p>
+
+<p>Now we need to add upvote route to our root path.</p>
+
+<h4 id="appviewslinksindexhtmlslim">app/views/links/index.html.slim</h4>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html">- @links.each do |link|
+  = link_to &quot;upvote&quot;, like_link_path(link), method: :put</code></pre></div>
+
+<p>If you click on link, and checkout upvotes size like this in console:</p>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">@link <span class="o">=</span> Link.find<span class="o">(</span>1<span class="o">)</span>
+@link.get_upvotes.size <span class="o">=</span>&gt; 0</code></pre></div>
+
+<p>You certainly noticed that nothing will happen. Of course because voting only counts when we’re signed in. Try to signin and now click on link. Now if you checkout in console, everything should work.</p>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">@link <span class="o">=</span> Link.find<span class="o">(</span>1<span class="o">)</span>
+@link.get_upvotes.size <span class="o">=</span>&gt; 1</code></pre></div>
+
+<h2 id="adding-downvoting">Adding downvoting</h2>
+
+<p>Adding downvoting to rails app is reversed process to upvoting, so instead of <strong>upvote_by</strong> you will add <strong>downvote_by</strong></p>
+
+<h4 id="appcontrollerslinkscontrollerrb-1">app/controllers/links_controller.rb</h4>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">downvote</span>
+  <span class="vi">@link</span> <span class="o">=</span> <span class="no">Link</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+  <span class="vi">@link</span><span class="o">.</span><span class="n">downvote_by</span> <span class="n">current_user</span>
+  <span class="n">redirect_to</span> <span class="n">links_path</span>
+<span class="k">end</span></code></pre></div>
+
+<p>Add path to links path. </p>
+
+<h4 id="appviewslinksindexhtmlslim-1">app/views/links/index.html.slim</h4>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html">= link_to &quot;downvote&quot;, dislike_link_path(link), method: :put</code></pre></div>
+
+<h2 id="showing-links-score">Showing link’s score</h2>
+
+<p>Next thing we need to is to add link’s score. Adding score is easy, thanks to methods get_upvotes.size and get_downvotes.size we can just add score method to our model.</p>
+
+<h4 id="appmodelslinkrb-1">app/models/link.rb</h4>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">score</span>
+  <span class="nb">self</span><span class="o">.</span><span class="n">get_upvotes</span><span class="o">.</span><span class="n">size</span> <span class="o">-</span> <span class="nb">self</span><span class="o">.</span><span class="n">get_downvotes</span><span class="o">.</span><span class="n">size</span></code></pre></div>
+
+<p>And this to your view file</p>
+
+<h4 id="appviewslinksindexhtmlslim-2">app/views/links/index.html.slim</h4>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html">= link.score</code></pre></div>
+
+<p>Now if you click on link, you should see that our score is automatically updated by downvotes and upvotes.</p>
+
+<p>That’s all for now, if you don’t understand anything, feel free to ask in discussion. </p>
+
+
+
+
+</div>
+
+
+        
+        <div id="disqus_thread" name="disqus_thread"></div>
+          <script type="text/javascript">
+        /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+            var disqus_shortname = 'mdolobac'; // required: replace example with your forum shortname
+
+        /* * * DON'T EDIT BELOW THIS LINE * * */
+            (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+          </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        
+
+
+<ul class="posts">
+  
+
+  <li><span>03 Aug 2014</span> &raquo; <a href="/2014/08/03/tags.html#disqus_thread">Tags</a></li>
+  
+  
+  
+
+  <li><span>03 Aug 2014</span> &raquo; <a href="/2014/08/03/tests.html#disqus_thread">How to Run Tests in Vim</a></li>
+  
+  
+  
+
+  <li><span>30 Jul 2014</span> &raquo; <a href="/2014/07/30/vim4rails.html#disqus_thread">Vim4rails</a></li>
+  
+  
+  
+
+  <li><span>09 Jul 2014</span> &raquo; <a href="/productivity-booster/2014/07/09/how-to-convert-source-code-to-pdf.html#disqus_thread">How to convert Ruby source code to pdf in Linux</a></li>
+  
+  
+  
+
+  <li><span>04 Jul 2014</span> &raquo; <a href="/2014/07/04/stopwatch.html#disqus_thread">How to create stopwatch in Ruby Shoes</a></li>
+  
+  
+  
+
+  <li><span>29 Jun 2014</span> &raquo; <a href="/shoes/2014/06/29/how-to-create-clock-in-ruby-shoes.html#disqus_thread">How to create digital clock in Ruby Shoes</a></li>
+  
+  
+  
+
+  <li><span>16 Jun 2014</span> &raquo; <a href="/2014/06/16/post-it.html#disqus_thread">Post It</a></li>
+  
+  
+  
+
+  <li><span>16 Jun 2014</span> &raquo; <a href="/shoes/2014/06/16/how-to-create-notes-app-in-ruby-shoes.html#disqus_thread">How to create post-it notes app in Ruby Shoes</a></li>
+  
+  
+  
+
+  <li><span>06 Jun 2014</span> &raquo; <a href="/weekly-rails/2014/06/06/how-to-create-link-aggregation-site-in-rails.html#disqus_thread">How to create link aggregation site in Rails&#58; Adding, editing, deleting links</a></li>
+  
+  
+  
+
+  <li><span>30 May 2014</span> &raquo; <a href="/learning-resources/2014/05/30/ruby-news-websites.html#disqus_thread">7 Websites to Get Latest News About Ruby</a></li>
+  
+  
+   
+  
+
+</ul>
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES: EDIT BEFORE PASTING INTO YOUR WEBPAGE * * */
+    var disqus_shortname = 'mdolobac'; // required: replace example with your forum shortname
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+      var s = document.createElement('script'); s.async = true;
+      s.type = 'text/javascript';
+      s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+      (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+    </script>
+    
+    <script type="text/javascript">var addthis_config = {"data_track_addressbar":true};</script>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-534eba9022761f4e"></script>
+<!-- AddThis Button END -->
+    
+ 
+
+
+              
+
+      </section> 
+
+      <section id="sidebar">
+        <ul class="posts">
+  <h1>Recent posts</h1>
+
+<li>
+  <span>05 Aug 2014</span> &raquo;
+
+  <a href="/weekly-rails/2014/08/05/how-to-add-voting-to-rails-app.html">
+    How to Add Voting to Rails App</a>
+</li>
+
+<li>
+  <span>03 Aug 2014</span> &raquo;
+
+  <a href="/2014/08/03/tags.html">
+    Tags</a>
+</li>
+
+<li>
+  <span>03 Aug 2014</span> &raquo;
+
+  <a href="/2014/08/03/tests.html">
+    How to Run Tests in Vim</a>
+</li>
+
+<li>
+  <span>30 Jul 2014</span> &raquo;
+
+  <a href="/2014/07/30/vim4rails.html">
+    Vim4rails</a>
+</li>
+
+<li>
+  <span>09 Jul 2014</span> &raquo;
+
+  <a href="/productivity-booster/2014/07/09/how-to-convert-source-code-to-pdf.html">
+    How to convert Ruby source code to pdf in Linux</a>
+</li>
+
+<li>
+  <span>04 Jul 2014</span> &raquo;
+
+  <a href="/2014/07/04/stopwatch.html">
+    How to create stopwatch in Ruby Shoes</a>
+</li>
+
+<li>
+  <span>29 Jun 2014</span> &raquo;
+
+  <a href="/shoes/2014/06/29/how-to-create-clock-in-ruby-shoes.html">
+    How to create digital clock in Ruby Shoes</a>
+</li>
+
+<li>
+  <span>16 Jun 2014</span> &raquo;
+
+  <a href="/2014/06/16/post-it.html">
+    Post It</a>
+</li>
+
+<li>
+  <span>16 Jun 2014</span> &raquo;
+
+  <a href="/shoes/2014/06/16/how-to-create-notes-app-in-ruby-shoes.html">
+    How to create post-it notes app in Ruby Shoes</a>
+</li>
+
+<li>
+  <span>06 Jun 2014</span> &raquo;
+
+  <a href="/weekly-rails/2014/06/06/how-to-create-link-aggregation-site-in-rails.html">
+    How to create link aggregation site in Rails&#58; Adding, editing, deleting links</a>
+</li>
+
+<li>
+  <span>30 May 2014</span> &raquo;
+
+  <a href="/learning-resources/2014/05/30/ruby-news-websites.html">
+    7 Websites to Get Latest News About Ruby</a>
+</li>
+
+<li>
+  <span>02 May 2014</span> &raquo;
+
+  <a href="/productivity-booster/2014/05/02/vim-plugins-for-ruby.html">
+    Vim for Rubyist&#58; 10 useful vim plugins for Ruby</a>
+</li>
+
+<li>
+  <span>24 Apr 2014</span> &raquo;
+
+  <a href="/2014/04/24/rails.html">
+    6 Books for learning or advancing your rails knowledge</a>
+</li>
+
+<li>
+  <span>24 Apr 2014</span> &raquo;
+
+  <a href="/learning-resources/2014/04/24/books-for-learning-rails.html">
+    6 Books for learning or advancing your rails knowledge</a>
+</li>
+
+<li>
+  <span>17 Apr 2014</span> &raquo;
+
+  <a href="/2014/04/17/calculator.html">
+    How to create simple calculator in Shoes</a>
+</li>
+
+<li>
+  <span>17 Apr 2014</span> &raquo;
+
+  <a href="/shoes/2014/04/17/how-to-create-simple-calculator-in-shoes.html">
+    How to create simple calculator in Ruby Shoes</a>
+</li>
+
+<li>
+  <span>09 Apr 2014</span> &raquo;
+
+  <a href="/learning-resources/2014/04/09/learn-ruby-on-rails-book-review.html">
+    Learn Ruby on Rails book review</a>
+</li>
+
+<li>
+  <span>05 Apr 2014</span> &raquo;
+
+  <a href="/2014/04/05/why_tmux.html">
+    Why to use tmux</a>
+</li>
+
+<li>
+  <span>04 Apr 2014</span> &raquo;
+
+  <a href="/weekly-rails/2014/04/04/how-to-create-todo-list-app-in-rails-adding-removing-completing-tasks.html">
+    How to create todo list app in rails, adding, removing and deleting tasks</a>
+</li>
+
+<li>
+  <span>28 Mar 2014</span> &raquo;
+
+  <a href="/learning-resources/2014/03/28/learn-ruby-with-these-resources.html">
+    Top 8 Learning resources for ruby beginner</a>
+</li>
+
+<li>
+  <span>28 Mar 2014</span> &raquo;
+
+  <a href="/learning-resources/2014/03/28/how-to-install-rails.html">
+    How to install Ruby on Rails for your operating system</a>
+</li>
+
+<li>
+  <span>26 Mar 2014</span> &raquo;
+
+  <a href="/productivity-booster/2014/03/26/top-ten-commands-in-terminal-you-will-use-everyday.html">
+    Top 10 commands in terminal you will use everyday</a>
+</li>
+
+<li>
+  <span>22 Mar 2014</span> &raquo;
+
+  <a href="/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.html">
+    How to create todo list app in rails</a>
+</li>
+
+</ul>
+
+
+
+
+
+
+
+      </section>  
+      
+      <footer id="page_footer">
+        <div class="contact"> 
+
+          
+          
+         
+        
+        
+       
+
+        </div>
+      </footer>
+    </div>
+    <script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-49278618-1', 'masteruby.github.io');
+  ga('send', 'pageview');
+
+</script>
+
+<script type="text/javascript">
+  window.onbeforeunload = function (e) {
+    e = e || window.event;
+    if (e) {
+      _gaq.push(['_trackPageview', '/bounce']);
+    }
+    return _gaq.push(['_trackPageview', '/bounce']);
+  };
+</script>
+
+
+
+  </body>
+</html>    

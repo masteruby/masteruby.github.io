@@ -1,0 +1,19 @@
+If you're Rails developer, you maybe thinking how to use Vim with Rails.
+
+In this guide I want to present usingsome tasks. 
+
+## 1. Running Rails Server in Background
+
+First task we'll cover how to use Rails Server, but still won't leave Vim
+
+## 2. Running Multiple Files in Terminal Window
+
+## 3. Running Tests Inside Vim
+
+## 4. Editing controllers, models and views is easier with Vim
+
+## 5. Generators using Vim
+
+## 6. Searching for files with CTRLp
+
+## 7. 

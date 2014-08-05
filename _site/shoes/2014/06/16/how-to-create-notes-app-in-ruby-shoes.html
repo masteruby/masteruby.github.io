@@ -65,7 +65,7 @@
 <p>First thing we’ll do is to design our app.
 At the top of page we’ll have three buttons, new, open, and save, so let’s design it.</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;green_shoes&#39;</span>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="nb">require</span> <span class="s1">&#39;green_shoes&#39;</span>
 <span class="nb">require</span> <span class="s1">&#39;yaml/store&#39;</span>
 
 <span class="no">Shoes</span><span class="o">.</span><span class="n">app</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">title</span><span class="p">:</span> <span class="s2">&quot;Post-it notes app&quot;</span> <span class="k">do</span>
@@ -87,7 +87,7 @@ At the top of page we’ll have three buttons, new, open, and save, so let’s d
 
 <p>Our app should have field for adding notes.</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="n">flow</span> <span class="k">do</span>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">flow</span> <span class="k">do</span>
   <span class="vi">@title</span> <span class="o">=</span> <span class="n">edit_line</span> <span class="s2">&quot;New note&quot;</span><span class="p">,</span> <span class="ss">margin</span><span class="p">:</span> <span class="o">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">5</span><span class="o">]</span>
   <span class="vi">@para</span> <span class="o">=</span> <span class="n">edit_box</span> <span class="s2">&quot;Describe your note here&quot;</span></code></pre></div>
 
@@ -101,7 +101,7 @@ At the top of page we’ll have three buttons, new, open, and save, so let’s d
 
 <p>Here’s how our app look right now:</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;green_shoes&#39;</span>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="nb">require</span> <span class="s1">&#39;green_shoes&#39;</span>
 <span class="nb">require</span> <span class="s1">&#39;yaml/store&#39;</span>
 
 <span class="no">Shoes</span><span class="o">.</span><span class="n">app</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">title</span><span class="p">:</span> <span class="s2">&quot;Post-it notes app&quot;</span> <span class="k">do</span>
@@ -124,12 +124,12 @@ At the top of page we’ll have three buttons, new, open, and save, so let’s d
 
 <p>For manipulation with our notes we’ll use YAML::Store. First thing we need to do is to create configuration file, where we store default values for our notes. Create <strong>config.yml</strong> file like this:</p>
 
-<div class="highlight"><pre><code class="yaml"><span class="l-Scalar-Plain">title</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">New note</span>
+<div class="highlight"><pre><code class="language-yaml" data-lang="yaml"><span class="l-Scalar-Plain">title</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">New note</span>
 <span class="l-Scalar-Plain">para</span><span class="p-Indicator">:</span> <span class="l-Scalar-Plain">Describe your note here</span></code></pre></div>
 
 <p>Here’s our default values. Let’s connect our button with that yaml file.</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="n">button</span> <span class="s2">&quot;New&quot;</span> <span class="k">do</span>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">button</span> <span class="s2">&quot;New&quot;</span> <span class="k">do</span>
   <span class="n">store</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">::</span><span class="no">Store</span><span class="o">.</span><span class="n">new</span> <span class="s2">&quot;config.yml&quot;</span>
   <span class="n">store</span><span class="o">.</span><span class="n">transaction</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span> <span class="k">do</span>
     <span class="vi">@title</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">store</span><span class="o">[</span><span class="s1">&#39;title&#39;</span><span class="o">]</span>
@@ -139,15 +139,15 @@ At the top of page we’ll have three buttons, new, open, and save, so let’s d
 
 <p>Take look at the code we’ve just wrote.</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="n">store</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">::</span><span class="no">Store</span><span class="o">.</span><span class="n">new</span> <span class="s2">&quot;config.yml&quot;</span></code></pre></div>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">store</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">::</span><span class="no">Store</span><span class="o">.</span><span class="n">new</span> <span class="s2">&quot;config.yml&quot;</span></code></pre></div>
 
 <p>Here we’ve set structure for reading our <strong>config.yml</strong> file.</p>
 
-<div class="highlight"><pre><code class="html">store.transaction(true) do</code></pre></div>
+<div class="highlight"><pre><code class="language-html" data-lang="html">store.transaction(true) do</code></pre></div>
 
 <p>Here we’ve start read only transaction.</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="vi">@title</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">store</span><span class="o">[</span><span class="s1">&#39;title&#39;</span><span class="o">]</span>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="vi">@title</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">store</span><span class="o">[</span><span class="s1">&#39;title&#39;</span><span class="o">]</span>
 <span class="vi">@para</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">store</span><span class="o">[</span><span class="s1">&#39;para&#39;</span><span class="o">]</span></code></pre></div>
 
 <p>Here we’ve set values of title and para to values in Hash of our config file.</p>
@@ -156,7 +156,7 @@ At the top of page we’ll have three buttons, new, open, and save, so let’s d
 
 <p>Let’s go create open button:</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="n">button</span> <span class="s2">&quot;Open&quot;</span> <span class="k">do</span>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">button</span> <span class="s2">&quot;Open&quot;</span> <span class="k">do</span>
   <span class="n">file</span> <span class="o">=</span> <span class="n">ask_open_file</span>
   <span class="n">store</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">::</span><span class="no">Store</span><span class="o">.</span><span class="n">new</span> <span class="n">file</span>
   <span class="n">store</span><span class="o">.</span><span class="n">transaction</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span> <span class="k">do</span>
@@ -173,7 +173,7 @@ At the top of page we’ll have three buttons, new, open, and save, so let’s d
 
 <p>Ok so this works right now, but we want to save values from Shoes to yaml for later use. We’ll use YAML::Store for this, but this time we’ll use different code.</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="n">button</span> <span class="s2">&quot;Save&quot;</span> <span class="k">do</span>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">button</span> <span class="s2">&quot;Save&quot;</span> <span class="k">do</span>
   
   <span class="n">file</span> <span class="o">=</span> <span class="n">ask_save_file</span>
   
@@ -187,17 +187,17 @@ At the top of page we’ll have three buttons, new, open, and save, so let’s d
 
 <p>So take look at the code that we’ve just done. </p>
 
-<div class="highlight"><pre><code class="ruby"><span class="n">file</span> <span class="o">=</span> <span class="n">ask_save_file</span></code></pre></div>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">file</span> <span class="o">=</span> <span class="n">ask_save_file</span></code></pre></div>
 
 <p>So we’re created menu that shows you dialog to write name of the file and save it.</p>
 
 <p><img src="/images/saving-file-in-shoes.png" alt="saving file in shoes" /> </p>
 
-<div class="highlight"><pre><code class="ruby"><span class="n">store</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">::</span><span class="no">Store</span><span class="o">.</span><span class="n">new</span> <span class="n">file</span></code></pre></div>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">store</span> <span class="o">=</span> <span class="no">YAML</span><span class="o">::</span><span class="no">Store</span><span class="o">.</span><span class="n">new</span> <span class="n">file</span></code></pre></div>
 
 <p>Here we used location of previously selected file to store our values.</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="n">store</span><span class="o">.</span><span class="n">transaction</span> <span class="k">do</span>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">store</span><span class="o">.</span><span class="n">transaction</span> <span class="k">do</span>
   <span class="n">store</span><span class="o">[</span><span class="s2">&quot;title&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="vi">@title</span><span class="o">.</span><span class="n">text</span>
   <span class="n">store</span><span class="o">[</span><span class="s2">&quot;para&quot;</span><span class="o">]</span> <span class="o">=</span> <span class="vi">@para</span><span class="o">.</span><span class="n">text</span></code></pre></div>
 
@@ -205,7 +205,7 @@ At the top of page we’ll have three buttons, new, open, and save, so let’s d
 
 <p>So take look at file we created now. It should look like this:</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="nb">require</span> <span class="s1">&#39;green_shoes&#39;</span>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="nb">require</span> <span class="s1">&#39;green_shoes&#39;</span>
 <span class="nb">require</span> <span class="s1">&#39;yaml/store&#39;</span>
 
 <span class="no">Shoes</span><span class="o">.</span><span class="n">app</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">200</span><span class="p">,</span> <span class="ss">title</span><span class="p">:</span> <span class="s2">&quot;Post-it notes app&quot;</span> <span class="k">do</span>
@@ -274,12 +274,42 @@ At the top of page we’ll have three buttons, new, open, and save, so let’s d
 <ul class="posts">
   
 
+  <li><span>05 Aug 2014</span> &raquo; <a href="/weekly-rails/2014/08/05/how-to-add-voting-to-rails-app.html#disqus_thread">How to Add Voting to Rails App</a></li>
+  
+  
+  
+
+  <li><span>03 Aug 2014</span> &raquo; <a href="/2014/08/03/tags.html#disqus_thread">Tags</a></li>
+  
+  
+  
+
+  <li><span>03 Aug 2014</span> &raquo; <a href="/2014/08/03/tests.html#disqus_thread">How to Run Tests in Vim</a></li>
+  
+  
+  
+
+  <li><span>30 Jul 2014</span> &raquo; <a href="/2014/07/30/vim4rails.html#disqus_thread">Vim4rails</a></li>
+  
+  
+  
+
   <li><span>09 Jul 2014</span> &raquo; <a href="/productivity-booster/2014/07/09/how-to-convert-source-code-to-pdf.html#disqus_thread">How to convert Ruby source code to pdf in Linux</a></li>
   
   
   
 
+  <li><span>04 Jul 2014</span> &raquo; <a href="/2014/07/04/stopwatch.html#disqus_thread">How to create stopwatch in Ruby Shoes</a></li>
+  
+  
+  
+
   <li><span>29 Jun 2014</span> &raquo; <a href="/shoes/2014/06/29/how-to-create-clock-in-ruby-shoes.html#disqus_thread">How to create digital clock in Ruby Shoes</a></li>
+  
+  
+  
+
+  <li><span>16 Jun 2014</span> &raquo; <a href="/2014/06/16/post-it.html#disqus_thread">Post It</a></li>
   
   
   
@@ -290,36 +320,6 @@ At the top of page we’ll have three buttons, new, open, and save, so let’s d
   
 
   <li><span>30 May 2014</span> &raquo; <a href="/learning-resources/2014/05/30/ruby-news-websites.html#disqus_thread">7 Websites to Get Latest News About Ruby</a></li>
-  
-  
-  
-
-  <li><span>02 May 2014</span> &raquo; <a href="/productivity-booster/2014/05/02/vim-plugins-for-ruby.html#disqus_thread">Vim for Rubyist&#58; 10 useful vim plugins for Ruby</a></li>
-  
-  
-  
-
-  <li><span>24 Apr 2014</span> &raquo; <a href="/learning-resources/2014/04/24/books-for-learning-rails.html#disqus_thread">6 Books for learning or advancing your rails knowledge</a></li>
-  
-  
-  
-
-  <li><span>17 Apr 2014</span> &raquo; <a href="/shoes/2014/04/17/how-to-create-simple-calculator-in-shoes.html#disqus_thread">How to create simple calculator in Ruby Shoes</a></li>
-  
-  
-  
-
-  <li><span>09 Apr 2014</span> &raquo; <a href="/learning-resources/2014/04/09/learn-ruby-on-rails-book-review.html#disqus_thread">Learn Ruby on Rails book review</a></li>
-  
-  
-  
-
-  <li><span>04 Apr 2014</span> &raquo; <a href="/weekly-rails/2014/04/04/how-to-create-todo-list-app-in-rails-adding-removing-completing-tasks.html#disqus_thread">How to create todo list app in rails, adding, removing and deleting tasks</a></li>
-  
-  
-  
-
-  <li><span>28 Mar 2014</span> &raquo; <a href="/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html#disqus_thread">How to install Ruby and Rails for your operating system</a></li>
   
   
    
@@ -355,6 +355,34 @@ At the top of page we’ll have three buttons, new, open, and save, so let’s d
   <h1>Recent posts</h1>
 
 <li>
+  <span>05 Aug 2014</span> &raquo;
+
+  <a href="/weekly-rails/2014/08/05/how-to-add-voting-to-rails-app.html">
+    How to Add Voting to Rails App</a>
+</li>
+
+<li>
+  <span>03 Aug 2014</span> &raquo;
+
+  <a href="/2014/08/03/tags.html">
+    Tags</a>
+</li>
+
+<li>
+  <span>03 Aug 2014</span> &raquo;
+
+  <a href="/2014/08/03/tests.html">
+    How to Run Tests in Vim</a>
+</li>
+
+<li>
+  <span>30 Jul 2014</span> &raquo;
+
+  <a href="/2014/07/30/vim4rails.html">
+    Vim4rails</a>
+</li>
+
+<li>
   <span>09 Jul 2014</span> &raquo;
 
   <a href="/productivity-booster/2014/07/09/how-to-convert-source-code-to-pdf.html">
@@ -362,10 +390,24 @@ At the top of page we’ll have three buttons, new, open, and save, so let’s d
 </li>
 
 <li>
+  <span>04 Jul 2014</span> &raquo;
+
+  <a href="/2014/07/04/stopwatch.html">
+    How to create stopwatch in Ruby Shoes</a>
+</li>
+
+<li>
   <span>29 Jun 2014</span> &raquo;
 
   <a href="/shoes/2014/06/29/how-to-create-clock-in-ruby-shoes.html">
     How to create digital clock in Ruby Shoes</a>
+</li>
+
+<li>
+  <span>16 Jun 2014</span> &raquo;
+
+  <a href="/2014/06/16/post-it.html">
+    Post It</a>
 </li>
 
 <li>
@@ -399,8 +441,22 @@ At the top of page we’ll have three buttons, new, open, and save, so let’s d
 <li>
   <span>24 Apr 2014</span> &raquo;
 
+  <a href="/2014/04/24/rails.html">
+    6 Books for learning or advancing your rails knowledge</a>
+</li>
+
+<li>
+  <span>24 Apr 2014</span> &raquo;
+
   <a href="/learning-resources/2014/04/24/books-for-learning-rails.html">
     6 Books for learning or advancing your rails knowledge</a>
+</li>
+
+<li>
+  <span>17 Apr 2014</span> &raquo;
+
+  <a href="/2014/04/17/calculator.html">
+    How to create simple calculator in Shoes</a>
 </li>
 
 <li>
@@ -418,6 +474,13 @@ At the top of page we’ll have three buttons, new, open, and save, so let’s d
 </li>
 
 <li>
+  <span>05 Apr 2014</span> &raquo;
+
+  <a href="/2014/04/05/why_tmux.html">
+    Why to use tmux</a>
+</li>
+
+<li>
   <span>04 Apr 2014</span> &raquo;
 
   <a href="/weekly-rails/2014/04/04/how-to-create-todo-list-app-in-rails-adding-removing-completing-tasks.html">
@@ -427,15 +490,15 @@ At the top of page we’ll have three buttons, new, open, and save, so let’s d
 <li>
   <span>28 Mar 2014</span> &raquo;
 
-  <a href="/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html">
-    How to install Ruby and Rails for your operating system</a>
+  <a href="/learning-resources/2014/03/28/learn-ruby-with-these-resources.html">
+    Top 8 Learning resources for ruby beginner</a>
 </li>
 
 <li>
   <span>28 Mar 2014</span> &raquo;
 
-  <a href="/learning-resources/2014/03/28/learn-ruby-with-these-resources.html">
-    Top 8 Learning resources for ruby beginner</a>
+  <a href="/learning-resources/2014/03/28/how-to-install-rails.html">
+    How to install Ruby on Rails for your operating system</a>
 </li>
 
 <li>
@@ -449,7 +512,7 @@ At the top of page we’ll have three buttons, new, open, and save, so let’s d
   <span>22 Mar 2014</span> &raquo;
 
   <a href="/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.html">
-    How to create todo list app in rails static pages</a>
+    How to create todo list app in rails</a>
 </li>
 
 </ul>

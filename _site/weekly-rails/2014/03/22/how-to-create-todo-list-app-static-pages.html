@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>How to create todo list app in rails static pages </title>
+    <title>How to create todo list app in rails </title>
     	<!-- Bootstrap CSS -->
     <meta name="google-site-verification" content="UFFQXW8FdLgKuB_vYYy8LTw5aonnBmAHdUhUopMxero" />
     <meta description="Masteruby is tutorials web site about learning ruby">
@@ -48,26 +48,38 @@
         <!-- AddThis Button BEGIN -->
 
 
-<h2>How to create todo list app in rails static pages</h2>
+<h2>How to create todo list app in rails</h2>
 <p class="meta">22 Mar 2014</p>
 
 <h4>Posted by Milos Dolobac</h4>
 
 <div class="post">
-<p>In the following series of posts we gonna create todo list app in rails.
-In this tutorial we’ll create basic structure of our app. In first part of
-tutorial you will learn:</p>
+<p>I this tutorial I want to show you creating todo list app.</p>
+
+<p>In this tutorial you will learn:</p>
 
 <ul>
-  <li>How to install <strong>Rails</strong></li>
-  <li>How to choose text editor for your operating system</li>
-  <li>How to use <strong>Rails</strong> in command line </li>
-  <li>How to use <strong>Bundler</strong> to install gems</li>
-  <li>How to use <strong>Cucumber</strong> with <strong>Capybara</strong> to test our pages</li>
-  <li>How to create our static_pages(home,about,contact)</li>
+  <li>Why you should use Rails</li>
+  <li>What you need to know before getting started</li>
+  <li>How to install Rails</li>
+  <li>What text editor you should use</li>
+  <li>How to start Rails application</li>
+  <li>How to use <strong>Models</strong> and <strong>Migrations</strong> to setup database</li>
+  <li>Using controllers and views to create list of todos</li>
+  <li>Styling our app with Bootstrap</li>
+  <li>What to improve in your rails app</li>
 </ul>
 
-<h2 id="what-do-you-need">1 What do you need</h2>
+<h2 id="why-you-should-use-rails">1 Why you should use Rails</h2>
+
+<ul>
+  <li>is readable, because is written in Ruby language</li>
+  <li>you don’t have to write SQL, thanks to ORM(Object Relation Mapping)</li>
+  <li>it requires minimal configuration</li>
+  <li>it has a lot of generators to save time</li>
+</ul>
+
+<h2 id="what-you-need-to-know-before-getting-started-with-rails">2 What you need to know before getting started with Rails</h2>
 
 <ul>
   <li>
@@ -81,393 +93,336 @@ tutorial you will learn:</p>
   </li>
 </ul>
 
-<h2 id="how-to-install-ruby">2 How to install Ruby</h2>
+<h2 id="how-to-install-ruby">3 How to install Ruby</h2>
+
 <p>In <a href="http://masteruby.github.io/learning-resources/2015/03/28/how-to-install-ruby.html">this post</a>
 I’ve included installation instructions for Ruby and Rails</p>
 
-<h2 id="choosing-your-text-editor">3 Choosing your text editor</h2>
+<h2 id="what-text-editor-you-should-use-for-writting-rails-applications">4 What text editor you should use for writting rails applications</h2>
 
 <p>You write all your ruby programs using text editor.</p>
 
-<h3 id="notepadhttpnotepad-plus-plusorgdownloadv653html">3.1 <a href="http://notepad-plus-plus.org/download/v6.5.3.html">Notepad++</a></h3>
+<h3 id="notepadhttpnotepad-plus-plusorgdownloadv653html">4.1 <a href="http://notepad-plus-plus.org/download/v6.5.3.html">Notepad++</a></h3>
 
 <p>For Windows  I recommend you this editor. It’s free and it includes syntax highlighting and auto completion for ruby. </p>
 
-<h3 id="textmatehttpmacromatescom">3.2 <a href="http://macromates.com">TextMate</a></h3>
+<h3 id="textmatehttpmacromatescom">4.2 <a href="http://macromates.com">TextMate</a></h3>
 
 <p>On Mac you can use TextMate. You can download it and install for free.</p>
 
-<h3 id="gedit">3.3 Gedit</h3>
+<h3 id="gedit">4.3 Gedit</h3>
 
 <p>On Linux you can use gedit.</p>
 
-<h2 id="creating-basic-structure-of-the-app">4 Creating basic structure of the app</h2>
+<h2 id="how-to-start-rails-application">5 How to start Rails application</h2>
 
-<p>Ok so you’ve got your tools in order, so we can start to  create application. Open up terminal window or command prompt if you’re on Windows and enter following code:</p>
+<p>Ok so you’ve got your tools in order, so we can start to  create application.</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>rails new todo --skip-test-unit</code></pre></div>
+<h3 id="creating-new-rails-application">5.1 Creating new Rails application</h3>
 
-<p>This will create rails application named todo. It takes a while. Ok let’s check out some folders that we’re created.</p>
+<p>Open up terminal window or command prompt if you’re on Windows and enter following code:</p>
 
-<h4 id="gemfile">Gemfile</h4>
+<div class="highlight"><pre><code class="language-sh" data-lang="sh"><span class="nv">$ </span>rails new todo-list-app</code></pre></div>
+
+<p>This will create rails application named todo-list-app. It takes a while. </p>
+
+<h3 id="starting-rails-application">5.2 Starting Rails application</h3>
+
+<p>Starting Rails application is easy. Just use this command in terminal:</p>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">rails server</code></pre></div>
+
+<p>And look at the rails opening screen.</p>
+
+<p><img src="/images/rails-welcome.png" alt="rails welcome screen" /></p>
+
+<h3 id="directory-structure-of-rails-app">5.3 Directory structure of Rails app</h3>
+
+<p>Our web server is now working, so we can take a look at basic structure of Rails</p>
+
+<h3 id="appviews">app/views</h3>
+
+<p>Views folder is place for your erb, slim or haml templates. </p>
 
 <p>That’s the file that you will use to install all dependencies what you need
  for your applications. They’re called gems. Just add name of gem to your
  Gemfile and let Bundler to take care of installation.</p>
 
-<h4 id="appviews">app/views</h4>
+<h3 id="appviews-1">app/views</h3>
 
 <p>In this folder you place your html templates.</p>
 
-<h4 id="appassets">app/assets</h4>
+<h3 id="appassets">app/assets</h3>
 
 <p>Images, Javascript and CSS files belongs here.</p>
 
-<h3 id="how-to-use-bundler">4.1 How to use Bundler</h3>
+<h3 id="how-to-use-bundler-to-install-dependencies">5.4 How to use Bundler to install dependencies</h3>
 
-<p>After creating rails application you should use Bundler to use all dependencies
-what you need. First add name of the gem to your Gemfile, then open up terminal
-and add following command:</p>
+<p>After creating rails application you should use <strong>Bundler</strong> to install all dependencies
+what you need. First add name of the gem to your Gemfile like this:</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>bundle install</code></pre></div>
+<h4 id="gemfile">Gemfile</h4>
 
-<p>Let’s add some gems to your Gemfile. Open up your Gemfile and add following
-gems:</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">gem</span> <span class="s1">&#39;slim-rails&#39;</span></code></pre></div>
 
-<div class="highlight"><pre><code class="ruby"><span class="n">gem</span> <span class="s1">&#39;slim-rails&#39;</span>
-<span class="n">gem</span> <span class="s1">&#39;capybara&#39;</span>
-<span class="n">gem</span> <span class="s1">&#39;cucumber-rails&#39;</span><span class="p">,</span> <span class="ss">:require</span> <span class="o">=&gt;</span> <span class="kp">false</span>
-<span class="n">gem</span> <span class="s1">&#39;database_cleaner&#39;</span>
-<span class="n">gem</span> <span class="s1">&#39;rspec-expectations&#39;</span>
-<span class="n">gem</span> <span class="s1">&#39;selenium-webdriver&#39;</span></code></pre></div>
+<p>So here we’ve added <strong>slim-rails</strong> gem to our gem, which we’ll use later.</p>
 
-<p>Install it with Bundler:</p>
+<p>Now install it with bundler.</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>bundle install</code></pre></div>
+<div class="highlight"><pre><code class="language-sh" data-lang="sh"><span class="nv">$ </span>bundle install</code></pre></div>
 
-<h3 id="starting-our-application">4.2 Starting our application</h3>
+<h2 id="how-to-use-models-and-controllers-to-setup-database">6 How to use models and controllers to setup database</h2>
 
-<p>To run your application, type this into command line:</p>
+<p>To save records to database we need to use models</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>rails server</code></pre></div>
+<h3 id="what-are-models">6.1 What are models</h3>
 
-<p>Go to web browser and type localhost:3000. Your output screen should look like this:</p>
+<p>Models are special ruby classes that talks to database, store and validates data.</p>
 
-<p><img src="/images/rails-opening-screen.png" alt="rails-opening-screen" /></p>
+<p>Right now when we know what models are we can create our first model.</p>
 
-<h2 id="creating-static-pages">5 Creating Static Pages</h2>
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">rails generate model Todo item:string</code></pre></div>
 
-<p>We have our web server running let’s build some pages.</p>
+<p>This command will create migration create_todos</p>
 
-<h3 id="creating-controllers">5.1 Creating controllers</h3>
+<h3 id="what-are-database-migrations">6.2 What are database migrations</h3>
+<p>Database Migrations are…</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>rails generate controller StaticPages home <span class="nb">help </span>about --no-test-framework</code></pre></div>
+<p>Take look at file with name <strong>create_todos.rb</strong></p>
 
-<p>If you open your views folder, you should see that you have new folder named
-<strong>static_pages</strong> with some files in it. Go to the <strong>config/routes.rb</strong>, you should see path of our pages that we’re created. Type for example, localhost:3000/static_pages into your web browser.</p>
+<p>If you want to migrate our table to database.</p>
 
-<p><img src="/images/home.png" alt="home" /></p>
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">rake db:migrate</code></pre></div>
 
-<p>We created StaticPages controller and we can populate our files. Testing every
-change in a browser would be tedious. So we gonna need Cucumber and Capybara to
-do it for us.</p>
+<p>This will create new database with table todos and column item.  </p>
 
-<h3 id="cucumber">5.2 Cucumber</h3>
-<p>Cucumber lets software developers and shareholders to use simple plain language
-to describe features. If you want to know more about Cucumber, try
-<a href="http://www.amazon.com/The-Cucumber-Book-Behaviour-Driven-Development/dp/1934356808">CucumberBook</a>
-#### How Cucumber works</p>
+<p>If you have sqlitebrowser installed you can take a look at database that we’ve just created. You should see empty database with table todos and columns like this at picture:</p>
 
-<p>Cucumber works in features which are written in plain text and step definitions which are written in regular ruby code. If you go to your app folder, you should see that folder named features  was created.  </p>
+<p><img src="/images/empty-database.png" alt="how to migrate model to database in rails" /></p>
 
-<p>First we need to setup folder structure of Cucumber. Run following command:</p>
+<h3 id="insert-records-to-database">6.3 Insert Records to Database</h3>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>rails generate cucumber:install</code></pre></div>
+<p>Now we can start to insert records todatabase.</p>
 
-<p>We need to test all our static pages. Open up folder features in your main
- directory and add file <strong>static_pages.feature</strong> into your features directory.</p>
+<p>Open up rails console</p>
 
-<h4 id="staticpagesfeature">static_pages.feature</h4>
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">rails console</code></pre></div>
 
-<div class="highlight"><pre><code class="gherkin"><span class="k">Feature:</span><span class="nf"> Static Pages content</span>
+<p>Start adding some todos as in the picture.</p>
 
-<span class="nf"> User should see static pages content</span>
+<p><img src="/images/rails-console.png" alt="add todos in rails console" /></p>
 
-<span class="nf"> </span><span class="k">Scenario Outline:</span><span class="nf"> Path testing</span>
+<p>Certainly you noticed we’ve used Todowith method create I will explain this later in controller section. Check out database in sqlite browser.</p>
 
-<span class="k">    When </span><span class="nf">I visit </span><span class="nv">&lt;Path&gt;</span><span class="nf"> path </span>
-<span class="nf">    </span><span class="k">Then </span><span class="nf">I should see following content: </span><span class="nv">&lt;Content&gt;</span><span class="nf"></span>
-<span class="nf">    </span>
-<span class="nf">    </span><span class="k">Examples:</span>
-<span class="k">      |</span><span class="nv"> Path</span><span class="k">     |</span><span class="nv"> Content</span><span class="k"> | </span><span class="nf"></span>
-<span class="k">      |</span><span class="s"> Home</span><span class="k">     |</span><span class="s"> Todo</span><span class="k">    |</span><span class="nf"></span>
-<span class="k">      |</span><span class="s"> About</span><span class="k">    |</span><span class="s"> About</span><span class="k">   |</span><span class="nf"></span>
-<span class="k">      |</span><span class="s"> Help</span><span class="k">     |</span><span class="s"> Help</span><span class="k">    |</span></code></pre></div>
+<p><img src="/images/populate-database.png" alt="populating sqlite database" /></p>
 
-<p>This is how it works. At first line you define your feature, in our example
- StaticPages content. Then you define your steps. Steps always begin with
- keywords: Given,When,Then,And and continue with regular expression. It can be
- any text. Don’t forget to surround your text in regular expression like this: <strong>/^some text$/</strong></p>
+<h2 id="using-controllers-and-views-to-create-todos">7 Using controllers and views to create todos</h2>
 
-<p>We have our feature defined, let’s test it with Cucumber</p>
+<p>Ok we’ve our records in database, but we want to show them in browser. To show them we need to create two parts controllers and views.</p>
 
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>cucumber</code></pre></div>
+<h3 id="what-are-controllers">7.1 What are controllers</h3>
 
-<p>You should see something like this:</p>
+<p>Controllers are user request to database. It can be <strong>GET</strong> request that is like on database is stored form and you want to show form in a browser. And it can be <strong>POST</strong> request when you fill in a form and send details to database. </p>
 
-<p><img src="/images/static-pages-failing-steps.png" alt="failing steps" /></p>
+<p>Create first controller with name <strong>todo</strong></p>
 
-<p>Ok we’ve saw undefined scenarios and steps let’s actually implement it. Open
- up folder step-definitions and create file <strong>static_pages_steps.rb</strong></p>
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">rails generate controller todos</code></pre></div>
 
-<h4 id="staticpagesstepsrb">static_pages_steps.rb</h4>
+<h3 id="what-are-views">7.2 What are views</h3>
 
-<div class="highlight"><pre><code class="ruby"><span class="no">When</span> <span class="sr">/^I visit Home path$/</span> <span class="k">do</span> 
-  <span class="n">visit</span> <span class="s1">&#39;static_pages/home&#39;</span>
+<p>Views are html files that user see through browser. We’ll use slim for that. To use rails effectively we need to use ruby code in html templates. Default it is ERB, but slim code is a really shorter. If you have trouble with translating HTML code to Slim, I recommend you <a href="https://html2slim.herokuapp.com/">html2slim</a> website</p>
+
+<h3 id="showing-list-of-all-todos">7.3 Showing list of all todos</h3>
+
+<p>Ok let’s start with creating action that will show all of tasks to browser.
+First we need to record all of task in our controller.</p>
+
+<h4 id="appcontrollerstodoscontrollerrb">app/controllers/todos_controller.rb</h4>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">index</span>
+  <span class="vi">@todos</span> <span class="o">=</span> <span class="no">Todo</span><span class="o">.</span><span class="n">all</span>
 <span class="k">end</span></code></pre></div>
 
-<p>In first line we match name of our step with name in the feature file.
-Then we use capybara to visit home path in the browser. Run your test with cucumber. You should see one passing test.</p>
+<p>This command will checkout database for all todos and saves into instance variable todos.</p>
 
-<p>Now we need to test content of our home page. Add this into features/step_definitions/static_pages_steps.rb:</p>
+<p>Next thing we need to is to add route</p>
 
-<div class="highlight"><pre><code class="ruby"><span class="no">Then</span> <span class="sr">/^I should see following content: Todo$/</span> <span class="k">do</span>
-  <span class="n">expect</span><span class="p">(</span><span class="n">page</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_content</span><span class="p">(</span><span class="s2">&quot;Todo&quot;</span><span class="p">)</span>
-<span class="k">end</span></code></pre></div>
+<h4 id="appviewstodosindexhtmlslim">app/views/todos/index.html.slim</h4>
 
-<p>In first line we match second step with feature file.
-On the second line we use <strong>Rspec Expectations</strong> to test content of our home page.</p>
-
-<p>Run cucumber again. You should see failing tests. Of course that test is falling, we don’t have content Todo in our templates.</p>
-
-<p>Open up folder app/views/static_pages and edit file named <strong>home.html.slim</strong>.</p>
-
-<h3 id="why-to-use-slim">5.3 Why to use Slim</h3>
-
-<p>Maybe you wonder why we’re using files with slim ending. Slim is a template
-language that strips all unnecessary elements as opening and closing tags. For example this is a code in html: </p>
-
-<div class="highlight"><pre><code class="html"><span class="nt">&lt;html&gt;</span>
-  <span class="nt">&lt;head&gt;</span>
-    <span class="nt">&lt;title&gt;</span>My WebPage<span class="nt">&lt;/title&gt;</span>
-  <span class="nt">&lt;/head&gt;</span>
-  <span class="nt">&lt;body&gt;</span>
-    <span class="nt">&lt;h1&gt;</span>My heading<span class="nt">&lt;/h1&gt;</span>
-    <span class="nt">&lt;p&gt;</span>My paragraph<span class="nt">&lt;/p&gt;</span>
-  <span class="nt">&lt;/body&gt;</span>
-  <span class="nt">&lt;/html&gt;</span></code></pre></div>
-
-<p>And this is code in Slim:</p>
-
-<div class="highlight"><pre><code class="html">html
-    head
-     title My WebPage
-    body
-      h1 My heading
-      p My paragraph</code></pre></div>
-
-<p>You see that Slim code is shorter and easier to read as Html code. 
-  Let’s return to our file. Replace content of <strong>home.html.slim</strong> with following
-  content:</p>
-
-<h4 id="homehtmlslim">home.html.slim</h4>
-
-<div class="highlight"><pre><code class="html">h1 Todo</code></pre></div>
-
-<p>You should see that our test is now passing. Implement this to remaining steps
-in our feature file.</p>
-
-<h4 id="staticpagesstepsrbexcerpt">static_pages_steps.rb(excerpt)</h4>
-
-<div class="highlight"><pre><code class="ruby"><span class="no">When</span> <span class="sr">/^I visit About path$/</span> <span class="k">do</span>
-  <span class="n">visit</span> <span class="s1">&#39;static_pages/about&#39;</span>
-<span class="k">end</span>
-
-<span class="no">Then</span> <span class="sr">/^I should see following content: About$/</span> <span class="k">do</span>
-  <span class="n">expect</span><span class="p">(</span><span class="n">page</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_content</span><span class="p">(</span><span class="s2">&quot;About&quot;</span><span class="p">)</span>
-<span class="k">end</span> 
-
-<span class="no">When</span> <span class="sr">/^I visit Help path$/</span> <span class="k">do</span>
-  <span class="n">visit</span> <span class="s1">&#39;static_pages/help&#39;</span>
-<span class="k">end</span>
-
-<span class="no">Then</span> <span class="sr">/^I should see following content: Help$/</span> <span class="k">do</span>
-  <span class="n">expect</span><span class="p">(</span><span class="n">page</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_content</span><span class="p">(</span><span class="s2">&quot;Help&quot;</span><span class="p">)</span>
-<span class="k">end</span></code></pre></div>
-
-<h4 id="abouthtmlslim">about.html.slim</h4>
-
-<div class="highlight"><pre><code class="html">h1 About</code></pre></div>
-
-<h4 id="helphtmlslim">help.html.slim</h4>
-
-<div class="highlight"><pre><code class="html">h1 Help</code></pre></div>
-
-<p>All our tests are now passing, next step will be implement title tests. Open up
- your <strong>static_pages.feature</strong> file and append following line:</p>
-
-<h4 id="staticpagesfeature-1">static_pages.feature</h4>
-
-<div class="highlight"><pre><code class="gherkin"><span class="k">And </span><span class="nf">I should see following title: </span><span class="nv">&lt;Title&gt;</span><span class="nf"></span>
-
-<span class="nf"> </span><span class="k">Examples:</span>
-<span class="k">   |</span><span class="nv"> Path</span><span class="k">     |</span><span class="nv"> Content</span><span class="k"> |</span><span class="nv"> **Title</span><span class="k"> |</span><span class="nv">**</span><span class="k"></span>
-<span class="k">   |</span><span class="nv"> Home</span><span class="k">     |</span><span class="nv"> Todo</span><span class="k">    |</span><span class="nv"> **Todo</span><span class="k">  |</span><span class="nv">**</span><span class="k"></span>
-<span class="k">   |</span><span class="nv"> About</span><span class="k">    |</span><span class="nv"> About</span><span class="k">   |</span><span class="nv"> **About</span><span class="k"> |</span><span class="nv">**</span><span class="k"></span>
-<span class="k">   |</span><span class="nv"> Help</span><span class="k">     |</span><span class="nv"> Help</span><span class="k">    |</span><span class="nv"> **Help</span><span class="k">  |</span><span class="nv">**</span></code></pre></div>
-
-<p>Let’s implement our test. Add these lines to our steps file.</p>
-
-<h4 id="staticpagesstepsrb-1">static_pages_steps.rb</h4>
-
-<div class="highlight"><pre><code class="ruby"><span class="no">And</span> <span class="sr">/^I should see following title: Todo$/</span> <span class="k">do</span>
-  <span class="n">expect</span><span class="p">(</span><span class="n">page</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_title</span><span class="p">(</span><span class="s2">&quot;Todo&quot;</span><span class="p">)</span>
-<span class="k">end</span>
-
-<span class="no">And</span> <span class="sr">/^I should see following title: About$/</span> <span class="k">do</span>
-  <span class="n">expect</span><span class="p">(</span><span class="n">page</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_title</span><span class="p">(</span><span class="s2">&quot;About&quot;</span><span class="p">)</span>
-<span class="k">end</span>
-
- <span class="no">And</span> <span class="sr">/^I should see following title: Help$/</span> <span class="k">do</span>
-  <span class="n">expect</span><span class="p">(</span><span class="n">page</span><span class="p">)</span><span class="o">.</span><span class="n">to</span> <span class="n">have_title</span><span class="p">(</span><span class="s2">&quot;Help&quot;</span><span class="p">)</span>
-<span class="k">end</span></code></pre></div>
-
-<p>Let’s fix failing tests. We need to change our title in our templates.</p>
-
-<h4 id="homehtmlslim-1">home.html.slim</h4>
-
-<div class="highlight"><pre><code class="html">html
-  head
-    title Todo</code></pre></div>
-
-<h4 id="abouthtmlslim-1">about.html.slim</h4>
-
-<div class="highlight"><pre><code class="html">html
-  head
-    title About</code></pre></div>
-
-<h4 id="helphtmlslim-1">help.html.slim</h4>
-
-<div class="highlight"><pre><code class="html">html
-  head
-    title Help</code></pre></div>
-
-<p>Let’s run cucumber again. You should see that’s all our steps are now passing. We are done.</p>
-
-<h2 id="what-to-improve">6 What to improve</h2>
-
-<h3 id="watching-step-changes-with-guard">6.1 Watching step changes with Guard</h3>
-<p>There’s lot a place to improve. For example running cucumber every time for
-every change in terminal it’s disgusting. Let’s change it. We can use <strong>Guard</strong>
-to watch every change in our features folder. Add Guard to your Gemfile.</p>
-
-<div class="highlight"><pre><code class="ruby"><span class="n">gem</span> <span class="s1">&#39;guard-cucumber&#39;</span></code></pre></div>
-
-<p>And install it:</p>
-
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>bundle install</code></pre></div>
-
-<p>Let’s add Guard to Cucumber.</p>
-
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>guard init cucumber</code></pre></div>
-
-<p>If you open your app’s folder you should see that file named <strong>Guardfile</strong> was
-created.</p>
-
-<p>Let’s run Guard to run our features automatically.</p>
-
-<div class="highlight"><pre><code class="sh"><span class="nv">$ </span>guard</code></pre></div>
-
-<p>All features are running automatically by now.</p>
-
-<h3 id="eliminate-duplication-in-title">6.2 Eliminate duplication in title</h3>
-
-<p>Take a look at files in views folder.
-You saw that we’ve writed title tag three times. That’s terrible, let’s do
-something about that. First rename file in <strong>app/views/layouts</strong> directory.</p>
-
-<div class="highlight"><pre><code class="sh">mv application.html.erb application.html.slim</code></pre></div>
-
-<p>Delete all content and replace it with following:</p>
-
-<h4 id="appviewslayoutsapplicationhtmlslim">app/views/layouts/application.html.slim</h4>
-
-<div class="highlight"><pre><code class="html">doctype html
-html
-  head
-    title Todo
-    = stylesheet_link_tag    &quot;application&quot;, media: &quot;all&quot;, &quot;data-turbolinks-track&quot; =&gt; true
-    = javascript_include_tag &quot;application&quot;, &quot;data-turbolinks-track&quot; =&gt; true
-    = csrf_meta_tags
-  body
-    = yield</code></pre></div>
-
-<h4 id="appviewsstaticpagesabouthtmlslim">app/views/static_pages/about.html.slim</h4>
-
-<div class="highlight"><pre><code class="html">- provide(:title, &#39;About&#39;)
-h1 About</code></pre></div>
-
-<h4 id="appviewsstaticpageshelphtmlslim">app/views/static_pages/help.html.slim</h4>
-
-<div class="highlight"><pre><code class="html">- provide(:title, &#39;Help&#39;)
-h1 Help</code></pre></div>
-
-<h3 id="linking-our-pages-and-updating-routes">6.3 Linking our pages and updating routes</h3>
-
-<p>Typing long adresses like <strong>static_pages/home</strong> is very disgusting, if we
-instead use shorter address, it wouldbe much better.</p>
-
-<p>Open up <strong>config/routes.rb</strong> and replace it content with following:</p>
-
-<div class="highlight"><pre><code class="cucumber"><span class="nf">root &quot;</span><span class="s">static_pages#home</span><span class="nf">&quot;</span>
-<span class="nf">match &quot;</span><span class="s">/help</span><span class="nf">&quot;, to: &quot;</span><span class="s">static_pages#help</span><span class="nf">&quot;, via: &#39;get&#39;</span>
-<span class="nf">match &quot;</span><span class="s">/about</span><span class="nf">&quot;, to: &quot;</span><span class="s">static_pages#about</span><span class="nf">&quot;, via: &#39;get&#39;</span></code></pre></div>
-
-<p>And change tests in <strong>features/step_definitions/static_pages_steps.rb</strong> like this:</p>
-
-<p><strong>features/step_definitions/static_pages_steps.rb</strong></p>
-
-<div class="highlight"><pre><code class="ruby"><span class="no">When</span> <span class="sr">/^I visit Home path$/</span> <span class="k">do</span>
-  <span class="n">visit</span> <span class="s1">&#39;/&#39;</span>
-<span class="k">end</span>  
-
-<span class="no">When</span> <span class="sr">/^I visit About path$/</span> <span class="k">do</span>
-  <span class="n">visit</span> <span class="s1">&#39;/about&#39;</span>
-<span class="k">end</span>
-
-<span class="no">When</span> <span class="sr">/^I visit Help path$/</span> <span class="k">do</span>
-  <span class="n">visit</span> <span class="s1">&#39;/help&#39;</span>
-<span class="k">end</span></code></pre></div>
-
-<p>Let’s take a look at code we’ve just wrote.</p>
-
-<div class="highlight"><pre><code class="sh">root <span class="s2">&quot;static_pages#home&quot;</span></code></pre></div>
-
-<p>This code creates root path for our pages. In this time it’s
-<strong>static_pages#home</strong>. So you don’t have to write your path to web browser.
-Start rails server. You should something like this:</p>
-
-<p><img src="/images/root_path.png" alt="how-to-create-root-path-in-rails" /></p>
-
-<p>That’s good but your visitors don’t have time to write short path like
-<strong>/help</strong> to your webrowser. You haveto include links on your root page.</p>
-
-<p>Add this code for adding links to your
-<strong>app/views/static_pages/layouts/application.html</strong> file after the body tag.</p>
-
-<h4 id="applicationhtmlslim">application.html.slim</h4>
-
-<div class="highlight"><pre><code class="sh">nav
+<div class="highlight"><pre><code class="language-html" data-lang="html">- @todos.each do |todo|
   ul
-    <span class="nv">li</span> <span class="o">=</span> link_to <span class="s2">&quot;Home&quot;</span>, root_path
-    <span class="nv">li</span> <span class="o">=</span> link_to <span class="s2">&quot;Help&quot;</span>, help_path
-    <span class="nv">li</span> <span class="o">=</span> link_to <span class="s2">&quot;About&quot;</span>, about_path</code></pre></div>
+ 	  li = todo.item</code></pre></div>
 
-<p>You should see links on your home page.</p>
+<p>If you wonder why we’ve used folder todos and file index.html.slim inside.So this is basic rails naming convention. If you have controller with name todos, you should have views folder named todos too. And for every GET action(index, new, show, edit) you should have template with name like in controller, this time it is index.</p>
 
-<p><img src="/images/linked-pages.png" alt="linked pages" /></p>
+<p>Now we can creates routes.</p>
 
-<p>We’re done here. In next tutorial we’ll do some styling to our app</p>
+<h4 id="configroutesrb">config/routes.rb</h4>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">resources</span> <span class="ss">:todos</span></code></pre></div>
+
+<p>Take look at this at the browser. You should see task we’ve created beforein your web browser.</p>
+
+<p><img src="/images/todo-list.png" alt="showing list of todos" /></p>
+
+<h4 id="adding-links-to-our-homepage">7.4.1 Adding links to our homepage</h4>
+
+<h4 id="appviewstodosindexhtmlslim-1">app/views/todos/index.html.slim</h4>
+
+<p>Typing address to addressbar is really annoying, so to save time we’ll add links to our homepage.</p>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html">- @todos.each do |todo|
+  ul
+ 	  li = todo.item
+p = link_to &quot;New&quot;, &#39;#&#39;
+p = link_to &quot;Edit&quot;, &#39;#&#39;
+p = link_to &quot;Delete&quot;, &#39;#&#39;</code></pre></div>
+
+<h3 id="creating-new-todos">7.4 Creating new todos</h3>
+
+<p>Now we want to create new tasks. First thing we need to do is to create new action in controller</p>
+
+<h4 id="creating-new-action-in-todos-controller">7.4.1 Creating new action in todos controller</h4>
+
+<h4 id="appcontrollerstodoscontrollerrb-1">app/controllers/todos_controller.rb</h4>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">index</span>
+  <span class="vi">@todos</span> <span class="o">=</span> <span class="no">Todo</span><span class="o">.</span><span class="n">all</span>
+<span class="k">end</span>
+
+<span class="k">def</span> <span class="nf">new</span>
+  <span class="vi">@todo</span> <span class="o">=</span> <span class="no">Todo</span><span class="o">.</span><span class="n">new</span>
+<span class="k">end</span></code></pre></div>
+
+<p>To create our todos in browser we need to create new form in app/views folder.</p>
+
+<h4 id="creating-new-todo-form">7.4.2 Creating new todo form</h4>
+
+<h4 id="appviewstodosnewhtmlslim">app/views/todos/new.html.slim</h4>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html">= form_for(@todo) do |f|
+  p
+    = f.text_field :item, :placeholder =&gt; &quot;Add new item&quot;
+  p
+    = f.submit</code></pre></div>
+
+<p>And update home page like this</p>
+
+<h4 id="appviewstodosnewhtmlslim-1">app/views/todos/new.html.slim</h4>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html">- @todos.each do |todo|
+  ul
+    li = todo.item
+p
+  = link_to &quot;New&quot;, new_todo_path
+p
+  = link_to &quot;Edit&quot;, &#39;#&#39;
+p
+  = link_to &quot;Delete&quot;, &#39;#&#39;</code></pre></div>
+
+<p>Here we used form_for, that is rails helper for creating forms. Then we’ve set text_field to value of todo itemand submit it. Look at our form in a browser.</p>
+
+<p><img src="/images/new_todo_form.png" alt="how to create new todo form in rails" /></p>
+
+<p>Try to submit now. You should see following error.</p>
+
+<p><img src="/images/new_todo_form_error.png" alt="error in new form in Rails" /></p>
+
+<p>It fails because <strong>new</strong> is <strong>GET</strong> request, we’re getting form from server, but to save details we’ve added to our we need to use <strong>POST</strong> request.</p>
+
+<h4 id="creating-create-action-in-todos-controller">7.4.3 Creating create action in todos controller</h4>
+
+<p>Our form doesn’t work because we haven’t set action in controller to create new todo in database. </p>
+
+<h4 id="appcontrollerstodoscontrollerrb-2">app/controllers/todos_controller.rb</h4>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">create</span>
+  <span class="vi">@todo</span> <span class="o">=</span> <span class="no">Todo</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">todo_params</span><span class="p">)</span>
+  <span class="n">redirect_to</span> <span class="n">todos_path</span>
+<span class="k">end</span>
+
+<span class="kp">private</span>
+<span class="k">def</span> <span class="nf">todo_params</span>
+  <span class="n">params</span><span class="o">.</span><span class="n">require</span><span class="p">(</span><span class="ss">:todo</span><span class="p">)</span><span class="o">.</span><span class="n">permit</span><span class="p">(</span><span class="ss">:item</span><span class="p">)</span><span class="k">end</span></code></pre></div>
+
+<p>After submitting form that redirects back to homepage.</p>
+
+<p>So now you if you submit you should see your todo in list</p>
+
+<p><img src="/images/creating_first_todo.png" alt="creating todo with form" /></p>
+
+<h3 id="editing-todos">7.5 Editing todos</h3>
+
+<p>Sometimes when you make a mistake, you want to edit your todo. We need to create edit a</p>
+
+<h4 id="adding-edit-action-to-controller">7.5.1 Adding edit action to controller</h4>
+
+<h4 id="appcontrollerstodoscontrollerrb-3">app/controllers/todos_controller.rb</h4>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">edit</span>
+  <span class="vi">@todo</span> <span class="o">=</span> <span class="no">Todo</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+<span class="k">end</span></code></pre></div>
+
+<p>To edit our todo we’ve to find it first. Every todo has id, so we’ll use special number for that.</p>
+
+<h3 id="creating-form-for-editing-todos">7.5.2 Creating form for editing todos</h3>
+
+<p>So exactly as last time, we need to create <strong>GET</strong> request this time edit.</p>
+
+<h4 id="appviewstodosedithtmlslim">app/views/todos/edit.html.slim</h4>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html">h2 Edit todo
+= form_for(@link) do |f|
+  = f.text_field :item
+  = f.submit</code></pre></div>
+
+<p>And don’t forget to add link to edit_form to your homepage.</p>
+
+<div class="highlight"><pre><code class="language-html" data-lang="html">- @todos.each do |todo|
+  ul
+    li = todo.item
+p
+  = link_to &quot;New&quot;, new_todo_path
+p
+  = link_to &quot;Edit&quot;, edit_todo_path
+p
+  = link_to &quot;Delete&quot;, &#39;#&#39;</code></pre></div>
+
+<p><img src="/images/edit_todo_form.png" alt="edit form in rails" /></p>
+
+<p>Again try to submit it, you should see following error.</p>
+
+<p><img src="/images/edit_form_error.png" alt="edit form error in rails" /></p>
+
+<p>Same error as a last time, but this time we need to create <strong>POST</strong> request with name <strong>update</strong></p>
+
+<h4 id="adding-update-action">7.5.3 Adding update action</h4>
+
+<h4 id="appcontrollerstodoscontrollerrb-4">app/controllers/todos_controller.rb</h4>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">update</span>
+  <span class="vi">@todo</span> <span class="o">=</span> <span class="no">Todo</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span> 
+  <span class="vi">@todo</span><span class="o">.</span><span class="n">update</span></code></pre></div>
+
+<p>If you submit form right now, you should see that our todo is updated.</p>
+
+<p><img src="/images/todo_updated.png" alt="updated todo in rails" /></p>
+
+<h3 id="deleting-todos">7.6 Deleting todos</h3>
+<p>Sometimes when todo is done, you want to remove it. To remove we’ll use destroy action.</p>
+
+<h4 id="adding-destroy-action-to-controller">7.6.1 Adding destroy action to controller</h4>
+
+<h4 id="appcontrollerstodoscontrollerrb-5">app/controllers/todos_controller.rb</h4>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">destroy</span>
+  <span class="vi">@todo</span> <span class="o">=</span> <span class="no">Todo</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+  <span class="vi">@todo</span><span class="o">.</span><span class="n">destroy</span>
+<span class="k">end</span></code></pre></div>
+
+<h2 id="adding-styling-with-bootstrap">8 Adding styling with Bootstrap</h2>
+
+<p>Our app is little bit dry. No css just plain HTML, let’s fix it. We’ll use bootstrap library for that. Add bootstrap gem to your Gemfile</p>
 
 
 
@@ -497,12 +452,42 @@ Start rails server. You should something like this:</p>
 <ul class="posts">
   
 
+  <li><span>05 Aug 2014</span> &raquo; <a href="/weekly-rails/2014/08/05/how-to-add-voting-to-rails-app.html#disqus_thread">How to Add Voting to Rails App</a></li>
+  
+  
+  
+
+  <li><span>03 Aug 2014</span> &raquo; <a href="/2014/08/03/tags.html#disqus_thread">Tags</a></li>
+  
+  
+  
+
+  <li><span>03 Aug 2014</span> &raquo; <a href="/2014/08/03/tests.html#disqus_thread">How to Run Tests in Vim</a></li>
+  
+  
+  
+
+  <li><span>30 Jul 2014</span> &raquo; <a href="/2014/07/30/vim4rails.html#disqus_thread">Vim4rails</a></li>
+  
+  
+  
+
   <li><span>09 Jul 2014</span> &raquo; <a href="/productivity-booster/2014/07/09/how-to-convert-source-code-to-pdf.html#disqus_thread">How to convert Ruby source code to pdf in Linux</a></li>
   
   
   
 
+  <li><span>04 Jul 2014</span> &raquo; <a href="/2014/07/04/stopwatch.html#disqus_thread">How to create stopwatch in Ruby Shoes</a></li>
+  
+  
+  
+
   <li><span>29 Jun 2014</span> &raquo; <a href="/shoes/2014/06/29/how-to-create-clock-in-ruby-shoes.html#disqus_thread">How to create digital clock in Ruby Shoes</a></li>
+  
+  
+  
+
+  <li><span>16 Jun 2014</span> &raquo; <a href="/2014/06/16/post-it.html#disqus_thread">Post It</a></li>
   
   
   
@@ -513,36 +498,6 @@ Start rails server. You should something like this:</p>
   
 
   <li><span>06 Jun 2014</span> &raquo; <a href="/weekly-rails/2014/06/06/how-to-create-link-aggregation-site-in-rails.html#disqus_thread">How to create link aggregation site in Rails&#58; Adding, editing, deleting links</a></li>
-  
-  
-  
-
-  <li><span>30 May 2014</span> &raquo; <a href="/learning-resources/2014/05/30/ruby-news-websites.html#disqus_thread">7 Websites to Get Latest News About Ruby</a></li>
-  
-  
-  
-
-  <li><span>02 May 2014</span> &raquo; <a href="/productivity-booster/2014/05/02/vim-plugins-for-ruby.html#disqus_thread">Vim for Rubyist&#58; 10 useful vim plugins for Ruby</a></li>
-  
-  
-  
-
-  <li><span>24 Apr 2014</span> &raquo; <a href="/learning-resources/2014/04/24/books-for-learning-rails.html#disqus_thread">6 Books for learning or advancing your rails knowledge</a></li>
-  
-  
-  
-
-  <li><span>17 Apr 2014</span> &raquo; <a href="/shoes/2014/04/17/how-to-create-simple-calculator-in-shoes.html#disqus_thread">How to create simple calculator in Ruby Shoes</a></li>
-  
-  
-  
-
-  <li><span>09 Apr 2014</span> &raquo; <a href="/learning-resources/2014/04/09/learn-ruby-on-rails-book-review.html#disqus_thread">Learn Ruby on Rails book review</a></li>
-  
-  
-  
-
-  <li><span>04 Apr 2014</span> &raquo; <a href="/weekly-rails/2014/04/04/how-to-create-todo-list-app-in-rails-adding-removing-completing-tasks.html#disqus_thread">How to create todo list app in rails, adding, removing and deleting tasks</a></li>
   
   
    
@@ -578,6 +533,34 @@ Start rails server. You should something like this:</p>
   <h1>Recent posts</h1>
 
 <li>
+  <span>05 Aug 2014</span> &raquo;
+
+  <a href="/weekly-rails/2014/08/05/how-to-add-voting-to-rails-app.html">
+    How to Add Voting to Rails App</a>
+</li>
+
+<li>
+  <span>03 Aug 2014</span> &raquo;
+
+  <a href="/2014/08/03/tags.html">
+    Tags</a>
+</li>
+
+<li>
+  <span>03 Aug 2014</span> &raquo;
+
+  <a href="/2014/08/03/tests.html">
+    How to Run Tests in Vim</a>
+</li>
+
+<li>
+  <span>30 Jul 2014</span> &raquo;
+
+  <a href="/2014/07/30/vim4rails.html">
+    Vim4rails</a>
+</li>
+
+<li>
   <span>09 Jul 2014</span> &raquo;
 
   <a href="/productivity-booster/2014/07/09/how-to-convert-source-code-to-pdf.html">
@@ -585,10 +568,24 @@ Start rails server. You should something like this:</p>
 </li>
 
 <li>
+  <span>04 Jul 2014</span> &raquo;
+
+  <a href="/2014/07/04/stopwatch.html">
+    How to create stopwatch in Ruby Shoes</a>
+</li>
+
+<li>
   <span>29 Jun 2014</span> &raquo;
 
   <a href="/shoes/2014/06/29/how-to-create-clock-in-ruby-shoes.html">
     How to create digital clock in Ruby Shoes</a>
+</li>
+
+<li>
+  <span>16 Jun 2014</span> &raquo;
+
+  <a href="/2014/06/16/post-it.html">
+    Post It</a>
 </li>
 
 <li>
@@ -622,8 +619,22 @@ Start rails server. You should something like this:</p>
 <li>
   <span>24 Apr 2014</span> &raquo;
 
+  <a href="/2014/04/24/rails.html">
+    6 Books for learning or advancing your rails knowledge</a>
+</li>
+
+<li>
+  <span>24 Apr 2014</span> &raquo;
+
   <a href="/learning-resources/2014/04/24/books-for-learning-rails.html">
     6 Books for learning or advancing your rails knowledge</a>
+</li>
+
+<li>
+  <span>17 Apr 2014</span> &raquo;
+
+  <a href="/2014/04/17/calculator.html">
+    How to create simple calculator in Shoes</a>
 </li>
 
 <li>
@@ -641,6 +652,13 @@ Start rails server. You should something like this:</p>
 </li>
 
 <li>
+  <span>05 Apr 2014</span> &raquo;
+
+  <a href="/2014/04/05/why_tmux.html">
+    Why to use tmux</a>
+</li>
+
+<li>
   <span>04 Apr 2014</span> &raquo;
 
   <a href="/weekly-rails/2014/04/04/how-to-create-todo-list-app-in-rails-adding-removing-completing-tasks.html">
@@ -650,15 +668,15 @@ Start rails server. You should something like this:</p>
 <li>
   <span>28 Mar 2014</span> &raquo;
 
-  <a href="/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html">
-    How to install Ruby and Rails for your operating system</a>
+  <a href="/learning-resources/2014/03/28/learn-ruby-with-these-resources.html">
+    Top 8 Learning resources for ruby beginner</a>
 </li>
 
 <li>
   <span>28 Mar 2014</span> &raquo;
 
-  <a href="/learning-resources/2014/03/28/learn-ruby-with-these-resources.html">
-    Top 8 Learning resources for ruby beginner</a>
+  <a href="/learning-resources/2014/03/28/how-to-install-rails.html">
+    How to install Ruby on Rails for your operating system</a>
 </li>
 
 <li>
@@ -672,7 +690,7 @@ Start rails server. You should something like this:</p>
   <span>22 Mar 2014</span> &raquo;
 
   <a href="/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.html">
-    How to create todo list app in rails static pages</a>
+    How to create todo list app in rails</a>
 </li>
 
 </ul>

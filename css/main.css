@@ -294,9 +294,10 @@ footer .contact a {
 
 .post h4 {
   font-size: 1.2em;
+	margin: 0
 }
 .post p {
-margin: 0 0 2.0em;
+margin: 0 0.5 1.0em;
   
 }
 

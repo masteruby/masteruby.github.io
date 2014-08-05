@@ -64,11 +64,11 @@
 
 <p>Want to find some file but don’t know its path? Try to use <strong>:find</strong> command:</p>
 
-<div class="highlight"><pre><code class="sh">:find schema.rb</code></pre></div>
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">:find schema.rb</code></pre></div>
 
 <p>You can also move up in your Rails application by finding related files. For example, let’s assume you’re editing <strong>home.html.slim</strong>. Try to find related file</p>
 
-<div class="highlight"><pre><code class="sh">:R</code></pre></div>
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">:R</code></pre></div>
 
 <p>You should see that you’re in file <strong>static_pages_controller.rb</strong> and that you have cursor at method named home.</p>
 
@@ -76,18 +76,18 @@
 
 <p>Jumping from views to controllers to models can be really painful. Here’s where <strong>vim-rails</strong> plugin excels. For example let’s assume you have file named <strong>home.html.slim</strong> in your <strong>views</strong> directory. You can edit it with simple <strong>Eview</strong>:</p>
 
-<div class="highlight"><pre><code class="sh">:Eview static_pages/home</code></pre></div>
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">:Eview static_pages/home</code></pre></div>
 
 <p>You see? You don’t have to
 set file extension or whole path, just add name of your controller and name of your view file.</p>
 
 <p>Similarily you can edit controller too:</p>
 
-<div class="highlight"><pre><code class="vim"><span class="p">:</span>Econtroller static_pages</code></pre></div>
+<div class="highlight"><pre><code class="language-vim" data-lang="vim"><span class="p">:</span>Econtroller static_pages</code></pre></div>
 
 <p>Here are commands for editing your layouts, stylesheets and models:</p>
 
-<div class="highlight"><pre><code class="sh">:Elayout header
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">:Elayout header
 :Emodel User
 :Estylesheet main</code></pre></div>
 
@@ -95,7 +95,7 @@ set file extension or whole path, just add name of your controller and name of y
 
 <p>So you want to run migration, generate model or controller. Before vim-rails plugin you have to close your vim session and go back to terminal, not anymore. Here’s useful commands you should know. Let’s assume you’re building model named User, you can simply create model with :Rgenerate and destroy model with :Rdestroy.</p>
 
-<div class="highlight"><pre><code class="sh">:Rgenerate model User
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">:Rgenerate model User
 :Rdestroy model User
 :Rserver</code></pre></div>
 
@@ -112,7 +112,7 @@ set file extension or whole path, just add name of your controller and name of y
 
 <p>Type this into vim session to run NerdTree:</p>
 
-<div class="highlight"><pre><code class="sh">:NERDTree</code></pre></div>
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">:NERDTree</code></pre></div>
 
 <p>You should see content of current working directory. NerdTree use vim navigation keys to move up and down to directory tree.</p>
 
@@ -128,15 +128,15 @@ set file extension or whole path, just add name of your controller and name of y
 
 <p>For example let’see what’s changed with git status</p>
 
-<div class="highlight"><pre><code class="sh">:Git status</code></pre></div>
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">:Git status</code></pre></div>
 
 <p>Let’s add changes to repository</p>
 
-<div class="highlight"><pre><code class="sh">:Git add .</code></pre></div>
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">:Git add .</code></pre></div>
 
 <p>Let’s push it to origin master</p>
 
-<div class="highlight"><pre><code class="sh">:Git push origin master</code></pre></div>
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">:Git push origin master</code></pre></div>
 
 <h2 id="vim-rubyhttpsgithubcomvim-rubyvim-ruby">4. <a href="https://github.com/vim-ruby/vim-ruby">Vim-Ruby</a></h2>
 
@@ -144,7 +144,7 @@ set file extension or whole path, just add name of your controller and name of y
 
 <p>Here’s list of useful navigation methods in vim-ruby</p>
 
-<div class="highlight"><pre><code class="sh"><span class="c"># To edit start of next method definition</span>
+<div class="highlight"><pre><code class="language-sh" data-lang="sh"><span class="c"># To edit start of next method definition</span>
 <span class="o">]</span>m
 <span class="c"># To go to end of next method definition</span>
 <span class="o">]</span>M
@@ -157,11 +157,11 @@ set file extension or whole path, just add name of your controller and name of y
 
 <p>You don’t have exit vim or attach another tmux session to install gems anymore. Just run :Bundle in command mode in Vim and gems will be installed:</p>
 
-<div class="highlight"><pre><code class="sh">:Bundle</code></pre></div>
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">:Bundle</code></pre></div>
 
 <p>To edit Gemfile you will use this command:</p>
 
-<div class="highlight"><pre><code class="sh">:Bopen</code></pre></div>
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">:Bopen</code></pre></div>
 
 <h2 id="vim-cucumberhttpsgithubcomtpopevim-cucumber">6. <a href="https://github.com/tpope/vim-cucumber">Vim-Cucumber</a></h2>
 
@@ -175,7 +175,7 @@ set file extension or whole path, just add name of your controller and name of y
 
 <p>With Vroom you can run your tests inside Vim. Supports Rspec, Cucumber and MiniTest. You can run your tests with:</p>
 
-<div class="highlight"><pre><code class="sh">:VroomRunTestFile</code></pre></div>
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">:VroomRunTestFile</code></pre></div>
 
 <h2 id="vim-endwisehttpsgithubcomtpopevim-endwise">9. <a href="https://github.com/tpope/vim-endwise">Vim-endwise</a></h2>
 
@@ -215,12 +215,42 @@ set file extension or whole path, just add name of your controller and name of y
 <ul class="posts">
   
 
+  <li><span>05 Aug 2014</span> &raquo; <a href="/weekly-rails/2014/08/05/how-to-add-voting-to-rails-app.html#disqus_thread">How to Add Voting to Rails App</a></li>
+  
+  
+  
+
+  <li><span>03 Aug 2014</span> &raquo; <a href="/2014/08/03/tags.html#disqus_thread">Tags</a></li>
+  
+  
+  
+
+  <li><span>03 Aug 2014</span> &raquo; <a href="/2014/08/03/tests.html#disqus_thread">How to Run Tests in Vim</a></li>
+  
+  
+  
+
+  <li><span>30 Jul 2014</span> &raquo; <a href="/2014/07/30/vim4rails.html#disqus_thread">Vim4rails</a></li>
+  
+  
+  
+
   <li><span>09 Jul 2014</span> &raquo; <a href="/productivity-booster/2014/07/09/how-to-convert-source-code-to-pdf.html#disqus_thread">How to convert Ruby source code to pdf in Linux</a></li>
   
   
   
 
+  <li><span>04 Jul 2014</span> &raquo; <a href="/2014/07/04/stopwatch.html#disqus_thread">How to create stopwatch in Ruby Shoes</a></li>
+  
+  
+  
+
   <li><span>29 Jun 2014</span> &raquo; <a href="/shoes/2014/06/29/how-to-create-clock-in-ruby-shoes.html#disqus_thread">How to create digital clock in Ruby Shoes</a></li>
+  
+  
+  
+
+  <li><span>16 Jun 2014</span> &raquo; <a href="/2014/06/16/post-it.html#disqus_thread">Post It</a></li>
   
   
   
@@ -231,36 +261,6 @@ set file extension or whole path, just add name of your controller and name of y
   
 
   <li><span>06 Jun 2014</span> &raquo; <a href="/weekly-rails/2014/06/06/how-to-create-link-aggregation-site-in-rails.html#disqus_thread">How to create link aggregation site in Rails&#58; Adding, editing, deleting links</a></li>
-  
-  
-  
-
-  <li><span>30 May 2014</span> &raquo; <a href="/learning-resources/2014/05/30/ruby-news-websites.html#disqus_thread">7 Websites to Get Latest News About Ruby</a></li>
-  
-  
-  
-
-  <li><span>24 Apr 2014</span> &raquo; <a href="/learning-resources/2014/04/24/books-for-learning-rails.html#disqus_thread">6 Books for learning or advancing your rails knowledge</a></li>
-  
-  
-  
-
-  <li><span>17 Apr 2014</span> &raquo; <a href="/shoes/2014/04/17/how-to-create-simple-calculator-in-shoes.html#disqus_thread">How to create simple calculator in Ruby Shoes</a></li>
-  
-  
-  
-
-  <li><span>09 Apr 2014</span> &raquo; <a href="/learning-resources/2014/04/09/learn-ruby-on-rails-book-review.html#disqus_thread">Learn Ruby on Rails book review</a></li>
-  
-  
-  
-
-  <li><span>04 Apr 2014</span> &raquo; <a href="/weekly-rails/2014/04/04/how-to-create-todo-list-app-in-rails-adding-removing-completing-tasks.html#disqus_thread">How to create todo list app in rails, adding, removing and deleting tasks</a></li>
-  
-  
-  
-
-  <li><span>28 Mar 2014</span> &raquo; <a href="/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html#disqus_thread">How to install Ruby and Rails for your operating system</a></li>
   
   
    
@@ -296,6 +296,34 @@ set file extension or whole path, just add name of your controller and name of y
   <h1>Recent posts</h1>
 
 <li>
+  <span>05 Aug 2014</span> &raquo;
+
+  <a href="/weekly-rails/2014/08/05/how-to-add-voting-to-rails-app.html">
+    How to Add Voting to Rails App</a>
+</li>
+
+<li>
+  <span>03 Aug 2014</span> &raquo;
+
+  <a href="/2014/08/03/tags.html">
+    Tags</a>
+</li>
+
+<li>
+  <span>03 Aug 2014</span> &raquo;
+
+  <a href="/2014/08/03/tests.html">
+    How to Run Tests in Vim</a>
+</li>
+
+<li>
+  <span>30 Jul 2014</span> &raquo;
+
+  <a href="/2014/07/30/vim4rails.html">
+    Vim4rails</a>
+</li>
+
+<li>
   <span>09 Jul 2014</span> &raquo;
 
   <a href="/productivity-booster/2014/07/09/how-to-convert-source-code-to-pdf.html">
@@ -303,10 +331,24 @@ set file extension or whole path, just add name of your controller and name of y
 </li>
 
 <li>
+  <span>04 Jul 2014</span> &raquo;
+
+  <a href="/2014/07/04/stopwatch.html">
+    How to create stopwatch in Ruby Shoes</a>
+</li>
+
+<li>
   <span>29 Jun 2014</span> &raquo;
 
   <a href="/shoes/2014/06/29/how-to-create-clock-in-ruby-shoes.html">
     How to create digital clock in Ruby Shoes</a>
+</li>
+
+<li>
+  <span>16 Jun 2014</span> &raquo;
+
+  <a href="/2014/06/16/post-it.html">
+    Post It</a>
 </li>
 
 <li>
@@ -340,8 +382,22 @@ set file extension or whole path, just add name of your controller and name of y
 <li>
   <span>24 Apr 2014</span> &raquo;
 
+  <a href="/2014/04/24/rails.html">
+    6 Books for learning or advancing your rails knowledge</a>
+</li>
+
+<li>
+  <span>24 Apr 2014</span> &raquo;
+
   <a href="/learning-resources/2014/04/24/books-for-learning-rails.html">
     6 Books for learning or advancing your rails knowledge</a>
+</li>
+
+<li>
+  <span>17 Apr 2014</span> &raquo;
+
+  <a href="/2014/04/17/calculator.html">
+    How to create simple calculator in Shoes</a>
 </li>
 
 <li>
@@ -359,6 +415,13 @@ set file extension or whole path, just add name of your controller and name of y
 </li>
 
 <li>
+  <span>05 Apr 2014</span> &raquo;
+
+  <a href="/2014/04/05/why_tmux.html">
+    Why to use tmux</a>
+</li>
+
+<li>
   <span>04 Apr 2014</span> &raquo;
 
   <a href="/weekly-rails/2014/04/04/how-to-create-todo-list-app-in-rails-adding-removing-completing-tasks.html">
@@ -368,15 +431,15 @@ set file extension or whole path, just add name of your controller and name of y
 <li>
   <span>28 Mar 2014</span> &raquo;
 
-  <a href="/learning-resources/2014/03/28/ruby-on-rails-installation-guide.html">
-    How to install Ruby and Rails for your operating system</a>
+  <a href="/learning-resources/2014/03/28/learn-ruby-with-these-resources.html">
+    Top 8 Learning resources for ruby beginner</a>
 </li>
 
 <li>
   <span>28 Mar 2014</span> &raquo;
 
-  <a href="/learning-resources/2014/03/28/learn-ruby-with-these-resources.html">
-    Top 8 Learning resources for ruby beginner</a>
+  <a href="/learning-resources/2014/03/28/how-to-install-rails.html">
+    How to install Ruby on Rails for your operating system</a>
 </li>
 
 <li>
@@ -390,7 +453,7 @@ set file extension or whole path, just add name of your controller and name of y
   <span>22 Mar 2014</span> &raquo;
 
   <a href="/weekly-rails/2014/03/22/how-to-create-todo-list-app-static-pages.html">
-    How to create todo list app in rails static pages</a>
+    How to create todo list app in rails</a>
 </li>
 
 </ul>
