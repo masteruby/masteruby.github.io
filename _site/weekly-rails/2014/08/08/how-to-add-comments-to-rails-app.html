@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>How to create digital clock in Ruby Shoes </title>
+    <title>How to Add Comments to Rails App with Commontator </title>
     	<!-- Bootstrap CSS -->
     <meta name="google-site-verification" content="UFFQXW8FdLgKuB_vYYy8LTw5aonnBmAHdUhUopMxero" />
     <meta description="Masteruby is tutorials web site about learning ruby">
@@ -48,98 +48,133 @@
         <!-- AddThis Button BEGIN -->
 
 
-<h2>How to create digital clock in Ruby Shoes</h2>
-<p class="meta">29 Jun 2014</p>
+<h2>How to Add Comments to Rails App with Commontator</h2>
+<p class="meta">08 Aug 2014</p>
 
 <h4>Posted by Milos Dolobac</h4>
 
 <div class="post">
-<p>In this post I want to show how to create digital clock using Shoes.</p>
+<p>Last time we’ve added <a href="/weekly-rails/2014/08/05/how-to-add-voting-to-rails-app.html">voting</a>. This time I will show you how easy can be adding comments with Commontator.</p>
 
-<p><img class="shoes" src="/images/clock.png" alt="how to create clock in Ruby" /></p>
+<h2 id="why-to-use-commontator">Why to Use Commontator</h2>
 
-<p>Clock is first in following series of tutorials about using Time library in Shoes. Next time we’ll look at stopwatch and timer.</p>
-
-<p>You can find out example code on <a href="https://github.com/MilosDolobac/green-shoes-apps">github</a></p>
-
-<p>Here’s what we’ve in front of us.</p>
+<p>Commontator has following advantages:</p>
 
 <ul>
-  <li>First we’ll add current time with Ruby Time library and append in to title element</li>
-  <li>Then we’ll add automatic update to current time</li>
-  <li>And we’ll add some styling to our clock</li>
+  <li>It includes comments count</li>
+  <li>Is easy to configure</li>
+  <li>It includes creating, editing and deleting comments</li>
+  <li>You can add voting with acts_as_votable</li>
+  <li>Is customizable </li>
 </ul>
 
-<h2 id="adding-current-time-to-our-app">Adding current Time to our app.</h2>
+<h2 id="how-to-install-commontator">How to Install Commontator</h2>
 
-<p>First thing we need to do is add current time. We’ll use Time library for this. Create ruby file <strong>clock.rb</strong> and add this code:</p>
+<p>First thing we need to do is to add commontator gem to Gemfile</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="nb">require</span> <span class="s1">&#39;green_shoes&#39;</span>
+<h4 id="gemfile">Gemfile</h4>
 
-<span class="no">Shoes</span><span class="o">.</span><span class="n">app</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">230</span> <span class="k">do</span>
-  <span class="n">flow</span> <span class="ss">margin</span><span class="p">:</span> <span class="mi">5</span> <span class="k">do</span>
-    <span class="vi">@clock</span> <span class="o">=</span> <span class="n">title</span> <span class="s1">&#39;&#39;</span>
-    <span class="n">t</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">new</span>
-    <span class="vi">@clock</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H:%M:%S&quot;</span><span class="p">)</span>
-  <span class="k">end</span>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">gem</span> <span class="s1">&#39;commontator&#39;</span></code></pre></div>
+
+<p>Then install it with Bundler</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">bundle</span> <span class="n">install</span></code></pre></div>
+
+<p>Now you can create Commontator configuration and migrations</p>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">rake</span> <span class="ss">commontator</span><span class="p">:</span><span class="n">install</span></code></pre></div>
+
+<p>And move migrations to database</p>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">rake db:migrate</code></pre></div>
+
+<h2 id="how-to-use-commontator-in-our-models">How to Use Commontator in Our Models</h2>
+
+<p>Let’s assume you’ve got two models, first is <strong>User</strong> and second is a <strong>Link</strong></p>
+
+<p>User should be able to post comments, so add this line to your User model.</p>
+
+<h4 id="appmodelsuserrb">app/models/user.rb</h4>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+  
+  <span class="n">acts_as_commontator</span></code></pre></div>
+
+<p>We want to show comments under each link, so add acts_as_commontable helper to Link model.</p>
+
+<h4 id="appmodelslinkrb">app/models/link.rb</h4>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Link</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+
+<span class="n">acts_as_commontable</span></code></pre></div>
+
+<h2 id="adding-comments-route">Adding Comment’s route</h2>
+
+<p>Next thing we need to is to add commontator’s route.</p>
+
+<h4 id="configroutesrb">config/routes.rb</h4>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">mount</span> <span class="no">Commontator</span><span class="o">::</span><span class="no">Engine</span> <span class="o">=&gt;</span> <span class="s1">&#39;/commontator&#39;</span></code></pre></div>
+
+<h2 id="showing-comments">Showing Comments</h2>
+
+<p>So we’ve added commontator’s helpers to our model, so we can add commontator’s thread to our views. Let’s assume we’ve got index action in links_controller.</p>
+
+<h4 id="appcontrollerslinkscontrollerrb">app/controllers/links_controller.rb</h4>
+
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">LinksController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
+
+<span class="k">def</span> <span class="nf">index</span>
+  <span class="vi">@links</span> <span class="o">=</span> <span class="no">Link</span><span class="o">.</span><span class="n">all</span>
 <span class="k">end</span></code></pre></div>
 
-<p>If you run our app right now, you should see something like this:</p>
+<p>Let’s add commontator’s thread to our views.</p>
 
-<p><img class="shoes" src="/images/adding-time.png" alt="adding current time in ruby" /></p>
+<h4 id="appviewslinksindexhtmlslim">app/views/links/index.html.slim</h4>
 
-<p>Take look at the code we’ve just done.</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html">- @links.each do |link|
+  = commontator_thread(link)</code></pre></div>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="vi">@clock</span> <span class="o">=</span> <span class="n">title</span> <span class="s1">&#39;&#39;</span></code></pre></div>
+<p>Now you should see comments count:</p>
 
-<p>We’ll store our clock in element title with name <strong>@clock</strong>. We didn’t usetitle until now, so you need to know that difference between title and para is that para is 12px high and titleis 34px high. </p>
+<p><img src="/images/comments-count.png" alt="how to add comments count in Rails" /></p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">t</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">new</span>
-<span class="vi">@clock</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H:%M:%S&quot;</span><span class="p">)</span></code></pre></div>
+<p>Click on show comments, you should see new comment link.</p>
 
-<p>On a first line we’ve created instance of Ruby Time class. On second line we’ve converted only hours, minutes, and seconds to string for using in our title.</p>
+<p><img src="/images/new-comment.png" alt="how to add new comment in Rails" /></p>
 
-<h2 id="updating-clock">Updating clock</h2>
+<p>Fill in new comment form and look at the comment that we’ve created:</p>
 
-<p>Our clock isn’t working well. We want to update clock after every change in time. Updating is very simple. Just add this code.</p>
+<p><img src="/images/showing-comment.png" alt="how to show comment in Rails" /></p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="nb">require</span> <span class="s1">&#39;green_shoes&#39;</span>
+<p>Looks nice isn’t it?</p>
 
-<span class="no">Shoes</span><span class="o">.</span><span class="n">app</span> <span class="k">do</span>
-  <span class="n">flow</span> <span class="k">do</span>
-    <span class="vi">@clock</span> <span class="o">=</span> <span class="n">title</span> <span class="s1">&#39;&#39;</span>
-    <span class="n">animate</span> <span class="k">do</span>
-      <span class="n">t</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">new</span>
-      <span class="vi">@clock</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H:%M:%S&quot;</span><span class="p">)</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
-<span class="k">end</span></code></pre></div>
+<h2 id="replacing-anonymous-with-username">Replacing “Anonymous” with username</h2>
 
-<p>Run your app now, it should update clock every second. </p>
+<p>You certainly noticed that when you’ve created comment, it shows Anonymous instead of username.</p>
 
-<h2 id="adding-some-style-to-clock">Adding some style to clock</h2>
+<p>Let’s fix that. Find this line in commontator initializer</p>
 
-<p>Our clock isn’t looking very good. Let’s fix it, replace code with clock text with this:</p>
+<h4 id="configinitializerscommontatorrb">config/initializers/commontator.rb</h4>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="vi">@clock</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">bg</span><span class="p">(</span><span class="n">fg</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H:%M:%S&quot;</span><span class="p">),</span> <span class="n">rgb</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span> <span class="n">black</span><span class="p">)</span></code></pre></div>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">config</span><span class="o">.</span><span class="n">user_name_proc</span> <span class="o">=</span> <span class="nb">lambda</span> <span class="p">{</span> <span class="o">|</span><span class="n">user</span><span class="o">|</span> <span class="no">I18n</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="s1">&#39;commontator.anonymous&#39;</span><span class="p">)</span> <span class="p">}</span></code></pre></div>
 
-<p>Take last look at the code we’ve just done:</p>
+<p>Now if you have column username in users table replace previous line with following:</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="nb">require</span> <span class="s1">&#39;green_shoes&#39;</span>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">config</span><span class="o">.</span><span class="n">user_name_proc</span> <span class="o">=</span> <span class="nb">lambda</span> <span class="p">{</span> <span class="o">|</span><span class="n">user</span><span class="o">|</span> <span class="n">user</span><span class="o">.</span><span class="n">username</span> <span class="p">}</span></code></pre></div>
 
-<span class="no">Shoes</span><span class="o">.</span><span class="n">app</span> <span class="ss">height</span><span class="p">:</span> <span class="mi">50</span><span class="p">,</span> <span class="ss">width</span><span class="p">:</span> <span class="mi">230</span> <span class="k">do</span>
-  <span class="n">flow</span> <span class="ss">margin</span><span class="p">:</span> <span class="mi">5</span> <span class="k">do</span>
-    <span class="vi">@clock</span> <span class="o">=</span> <span class="n">title</span> <span class="s1">&#39;&#39;</span>
-    <span class="n">animate</span> <span class="k">do</span>
-      <span class="n">t</span> <span class="o">=</span> <span class="no">Time</span><span class="o">.</span><span class="n">new</span>
-      <span class="vi">@clock</span><span class="o">.</span><span class="n">text</span> <span class="o">=</span> <span class="n">bg</span><span class="p">(</span><span class="n">fg</span><span class="p">(</span><span class="n">t</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%H:%M:%S&quot;</span><span class="p">),</span> <span class="n">rgb</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">255</span><span class="p">,</span> <span class="mi">0</span><span class="p">)),</span> <span class="n">black</span><span class="p">)</span>
-    <span class="k">end</span>
-  <span class="k">end</span>
-<span class="k">end</span></code></pre></div>
+<p>Now if you look at your comments in a browser you should see user’s name instead of Anonymous.</p>
 
-<p>So here we’ve set color of clock numbers to green and background to black.</p>
+<h2 id="customization">Customization</h2>
 
-<p>Now we’re done. Have some ideas how to improve clock? Feel free to add changes to github.</p>
+<p>Let’s assume you want to customize views. Run this command:</p>
+
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">rake commontator:copy:views</code></pre></div>
+
+<p>You should see that commontator folder was created in our views folder.</p>
+
+<p>That’s all for now. I hope that you liked my tutorial. If you don’t understand anything about post, feel free to ask in discussion. And if you like it, share it with your favorite social network.</p>
+
 
 
 
@@ -173,11 +208,6 @@
   
   
 
-  <li><span>08 Aug 2014</span> &raquo; <a href="/weekly-rails/2014/08/08/how-to-add-comments-to-rails-app.html#disqus_thread">How to Add Comments to Rails App with Commontator</a></li>
-  
-  
-  
-
   <li><span>05 Aug 2014</span> &raquo; <a href="/weekly-rails/2014/08/05/how-to-add-voting-to-rails-app.html#disqus_thread">How to Add Voting to Rails App</a></li>
   
   
@@ -204,6 +234,11 @@
   
 
   <li><span>04 Jul 2014</span> &raquo; <a href="/2014/07/04/stopwatch.html#disqus_thread">How to create stopwatch in Ruby Shoes</a></li>
+  
+  
+  
+
+  <li><span>29 Jun 2014</span> &raquo; <a href="/shoes/2014/06/29/how-to-create-clock-in-ruby-shoes.html#disqus_thread">How to create digital clock in Ruby Shoes</a></li>
   
   
   
