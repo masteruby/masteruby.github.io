@@ -7,132 +7,140 @@
 		<atom:link href="http://masteruby.github.io/feed.xml" rel="self" type="application/rss+xml" />
 		
 			<item>
-				<title>How to Add Comments to Rails App with Commontator</title>
-				<description>&lt;p&gt;Last time we’ve added &lt;a href=&quot;/weekly-rails/2014/08/05/how-to-add-voting-to-rails-app.html&quot;&gt;voting&lt;/a&gt;. This time I will show you how easy can be adding comments with Commontator.&lt;/p&gt;
+				<title>How to Add User Karma in Rails</title>
+				<description>&lt;p&gt;A week ago you’ve learnt &lt;a href=&quot;/weekly-rails/2014/08/05/how-to-add-voting-to-rails-app.html&quot;&gt;how to add voting&lt;/a&gt;. Acts_as_votable is great, but it doesn’t provide user karma. This time you will learn how to add user karma functionality to your app.&lt;/p&gt;
 
-&lt;h2 id=&quot;why-to-use-commontator&quot;&gt;Why to Use Commontator&lt;/h2&gt;
-
-&lt;p&gt;Commontator has following advantages:&lt;/p&gt;
+&lt;h2 id=&quot;what-do-you-need&quot;&gt;What do you need&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;It includes comments count&lt;/li&gt;
-  &lt;li&gt;Is easy to configure&lt;/li&gt;
-  &lt;li&gt;It includes creating, editing and deleting comments&lt;/li&gt;
-  &lt;li&gt;You can add voting with acts_as_votable&lt;/li&gt;
-  &lt;li&gt;Is customizable &lt;/li&gt;
+  &lt;li&gt;Links controller and model created&lt;/li&gt;
+  &lt;li&gt;User authentication created&lt;/li&gt;
+  &lt;li&gt;Acts_as_votable gem&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;how-to-install-commontator&quot;&gt;How to Install Commontator&lt;/h2&gt;
+&lt;h2 id=&quot;adding-karma-column-to-users-table&quot;&gt;Adding karma column to users table&lt;/h2&gt;
 
-&lt;p&gt;First thing we need to do is to add commontator gem to Gemfile&lt;/p&gt;
+&lt;p&gt;To use karma for user, we need to generate new migration. Create new migration like this:&lt;/p&gt;
 
-&lt;h4 id=&quot;gemfile&quot;&gt;Gemfile&lt;/h4&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;rails generate migration AddKarmaToUsers&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;commontator&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;Let’s edit it now.&lt;/p&gt;
 
-&lt;p&gt;Then install it with Bundler&lt;/p&gt;
+&lt;h4 id=&quot;dbmigrateaddkarmatousersrb&quot;&gt;db/migrate/add_karma_to_users.rb&lt;/h4&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;bundle&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;install&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;AddKarmaToUsers&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Migration&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;change&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;add_column&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:users&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:karma&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:integer&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:default&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Now you can create Commontator configuration and migrations&lt;/p&gt;
+&lt;p&gt;This code will add new column to users table with name karma. We’ve choosed basic type integer and set default value to 0.&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;rake&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;commontator&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;install&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;And move migrations to database&lt;/p&gt;
+&lt;p&gt;Let’s migrate it:&lt;/p&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;rake db:migrate&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;how-to-use-commontator-in-our-models&quot;&gt;How to Use Commontator in Our Models&lt;/h2&gt;
+&lt;h2 id=&quot;adding-user-as-voter&quot;&gt;Adding user as voter&lt;/h2&gt;
 
-&lt;p&gt;Let’s assume you’ve got two models, first is &lt;strong&gt;User&lt;/strong&gt; and second is a &lt;strong&gt;Link&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;User should be able to post comments, so add this line to your User model.&lt;/p&gt;
+&lt;p&gt;Before we’ll use user’s karma we need to add another acts_as_votable helper. I’ll explain why soon. &lt;/p&gt;
 
 &lt;h4 id=&quot;appmodelsuserrb&quot;&gt;app/models/user.rb&lt;/h4&gt;
 
 &lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
   
-  &lt;span class=&quot;n&quot;&gt;acts_as_commontator&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+  &lt;span class=&quot;n&quot;&gt;acts_as_voter&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;has_many&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:links&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;We want to show comments under each link, so add acts_as_commontable helper to Link model.&lt;/p&gt;
+&lt;h2 id=&quot;creating-methods-for-increasing-and-decreasing-users-karma&quot;&gt;Creating methods for increasing and decreasing user’s karma&lt;/h2&gt;
 
-&lt;h4 id=&quot;appmodelslinkrb&quot;&gt;app/models/link.rb&lt;/h4&gt;
+&lt;p&gt;For better readability we’ll use separate methods for increasing and decreasing user’s karma in user’s model.&lt;/p&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Link&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
+&lt;h4 id=&quot;appmodelsuserrb-1&quot;&gt;app/models/user.rb&lt;/h4&gt;
 
-&lt;span class=&quot;n&quot;&gt;acts_as_commontable&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;User&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ActiveRecord&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Base&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;has_many&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:links&lt;/span&gt; 
+  &lt;span class=&quot;n&quot;&gt;acts_as_voter&lt;/span&gt;
+  
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;increase_karma&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;update_attribute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:karma&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;karma&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;adding-comments-route&quot;&gt;Adding Comment’s route&lt;/h2&gt;
+&lt;p&gt;Here we’ve set method that will update user’s karma from default to 1. You will use similar for decreasing.&lt;/p&gt;
 
-&lt;p&gt;Next thing we need to is to add commontator’s route.&lt;/p&gt;
+&lt;h4 id=&quot;appmodelsuserrb-2&quot;&gt;app/models/user.rb&lt;/h4&gt;
 
-&lt;h4 id=&quot;configroutesrb&quot;&gt;config/routes.rb&lt;/h4&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;decrease_karma&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;update_attribute&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:karma&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;karma&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;count&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;mount&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Commontator&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Engine&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&amp;gt;&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;/commontator&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;We’ve added methods to models, let’s go to controllers.&lt;/p&gt;
 
-&lt;h2 id=&quot;showing-comments&quot;&gt;Showing Comments&lt;/h2&gt;
+&lt;h2 id=&quot;adding-user-karma-to-controller&quot;&gt;Adding user karma to controller&lt;/h2&gt;
 
-&lt;p&gt;So we’ve added commontator’s helpers to our model, so we can add commontator’s thread to our views. Let’s assume we’ve got index action in links_controller.&lt;/p&gt;
+&lt;p&gt;Now we can use user’s methods in our links_controller&lt;/p&gt;
 
 &lt;h4 id=&quot;appcontrollerslinkscontrollerrb&quot;&gt;app/controllers/links_controller.rb&lt;/h4&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;LinksController&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ApplicationController&lt;/span&gt;
-
-&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;index&lt;/span&gt;
-  &lt;span class=&quot;vi&quot;&gt;@links&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Link&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;all&lt;/span&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;upvote&lt;/span&gt;
+  &lt;span class=&quot;vi&quot;&gt;@link&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Link&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;current_user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;voted_for?&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@link&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;redirect_to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;links_path&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@link&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;upvote_by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;current_user&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@link&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;increase_karma&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;redirect_to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;links_path&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Let’s add commontator’s thread to our views.&lt;/p&gt;
+&lt;p&gt;Let’s check out what we’ve done.&lt;/p&gt;
 
-&lt;h4 id=&quot;appviewslinksindexhtmlslim&quot;&gt;app/views/links/index.html.slim&lt;/h4&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;vi&quot;&gt;@link&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Link&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;current_user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;voted_for?&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@link&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;redirect_to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;links_path&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;- @links.each do |link|
-  = commontator_thread(link)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;First we’ll find our link. Then we’ll checkout if current signed user has already voted for link, that’s why we’ve used acts_as_voter helper in our User model. If he has we’ll just redirect to path with all of links.&lt;/p&gt;
 
-&lt;p&gt;Now you should see comments count:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;vi&quot;&gt;@link&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;upvote_by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;current_user&lt;/span&gt;
+&lt;span class=&quot;vi&quot;&gt;@link&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;increase_karma&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;redirect_to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;links_path&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/comments-count.png&quot; alt=&quot;how to add comments count in Rails&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;First we’ll upvote link using acts_as_votable as in last time. Then we’ll increase karma to user that have created link.&lt;/p&gt;
 
-&lt;p&gt;Click on show comments, you should see new comment link.&lt;/p&gt;
+&lt;p&gt;Don’t forget to add similar code to downvote action too.&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/new-comment.png&quot; alt=&quot;how to add new comment in Rails&quot; /&gt;&lt;/p&gt;
+&lt;h4 id=&quot;appcontrollerslinkscontrollerrb-1&quot;&gt;app/controllers/links_controller.rb&lt;/h4&gt;
 
-&lt;p&gt;Fill in new comment form and look at the comment that we’ve created:&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;downvote&lt;/span&gt;
+  &lt;span class=&quot;vi&quot;&gt;@link&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Link&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;current_user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;voted_for?&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@link&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;redirect_to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;links_path&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@link&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;downvote_by&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;current_user&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@link&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;decrease_karma&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;redirect_to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;root_path&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/showing-comment.png&quot; alt=&quot;how to show comment in Rails&quot; /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;showing-users-karma&quot;&gt;Showing user’s karma&lt;/h2&gt;
 
-&lt;p&gt;Looks nice isn’t it?&lt;/p&gt;
+&lt;p&gt;Now you can show user’s karma in your view too. Let’s assume you have got show action in controller like this:&lt;/p&gt;
 
-&lt;h2 id=&quot;replacing-anonymous-with-username&quot;&gt;Replacing “Anonymous” with username&lt;/h2&gt;
+&lt;h4 id=&quot;appcontrollersuserscontrollerrb&quot;&gt;app/controllers/users_controller.rb&lt;/h4&gt;
 
-&lt;p&gt;You certainly noticed that when you’ve created comment, it shows Anonymous instead of username.&lt;/p&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;show&lt;/span&gt;
+  &lt;span class=&quot;vi&quot;&gt;@user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;User&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;p&gt;Let’s fix that. Find this line in commontator initializer&lt;/p&gt;
+&lt;p&gt;Now you can easy display user’s karmain your view like this:&lt;/p&gt;
 
-&lt;h4 id=&quot;configinitializerscommontatorrb&quot;&gt;config/initializers/commontator.rb&lt;/h4&gt;
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;= @user.karma&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user_name_proc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;I18n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;commontator.anonymous&amp;#39;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Now if you have column username in users table replace previous line with following:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;config&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user_name_proc&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;lambda&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;username&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Now if you look at your comments in a browser you should see user’s name instead of Anonymous.&lt;/p&gt;
-
-&lt;h2 id=&quot;customization&quot;&gt;Customization&lt;/h2&gt;
-
-&lt;p&gt;Let’s assume you want to customize views. Run this command:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;rake commontator:copy:views&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;You should see that commontator folder was created in our views folder.&lt;/p&gt;
-
-&lt;p&gt;That’s all for now. I hope that you liked my tutorial. If you don’t understand anything about post, feel free to ask in discussion. And if you like it, share it with your favorite social network.&lt;/p&gt;
+&lt;p&gt;That’s all for now, if you like it, don’t forget to share this article with your favorite social network.&lt;/p&gt;
 
 </description>
-				<pubDate>Fri, 08 Aug 2014 20:03:55 +0200</pubDate>
-				<link>http://masteruby.github.io/2014/08/08/comments.html</link>
-				<guid isPermaLink="true">http://masteruby.github.io/2014/08/08/comments.html</guid>
+				<pubDate>Tue, 12 Aug 2014 00:00:00 +0200</pubDate>
+				<link>http://masteruby.github.io/weekly-rails/2014/08/12/how-to-add-user-karma-to-rails-app.html</link>
+				<guid isPermaLink="true">http://masteruby.github.io/weekly-rails/2014/08/12/how-to-add-user-karma-to-rails-app.html</guid>
 			</item>
 		
 			<item>
@@ -395,99 +403,6 @@
 			</item>
 		
 			<item>
-				<title>Tags</title>
-				<description>&lt;ul&gt;
-  &lt;li&gt;rails generate model Post title:string body:post&lt;/li&gt;
-  &lt;li&gt;gem ‘acts-as-taggable-on’&lt;/li&gt;
-  &lt;li&gt;bundle install&lt;/li&gt;
-  &lt;li&gt;rake acts_as_taggable_on_engine:install:migrations&lt;/li&gt;
-  &lt;li&gt;rake db:migrate&lt;/li&gt;
-  &lt;li&gt;acts_as_taggable &lt;em&gt;*to Post&lt;/em&gt; &lt;/li&gt;
-&lt;/ul&gt;
-</description>
-				<pubDate>Sun, 03 Aug 2014 16:22:48 +0200</pubDate>
-				<link>http://masteruby.github.io/2014/08/03/tags.html</link>
-				<guid isPermaLink="true">http://masteruby.github.io/2014/08/03/tags.html</guid>
-			</item>
-		
-			<item>
-				<title>How to Run Tests in Vim</title>
-				<description>&lt;p&gt;Last time I’ve show you some &lt;a href=&quot;&quot;&gt;vim plugins for ruby&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;This time I want to show you how and why you should run your tests inside Vim. We’ll use following Vim plugins in this tutorial:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;vim-rspec&lt;/li&gt;
-  &lt;li&gt;vim-dispatch&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;why-to-run-tests-inside-vim&quot;&gt;Why to Run Tests inside Vim&lt;/h2&gt;
-
-&lt;h2 id=&quot;running-tests-with-rspec&quot;&gt;Running tests with Rspec&lt;/h2&gt;
-
-&lt;p&gt;Running test with vim-rspec is reallyeasy. First let’s add some mapping to our .vimrc&lt;/p&gt;
-
-&lt;h3 id=&quot;configuring-rspec&quot;&gt;Configuring Rspec&lt;/h3&gt;
-
-&lt;p&gt;For easy using it’s better to use following vim-mappings in vim-rspec.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;map &amp;lt;Leader&amp;gt;t :call RunCurrentSpecFile&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;&amp;lt;CR&amp;gt;
-map &amp;lt;Leader&amp;gt;a :call RunAllSpecs&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;&amp;lt;CR&amp;gt;
-map &amp;lt;Leader&amp;gt;s :call RunNearestSpec&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;&amp;lt;CR&amp;gt;
-map &amp;lt;Leader&amp;gt;l :call RunLastSpec&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;&amp;lt;CR&amp;gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Maybe you wonder what’s **&lt;leader&gt;** in .vimrc. Leader is default key, default **\**. So we&#39;ve set .vimrc, so to instead running long functions in command mode in Vim, we&#39;ve use simple&lt;/leader&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;running-current-spec-file-with-vim-rspec&quot;&gt;Running current spec file with Vim-Rspec&lt;/h3&gt;
-
-&lt;p&gt;Let’s assume you’ve created feature spec, with name &lt;strong&gt;users&lt;/strong&gt; and you wantto run only this spec right now. Before vim-rspec you needed to switch tmux session to run tests or open up new terminal window, not anymore&lt;/p&gt;
-
-&lt;p&gt;So to run current spec, just run:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;p&quot;&gt;\&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;And vim-rspec will take work running rspec
-### Running all specs&lt;/p&gt;
-
-&lt;h3 id=&quot;running-nearest-spec&quot;&gt;Running nearest spec&lt;/h3&gt;
-
-&lt;h3 id=&quot;running-last-spec&quot;&gt;Running last spec&lt;/h3&gt;
-
-&lt;h2 id=&quot;using-dispatch-to-run-tests&quot;&gt;Using Dispatch to Run tests&lt;/h2&gt;
-</description>
-				<pubDate>Sun, 03 Aug 2014 08:08:14 +0200</pubDate>
-				<link>http://masteruby.github.io/2014/08/03/tests.html</link>
-				<guid isPermaLink="true">http://masteruby.github.io/2014/08/03/tests.html</guid>
-			</item>
-		
-			<item>
-				<title>Vim4rails</title>
-				<description>&lt;p&gt;If you’re Rails developer, you maybe thinking how to use Vim with Rails.&lt;/p&gt;
-
-&lt;p&gt;In this guide I want to present usingsome tasks. &lt;/p&gt;
-
-&lt;h2 id=&quot;running-rails-server-in-background&quot;&gt;1. Running Rails Server in Background&lt;/h2&gt;
-
-&lt;p&gt;First task we’ll cover how to use Rails Server, but still won’t leave Vim&lt;/p&gt;
-
-&lt;h2 id=&quot;running-multiple-files-in-terminal-window&quot;&gt;2. Running Multiple Files in Terminal Window&lt;/h2&gt;
-
-&lt;h2 id=&quot;running-tests-inside-vim&quot;&gt;3. Running Tests Inside Vim&lt;/h2&gt;
-
-&lt;h2 id=&quot;editing-controllers-models-and-views-is-easier-with-vim&quot;&gt;4. Editing controllers, models and views is easier with Vim&lt;/h2&gt;
-
-&lt;h2 id=&quot;generators-using-vim&quot;&gt;5. Generators using Vim&lt;/h2&gt;
-
-&lt;h2 id=&quot;searching-for-files-with-ctrlp&quot;&gt;6. Searching for files with CTRLp&lt;/h2&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;7.&lt;/h2&gt;
-</description>
-				<pubDate>Wed, 30 Jul 2014 19:25:03 +0200</pubDate>
-				<link>http://masteruby.github.io/2014/07/30/vim4rails.html</link>
-				<guid isPermaLink="true">http://masteruby.github.io/2014/07/30/vim4rails.html</guid>
-			</item>
-		
-			<item>
 				<title>How to convert Ruby source code to pdf in Linux</title>
 				<description>&lt;p&gt;In this post I want to show to convert source code to pdf using Linux. We’ll use file &lt;strong&gt;base.rb&lt;/strong&gt; from &lt;strong&gt;Sinatra&lt;/strong&gt; framework as example.&lt;/p&gt;
 
@@ -566,91 +481,6 @@ map &amp;lt;Leader&amp;gt;l :call RunLastSpec&lt;span class=&quot;o&quot;&gt;()&
 				<pubDate>Wed, 09 Jul 2014 00:00:00 +0200</pubDate>
 				<link>http://masteruby.github.io/productivity-booster/2014/07/09/how-to-convert-source-code-to-pdf.html</link>
 				<guid isPermaLink="true">http://masteruby.github.io/productivity-booster/2014/07/09/how-to-convert-source-code-to-pdf.html</guid>
-			</item>
-		
-			<item>
-				<title>How to create stopwatch in Ruby Shoes</title>
-				<description>&lt;p&gt;Last time we’ve created &lt;a href=&quot;/shoes/2014/06/29/how-to-create-clock-in-ruby-shoes.html&quot;&gt;digital clock&lt;/a&gt; using Time Library. Today we’ll create stopwatch.&lt;/p&gt;
-
-&lt;p&gt;Here’s how final version will be look like:&lt;/p&gt;
-
-&lt;p&gt;&lt;img class=&quot;shoes&quot; alt=&quot;how to createstopwatch in Ruby&quot; src=&quot;/images/stopwatch.png&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;First we’ll reset Time to zero&lt;/li&gt;
-  &lt;li&gt;Then we’ll add buttons for startingand reseting our stopwatch.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;adding-reseted-time&quot;&gt;Adding reseted time&lt;/h2&gt;
-
-&lt;p&gt;First thing we need to do is to reset our time, because we want to start from zero.&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;no&quot;&gt;Shoes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-  &lt;span class=&quot;vi&quot;&gt;@stopwatch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;#39;&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;vi&quot;&gt;@stopwatch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strftime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;%H:%M:%S&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Here’s how app looks right now:&lt;/p&gt;
-
-&lt;p&gt;&lt;img class=&quot;shoes&quot; alt=&quot;how to reset time in ruby&quot; src=&quot;/images/reset-time.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;As in the last tutorial we’ll start with creating empty title element.&lt;/p&gt;
-
-&lt;p&gt;Last time we’ve used new instance of Time class to save current time. Here we want to reset current time to zero, so we’ve added zero in parentheses.&lt;/p&gt;
-
-&lt;p&gt;And on last line we’ve converted time to string and add to our title.&lt;/p&gt;
-
-&lt;h2 id=&quot;adding-buttons-for-starting-and-reseting-stopwatch&quot;&gt;Adding buttons for starting and reseting stopwatch&lt;/h2&gt;
-
-&lt;p&gt;We want from our stopwatch to start when we press start button and stop when press stop button.&lt;/p&gt;
-
-&lt;p&gt;So first we’ll create start button.&lt;/p&gt;
-
-&lt;p&gt;Add this code:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Start&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;animate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;We want to add every second&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Stop&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;vi&quot;&gt;@stopwatch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strftime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;%H:%M:%S&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;Here we’ve reset our time again to zero.&lt;/p&gt;
-
-&lt;p&gt;Here’s the final code:&lt;/p&gt;
-
-&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;green_shoes&amp;#39;&lt;/span&gt;
-
-&lt;span class=&quot;no&quot;&gt;Shoes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-  &lt;span class=&quot;vi&quot;&gt;@stopwatch&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;title&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;&amp;#39;&lt;/span&gt;
-  &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;
-  &lt;span class=&quot;vi&quot;&gt;@stopwatch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strftime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;%H:%M:%S&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  
-  &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Start&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;animate&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-    &lt;span class=&quot;vi&quot;&gt;@stopwatch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strftime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;%H:%M:%S&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-  
-  &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Stop&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
-    &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Time&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-    &lt;span class=&quot;vi&quot;&gt;@stopwatch&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;t&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;strftime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;%H:%M:%S&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
-  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
-&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-
-&lt;p&gt;I hope that you like my article, if you like it share it with clicking on buttons on the left sidebar.&lt;/p&gt;
-
-</description>
-				<pubDate>Fri, 04 Jul 2014 08:03:26 +0200</pubDate>
-				<link>http://masteruby.github.io/2014/07/04/stopwatch.html</link>
-				<guid isPermaLink="true">http://masteruby.github.io/2014/07/04/stopwatch.html</guid>
 			</item>
 		
 			<item>
@@ -748,12 +578,940 @@ map &amp;lt;Leader&amp;gt;l :call RunLastSpec&lt;span class=&quot;o&quot;&gt;()&
 			</item>
 		
 			<item>
-				<title>Post It</title>
-				<description>
+				<title>How to create post-it notes app in Ruby Shoes</title>
+				<description>&lt;p&gt;In this post I want to show you how to create post-it notes app something like Tomboy Notes in Linux.&lt;/p&gt;
+
+&lt;p&gt;Final product will be look like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/post-it-notes-app.png&quot; alt=&quot;how to create post-it notes app in ruby&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;design-app&quot;&gt;Design app&lt;/h2&gt;
+
+&lt;p&gt;First thing we’ll do is to design our app.
+At the top of page we’ll have three buttons, new, open, and save, so let’s design it.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;green_shoes&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;yaml/store&amp;#39;&lt;/span&gt;
+
+&lt;span class=&quot;no&quot;&gt;Shoes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Post-it notes app&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;New&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Open&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Save&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You certainly noticed that I’ve added line &lt;strong&gt;require yaml/store&lt;/strong&gt; in top of the app. We’ll use it later.&lt;/p&gt;
+
+&lt;p&gt;If you run your Shoes app right now, you should see our buttons.&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/pna_buttons.png&quot; alt=&quot;how to add buttons in shoes&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Our app should have field for adding notes.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;vi&quot;&gt;@title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edit_line&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;New note&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;vi&quot;&gt;@para&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edit_box&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Describe your note here&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We’ve created two text fields, title has only one line so we’ve used edit_line and para has multiple lines so we’ve used edit_box.&lt;/p&gt;
+
+&lt;p&gt;We’ve also added some space between text field with margin(left, top, right, bottom)&lt;/p&gt;
+
+&lt;p&gt;If you look at it, you should see something like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&quot;shoes&quot; src=&quot;/images/pna_text_field.png&quot; alt=&quot;how to create text field in shoes&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Here’s how our app look right now:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;green_shoes&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;yaml/store&amp;#39;&lt;/span&gt;
+
+&lt;span class=&quot;no&quot;&gt;Shoes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Post-it notes app&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;New&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Open&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Save&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edit_line&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;New note&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@para&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edit_box&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Describe your note here&amp;quot;&lt;/span&gt;
+   
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;adding-functionality-to-buttons&quot;&gt;Adding functionality to buttons&lt;/h2&gt;
+
+&lt;p&gt;For manipulation with our notes we’ll use YAML::Store. First thing we need to do is to create configuration file, where we store default values for our notes. Create &lt;strong&gt;config.yml&lt;/strong&gt; file like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-yaml&quot; data-lang=&quot;yaml&quot;&gt;&lt;span class=&quot;l-Scalar-Plain&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;New note&lt;/span&gt;
+&lt;span class=&quot;l-Scalar-Plain&quot;&gt;para&lt;/span&gt;&lt;span class=&quot;p-Indicator&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;l-Scalar-Plain&quot;&gt;Describe your note here&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Here’s our default values. Let’s connect our button with that yaml file.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;New&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;store&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;YAML&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Store&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;config.yml&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;store&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transaction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@title&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;store&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@para&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;store&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;para&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Take look at the code we’ve just wrote.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;store&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;YAML&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Store&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;config.yml&amp;quot;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Here we’ve set structure for reading our &lt;strong&gt;config.yml&lt;/strong&gt; file.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;store.transaction(true) do&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Here we’ve start read only transaction.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;vi&quot;&gt;@title&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;store&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+&lt;span class=&quot;vi&quot;&gt;@para&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;store&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;para&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Here we’ve set values of title and para to values in Hash of our config file.&lt;/p&gt;
+
+&lt;p&gt;Type something else to your text field. Now press new button. You should see that text was changed to default.&lt;/p&gt;
+
+&lt;p&gt;Let’s go create open button:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Open&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;file&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ask_open_file&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;store&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;YAML&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Store&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;store&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transaction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@title&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;store&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@para&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;store&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;para&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;It works like in previous example, but this time we want to choose file, we want to read.If you press open button. You should see file picker:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/open-file-in-shoes.png&quot; alt=&quot;how to open file in shoes&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;You can create another yaml file and test it. Values of yaml file should replaces values in text field.&lt;/p&gt;
+
+&lt;p&gt;Ok so this works right now, but we want to save values from Shoes to yaml for later use. We’ll use YAML::Store for this, but this time we’ll use different code.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Save&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  
+  &lt;span class=&quot;n&quot;&gt;file&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ask_save_file&lt;/span&gt;
+  
+  &lt;span class=&quot;n&quot;&gt;store&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;YAML&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Store&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;
+  
+  &lt;span class=&quot;n&quot;&gt;store&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transaction&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;store&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;title&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@title&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;store&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;para&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@para&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;So take look at the code that we’ve just done. &lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;file&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ask_save_file&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;So we’re created menu that shows you dialog to write name of the file and save it.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/saving-file-in-shoes.png&quot; alt=&quot;saving file in shoes&quot; /&gt; &lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;store&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;YAML&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Store&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Here we used location of previously selected file to store our values.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;store&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transaction&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;store&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;title&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@title&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;store&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;para&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@para&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Last time we extracted values from yaml file, this time we reverse this process and saves values what we type to text field.&lt;/p&gt;
+
+&lt;p&gt;So take look at file we created now. It should look like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;green_shoes&amp;#39;&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;require&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;yaml/store&amp;#39;&lt;/span&gt;
+
+&lt;span class=&quot;no&quot;&gt;Shoes&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;app&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;height&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;200&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Post-it notes app&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;New&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;store&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;YAML&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Store&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;config.yml&amp;quot;&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;store&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transaction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+        &lt;span class=&quot;vi&quot;&gt;@title&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;store&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;vi&quot;&gt;@para&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;store&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;para&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;  
+
+    
+    &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Open&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;file&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ask_open_file&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;store&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;YAML&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Store&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;store&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transaction&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+        &lt;span class=&quot;vi&quot;&gt;@title&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;store&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;title&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+        &lt;span class=&quot;vi&quot;&gt;@para&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;store&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s1&quot;&gt;&amp;#39;para&amp;#39;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;  
+    
+    &lt;span class=&quot;n&quot;&gt;button&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Save&amp;quot;&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;file&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ask_save_file&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;store&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;YAML&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;::&lt;/span&gt;&lt;span class=&quot;no&quot;&gt;Store&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;file&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;store&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;transaction&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;store&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;title&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@title&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;
+        &lt;span class=&quot;n&quot;&gt;store&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&amp;quot;para&amp;quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@para&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;text&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;    
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  
+  &lt;span class=&quot;n&quot;&gt;flow&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@title&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edit_line&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;New note&amp;quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@para&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;edit_box&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&amp;quot;Describe your note here&amp;quot;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;That’s all for now, if you like my post please share it on your favorite social network by clicking on the buttons on the top.&lt;/p&gt;
+
 </description>
-				<pubDate>Mon, 16 Jun 2014 19:02:17 +0200</pubDate>
-				<link>http://masteruby.github.io/2014/06/16/post-it.html</link>
-				<guid isPermaLink="true">http://masteruby.github.io/2014/06/16/post-it.html</guid>
+				<pubDate>Mon, 16 Jun 2014 00:00:00 +0200</pubDate>
+				<link>http://masteruby.github.io/shoes/2014/06/16/how-to-create-notes-app-in-ruby-shoes.html</link>
+				<guid isPermaLink="true">http://masteruby.github.io/shoes/2014/06/16/how-to-create-notes-app-in-ruby-shoes.html</guid>
+			</item>
+		
+			<item>
+				<title>How to create link aggregation site in Rails&amp;#58; Adding, editing, deleting links</title>
+				<description>&lt;p&gt;In this post we’ll create link aggregation that look like &lt;strong&gt;Hacker News&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;Here’s how it’ll be look like:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/link_aggregation_site.png&quot; alt=&quot;link aggregation site&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In this tutorial we’ll cover:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;#design&quot;&gt;Design our page with HTML, CSS&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#devise&quot;&gt;Creating authentication with Devise&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#links&quot;&gt;How to create, edit and delete links&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;#user&quot;&gt;How to show link user and time when post was submitted.&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;a-namedesigndesign-our-pagea&quot;&gt;&lt;a name=&quot;design&quot;&gt;Design our page&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Before we start to add real code, we’ll start with html and css. First create application named &lt;strong&gt;mlink&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;rails new mlink&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We’ll start with designing how our page will be look like. Add slim gem to your Gemfile&lt;/p&gt;
+
+&lt;h4 id=&quot;gemfile&quot;&gt;Gemfile&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;slim-rails&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Slim is template language, that strips HTML from unecessary tags. &lt;/p&gt;
+
+&lt;p&gt;Here’s how look like code in HTML&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;head&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;title&amp;gt;&lt;/span&gt;My Webpage&lt;span class=&quot;nt&quot;&gt;&amp;lt;/title&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/head&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;body&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;h1&amp;gt;&lt;/span&gt;My heading&lt;span class=&quot;nt&quot;&gt;&amp;lt;/h1&amp;gt;&lt;/span&gt;
+    &lt;span class=&quot;nt&quot;&gt;&amp;lt;p&amp;gt;&lt;/span&gt;My paragraph&lt;span class=&quot;nt&quot;&gt;&amp;lt;/p&amp;gt;&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;&amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And this how look like code in Slim:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;html
+  head
+    title My Webpage
+  body
+    h1 My Heading
+    p My paragraph&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Simpler isn’t it? Slim strips HTML from all opening and closing tags. Slim uses two spaces indentation after every parent element. For example element &lt;strong&gt;html&lt;/strong&gt; has two children &lt;strong&gt;body&lt;/strong&gt; and &lt;strong&gt;head&lt;/strong&gt;. In Slim you can use Ruby part of Ruby code.&lt;/p&gt;
+
+&lt;h3 id=&quot;creating-navigation&quot;&gt;Creating navigation&lt;/h3&gt;
+
+&lt;p&gt;We’ll start with basic navigation, wewant to show things related to links on left side and authentication on right side. Create controller named home&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;rails generate controller home home&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If you look at &lt;strong&gt;app/views&lt;/strong&gt; folder you should see that we’ve just createdfolder with name &lt;strong&gt;home&lt;/strong&gt; and you should see file &lt;strong&gt;home.html.slim&lt;/strong&gt; inside it.&lt;/p&gt;
+
+&lt;p&gt;Let’s take a look at the code at the browser:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;rails server&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;It works, but typing whole path to address bar in browser can be really disgusting. Let’s fix it.&lt;/p&gt;
+
+&lt;h4 id=&quot;configroutesrb&quot;&gt;config/routes.rb&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;root&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;home#home&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Here we’ve changed root path. So if you look at this at the browser, you should see that we don’t have to type address to addressbar anymore.&lt;/p&gt;
+
+&lt;h2 id=&quot;creating-navigation-1&quot;&gt;Creating navigation&lt;/h2&gt;
+
+&lt;p&gt;First thing we want to do is to create navigation, but we want to use it on every page so we need to modify our layout. If you have &lt;strong&gt;application.html.erb&lt;/strong&gt; in your &lt;strong&gt;layouts&lt;/strong&gt; folder replace it with following file:&lt;/p&gt;
+
+&lt;h4 id=&quot;appviewslayoutsapplicationhtmlslim&quot;&gt;app/views/layouts/application.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;doctype html
+html
+  head
+    title Mlink
+    = stylesheet_link_tag    &amp;quot;application&amp;quot;, media: &amp;quot;all&amp;quot;, &amp;quot;data-turbolinks-track&amp;quot; =&amp;gt; true
+    = javascript_include_tag &amp;quot;application&amp;quot;, &amp;quot;data-turbolinks-track&amp;quot; =&amp;gt; true
+    = csrf_meta_tags
+  body
+    div#wrapper
+      = render &amp;#39;layouts/header&amp;#39;
+      = yield&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;If you scroll down to the code, you certainly noticed two methods, first is &lt;strong&gt;render&lt;/strong&gt;. Render is used when you don’t want to have all the code in one file and want to use it in other file. Method will look at the partial with name &lt;strong&gt;_header.html.slim&lt;/strong&gt; in &lt;strong&gt;layouts&lt;/strong&gt; folder.&lt;/p&gt;
+
+&lt;p&gt;Another method is &lt;strong&gt;yield&lt;/strong&gt;. Yield is used to include anything related to page right after to header.&lt;/p&gt;
+
+&lt;p&gt;So now you know why to use partials, let’s create partial &lt;strong&gt;_header.html.slim&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;appviewslayoutsheaderhtmlslim&quot;&gt;app/views/layouts/_header.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;header.navbar
+  ul.links
+    li = link_to &amp;quot;Mlink, &amp;#39;#&amp;#39;
+    li = link_to &amp;quot;Home&amp;quot;, &amp;#39;#&amp;#39;
+    li = link_to &amp;quot;Submit&amp;quot;, &amp;#39;#&amp;#39;
+  ul.auth
+    li = link_to &amp;quot;Login&amp;quot;, &amp;#39;#&amp;#39;
+    li = link_to &amp;quot;Signup&amp;quot;, &amp;#39;#&amp;#39;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Take look at the code that we’ve just done.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;header.navbar
+  ul.links&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Slim use shortcuts for creating html elements. So here, you’ve used this:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;header.navbar&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;instead of:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;header&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;class=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&amp;quot;navbar&amp;quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You certainly noticed we’ve used &lt;strong&gt;link_to&lt;/strong&gt;. Link_to is special rails method for links.&lt;/p&gt;
+
+&lt;p&gt;Let’s add some styling for our navigation. Create file &lt;strong&gt;main.css.scss&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;appassetsstylesheetsmaincssscss&quot;&gt;app/assets/stylesheets/main.css.scss&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.navbar&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;background-color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;rgb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;120&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;163&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;100%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;overflow&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;hidden&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+
+  &lt;span class=&quot;n&quot;&gt;ul&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;list-style&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;none&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    
+    &lt;span class=&quot;n&quot;&gt;li&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;display&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;inline&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;k&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.8em&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      
+      &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;text-decoration&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;none&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;white&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+      &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt; 
+    &lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nc&quot;&gt;.links&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nc&quot;&gt;.auth&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Here we’ve added green background to our navigation, add some place between elements and &lt;/p&gt;
+
+&lt;p&gt;Ok let’s run rails server to see whatwe’ve created.
+We’ll end up with menu like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/header.png&quot; alt=&quot;horizontal navigation&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;design-main-content-of-page&quot;&gt;Design main content of page&lt;/h3&gt;
+
+&lt;p&gt;Let’s design content our webpage. We want to show links that users submitted on homepage, so add this to file &lt;strong&gt;home.html.slim&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;appviewshomehomehtmlslim&quot;&gt;app/views/home/home.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;section#content  
+  ol#links-list	
+    li
+      span.link	
+        = link_to &amp;quot;Geeklist&amp;quot;, &amp;#39;#&amp;#39;
+      span.details  
+        p
+          | posted by	
+          = link_to &amp;quot;ed_wood&amp;quot;, &amp;#39;#&amp;#39;
+          | 20 minutes ago&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And styling to &lt;strong&gt;main.css.scss&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;appassetsstylesheetsmaincssscss-1&quot;&gt;app/assets/stylesheets/main.css.scss&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nf&quot;&gt;#wrapper&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;background-color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;rgb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;223&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;223&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;224&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nc&quot;&gt;.details&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.6em&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;nf&quot;&gt;#links-list&lt;/span&gt; &lt;span class=&quot;nt&quot;&gt;li&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;padding&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0.8em&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;color&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;rgb&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;120&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;163&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;);&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;So we’ve just added how links will be look like.&lt;/p&gt;
+
+&lt;p&gt;Your homepage should look like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/links.png&quot; alt=&quot;links&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;We’ve just designed our home page let’s move to creating authentication.&lt;/p&gt;
+
+&lt;h2 id=&quot;a-namedevisecreating-authentication-with-devisea&quot;&gt;&lt;a name=&quot;devise&quot;&gt;Creating Authentication with Devise&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;For authentication we’ll use devise authentication system.&lt;/p&gt;
+
+&lt;p&gt;Add Devise gem to your Gemfile&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;devise&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And install it.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;bundle&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;install&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Run following command to setup Devise&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;rails generate devise:install&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;To work, we need to add model &lt;strong&gt;devise user&lt;/strong&gt; to database.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;rails generate devise user
+rake db:migrate&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Now we have to add authentication links to our homepage. Add this code to &lt;strong&gt;_header.html.slim&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;appviewslayoutsheaderhtmlslim-1&quot;&gt;app/views/layouts/_header.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;header.navbar
+  ul.links
+    li = link_to &amp;quot;Mlink&amp;quot;, &amp;#39;#&amp;#39;
+    li = link_to &amp;quot;Home&amp;quot;, root_path
+    li = link_to &amp;quot;Submit&amp;quot;, &amp;#39;#&amp;#39;
+  ul.auth
+    - if user_signed_in?
+      li = link_to &amp;#39;Edit profile&amp;#39;, edit_user_registration_path
+      li = link_to &amp;#39;Logout&amp;#39;, destroy_user_session_path
+    - else
+      li = link_to &amp;#39;Login&amp;#39;, new_user_session_path
+      li = link_to &amp;#39;Signup&amp;#39;, new_user_registration_path&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Restart your rails server and after you click on Signup link you should see this form:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/sign_up.png&quot; alt=&quot;signup form in devise&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;a-namelinkscreating-editing-deleting-linksa&quot;&gt;&lt;a name=&quot;links&quot;&gt;Creating, editing, deleting links&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;We’ve just added authentication. We need to create controller named &lt;strong&gt;links&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;rails generate controller links&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We need to add links values to database, so we need to generate this model.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;rails generate model Link title:string url:string user:references
+rake db:migrate&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Previous command will generate&lt;/p&gt;
+
+&lt;p&gt;Here we’ve created link attributes. Every link has title and url, and of course user id related to link url.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;rake db:migrate&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Add path do &lt;strong&gt;config/routes.rb&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;resources&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:links&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;Resources&lt;/strong&gt; will create all path&lt;/p&gt;
+
+&lt;p&gt;Now we can add path to controller. We’ll add create, update and destroy.&lt;/p&gt;
+
+&lt;h4 id=&quot;appcontrollerslinkscontrollerrb&quot;&gt;app/controllers/links_controller.rb&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;new&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;create&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;update&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;destroy&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;creating-links&quot;&gt;Creating links&lt;/h3&gt;
+
+&lt;p&gt;Now we’ll create form for creating links. Add &lt;strong&gt;/links/new&lt;/strong&gt; path to &lt;strong&gt;_header.html.slim&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;- if user_signed_in
+  li = link_to &amp;quot;Submit&amp;quot;, &amp;#39;links/new&amp;#39;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We have added user_signed which is helper that Devise provides to check if user has signed_in and if he has signed in we’ll show him link to submit form.&lt;/p&gt;
+
+&lt;p&gt;Let’s create form for our links, to simplify it add &lt;strong&gt;simple_form&lt;/strong&gt; gem to your Gemfile.&lt;/p&gt;
+
+&lt;h4 id=&quot;gemfile-1&quot;&gt;Gemfile&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;gem&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;simple_form&amp;#39;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And configure it.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;rails generate simple_form:install&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Let’s create form for submitting our links. We’ll put form in a partial &lt;strong&gt;_form.html.slim&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;appviewslinksformhtmlslim&quot;&gt;app/views/links/_form.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;= simple_form_for @link do |f|
+  = f.input :title
+  = f.input :url
+  = f.button :submit&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Simple form will generate basic html form.&lt;/p&gt;
+
+&lt;h4 id=&quot;appviewslinksnewhtmlslim&quot;&gt;app/views/links/new.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;h1 Submit a Link
+
+= render &amp;#39;form&amp;#39;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Just add little styling to your forms&lt;/p&gt;
+
+&lt;h4 id=&quot;appassetsstylesheetsformscssscss&quot;&gt;app/assets/stylesheets/forms.css.scss&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-css&quot; data-lang=&quot;css&quot;&gt;&lt;span class=&quot;nc&quot;&gt;.simple_form&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;div&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;input&lt;/span&gt; &lt;span class=&quot;err&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;margin-bottom&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;30px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;clear&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;both&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+  &lt;span class=&quot;nt&quot;&gt;label&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;float&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;width&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;200px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;text-align&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;margin&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;2px&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;10px&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;p&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;err&quot;&gt;}&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We need to connect user model with link model&lt;/p&gt;
+
+&lt;h4 id=&quot;appmodelsuserrb&quot;&gt;app/models/user.rb&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;has_many&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:links&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And we validate in our model that our links form can’t be blank.&lt;/p&gt;
+
+&lt;h4 id=&quot;appmodelslinkrb&quot;&gt;app/models/link.rb&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;n&quot;&gt;belongs_to&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:user&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;validates&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;presence&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;validates&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;presence&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h4 id=&quot;appcontrollerslinkscontrollerrb-1&quot;&gt;app/controllers/links_controller.rb&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;create&lt;/span&gt;
+  &lt;span class=&quot;vi&quot;&gt;@user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;current_user&lt;/span&gt;
+  &lt;span class=&quot;vi&quot;&gt;@link&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@user&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;links&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;new&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;link_params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@link&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;save&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;redirect_to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;root_path&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;render&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;new&amp;#39;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+  &lt;span class=&quot;kp&quot;&gt;private&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;link_params&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;require&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:link&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;permit&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:title&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;ss&quot;&gt;:url&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;We want to our links to show on home page so add this code to home controller.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;home&lt;/span&gt;
+  &lt;span class=&quot;vi&quot;&gt;@links&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Link&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;all&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;And add some code to &lt;strong&gt;home.html.slim&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;section#content
+  ol#links-list
+    - @links.each do |link|
+      li
+        span.link
+          = link_to link.title, link.url
+        span.details
+          - if link.user == current_user
+            = link_to &amp;#39;edit&amp;#39;, edit_link_path(link)
+            = link_to &amp;quot;delete&amp;quot;, link_path(link), method: :delete&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;editing-links&quot;&gt;Editing links&lt;/h3&gt;
+
+&lt;p&gt;We want to user to edit his links that he submitted, so we’ll add update action to &lt;strong&gt;links_controller&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;appcontrollerslinkscontrollerrb-2&quot;&gt;app/controllers/links_controller.rb&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;edit&lt;/span&gt;
+  &lt;span class=&quot;vi&quot;&gt;@link&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Link&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;update&lt;/span&gt;
+  &lt;span class=&quot;vi&quot;&gt;@link&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Link&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@link&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;update&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;link_params&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;redirect_to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;root_path&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;render&lt;/span&gt; &lt;span class=&quot;s1&quot;&gt;&amp;#39;edit&amp;#39;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt; 
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Here we’ve find link by it’s id and check out if link was submitted by current signed user, if it was we allow updating it.&lt;/p&gt;
+
+&lt;h3 id=&quot;deleting-links&quot;&gt;Deleting links&lt;/h3&gt;
+
+&lt;p&gt;To delete links add destroy action to &lt;strong&gt;links_controller&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-ruby&quot; data-lang=&quot;ruby&quot;&gt;&lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;destroy&lt;/span&gt;
+  &lt;span class=&quot;vi&quot;&gt;@link&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Link&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;find&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;params&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;ss&quot;&gt;:id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;vi&quot;&gt;@link&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;user&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;current_user&lt;/span&gt;
+    &lt;span class=&quot;vi&quot;&gt;@link&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;destroy&lt;/span&gt;
+    &lt;span class=&quot;n&quot;&gt;redirect_to&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;root_path&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;a-nameusershowing-links-user-and-when-it-was-submitteda&quot;&gt;&lt;a name=&quot;user&quot;&gt;Showing link’s user and when it was submitted.&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;We want to show which user submittted link and time when it was posted.&lt;/p&gt;
+
+&lt;p&gt;Right now we’re using user’s email to login, but we want to show username with link. We need to edit Devise to fix that.&lt;/p&gt;
+
+&lt;h3 id=&quot;adding-username-to-authentication-in-devise&quot;&gt;Adding username to authentication in Devise&lt;/h3&gt;
+
+&lt;p&gt;To add username to Devise based authentication follow instruction on &lt;a href=&quot;https://github.com/plataformatec/devise/wiki/How-To:-Allow-users-to-sign-in-using-their-username-or-email-address&quot;&gt;devise wiki&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;If you followed instruction on Devise wiki, you can add link’s user and time when it was submitted.&lt;/p&gt;
+
+&lt;p&gt;Add this code to &lt;strong&gt;home.html.slim&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;appviewshomehomehtmlslim-1&quot;&gt;app/views/home/home.html.slim&lt;/h4&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-html&quot; data-lang=&quot;html&quot;&gt;section#content
+  ol#links-list
+    - @links.each do |link|
+      li
+        span.link
+          = link_to link.title, link.url
+        span.details
+          - if link.user == current_user
+            = link_to &amp;quot;edit&amp;quot;, edit_link_path(link)
+            = link_to &amp;quot;delete&amp;quot;, link_path(link), method: :delete
+
+          p
+            |
+            posted by
+            = link_to link.user.username
+            = time_ago_in_words(link.created_at)&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;So that’s all for now. Next time we’ll add some comments to our links aggregation site.&lt;/p&gt;
+</description>
+				<pubDate>Fri, 06 Jun 2014 00:00:00 +0200</pubDate>
+				<link>http://masteruby.github.io/weekly-rails/2014/06/06/how-to-create-link-aggregation-site-in-rails.html</link>
+				<guid isPermaLink="true">http://masteruby.github.io/weekly-rails/2014/06/06/how-to-create-link-aggregation-site-in-rails.html</guid>
+			</item>
+		
+			<item>
+				<title>7 Websites to Get Latest News About Ruby</title>
+				<description>&lt;p&gt;In this post I want to show you some ruby news websites. It includes some ruby newsletters, blog directories and link aggregation sites.&lt;/p&gt;
+
+&lt;h2 id=&quot;ruby-weeklyhttprubyweeklycom&quot;&gt;1. &lt;a href=&quot;http://rubyweekly.com/&quot;&gt;Ruby Weekly&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Ruby Weekly is a email newsletter curated by Peter Cooper. If you subscribe you get into your emailbox every week collection of videos, tools and news from last week.&lt;/p&gt;
+
+&lt;h2 id=&quot;ruby-dailyhttprubydailyorg&quot;&gt;2. &lt;a href=&quot;http://rubydaily.org/&quot;&gt;Ruby Daily&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Ruby Daily is a daily newspaper website about Ruby by Nick Kugaevsky. It covers wide range of Ruby related subjects for example: Sinatra, Ruby on Rails, Heroku, RVM, TDD and more.&lt;/p&gt;
+
+&lt;h2 id=&quot;alltophttprubyalltopcom&quot;&gt;3. &lt;a href=&quot;http://ruby.alltop.com/&quot;&gt;Alltop&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Ruby section of Alltop collects stories from Ruby related blogs. If you want to find out some good Ruby blogs here’s the place you can start.&lt;/p&gt;
+
+&lt;h2 id=&quot;green-rubyhttpgreenrubyorg&quot;&gt;4. &lt;a href=&quot;http://greenruby.org/&quot;&gt;Green Ruby&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Another newsletter for Ruby. You can find out news from blogosphere, latest gem releases, podcasts, tools for easier development, screencasts and conference talks. &lt;/p&gt;
+
+&lt;h2 id=&quot;rubyflowhttpwwwrubyflowcom&quot;&gt;5. &lt;a href=&quot;http://www.rubyflow.com/&quot;&gt;Rubyflow&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Rubyflow is a link aggregation site for Ruby.&lt;/p&gt;
+
+&lt;h2 id=&quot;ruby5httpruby5envylabscom&quot;&gt;6. &lt;a href=&quot;http://ruby5.envylabs.com/&quot;&gt;Ruby5&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;5 minutes series of podcasts about latest news in Ruby world.&lt;/p&gt;
+
+&lt;h2 id=&quot;reddithttpwwwredditcomrruby&quot;&gt;7. &lt;a href=&quot;http://www.reddit.com/r/ruby/&quot;&gt;Reddit&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;I guess I don’t have to introduce Reddit. Reddit is a website, where users can submit text posts or links to specialized subreddits and other users can vote up or down. You can also checkout &lt;a href=&quot;http://www.reddit.com/r/rails/&quot;&gt;rails&lt;/a&gt; section of Reddit.&lt;/p&gt;
+
+&lt;p&gt;Am I forgotten something? You can add your favorite news websites on &lt;a href=&quot;http://list.ly/list/LEy-ruby-news-websites&quot;&gt;Listly&lt;/a&gt; &lt;/p&gt;
+</description>
+				<pubDate>Fri, 30 May 2014 00:00:00 +0200</pubDate>
+				<link>http://masteruby.github.io/learning-resources/2014/05/30/ruby-news-websites.html</link>
+				<guid isPermaLink="true">http://masteruby.github.io/learning-resources/2014/05/30/ruby-news-websites.html</guid>
+			</item>
+		
+			<item>
+				<title>Vim for Rubyist&amp;#58; 10 useful vim plugins for Ruby</title>
+				<description>&lt;p&gt;In this post I want to show some useful Vim plugins, that are true productivity boosters for every Ruby programmer. You can install them by either &lt;a href=&quot;https://github.com/tpope/vim-pathogen&quot;&gt;Pathogen&lt;/a&gt; or &lt;a href=&quot;https://github.com/gmarik/Vundle.vim&quot;&gt;Vundle&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;vim-railshttpsgithubcomtpopevim-rails&quot;&gt;1. &lt;a href=&quot;https://github.com/tpope/vim-rails&quot;&gt;Vim-Rails&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Vim-Rails plugin is must for every Rails Developer working in Vim. Here’s what I’ve found useful:&lt;/p&gt;
+
+&lt;h3 id=&quot;easy-navigation&quot;&gt;Easy navigation&lt;/h3&gt;
+
+&lt;p&gt;Want to find some file but don’t know its path? Try to use &lt;strong&gt;:find&lt;/strong&gt; command:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;:find schema.rb&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You can also move up in your Rails application by finding related files. For example, let’s assume you’re editing &lt;strong&gt;home.html.slim&lt;/strong&gt;. Try to find related file&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;:R&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You should see that you’re in file &lt;strong&gt;static_pages_controller.rb&lt;/strong&gt; and that you have cursor at method named home.&lt;/p&gt;
+
+&lt;h3 id=&quot;great-editing&quot;&gt;Great Editing&lt;/h3&gt;
+
+&lt;p&gt;Jumping from views to controllers to models can be really painful. Here’s where &lt;strong&gt;vim-rails&lt;/strong&gt; plugin excels. For example let’s assume you have file named &lt;strong&gt;home.html.slim&lt;/strong&gt; in your &lt;strong&gt;views&lt;/strong&gt; directory. You can edit it with simple &lt;strong&gt;Eview&lt;/strong&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;:Eview static_pages/home&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You see? You don’t have to
+set file extension or whole path, just add name of your controller and name of your view file.&lt;/p&gt;
+
+&lt;p&gt;Similarily you can edit controller too:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-vim&quot; data-lang=&quot;vim&quot;&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;Econtroller static_pages&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Here are commands for editing your layouts, stylesheets and models:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;:Elayout header
+:Emodel User
+:Estylesheet main&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;generator-commands&quot;&gt;Generator Commands&lt;/h3&gt;
+
+&lt;p&gt;So you want to run migration, generate model or controller. Before vim-rails plugin you have to close your vim session and go back to terminal, not anymore. Here’s useful commands you should know. Let’s assume you’re building model named User, you can simply create model with :Rgenerate and destroy model with :Rdestroy.&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;:Rgenerate model User
+:Rdestroy model User
+:Rserver&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;To run rails server within background of Vim you will use Rserver command. 
+### Syntax highlighting&lt;/p&gt;
+
+&lt;p&gt;Of course syntax highlighting is included too. Vim-rails has built syntax highlighting for special Active Record methods and all keywords that Rails has unique.&lt;/p&gt;
+
+&lt;p&gt;That’s only small part of what plugin provides, to see list of all commands, go to &lt;a href=&quot;https://raw.githubusercontent.com/tpope/vim-rails/master/doc/rails.txt&quot;&gt;project documentation&lt;/a&gt;. For example, it provides commands forrefactoring your code, it has built support for Rake and other.&lt;/p&gt;
+
+&lt;h2 id=&quot;nerdtreehttpsgithubcomscrooloosenerdtree&quot;&gt;2. &lt;a href=&quot;https://github.com/scrooloose/nerdtree&quot;&gt;NerdTree&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Navigation by vim-rails plugin can be great, but only when you know what you’re looking for. For other purposes, you can use &lt;strong&gt;NERDTree&lt;/strong&gt; as file navigator. &lt;/p&gt;
+
+&lt;p&gt;Type this into vim session to run NerdTree:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;:NERDTree&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;You should see content of current working directory. NerdTree use vim navigation keys to move up and down to directory tree.&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&quot;vim&quot; src=&quot;/images/nerd_tree.png&quot; alt=&quot;nerd tree&quot; /&gt;&amp;lt;/img&amp;gt;&lt;/p&gt;
+
+&lt;p&gt;Let’s assume you want to open up directory &lt;strong&gt;app&lt;/strong&gt;. Navigate to app with Vim and press key &lt;strong&gt;o&lt;/strong&gt;. You should see content of app directory:&lt;/p&gt;
+
+&lt;p&gt;&lt;img class=&quot;vim&quot; src=&quot;/images/nerd_tree_app.png&quot; alt=&quot;nerd tree app&quot; /&gt;&amp;lt;/img&amp;gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;vim-fugitivehttpsgithubcomtpopevim-fugitive&quot;&gt;3. &lt;a href=&quot;https://github.com/tpope/vim-fugitive&quot;&gt;Vim-fugitive&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;If you have your project tracked with Git, switching between terminal sessions can be really painful. Fugitive is absolutely greatly tool for using Git inside Vim.&lt;/p&gt;
+
+&lt;p&gt;For example let’see what’s changed with git status&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;:Git status&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Let’s add changes to repository&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;:Git add .&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;Let’s push it to origin master&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;:Git push origin master&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;vim-rubyhttpsgithubcomvim-rubyvim-ruby&quot;&gt;4. &lt;a href=&quot;https://github.com/vim-ruby/vim-ruby&quot;&gt;Vim-Ruby&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Vim-Ruby provides useful things like easy navigation and syntax highlighting in ruby&lt;/p&gt;
+
+&lt;p&gt;Here’s list of useful navigation methods in vim-ruby&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;&lt;span class=&quot;c&quot;&gt;# To edit start of next method definition&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;m
+&lt;span class=&quot;c&quot;&gt;# To go to end of next method definition&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;M
+&lt;span class=&quot;c&quot;&gt;# To start of previous method definition&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;m
+&lt;span class=&quot;c&quot;&gt;# To end of previous method definition&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;M&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;vim-bundlerhttpsgithubcomtpopevim-bundler&quot;&gt;5. &lt;a href=&quot;https://github.com/tpope/vim-bundler&quot;&gt;Vim-Bundler&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;You don’t have exit vim or attach another tmux session to install gems anymore. Just run :Bundle in command mode in Vim and gems will be installed:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;:Bundle&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;p&gt;To edit Gemfile you will use this command:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;:Bopen&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;vim-cucumberhttpsgithubcomtpopevim-cucumber&quot;&gt;6. &lt;a href=&quot;https://github.com/tpope/vim-cucumber&quot;&gt;Vim-Cucumber&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Vim-Cucumber plugin provides syntax highlighting and indentation for Cucumber.&lt;/p&gt;
+
+&lt;h2 id=&quot;vim-slimhttpsgithubcomslim-templatevim-slimvim-hamlhttpsgithubcomtpopevim-haml&quot;&gt;7. &lt;a href=&quot;https://github.com/slim-template/vim-slim&quot;&gt;Vim-slim&lt;/a&gt;/&lt;a href=&quot;https://github.com/tpope/vim-haml&quot;&gt;Vim-haml&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Here’s the plugin that provides syntax highlighting for your favorite template language, it can be haml or slim.&lt;/p&gt;
+
+&lt;h2 id=&quot;vim-vroomhttpsgithubcomskalnikvim-vroom&quot;&gt;8. &lt;a href=&quot;https://github.com/skalnik/vim-vroom&quot;&gt;Vim-Vroom&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;With Vroom you can run your tests inside Vim. Supports Rspec, Cucumber and MiniTest. You can run your tests with:&lt;/p&gt;
+
+&lt;div class=&quot;highlight&quot;&gt;&lt;pre&gt;&lt;code class=&quot;language-sh&quot; data-lang=&quot;sh&quot;&gt;:VroomRunTestFile&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;vim-endwisehttpsgithubcomtpopevim-endwise&quot;&gt;9. &lt;a href=&quot;https://github.com/tpope/vim-endwise&quot;&gt;Vim-endwise&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Here’s the useful plugin that adds end after if, do, def keywords.&lt;/p&gt;
+
+&lt;h2 id=&quot;supertabhttpsgithubcomervandewsupertab&quot;&gt;10. &lt;a href=&quot;https://github.com/ervandew/supertab&quot;&gt;Supertab&lt;/a&gt;&lt;/h2&gt;
+
+&lt;p&gt;Supertab is useful in situations when you have lot of repetiting words like &lt;strong&gt;def&lt;/strong&gt;. It works that you press Tab and it completes word for you.&lt;/p&gt;
+
+&lt;p&gt;If you like this post, share it with clicking on social network toolbar at the top of page. &lt;/p&gt;
+
+</description>
+				<pubDate>Fri, 02 May 2014 00:00:00 +0200</pubDate>
+				<link>http://masteruby.github.io/productivity-booster/2014/05/02/vim-plugins-for-ruby.html</link>
+				<guid isPermaLink="true">http://masteruby.github.io/productivity-booster/2014/05/02/vim-plugins-for-ruby.html</guid>
+			</item>
+		
+			<item>
+				<title>6 Books for learning or advancing your rails knowledge</title>
+				<description>&lt;p&gt;In this post I want to give you list of books for rails beginner or
+intermediate developer.&lt;/p&gt;
+
+&lt;h2 id=&quot;for-beginner&quot;&gt;For Beginner&lt;/h2&gt;
+
+&lt;h3 id=&quot;learn-ruby-on-railshttplearn-railscomlearn-ruby-on-railshtml-by-daniel-kehoe&quot;&gt;1. &lt;a href=&quot;http://learn-rails.com/learn-ruby-on-rails.html&quot;&gt;Learn Ruby on Rails&lt;/a&gt; by Daniel Kehoe&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://learn-rails.com/learn-ruby-on-rails.html&quot;&gt;&lt;img src=&quot;/images/learn-rails-book-cover.jpg&quot; class=&quot;book&quot; alt=&quot;learn ruby on rails book&quot; /&gt;&amp;lt;/img&amp;gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Here’s the first book you should read. This book will give you basic
+introduction to
+rails. In step by step guide you will learn how to create mailing list with
+integration with MailChimp and GoogleDrive. I’ve included detailed review of
+&lt;a href=&quot;/learning-resources/2014/04/09/learn-ruby-on-rails-book-review.html&quot;&gt;learn ruby on rails book&lt;/a&gt; right here.&lt;/p&gt;
+
+&lt;h3 id=&quot;ruby-on-rails-tutorialhttpwwwamazoncomruby-rails-tutorial-addison-wesley-professionaldp0321832051refsr11sbooksieutf8qid1398328251sr1-1keywordsrubyonrailstutorial-by-michael-hartl&quot;&gt;2. &lt;a href=&quot;http://www.amazon.com/Ruby-Rails-Tutorial-Addison-Wesley-Professional/dp/0321832051/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1398328251&amp;amp;sr=1-1&amp;amp;keywords=ruby+on+rails+tutorial&quot;&gt;Ruby on Rails Tutorial&lt;/a&gt; by Michael Hartl&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.amazon.com/Ruby-Rails-Tutorial-Addison-Wesley-Professional/dp/0321832051/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1398328251&amp;amp;sr=1-1&amp;amp;keywords=ruby+on+rails+tutorial&quot;&gt;&lt;img src=&quot;/images/ruby_on_rails_tutorial.jpeg&quot; class=&quot;book&quot; alt=&quot;ruby on rails tutorial&quot; /&gt;&amp;lt;/img&amp;gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Ruby on Rails Tutorial is a must read for every rails beginner. I think you should
+read this after learn ruby on rails book.&lt;/p&gt;
+
+&lt;p&gt;Are you bored with building example
+applications like how to create blog in rails? So here’s the step by step guide
+to creating Twitter like social network.&lt;/p&gt;
+
+&lt;p&gt;Not only this book covers rails
+perfectly, but it is perfect introduction to test driven development in rspec,
+styling with sass and tracking changes in your code in git.&lt;/p&gt;
+
+&lt;h3 id=&quot;agile-web-development-with-railshttpwwwamazoncomagile-development-rails-facets-rubydp1937785564refsr11sbooksieutf8qid1398328340sr1-1keywordsagilewebdevelopmentwithrails4-by-david-heinemeier-hansson-dave-thomas&quot;&gt;3. &lt;a href=&quot;http://www.amazon.com/Agile-Development-Rails-Facets-Ruby/dp/1937785564/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1398328340&amp;amp;sr=1-1&amp;amp;keywords=agile+web+development+with+rails+4&quot;&gt;Agile Web Development with Rails&lt;/a&gt; by David Heinemeier Hansson, Dave Thomas&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.amazon.com/Agile-Development-Rails-Facets-Ruby/dp/1937785564/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1398328340&amp;amp;sr=1-1&amp;amp;keywords=agile+web+development+with+rails+4&quot;&gt;&lt;img src=&quot;/images/agile_web_development_with_rails.jpg&quot; class=&quot;book&quot; alt=&quot;agile web development with rails&quot; /&gt;&amp;lt;/img&amp;gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Here is the book written by two legendary figures in programming. David
+Heinemeier Hannson, founder of 37 signals, creator of Ruby on Rails framework and
+author of books like Getting Real, Rework and Remote and Dave Thomas author of
+legendary book Pragmatic Programmer that every developer should read. In this
+book you will learn how to create Depot, web based shopping cart application.&lt;/p&gt;
+
+&lt;h2 id=&quot;for-intermediate-developer&quot;&gt;For intermediate developer&lt;/h2&gt;
+
+&lt;h3 id=&quot;rails-antipatternshttpwwwamazoncomrails-antipatterns-refactoring-addison-wesley-professionaldp0321604814refsr11sbooksieutf8qid1398326493sr1-1keywordsrailsantipatterns-by-chad-pytel-and-tammer-saleh&quot;&gt;4. &lt;a href=&quot;http://www.amazon.com/Rails-AntiPatterns-Refactoring-Addison-Wesley-Professional/dp/0321604814/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1398326493&amp;amp;sr=1-1&amp;amp;keywords=rails+antipatterns&quot;&gt;Rails Antipatterns&lt;/a&gt; by Chad Pytel and Tammer Saleh&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.amazon.com/Rails-AntiPatterns-Refactoring-Addison-Wesley-Professional/dp/0321604814/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1398326493&amp;amp;sr=1-1&amp;amp;keywords=rails+antipatterns&quot;&gt;&lt;img src=&quot;/images/rails_antipatterns.jpg&quot; class=&quot;book&quot; alt=&quot;rails antipatterns&quot; /&gt;&amp;lt;/img&amp;gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Are you getting headaches from your masses of code? Did you find your rails code unreadable, difficult to maintain?&lt;/p&gt;
+
+&lt;p&gt;Maybe you will find your rails antipattern. Here’s the problem and solution guide to your problems.&lt;/p&gt;
+
+&lt;p&gt;What I like about this book that takes every part of Rails application separately. You
+will look at problems like too much code in models, using sql code where it
+don’t belong, bad habits brought from php and else.&lt;/p&gt;
+
+&lt;h3 id=&quot;the-rails-viewhttpwwwamazoncomthe-rails-view-maintainable-experiencedp1934356875-by-bruce-williams-and-bruce-athayde&quot;&gt;5. &lt;a href=&quot;http://www.amazon.com/The-Rails-View-Maintainable-Experience/dp/1934356875&quot;&gt;The Rails View&lt;/a&gt; by Bruce Williams and Bruce Athayde&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.amazon.com/Rails-View-Beautiful-Maintainable-Experience/dp/1934356875/ref=sr_1_1?s=books&amp;amp;ie=UTF8&amp;amp;qid=1398343196&amp;amp;sr=1-1&amp;amp;keywords=the+rails+view&quot;&gt;&lt;img src=&quot;/images/rails_view.jpg&quot; class=&quot;book&quot; alt=&quot;rails view&quot; /&gt;&amp;lt;/img&amp;gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Are you getting sick from combination of html and your template language in
+your views? Are you hoping that your views code should look better, but don’t know how? &lt;/p&gt;
+
+&lt;p&gt;Try Rails View book, in this book you will look at each part of
+views, you will find out solutions about how to improve your layout, you will
+learn some tricks about how to improve your stylesheets, adding some beauty to
+your forms, better javascripts code and other.&lt;/p&gt;
+
+&lt;h3 id=&quot;deploying-railshttpexamplecom-by-anthony-burns-and-tom-copeland&quot;&gt;6. &lt;a href=&quot;http://example.com&quot;&gt;Deploying Rails&lt;/a&gt; by Anthony Burns and Tom Copeland&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://www.amazon.com/Deploying-Rails-Automate-Deploy-Maintain/dp/1934356956&quot;&gt;&lt;img src=&quot;/images/deploying_rails.jpg&quot; class=&quot;book&quot; alt=&quot;deploying rails&quot; /&gt;&amp;lt;/img&amp;gt;&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Are you developing real world rails application and you wonder how to deploy it?
+Deploying Rails book is here for you.&lt;/p&gt;
+
+&lt;p&gt;In first part of the book you will learn
+how to create your own virtual server with Vagrant, then you move on open
+source server provision tool Puppet. Then you will be introduced to gems like
+Capistrano, Nagios for better deployment.&lt;/p&gt;
+
+&lt;h2 id=&quot;whats-next&quot;&gt;What’s next&lt;/h2&gt;
+
+&lt;p&gt;If you’re beginner I recommend you to learn ruby first, I’ve wrote post about &lt;a href=&quot;/learning-resources/2014/03/28/learn-ruby-with-these-resources.html&quot;&gt;learning resources
+for ruby&lt;/a&gt; and if you have trouble with rails
+installation I wrote about &lt;a href=&quot;/learning-resources&quot;&gt;how to install rails&lt;/a&gt; in my
+previous post. I hope that my list of books about Rails was helpful for you.&lt;/p&gt;
+</description>
+				<pubDate>Thu, 24 Apr 2014 00:00:00 +0200</pubDate>
+				<link>http://masteruby.github.io/learning-resources/2014/04/24/books-for-learning-rails.html</link>
+				<guid isPermaLink="true">http://masteruby.github.io/learning-resources/2014/04/24/books-for-learning-rails.html</guid>
 			</item>
 		
 	</channel>

@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>How to Add Comments to Rails App with Commontator </title>
+    <title>How to Add User Karma in Rails </title>
     	<!-- Bootstrap CSS -->
     <meta name="google-site-verification" content="UFFQXW8FdLgKuB_vYYy8LTw5aonnBmAHdUhUopMxero" />
     <meta description="Masteruby is tutorials web site about learning ruby">
@@ -48,132 +48,140 @@
         <!-- AddThis Button BEGIN -->
 
 
-<h2>How to Add Comments to Rails App with Commontator</h2>
-<p class="meta">08 Aug 2014</p>
+<h2>How to Add User Karma in Rails</h2>
+<p class="meta">12 Aug 2014</p>
 
 <h4>Posted by Milos Dolobac</h4>
 
 <div class="post">
-<p>Last time we’ve added <a href="/weekly-rails/2014/08/05/how-to-add-voting-to-rails-app.html">voting</a>. This time I will show you how easy can be adding comments with Commontator.</p>
+<p>A week ago you’ve learnt <a href="/weekly-rails/2014/08/05/how-to-add-voting-to-rails-app.html">how to add voting</a>. Acts_as_votable is great, but it doesn’t provide user karma. This time you will learn how to add user karma functionality to your app.</p>
 
-<h2 id="why-to-use-commontator">Why to Use Commontator</h2>
-
-<p>Commontator has following advantages:</p>
+<h2 id="what-do-you-need">What do you need</h2>
 
 <ul>
-  <li>It includes comments count</li>
-  <li>Is easy to configure</li>
-  <li>It includes creating, editing and deleting comments</li>
-  <li>You can add voting with acts_as_votable</li>
-  <li>Is customizable </li>
+  <li>Links controller and model created</li>
+  <li>User authentication created</li>
+  <li>Acts_as_votable gem</li>
 </ul>
 
-<h2 id="how-to-install-commontator">How to Install Commontator</h2>
+<h2 id="adding-karma-column-to-users-table">Adding karma column to users table</h2>
 
-<p>First thing we need to do is to add commontator gem to Gemfile</p>
+<p>To use karma for user, we need to generate new migration. Create new migration like this:</p>
 
-<h4 id="gemfile">Gemfile</h4>
+<div class="highlight"><pre><code class="language-sh" data-lang="sh">rails generate migration AddKarmaToUsers</code></pre></div>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">gem</span> <span class="s1">&#39;commontator&#39;</span></code></pre></div>
+<p>Let’s edit it now.</p>
 
-<p>Then install it with Bundler</p>
+<h4 id="dbmigrateaddkarmatousersrb">db/migrate/add_karma_to_users.rb</h4>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">bundle</span> <span class="n">install</span></code></pre></div>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">AddKarmaToUsers</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
+  <span class="k">def</span> <span class="nf">change</span>
+    <span class="n">add_column</span> <span class="ss">:users</span><span class="p">,</span> <span class="ss">:karma</span><span class="p">,</span> <span class="ss">:integer</span><span class="p">,</span> <span class="ss">:default</span> <span class="o">=&gt;</span> <span class="mi">0</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></div>
 
-<p>Now you can create Commontator configuration and migrations</p>
+<p>This code will add new column to users table with name karma. We’ve choosed basic type integer and set default value to 0.</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">rake</span> <span class="ss">commontator</span><span class="p">:</span><span class="n">install</span></code></pre></div>
-
-<p>And move migrations to database</p>
+<p>Let’s migrate it:</p>
 
 <div class="highlight"><pre><code class="language-sh" data-lang="sh">rake db:migrate</code></pre></div>
 
-<h2 id="how-to-use-commontator-in-our-models">How to Use Commontator in Our Models</h2>
+<h2 id="adding-user-as-voter">Adding user as voter</h2>
 
-<p>Let’s assume you’ve got two models, first is <strong>User</strong> and second is a <strong>Link</strong></p>
-
-<p>User should be able to post comments, so add this line to your User model.</p>
+<p>Before we’ll use user’s karma we need to add another acts_as_votable helper. I’ll explain why soon. </p>
 
 <h4 id="appmodelsuserrb">app/models/user.rb</h4>
 
 <div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
   
-  <span class="n">acts_as_commontator</span></code></pre></div>
+  <span class="n">acts_as_voter</span>
+  <span class="n">has_many</span> <span class="ss">:links</span></code></pre></div>
 
-<p>We want to show comments under each link, so add acts_as_commontable helper to Link model.</p>
+<h2 id="creating-methods-for-increasing-and-decreasing-users-karma">Creating methods for increasing and decreasing user’s karma</h2>
 
-<h4 id="appmodelslinkrb">app/models/link.rb</h4>
+<p>For better readability we’ll use separate methods for increasing and decreasing user’s karma in user’s model.</p>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">Link</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+<h4 id="appmodelsuserrb-1">app/models/user.rb</h4>
 
-<span class="n">acts_as_commontable</span></code></pre></div>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
+  <span class="n">has_many</span> <span class="ss">:links</span> 
+  <span class="n">acts_as_voter</span>
+  
+  <span class="k">def</span> <span class="nf">increase_karma</span><span class="p">(</span><span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">update_attribute</span><span class="p">(</span><span class="ss">:karma</span><span class="p">,</span> <span class="n">karma</span> <span class="o">+</span> <span class="n">count</span><span class="p">)</span>
+  <span class="k">end</span></code></pre></div>
 
-<h2 id="adding-comments-route">Adding Comment’s route</h2>
+<p>Here we’ve set method that will update user’s karma from default to 1. You will use similar for decreasing.</p>
 
-<p>Next thing we need to is to add commontator’s route.</p>
+<h4 id="appmodelsuserrb-2">app/models/user.rb</h4>
 
-<h4 id="configroutesrb">config/routes.rb</h4>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">decrease_karma</span><span class="p">(</span><span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+  <span class="n">update_attribute</span><span class="p">(</span><span class="ss">:karma</span><span class="p">,</span> <span class="n">karma</span> <span class="o">-</span> <span class="n">count</span><span class="p">)</span>
+<span class="k">end</span></code></pre></div>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">mount</span> <span class="no">Commontator</span><span class="o">::</span><span class="no">Engine</span> <span class="o">=&gt;</span> <span class="s1">&#39;/commontator&#39;</span></code></pre></div>
+<p>We’ve added methods to models, let’s go to controllers.</p>
 
-<h2 id="showing-comments">Showing Comments</h2>
+<h2 id="adding-user-karma-to-controller">Adding user karma to controller</h2>
 
-<p>So we’ve added commontator’s helpers to our model, so we can add commontator’s thread to our views. Let’s assume we’ve got index action in links_controller.</p>
+<p>Now we can use user’s methods in our links_controller</p>
 
 <h4 id="appcontrollerslinkscontrollerrb">app/controllers/links_controller.rb</h4>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">LinksController</span> <span class="o">&lt;</span> <span class="no">ApplicationController</span>
-
-<span class="k">def</span> <span class="nf">index</span>
-  <span class="vi">@links</span> <span class="o">=</span> <span class="no">Link</span><span class="o">.</span><span class="n">all</span>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">upvote</span>
+  <span class="vi">@link</span> <span class="o">=</span> <span class="no">Link</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">current_user</span><span class="o">.</span><span class="n">voted_for?</span> <span class="vi">@link</span>
+    <span class="n">redirect_to</span> <span class="n">links_path</span>
+  <span class="k">else</span>
+    <span class="vi">@link</span><span class="o">.</span><span class="n">upvote_by</span> <span class="n">current_user</span>
+    <span class="vi">@link</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">increase_karma</span>
+    <span class="n">redirect_to</span> <span class="n">links_path</span>
+  <span class="k">end</span>
 <span class="k">end</span></code></pre></div>
 
-<p>Let’s add commontator’s thread to our views.</p>
+<p>Let’s check out what we’ve done.</p>
 
-<h4 id="appviewslinksindexhtmlslim">app/views/links/index.html.slim</h4>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="vi">@link</span> <span class="o">=</span> <span class="no">Link</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+<span class="k">if</span> <span class="n">current_user</span><span class="o">.</span><span class="n">voted_for?</span> <span class="vi">@link</span>
+  <span class="n">redirect_to</span> <span class="n">links_path</span></code></pre></div>
 
-<div class="highlight"><pre><code class="language-html" data-lang="html">- @links.each do |link|
-  = commontator_thread(link)</code></pre></div>
+<p>First we’ll find our link. Then we’ll checkout if current signed user has already voted for link, that’s why we’ve used acts_as_voter helper in our User model. If he has we’ll just redirect to path with all of links.</p>
 
-<p>Now you should see comments count:</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="vi">@link</span><span class="o">.</span><span class="n">upvote_by</span> <span class="n">current_user</span>
+<span class="vi">@link</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">increase_karma</span>
+<span class="n">redirect_to</span> <span class="n">links_path</span></code></pre></div>
 
-<p><img src="/images/comments-count.png" alt="how to add comments count in Rails" /></p>
+<p>First we’ll upvote link using acts_as_votable as in last time. Then we’ll increase karma to user that have created link.</p>
 
-<p>Click on show comments, you should see new comment link.</p>
+<p>Don’t forget to add similar code to downvote action too.</p>
 
-<p><img src="/images/new-comment.png" alt="how to add new comment in Rails" /></p>
+<h4 id="appcontrollerslinkscontrollerrb-1">app/controllers/links_controller.rb</h4>
 
-<p>Fill in new comment form and look at the comment that we’ve created:</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">downvote</span>
+  <span class="vi">@link</span> <span class="o">=</span> <span class="no">Link</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">current_user</span><span class="o">.</span><span class="n">voted_for?</span> <span class="vi">@link</span>
+    <span class="n">redirect_to</span> <span class="n">links_path</span>
+  <span class="k">else</span>
+    <span class="vi">@link</span><span class="o">.</span><span class="n">downvote_by</span> <span class="n">current_user</span>
+    <span class="vi">@link</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">decrease_karma</span>
+    <span class="n">redirect_to</span> <span class="n">root_path</span>
+  <span class="k">end</span>
+<span class="k">end</span></code></pre></div>
 
-<p><img src="/images/showing-comment.png" alt="how to show comment in Rails" /></p>
+<h2 id="showing-users-karma">Showing user’s karma</h2>
 
-<p>Looks nice isn’t it?</p>
+<p>Now you can show user’s karma in your view too. Let’s assume you have got show action in controller like this:</p>
 
-<h2 id="replacing-anonymous-with-username">Replacing “Anonymous” with username</h2>
+<h4 id="appcontrollersuserscontrollerrb">app/controllers/users_controller.rb</h4>
 
-<p>You certainly noticed that when you’ve created comment, it shows Anonymous instead of username.</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">show</span>
+  <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
+<span class="k">end</span></code></pre></div>
 
-<p>Let’s fix that. Find this line in commontator initializer</p>
+<p>Now you can easy display user’s karmain your view like this:</p>
 
-<h4 id="configinitializerscommontatorrb">config/initializers/commontator.rb</h4>
+<div class="highlight"><pre><code class="language-html" data-lang="html">= @user.karma</code></pre></div>
 
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">config</span><span class="o">.</span><span class="n">user_name_proc</span> <span class="o">=</span> <span class="nb">lambda</span> <span class="p">{</span> <span class="o">|</span><span class="n">user</span><span class="o">|</span> <span class="no">I18n</span><span class="o">.</span><span class="n">t</span><span class="p">(</span><span class="s1">&#39;commontator.anonymous&#39;</span><span class="p">)</span> <span class="p">}</span></code></pre></div>
-
-<p>Now if you have column username in users table replace previous line with following:</p>
-
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="n">config</span><span class="o">.</span><span class="n">user_name_proc</span> <span class="o">=</span> <span class="nb">lambda</span> <span class="p">{</span> <span class="o">|</span><span class="n">user</span><span class="o">|</span> <span class="n">user</span><span class="o">.</span><span class="n">username</span> <span class="p">}</span></code></pre></div>
-
-<p>Now if you look at your comments in a browser you should see user’s name instead of Anonymous.</p>
-
-<h2 id="customization">Customization</h2>
-
-<p>Let’s assume you want to customize views. Run this command:</p>
-
-<div class="highlight"><pre><code class="language-sh" data-lang="sh">rake commontator:copy:views</code></pre></div>
-
-<p>You should see that commontator folder was created in our views folder.</p>
-
-<p>That’s all for now. I hope that you liked my tutorial. If you don’t understand anything about post, feel free to ask in discussion. And if you like it, share it with your favorite social network.</p>
+<p>That’s all for now, if you like it, don’t forget to share this article with your favorite social network.</p>
 
 
 
@@ -203,7 +211,7 @@
 <ul class="posts">
   
 
-  <li><span>12 Aug 2014</span> &raquo; <a href="/weekly-rails/2014/08/12/how-to-add-user-karma-to-rails-app.html#disqus_thread">How to Add User Karma in Rails</a></li>
+  <li><span>08 Aug 2014</span> &raquo; <a href="/weekly-rails/2014/08/08/how-to-add-comments-to-rails-app.html#disqus_thread">How to Add Comments to Rails App with Commontator</a></li>
   
   
   
