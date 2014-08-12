@@ -31,10 +31,6 @@
         <lastmod>2014-07-04T15:42:20+02:00</lastmod>
     </url>
     <url>
-        <loc>http://masteruby.github.io/2014/04/05/why_tmux.html</loc>
-        <lastmod>2014-07-04T15:42:20+02:00</lastmod>
-    </url>
-    <url>
         <loc>
             http://masteruby.github.io/learning-resources/2014/04/09/learn-ruby-on-rails-book-review.html
         </loc>
@@ -47,17 +43,9 @@
         <lastmod>2014-07-04T15:42:20+02:00</lastmod>
     </url>
     <url>
-        <loc>http://masteruby.github.io/2014/04/17/calculator.html</loc>
-        <lastmod>2014-07-04T15:42:20+02:00</lastmod>
-    </url>
-    <url>
         <loc>
             http://masteruby.github.io/learning-resources/2014/04/24/books-for-learning-rails.html
         </loc>
-        <lastmod>2014-07-04T15:42:20+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://masteruby.github.io/2014/04/24/rails.html</loc>
         <lastmod>2014-07-04T15:42:20+02:00</lastmod>
     </url>
     <url>
@@ -85,17 +73,9 @@
         <lastmod>2014-07-04T15:42:20+02:00</lastmod>
     </url>
     <url>
-        <loc>http://masteruby.github.io/2014/06/16/post-it.html</loc>
-        <lastmod>2014-06-16T19:02:17+02:00</lastmod>
-    </url>
-    <url>
         <loc>
             http://masteruby.github.io/shoes/2014/06/29/how-to-create-clock-in-ruby-shoes.html
         </loc>
-        <lastmod>2014-07-04T15:42:20+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://masteruby.github.io/2014/07/04/stopwatch.html</loc>
         <lastmod>2014-07-04T15:42:20+02:00</lastmod>
     </url>
     <url>
@@ -103,18 +83,6 @@
             http://masteruby.github.io/productivity-booster/2014/07/09/how-to-convert-source-code-to-pdf.html
         </loc>
         <lastmod>2014-07-09T20:42:34+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://masteruby.github.io/2014/07/30/vim4rails.html</loc>
-        <lastmod>2014-07-30T19:25:03+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://masteruby.github.io/2014/08/03/tests.html</loc>
-        <lastmod>2014-08-03T08:08:14+02:00</lastmod>
-    </url>
-    <url>
-        <loc>http://masteruby.github.io/2014/08/03/tags.html</loc>
-        <lastmod>2014-08-03T16:22:48+02:00</lastmod>
     </url>
     <url>
         <loc>
@@ -129,12 +97,14 @@
         <lastmod>2014-08-08T20:10:20+02:00</lastmod>
     </url>
     <url>
-        <loc>http://masteruby.github.io/2014/08/08/comments.html</loc>
-        <lastmod>2014-08-08T20:03:55+02:00</lastmod>
+        <loc>
+            http://masteruby.github.io/weekly-rails/2014/08/12/how-to-add-user-karma-to-rails-app.html
+        </loc>
+        <lastmod>2014-08-12T15:35:13+02:00</lastmod>
     </url>
     <url>
         <loc>http://masteruby.github.io/</loc>
-        <lastmod>2014-08-08T20:10:20+02:00</lastmod>
+        <lastmod>2014-08-12T15:35:13+02:00</lastmod>
     </url>
     <url>
         <loc>http://masteruby.github.io/learning-resources.html</loc>

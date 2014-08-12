@@ -3,7 +3,7 @@ layout: post
 title: How to Add User Karma in Rails
 ---
 
-A week ago you've learnt [how to add voting](/weekly-rails/2014/08/05/how-to-add-voting-to-rails-app.html). Acts_as_votable is great, but it doesn't provide user karma. This time you will learn how to add user karma functionality to your app.
+A week ago you've learned [how to add voting](/weekly-rails/2014/08/05/how-to-add-voting-to-rails-app.html). Acts_as_votable is great, but it doesn't provide user karma. This time you will learn how to add user karma functionality to your app.
 
 ## What do you need
 

@@ -8,7 +8,7 @@
 		
 			<item>
 				<title>How to Add User Karma in Rails</title>
-				<description>&lt;p&gt;A week ago you’ve learnt &lt;a href=&quot;/weekly-rails/2014/08/05/how-to-add-voting-to-rails-app.html&quot;&gt;how to add voting&lt;/a&gt;. Acts_as_votable is great, but it doesn’t provide user karma. This time you will learn how to add user karma functionality to your app.&lt;/p&gt;
+				<description>&lt;p&gt;A week ago you’ve learned &lt;a href=&quot;/weekly-rails/2014/08/05/how-to-add-voting-to-rails-app.html&quot;&gt;how to add voting&lt;/a&gt;. Acts_as_votable is great, but it doesn’t provide user karma. This time you will learn how to add user karma functionality to your app.&lt;/p&gt;
 
 &lt;h2 id=&quot;what-do-you-need&quot;&gt;What do you need&lt;/h2&gt;
 
