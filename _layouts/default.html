@@ -20,7 +20,11 @@
     <link rel="alternate" type="application/rss+xml" title="{{ site.name }}" href="{{ site.url }}/feed.xml">
     
 	<!-- Bootstrap CSS -->
-  <meta name="google-site-verification" content="UFFQXW8FdLgKuB_vYYy8LTw5aonnBmAHdUhUopMxero" />
+	<meta name="google-site-verification" content="UFFQXW8FdLgKuB_vYYy8LTw5aonnBmAHdUhUopMxero" />
+	{% if author.google_plus %}
+	<link rel="author" href="{{ author.google_plus }}?rel=author" />
+	{% endif %}
+
   </head>
   
   <body>
