@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-    <title>How to Add User Karma in Rails </title>
+    <title>Painless Vim&#58; Everything you Want to Know about Vim </title>
     	<!-- Bootstrap CSS -->
     <meta name="google-site-verification" content="UFFQXW8FdLgKuB_vYYy8LTw5aonnBmAHdUhUopMxero" />
     <meta description="Masteruby is tutorials web site about learning ruby">
@@ -50,140 +50,64 @@
         <!-- AddThis Button BEGIN -->
 
 
-<h2>How to Add User Karma in Rails</h2>
-<p class="meta">12 Aug 2014</p>
+<h2>Painless Vim&#58; Everything you Want to Know about Vim</h2>
+<p class="meta">01 Oct 2014</p>
 
 <h4>Posted by Milos Dolobac</h4>
 
 <div class="post">
-<p>A week ago you’ve learned <a href="/weekly-rails/2014/08/05/how-to-add-voting-to-rails-app.html">how to add voting</a>. Acts_as_votable is great, but it doesn’t provide user karma. This time you will learn how to add user karma functionality to your app.</p>
+<p>Have you tried Vim, but you found it hard to start and you just quitted it? Do you want to convince your colleague to use Vim?</p>
 
-<h2 id="what-do-you-need">What do you need</h2>
+<p>Until recently, you have hard time. You certainly walked through Vim help system or you found some tutorials online, but real Vim’s guide to beginners was really missing.</p>
+
+<h2 id="meet-painless-vim">Meet Painless Vim</h2>
+
+<p><a href="https://leanpub.com/painless_vim?a=1TpbU12X52sRpKmE_tjqw0"><img class="book" src="/images/vim.png" /></a></p>
+
+<p>Painless Vim by Nate Dickson is a new beginner’s guide to Vim. It promises to help you to get up to speed quickly. Book has 28 chapters and each chapter covers part of Vim step by step.</p>
+
+<p>Book is short(166 pages), but it uses it’s space perfectly.</p>
+
+<p>You will start with basics like navigation commands and what to put to your .vimrc and then you will move to other topics like remapping keys to your taste or tips and tricks for using insert mode.</p>
+
+<p>In some chapters you will find some recommendation what to do and what you should avoid. For example in chapter about mapping keys, you will find out examples which keys you should remap and which you shouldn’t.</p>
+
+<h2 id="chapters-of-the-book">Chapters of the Book</h2>
 
 <ul>
-  <li>Links controller and model created</li>
-  <li>User authentication created</li>
-  <li>Acts_as_votable gem</li>
+  <li>1 Get in, Get Out, Get Comfortable</li>
+  <li>2 Moving Around in Vim: Baby Steps</li>
+  <li>3 Your .vimrc File and You</li>
+  <li>4 Interlude: The Joy of a Good Cheat Sheet</li>
+  <li>5 Moving Around in Vim: Grown Up Steps</li>
+  <li>6 Operators 1: Changing Letters and Lines</li>
+  <li>7 Doing Things More Than Once</li>
+  <li>8 Moving Around in Vim: Dance Steps</li>
+  <li>9 Modes at Last</li>
+  <li>10 Plugins</li>
+  <li>11 Operators: Moving and Changing at the Same Time</li>
+  <li>12 Interlude: How to Back Off Without Giving Up</li>
+  <li>13 Registers: Clipboards as Far as the Eye Can See</li>
+  <li>14 Text Origami. :h folding</li>
+  <li>15 Searching and (More Importantly) Finding</li>
+  <li>16 Using Vim’s Help System</li>
+  <li>17 Doing Things at Vim Speed</li>
+  <li>18 Mapping Keys</li>
+  <li>19 Fancy Insert Mode Tricks</li>
+  <li>20 Vim Windows Are Not Microsoft Windows</li>
+  <li>21 Tab Pages Are Not Browser Tabs</li>
+  <li>22 Interlude: Reviewing Views</li>
+  <li>23 How Vim Thinks</li>
+  <li>24 Visual Mode Basics</li>
+  <li>25 Vim GUIs</li>
+  <li>26 Menus Everywhere</li>
+  <li>27 Literary Vim: Writing Prose in Vim</li>
+  <li>28 Conclusion</li>
 </ul>
 
-<h2 id="adding-karma-column-to-users-table">Adding karma column to users table</h2>
+<p>Painless Vim is a great beginners guide that I can recommend you. There was never been step by step guide to Vim like this. If you’ve tried Vim in the past, give it another chance. That’s book is really worth of it.</p>
 
-<p>To use karma for user, we need to generate new migration. Create new migration like this:</p>
-
-<div class="highlight"><pre><code class="language-sh" data-lang="sh">rails generate migration AddKarmaToUsers</code></pre></div>
-
-<p>Let’s edit it now.</p>
-
-<h4 id="dbmigrateaddkarmatousersrb">db/migrate/add_karma_to_users.rb</h4>
-
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">AddKarmaToUsers</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Migration</span>
-  <span class="k">def</span> <span class="nf">change</span>
-    <span class="n">add_column</span> <span class="ss">:users</span><span class="p">,</span> <span class="ss">:karma</span><span class="p">,</span> <span class="ss">:integer</span><span class="p">,</span> <span class="ss">:default</span> <span class="o">=&gt;</span> <span class="mi">0</span>
-  <span class="k">end</span>
-<span class="k">end</span></code></pre></div>
-
-<p>This code will add new column to users table with name karma. We’ve choosed basic type integer and set default value to 0.</p>
-
-<p>Let’s migrate it:</p>
-
-<div class="highlight"><pre><code class="language-sh" data-lang="sh">rake db:migrate</code></pre></div>
-
-<h2 id="adding-user-as-voter">Adding user as voter</h2>
-
-<p>Before we’ll use user’s karma we need to add another acts_as_votable helper. I’ll explain why soon. </p>
-
-<h4 id="appmodelsuserrb">app/models/user.rb</h4>
-
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-  
-  <span class="n">acts_as_voter</span>
-  <span class="n">has_many</span> <span class="ss">:links</span></code></pre></div>
-
-<h2 id="creating-methods-for-increasing-and-decreasing-users-karma">Creating methods for increasing and decreasing user’s karma</h2>
-
-<p>For better readability we’ll use separate methods for increasing and decreasing user’s karma in user’s model.</p>
-
-<h4 id="appmodelsuserrb-1">app/models/user.rb</h4>
-
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">class</span> <span class="nc">User</span> <span class="o">&lt;</span> <span class="no">ActiveRecord</span><span class="o">::</span><span class="no">Base</span>
-  <span class="n">has_many</span> <span class="ss">:links</span> 
-  <span class="n">acts_as_voter</span>
-  
-  <span class="k">def</span> <span class="nf">increase_karma</span><span class="p">(</span><span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-    <span class="n">update_attribute</span><span class="p">(</span><span class="ss">:karma</span><span class="p">,</span> <span class="n">karma</span> <span class="o">+</span> <span class="n">count</span><span class="p">)</span>
-  <span class="k">end</span></code></pre></div>
-
-<p>Here we’ve set method that will update user’s karma from default to 1. You will use similar for decreasing.</p>
-
-<h4 id="appmodelsuserrb-2">app/models/user.rb</h4>
-
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">decrease_karma</span><span class="p">(</span><span class="n">count</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-  <span class="n">update_attribute</span><span class="p">(</span><span class="ss">:karma</span><span class="p">,</span> <span class="n">karma</span> <span class="o">-</span> <span class="n">count</span><span class="p">)</span>
-<span class="k">end</span></code></pre></div>
-
-<p>We’ve added methods to models, let’s go to controllers.</p>
-
-<h2 id="adding-user-karma-to-controller">Adding user karma to controller</h2>
-
-<p>Now we can use user’s methods in our links_controller</p>
-
-<h4 id="appcontrollerslinkscontrollerrb">app/controllers/links_controller.rb</h4>
-
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">upvote</span>
-  <span class="vi">@link</span> <span class="o">=</span> <span class="no">Link</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
-  <span class="k">if</span> <span class="n">current_user</span><span class="o">.</span><span class="n">voted_for?</span> <span class="vi">@link</span>
-    <span class="n">redirect_to</span> <span class="n">links_path</span>
-  <span class="k">else</span>
-    <span class="vi">@link</span><span class="o">.</span><span class="n">upvote_by</span> <span class="n">current_user</span>
-    <span class="vi">@link</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">increase_karma</span>
-    <span class="n">redirect_to</span> <span class="n">links_path</span>
-  <span class="k">end</span>
-<span class="k">end</span></code></pre></div>
-
-<p>Let’s check out what we’ve done.</p>
-
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="vi">@link</span> <span class="o">=</span> <span class="no">Link</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
-<span class="k">if</span> <span class="n">current_user</span><span class="o">.</span><span class="n">voted_for?</span> <span class="vi">@link</span>
-  <span class="n">redirect_to</span> <span class="n">links_path</span></code></pre></div>
-
-<p>First we’ll find our link. Then we’ll checkout if current signed user has already voted for link, that’s why we’ve used acts_as_voter helper in our User model. If he has we’ll just redirect to path with all of links.</p>
-
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="vi">@link</span><span class="o">.</span><span class="n">upvote_by</span> <span class="n">current_user</span>
-<span class="vi">@link</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">increase_karma</span>
-<span class="n">redirect_to</span> <span class="n">links_path</span></code></pre></div>
-
-<p>First we’ll upvote link using acts_as_votable as in last time. Then we’ll increase karma to user that have created link.</p>
-
-<p>Don’t forget to add similar code to downvote action too.</p>
-
-<h4 id="appcontrollerslinkscontrollerrb-1">app/controllers/links_controller.rb</h4>
-
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">downvote</span>
-  <span class="vi">@link</span> <span class="o">=</span> <span class="no">Link</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
-  <span class="k">if</span> <span class="n">current_user</span><span class="o">.</span><span class="n">voted_for?</span> <span class="vi">@link</span>
-    <span class="n">redirect_to</span> <span class="n">links_path</span>
-  <span class="k">else</span>
-    <span class="vi">@link</span><span class="o">.</span><span class="n">downvote_by</span> <span class="n">current_user</span>
-    <span class="vi">@link</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">decrease_karma</span>
-    <span class="n">redirect_to</span> <span class="n">root_path</span>
-  <span class="k">end</span>
-<span class="k">end</span></code></pre></div>
-
-<h2 id="showing-users-karma">Showing user’s karma</h2>
-
-<p>Now you can show user’s karma in your view too. Let’s assume you have got show action in controller like this:</p>
-
-<h4 id="appcontrollersuserscontrollerrb">app/controllers/users_controller.rb</h4>
-
-<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="k">def</span> <span class="nf">show</span>
-  <span class="vi">@user</span> <span class="o">=</span> <span class="no">User</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">params</span><span class="o">[</span><span class="ss">:id</span><span class="o">]</span><span class="p">)</span>
-<span class="k">end</span></code></pre></div>
-
-<p>Now you can easy display user’s karmain your view like this:</p>
-
-<div class="highlight"><pre><code class="language-html" data-lang="html">= @user.karma</code></pre></div>
-
-<p>That’s all for now, if you like it, don’t forget to share this article with your favorite social network.</p>
+<p>You can buy the book on <a href="https://leanpub.com/painless_vim?a=1TpbU12X52sRpKmE_tjqw0">Leanpub</a>, where you can get book in three formats: PDF, EPUB and MOBI and you will get access to future updates of the book.</p>
 
 
 
@@ -213,17 +137,17 @@
 <ul class="posts">
   
 
-  <li><span>01 Oct 2014</span> &raquo; <a href="/2014/10/01/pvim.html#disqus_thread">Painless Vim&#58; Everything you Want to Know about Vim</a></li>
-  
-  
-  
-
   <li><span>01 Oct 2014</span> &raquo; <a href="/productivity-booster/2014/10/01/painless-vim-book-review.html#disqus_thread">Painless Vim&#58; Everything you Want to Know about Vim</a></li>
   
   
   
 
   <li><span>12 Aug 2014</span> &raquo; <a href="/2014/08/12/karma.html#disqus_thread">How to Add User Karma</a></li>
+  
+  
+  
+
+  <li><span>12 Aug 2014</span> &raquo; <a href="/weekly-rails/2014/08/12/how-to-add-user-karma-to-rails-app.html#disqus_thread">How to Add User Karma in Rails</a></li>
   
   
   
